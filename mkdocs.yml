@@ -1,5 +1,8 @@
 site_name: 谷歌C++编程风格指南
 pages:
 - 简介: index.md
+- 正文: 
+  - C++版本: cpp_version.md
+  - 头文件: header_files.md
 
 theme: readthedocs
