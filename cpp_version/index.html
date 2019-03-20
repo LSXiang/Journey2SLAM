@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
   <link rel="stylesheet" href="../css/highlight.css">
+  <link href="../css/extra.css" rel="stylesheet">
 
   
   <script>
@@ -27,7 +28,19 @@
   <script src="../js/modernizr-2.8.3.min.js"></script>
   <script type="text/javascript" src="../js/highlight.pack.js"></script>
   <script src="../js/theme.js"></script> 
+  <script src="../_static/js/extra.js"></script>
+  <script src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_SVG"></script>
 
+  
+  <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-27795084-5', 'mkdocs.org');
+      ga('send', 'pageview');
+  </script>
   
 </head>
 
@@ -111,6 +124,10 @@
     <li>C++版本</li>
     <li class="wy-breadcrumbs-aside">
       
+        
+          <a href="https://github.com/LSXiang/GoogleCppStyleGuide" class="icon icon-github"> Edit on GitHub</a>
+        
+      
     </li>
   </ul>
   <hr/>
@@ -118,7 +135,15 @@
           <div role="main">
             <div class="section">
               
-                
+                <p>数学公式$\lim_{x \to \infty} \exp(-x) = 0$
+$$
+\mathbf{V}_1 \times \mathbf{V}_2 =
+\begin{vmatrix}
+    \mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \
+    \frac{\partial X}{\partial u} &amp; \frac{\partial Y}{\partial u} &amp; 0 \
+    \frac{\partial X}{\partial v} &amp; \frac{\partial Y}{\partial v} &amp; 0 \
+\end{vmatrix}
+$$</p>
               
             </div>
           </div>
@@ -139,6 +164,8 @@
   <div role="contentinfo">
     <!-- Copyright etc -->
     
+      <p>Copyright &copy; 2019,<a href="https://github.com/LSXiang">Akatsuki (jacob.lsx)</a>. All rights reserved.</p>
+    
   </div>
 
   Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -153,6 +180,8 @@
 
 <div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
