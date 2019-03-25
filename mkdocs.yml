@@ -1,8 +1,48 @@
 site_name: 谷歌C++编程风格指南
-pages:
+nav:
 - 简介: index.md
 - 正文: 
   - C++版本: cpp_version.md
   - 头文件: header_files.md
 
-theme: readthedocs
+theme: 
+  name: 'readthedocs'
+  font: false
+  language: 'zh'
+
+extra_javascript:
+  - 'javascripts/extra.js'
+  - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_SVG
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      preserve_tabs: true
+      custom_fences:
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.inline_mathjax_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
