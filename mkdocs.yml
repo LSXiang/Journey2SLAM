@@ -1,4 +1,14 @@
 site_name: 谷歌C++编程风格指南
+site_description: 谷歌C++编程风格指南中文翻译版
+site_author: Jacob.lsx
+site_url: 'https://github.com/LSXiang/GoogleCppStyleGuide'
+
+# Repository
+repo_url: 'https://github.com/LSXiang/GoogleCppStyleGuide'
+
+# Copyright
+copyright: 'Copyright &copy; 2019. All rights reserved.'
+
 nav:
 - 简介: index.md
 - 正文: 
@@ -10,11 +20,15 @@ theme:
   font: false
   language: 'zh'
 
+extra:
+  search:
+    language: 'zh'
+  social:
+    - type: 'github'
+      link: 'https://github.com/LSXiang'
+
 extra_javascript:
   - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
-
-extra_css:
-  - css/extra.css
 
 # Extensions
 markdown_extensions:
@@ -48,3 +62,8 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
+
+# Google Analytics
+google_analytics:
+  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
+  - auto
