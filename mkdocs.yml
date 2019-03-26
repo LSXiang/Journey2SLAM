@@ -11,8 +11,10 @@ theme:
   language: 'zh'
 
 extra_javascript:
-  - 'javascripts/extra.js'
-  - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_SVG
+  - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
+
+extra_css:
+  - css/extra.css
 
 # Extensions
 markdown_extensions:
