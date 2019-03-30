@@ -19,10 +19,15 @@ theme:
   name: 'readthedocs'
   font: false
   language: 'zh'
+  navigation_depth: 4
+  display_version: true
+  feature:
+    tabs: true
 
 extra:
+  version: 1.0
   search:
-    language: 'zh'
+    language: 'jp'
   social:
     - type: 'github'
       link: 'https://github.com/LSXiang'
@@ -32,15 +37,89 @@ extra_javascript:
 
 # Extensions
 markdown_extensions:
+    # The Abbreviations extension adds the ability to define abbreviations.
+    # eg:
+    #     The HTML specification is maintained by the W3C
+    #     *[HTML]: Hyper Text Markup Language
+    #     *[W3C]:  World Wide Web Consortium
+  - abbr
+
+    # The Admonition extension adds rST-style admonitions to Markdown documents.
+    # directive types: "attention", "caution", "danger", "error", "hint", 
+    #                  "important", "note", "tip", "warning", "admonition"
+    # eg:
+    #     !!! type "optional explicit title within double quotes"
+    #     Any number of other indented markdown elements.
+    #
+    #     This is the second paragraph.
   - admonition
-  - codehilite:
-      guess_lang: false
-      linenums: true
+
+    # The Attribute Lists extension adds a syntax to define attributes on the 
+    # various HTML elements in markdown’s output.
+  # - attr_list
+
+    # The CodeHilite extension adds code/syntax highlighting to standard 
+    # Python-Markdown code blocks using Pygments.
+  # - codehilite:
+  #     use_pygments: true  # Defaults to True
+  #     guess_lang: false   # Automatic language detection， defaults to true.
+  #     linenums:         # Use line numbers, 'true' of 'false', defaults to None.
+  #     noclasses:        # Use inline styles instead of CSS classes. Defaults to False.
+  #     css_class:        # Set CSS class name for the wrapper <div> tag. Defaults to codehilite
+
+    # The Definition Lists extension adds the ability to create definition 
+    # lists in Markdown documents.
+    # eg:
+    #     Apple
+    #     :   Pomaceous fruit of plants of the genus Malus in
+    #         the family Rosaceae.
   - def_list
+
+    # The Fenced Code Blocks extension adds a secondary way to define code blocks,
+    # which overcomes a few limitations of the indented code blocks.
+  - fenced_code 
+    
+    # The Footnotes extension adds syntax for defining footnotes in Markdown documents.
+    # eg:
+    #     Footnotes[^1] have a label[^@#$%] and the footnote's content.
+    #     [^1]: This is a footnote content.
+    #     [^@#$%]: A footnote on the label: "@#$%".
   - footnotes
+
+    # The Legacy Attributes extension restores Python-Markdown’s original attribute 
+    # setting syntax. Older versions of Python Markdown (prior to 3.0) included built-in
+    # and undocumented support for defining attributes on elements. Most users have never
+    # made use of the syntax and it has been deprecated in favor of Attribute Lists. 
+    # This extension restores the legacy behavior for users who have existing documents 
+    # which use the syntax.
+  # - legacy_attr
+
+    # The Legacy EM extension restores Markdown’s original behavior for emphasis 
+    # and strong syntax when using underscores.
+  # - legacy_em 
+  
+  # The Meta-Data extension adds a syntax for defining meta-data about a document. 
+  # It is inspired by and follows the syntax of MultiMarkdown. Currently, this extension
+  # does not use the meta-data in any way, but simply provides it as a Meta attribute of
+  # a Markdown instance for use by other extensions or directly by your python code.
   - meta
+
+    # The New-Line-to-Break (nl2br) Extension will cause newlines to be treated as hard breaks
+    # like StackOverflow and GitHub flavored Markdown do.
+  # - nl2br
+
+    # The Sane Lists extension alters the behavior of the Markdown List syntax to be less surprising.
+  # - sane_lists
+
+  # The Table of Contents extension generates a Table of Contents from a Markdown document and 
+  # adds it into the resulting HTML document.
   - toc:
+  #     marker:           # Text to find and replace with the Table of Contents. Defaults to [TOC].
+  #     title:            # Title to insert in the Table of Contents’ <div>. Defaults to None
       permalink: true
+      baselevel: 1      # Base level for headers. Defaults to 1.
+  #     slugify           # Callable to generate anchors.
+
   - pymdownx.arithmatex
   - pymdownx.betterem:
       smart_enable: all
@@ -54,6 +133,7 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences:
+      highlight_code: true
       preserve_tabs: true
       custom_fences:
         - name: math
@@ -61,7 +141,8 @@ markdown_extensions:
           format: !!python/name:pymdownx.arithmatex.inline_mathjax_format
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.tilde
+  - pymdownx.tilde      
+  - pymdownx.keys:
 
 # Google Analytics
 google_analytics:
