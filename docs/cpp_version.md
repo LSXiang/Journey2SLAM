@@ -12,9 +12,14 @@ $$
 
 
 
-!!! success "这样是对的"
+!!! note "前面需要空4个空格"
+    这样才是对的
 
-!!! warning "这样是错的"
+    这是才是对的
+
+
+!!! warning ""
+    这是hi什么
 
 > 这是什么鬼啊
 >
@@ -22,8 +27,17 @@ $$
 >
 > > 你好啊
 
+## A setext style header {: #setext}
 
-```C++
+### A hash style header {: #hash }
+
+Footnotes[^1] have a label[^@#$%] and the footnote's content.
+
+<!-- [link](http://example.com){: class="foo bar" title="Some title!" } -->
+
+[link](http:www.baidu.com 'baidu') 
+
+```C++ hl_lines="1 3"
 int main(int argc, char** argv) {
   if (argc != 2) {
     return -1;
@@ -41,4 +55,45 @@ int main(int argc, char** argv) {
   打开 `MathJax` 设置文件。  
 - **粗体**
   开关  
+
+
+++ctrl+alt+delete++
+
+- [x] tasklist  
+
+
+The HTML specification
+is maintained by the W3C.
+
+*[HTML]: Hyper Text Markup Language
+*[W3C]:  World Wide Web Consortium
+
+!!! note "Phasellus posuere in sem ut cursus"
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla et euismod
+    nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
+    massa, nec semper lorem quam in massa.
+
+Apple 
+:   Pomaceous fruit of plants of the genus Malus in
+    the family Rosaceae.
+
+Orange
+:   The fruit of an evergreen tree of the genus Citrus.
+
+
+
+[^1]: This is a footnote content.
+[^@#$%]: A footnote on the label: "@#$%".
+
+
+
+
+
+
+
+
+
+
+
+
 
