@@ -16,13 +16,12 @@ nav:
   - 头文件: header_files.md
 
 theme: 
-  name: 'readthedocs'
+  name: 'readthedocs'   # readthedocs material
   font: false
+  # logo: schools
   language: 'zh'
   navigation_depth: 4
   display_version: true
-  feature:
-    tabs: true
 
 extra:
   version: 1.0
@@ -34,6 +33,7 @@ extra:
 
 extra_javascript:
   - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
+extra_css:
 
 # Extensions
 markdown_extensions:
@@ -97,11 +97,11 @@ markdown_extensions:
     # The Legacy EM extension restores Markdown’s original behavior for emphasis 
     # and strong syntax when using underscores.
   # - legacy_em 
-  
-  # The Meta-Data extension adds a syntax for defining meta-data about a document. 
-  # It is inspired by and follows the syntax of MultiMarkdown. Currently, this extension
-  # does not use the meta-data in any way, but simply provides it as a Meta attribute of
-  # a Markdown instance for use by other extensions or directly by your python code.
+
+    # The Meta-Data extension adds a syntax for defining meta-data about a document. 
+    # It is inspired by and follows the syntax of MultiMarkdown. Currently, this extension
+    # does not use the meta-data in any way, but simply provides it as a Meta attribute of
+    # a Markdown instance for use by other extensions or directly by your python code.
   - meta
 
     # The New-Line-to-Break (nl2br) Extension will cause newlines to be treated as hard breaks
@@ -111,38 +111,152 @@ markdown_extensions:
     # The Sane Lists extension alters the behavior of the Markdown List syntax to be less surprising.
   # - sane_lists
 
-  # The Table of Contents extension generates a Table of Contents from a Markdown document and 
-  # adds it into the resulting HTML document.
+    # The Table of Contents extension generates a Table of Contents from a Markdown document and 
+    # adds it into the resulting HTML document.
   - toc:
   #     marker:           # Text to find and replace with the Table of Contents. Defaults to [TOC].
   #     title:            # Title to insert in the Table of Contents’ <div>. Defaults to None
-      permalink: true
+      permalink: true   # Set to True or a string to generate permanent links at the end of each header. Useful with Sphinx style sheets.
       baselevel: 1      # Base level for headers. Defaults to 1.
   #     slugify           # Callable to generate anchors.
+  #     separator:        # Word separator. Character which replaces white space in id. Defaults to “-”.
+  #     toc_depth:        # Define the range of section levels to include in the Table of Contents.Defaults to 6 (bottom).
 
+    # The Tables extension adds the ability to create tables in Markdown documents.
+  - tables
+
+    # The WikiLinks extension adds support for WikiLinks
+  # - wikilinks
+
+  ### PyMdown Extensions is a collection of extensions for Python Markdown.
+  ### you can get detail from https://facelessuser.github.io/pymdown-extensions/
+    # Arithmatex is an extension that preserves LaTeX math equations (x√y3) during the Markdown 
+    # conversion process so that they can be used with MathJax.
   - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
+
+    # B64 converts all local images in a document to base64 encoding and embeds them in the document.
+  # - b64
+
+    # BetterEm is a different approach to emphasis than Python Markdown's default.
+    # It works similar but handles certain corner cases differently.
+  # - pymdownx.betterem:
+  #     smart_enable: all
+
+    # Caret is an extension that is syntactically built around the ^ character. 
+    # It adds support for inserting supers^cripts^ and adds an easy way to place text in an <ins> tag.
   - pymdownx.caret
+
+    # Critic adds handling and support of Critic Markup.
   - pymdownx.critic
+
+    # Details creates collapsible elements with <details><summary> tags.
   - pymdownx.details
+
+    # Emoji makes adding emoji via Markdown easy 😄.
   - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      emoji_generator: !!python/name:pymdownx.emoji.to_png
+
+    # EscapeAll allows the escaping of any character, some with additional effects.
+  - pymdownx.escapeall:
+      hardbreak: false  # Escaped newlines will be hard breaks: <br>.
+      nbsp: false       # Escaped spaces will be non-breaking spaces: &nbsp;.
+
+    # Extra is just like Python Markdown's Extra package except it uses PyMdown Extensions 
+    # to substitute similar extensions.
+  # - pymdownx.extra:
+
+    # Highlight allows you to configure the syntax highlighting of SuperFences and InlineHilite.
+    # Also passes standard Markdown indented code blocks through the syntax highlighter.
+  - pymdownx.highlight:
+      # css_class: 'highlight'
+      # guess_lang: false
+      # pygments_style: 'default'
+      # noclasses: false
+      # use_pygments: true
+      # linenums: false
+      # linenums_special: 1
+      # linenums_style: 'table'
+      # extend_pygments_lang:
+
+    # InlineHilite highlights inline code: from module import function as func.
   - pymdownx.inlinehilite
+
+    # Keys makes inserting key inputs into documents as easy as pressing Ctrl＋Alt＋Del.
+  - pymdownx.keys
+
+    # MagicLink linkafies URL and email links without having to wrap them in Markdown syntax.
+    # Also, allows shortens repository issue, pull request, and commit links.
   - pymdownx.magiclink
+
+    # Mark allows you to mark words easily.
   - pymdownx.mark
+
+    # PathConverter converts paths to absolute or relative to a given base path.
+  # - pymdownx.pathconverter
+
+    # ProgressBar creates progress bars quick and easy.
+  # - pymdownx.progressbar:
+  #     level_class: true       # Enables or disables the level class feature. The level class feature adds level classes in increments defined by progress_increment.
+  #     add_classes:            # This option accepts a string of classes separated by spaces.
+  #     progress_increment: 20  # Defines the increment at which the level_class classes are generated at.
+
+    # SmartSymbols inserts commonly used Unicode characters via simple ASCII representations: =/= → ≠.
   - pymdownx.smartsymbols
+    # trademark:       true 	# Add syntax for trademark symbol.
+    # copyright:       true 	# True 	Add syntax for copyright symbol.
+    # registered:      true 	# Add syntax for registered symbol.
+    # care_of:         true 	# Add syntax for care / of.
+    # plusminus:       true 	# Add syntax for plus / minus.
+    # arrows:          true 	# Add syntax for creating arrows.
+    # notequal:        true 	# Add syntax for not equal symbol.
+    # fractions:       true   # Add syntax for common fractions.
+    # ordinal_numbers: true   # Add syntax for ordinal numbers.
+
+    # Snippets include other Markdown or HTML snippets into the current Markdown file being parsed.
+  # - pymdownx.snippets
+  #     base_path:          # A string indicating a base path to be used resolve snippet locations.
+  #     encoding: 'utf-8'   # Encoding to use when reading in the snippets.
+  #     check_paths: false  # Make the build fail if a snippet can't be found.
+
+    # StripHTML can strip out HTML comments and specific tag attributes.
+  # - pymdownx.striphtml
+  #     css_class:
+  #     style_plain_text: false 
+  #     custom_inline:
+
+    # SuperFences is like Python Markdown's fences, but better. Nest fences under lists, admonitions,
+    # and other syntaxes. Combine multiple fences together in tabbed groups, and even create special
+    # custom fences for content like UML.
   - pymdownx.superfences:
-      highlight_code: true
-      preserve_tabs: true
-      custom_fences:
+      highlight_code: true  # Enable or disable code highlighting.
+      preserve_tabs: true   # Experimental feature that preserves tabs in fenced code blocks.
+      disable_indented_code_blocks: false # Disables Python Markdown's indented code block parsing. This is nice if you only ever use fenced blocks.
+      custom_fences:        # Custom fences.
         - name: math
           class: arithmatex
           format: !!python/name:pymdownx.arithmatex.inline_mathjax_format
+        - name: flow
+          class: uml-flowchart
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: sequence
+          class: uml-sequence-diagram
+          format: !!python/name:pymdownx.superfences.fence_code_format
+      # css_class:            # Class name is applied to the wrapper element of the code. 
+                            # If configured, this setting will override the css_class option of either CodeHilite or Highlight. 
+                            # If nothing is configured here or via CodeHilite or Highlight, the class highlight will be used.
+
+    # Tasklist allows inserting lists with check boxes.
   - pymdownx.tasklist:
-      custom_checkbox: true
-  - pymdownx.tilde      
-  - pymdownx.keys:
+      # custom_checkbox: true     # Generate task lists in such a way as to allow for styling the check box with CSS.
+      clickable_checkbox: true  # Enable user to interact with checkboxes.
+    # Tilde is syntactically built around the ~ character. 
+    # It adds support for inserting subscripts and adds an easy way to place text in a <del> tag.
+    
+  - pymdownx.tilde:
+      smart_delete: true  # Use smart logic with delete characters.
+      delete: true        # Enable delete feature.
+      subscript: true     # Enable subscript feature.
+
 
 # Google Analytics
 google_analytics:
