@@ -31,7 +31,7 @@ $$
 
 ### A hash style header {: #hash }
 
-Footnotes[^1] have a label[^@#$%] and the footnote's content.
+
 
 <!-- [link](http://example.com){: class="foo bar" title="Some title!" } -->
 
@@ -80,20 +80,49 @@ Apple
 Orange
 :   The fruit of an evergreen tree of the genus Citrus.
 
+???+ note ""
+    ```Bash tab="tab-title"
+    #!/bin/bash
+    STR="Hello World!"
+    echo $STR
+    ```
+
+    ```C tab="tab-title"
+    #include 
+
+    int main(void) {
+      printf("hello, world\n");
+    }
+    ```
+
+    ```C++ tab="tab-title"
+    #include <iostream>
+
+    int main() {
+      std::cout << "Hello, world!\n";
+      return 0;
+    }
+    ```
+
+    ```C# tab="tab-title"
+    using System;
+
+    class Program {
+      static void Main(string[] args) {
+        Console.WriteLine("Hello, world!");
+      }
+    }
+    ```
+
+???+ note "Open styled details"
+
+    ??? danger "Nested details!"
+        And more content again.
 
 
-[^1]: This is a footnote content.
-[^@#$%]: A footnote on the label: "@#$%".
-
-
-
-
-
-
-
-
-
-
-
-
-
+```hl_lines="1 3" linenums="2"
+"""Some file."""
+import foo.bar
+import boo.baz
+import foo.bar.baz
+```
