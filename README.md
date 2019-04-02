@@ -38,10 +38,9 @@ python3 -m mkdocs serve
 Then visit http://127.0.0.1:8000 in your local browser to see the website performance.
 
 **NOTE: Please be sure to sign the article. If you are authorizing to reprint the articles on your personal website, please also include the original source in the article. When you initiate a submission, you will agree to the "[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)" knowledge used by this site. Share the agreement, please read the terms of the agreement before submitting the manuscript to determine whether you accept the agreement. At the same time, you can apply to us to revoke the authorization to publish the article at any time. You only need to apply for the Pull Request of the corresponding file in Repo.** 
+[![license](https://licensebuttons.net/l/by/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.en)
 
 
-
----
 
 ---
 
@@ -88,6 +87,5 @@ python3 -m mkdocs serve
 
 
 **注意：请务必在文章中署名，若您是授权将您个人网站中的文章转载在本站，也请一并在文中附上原文出处。当您发起投稿后，将意味着同意本站所使用的 "[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)" 知识共享协议，投稿前请先阅读协议条款，确定您是否接受这一协议。同时，您随时可以向我们申请撤销刊登文章的授权，只需要在 Repo 中申请删除对应文件的 Pull Request 即可。**
-
-![[license]()](https://licensebuttons.net/l/by/4.0/88x31.png)
+[![license](https://licensebuttons.net/l/by/4.0/88x31.png)](https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh)
 
