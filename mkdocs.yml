@@ -11,12 +11,13 @@ copyright: 'Copyright &copy; 2019. All rights reserved.'
 
 nav:
 - 主页: index.md
-- 视觉: 
-  - C++版本: cpp_version.md
-  - 头文件: header_files.md
-- 状态估计
-- 开源项目梳理
-- 文档推荐
+- 计算机视觉: 
+    - 目录: computer_vision/computer_vision.md
+    - 图像滤波器: computer_vision/image_filtering.md
+- 多视几何篇: header_files.md
+- 状态估计: cpp_version.md
+# - 开源项目梳理
+# - 文档推荐
 
 theme: 
   name: 'readthedocs'   # readthedocs material
