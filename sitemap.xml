@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-     <loc>https://github.com/LSXiang/GoogleCppStyleGuide/</loc>
-     <lastmod>2019-04-01</lastmod>
+     <loc>https://github.com/LSXiang/Journey2SLAM/</loc>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://github.com/LSXiang/GoogleCppStyleGuide/cpp_version/</loc>
-     <lastmod>2019-04-01</lastmod>
+     <loc>https://github.com/LSXiang/Journey2SLAM/computer_vision/computer_vision/</loc>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://github.com/LSXiang/GoogleCppStyleGuide/header_files/</loc>
-     <lastmod>2019-04-01</lastmod>
+     <loc>https://github.com/LSXiang/Journey2SLAM/computer_vision/image_filtering/</loc>
+     <lastmod>2019-04-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://github.com/LSXiang/Journey2SLAM/header_files/</loc>
+     <lastmod>2019-04-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://github.com/LSXiang/Journey2SLAM/cpp_version/</loc>
+     <lastmod>2019-04-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
