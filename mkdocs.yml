@@ -1,19 +1,22 @@
-site_name: 谷歌C++编程风格指南
-site_description: 谷歌C++编程风格指南中文翻译版
+site_name: SLAM之旅
+site_description: 学习 SLAM 过程中的知识记录
 site_author: Jacob.lsx
-site_url: 'https://github.com/LSXiang/GoogleCppStyleGuide'
+site_url: 'https://github.com/LSXiang/Journey2SLAM'
 
 # Repository
-repo_url: 'https://github.com/LSXiang/GoogleCppStyleGuide'
+repo_url: 'https://github.com/LSXiang/Journey2SLAM'
 
 # Copyright
 copyright: 'Copyright &copy; 2019. All rights reserved.'
 
 nav:
-- 简介: index.md
-- 正文: 
+- 主页: index.md
+- 视觉: 
   - C++版本: cpp_version.md
   - 头文件: header_files.md
+- 状态估计
+- 开源项目梳理
+- 文档推荐
 
 theme: 
   name: 'readthedocs'   # readthedocs material
