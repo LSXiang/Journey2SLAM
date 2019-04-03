@@ -1,39 +1,70 @@
-site_name: SLAM之旅
-site_description: 学习 SLAM 过程中的知识记录
+site_name: SLAM 之旅
+site_description: SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台
 site_author: Jacob.lsx
-site_url: 'https://github.com/LSXiang/Journey2SLAM'
+site_url: https://github.com/LSXiang/Journey2SLAM
 
 # Repository
-repo_url: 'https://github.com/LSXiang/Journey2SLAM'
+repo_name: LSXiang/Journey2SLAM
+repo_url: https://github.com/LSXiang/Journey2SLAM
 
 # Copyright
 copyright: 'Copyright &copy; 2019. All rights reserved.'
 
+# Configuration
+theme:
+  name: 'material'    # readthedocs material 
+  # 404 page
+  static_templates:
+    - 404.html
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+  # Default values, taken from mkdocs_theme.yml
+  language: zh
+  logo:
+    icon: 'school'
+  palette:
+    primary: 'Blue'  # default: indigo
+    accent:  'indigo'  # default: indigo
+  feature:
+    tabs: true
+  font:
+    text: Roboto
+    code: Roboto Mono
+  navigation_depth: 10
+
+# Navigation 
 nav:
 - 主页: index.md
 - 计算机视觉: 
     - 目录: computer_vision/computer_vision.md
     - 图像滤波器: computer_vision/image_filtering.md
-- 多视几何篇: header_files.md
-- 状态估计: cpp_version.md
-# - 开源项目梳理
+- 多视几何: 
+    - 概览: multiple_view_geometry/mvg.md
+- 状态估计: 
+    - 概览: state_estimation_robotics/state_estimation_robotics.md
+- 开源项目:
+    - RPG-SVO:
+      - 算法框架: projects/rpg_svo/structure.md
+    - ORB-SLAM:
+      - 算法框架: projects/orb_slam/structure.md
+      - 初始化: projects/orb_slam/initialize.md
 # - 文档推荐
 
-theme: 
-  name: 'readthedocs'   # readthedocs material
-  font: false
-  # logo: schools
-  language: 'zh'
-  navigation_depth: 4
-  display_version: true
-
+# Customization
 extra:
   version: 1.0
   search:
     language: 'jp'
+  manifest: 'manifest.webmanifest'
   social:
     - type: 'github'
       link: 'https://github.com/LSXiang'
+
+# Google Analytics
+google_analytics:
+  - 'UA-XXXXXXXX-X'
+  - 'auto'
 
 extra_javascript:
   - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
@@ -265,9 +296,3 @@ markdown_extensions:
       smart_delete: true  # Use smart logic with delete characters.
       delete: true        # Enable delete feature.
       subscript: true     # Enable subscript feature.
-
-
-# Google Analytics
-google_analytics:
-  - !!python/object/apply:os.getenv ["GOOGLE_ANALYTICS_KEY"]
-  - auto
