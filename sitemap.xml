@@ -16,12 +16,27 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://github.com/LSXiang/Journey2SLAM/header_files/</loc>
+     <loc>https://github.com/LSXiang/Journey2SLAM/multiple_view_geometry/mvg/</loc>
      <lastmod>2019-04-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://github.com/LSXiang/Journey2SLAM/cpp_version/</loc>
+     <loc>https://github.com/LSXiang/Journey2SLAM/state_estimation_robotics/state_estimation_robotics/</loc>
+     <lastmod>2019-04-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://github.com/LSXiang/Journey2SLAM/projects/rpg_svo/structure/</loc>
+     <lastmod>2019-04-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://github.com/LSXiang/Journey2SLAM/projects/orb_slam/structure/</loc>
+     <lastmod>2019-04-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://github.com/LSXiang/Journey2SLAM/projects/orb_slam/initialize/</loc>
      <lastmod>2019-04-03</lastmod>
      <changefreq>daily</changefreq>
     </url>

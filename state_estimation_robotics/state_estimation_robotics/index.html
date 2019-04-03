@@ -13,7 +13,7 @@
         <meta name="description" content="SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台">
       
       
-        <link rel="canonical" href="https://github.com/LSXiang/Journey2SLAM/header_files/">
+        <link rel="canonical" href="https://github.com/LSXiang/Journey2SLAM/state_estimation_robotics/state_estimation_robotics/">
       
       
         <meta name="author" content="Jacob.lsx">
@@ -37,7 +37,7 @@
       
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
     
     
@@ -46,9 +46,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.3020aac5.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -57,7 +57,7 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.01ccdecf.js"></script>
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
     
     
       
@@ -66,9 +66,9 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
-      <link rel="manifest" href="../manifest.webmanifest">
+      <link rel="manifest" href="../../manifest.webmanifest">
     
     
     
@@ -134,6 +134,10 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#todo" tabindex="1" class="md-skip">
+        跳转至
+      </a>
     
     
       <header class="md-header" data-md-component="header">
@@ -232,7 +236,7 @@
         
   <li class="md-tabs__item">
     
-      <a href=".." title="主页" class="md-tabs__link">
+      <a href="../.." title="主页" class="md-tabs__link">
         主页
       </a>
     
@@ -244,7 +248,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../computer_vision/computer_vision/" title="计算机视觉" class="md-tabs__link">
+        <a href="../../computer_vision/computer_vision/" title="计算机视觉" class="md-tabs__link">
           计算机视觉
         </a>
       
@@ -257,8 +261,8 @@
   
     <li class="md-tabs__item">
       
-        <a href="./" title="多视几何篇" class="md-tabs__link md-tabs__link--active">
-          多视几何篇
+        <a href="../../multiple_view_geometry/mvg/" title="多视几何" class="md-tabs__link">
+          多视几何
         </a>
       
     </li>
@@ -270,11 +274,30 @@
   
     <li class="md-tabs__item">
       
-        <a href="../cpp_version/" title="状态估计" class="md-tabs__link">
+        <a href="./" title="状态估计" class="md-tabs__link md-tabs__link--active">
           状态估计
         </a>
       
     </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../projects/rpg_svo/structure/" title="开源项目" class="md-tabs__link">
+          开源项目
+        </a>
+      
+    </li>
+  
+
   
 
       
@@ -327,7 +350,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="主页" class="md-nav__link">
+    <a href="../.." title="主页" class="md-nav__link">
       主页
     </a>
   </li>
@@ -358,7 +381,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../computer_vision/computer_vision/" title="目录" class="md-nav__link">
+    <a href="../../computer_vision/computer_vision/" title="目录" class="md-nav__link">
       目录
     </a>
   </li>
@@ -370,8 +393,44 @@
 
 
   <li class="md-nav__item">
-    <a href="../computer_vision/image_filtering/" title="图像滤波器" class="md-nav__link">
+    <a href="../../computer_vision/image_filtering/" title="图像滤波器" class="md-nav__link">
       图像滤波器
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      多视几何
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        多视几何
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../multiple_view_geometry/mvg/" title="概览" class="md-nav__link">
+      概览
     </a>
   </li>
 
@@ -390,14 +449,14 @@
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
-    <label class="md-nav__link" for="nav-3">
-      多视几何篇
+    <label class="md-nav__link" for="nav-4">
+      状态估计
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        多视几何篇
+      <label class="md-nav__title" for="nav-4">
+        状态估计
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -412,6 +471,8 @@
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
     
     
     <a href="./" title="概览" class="md-nav__link md-nav__link--active">
@@ -433,14 +494,33 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
-    <label class="md-nav__link" for="nav-4">
-      状态估计
+    <label class="md-nav__link" for="nav-5">
+      开源项目
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        状态估计
+      <label class="md-nav__title" for="nav-5">
+        开源项目
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-1" type="checkbox" id="nav-5-1">
+    
+    <label class="md-nav__link" for="nav-5-1">
+      RPG-SVO
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-1">
+        RPG-SVO
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -451,9 +531,62 @@
 
 
   <li class="md-nav__item">
-    <a href="../cpp_version/" title="概览" class="md-nav__link">
-      概览
+    <a href="../../projects/rpg_svo/structure/" title="算法框架" class="md-nav__link">
+      算法框架
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      ORB-SLAM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        ORB-SLAM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projects/orb_slam/structure/" title="算法框架" class="md-nav__link">
+      算法框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projects/orb_slam/initialize/" title="初始化" class="md-nav__link">
+      初始化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -469,54 +602,30 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/header_files.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/state_estimation_robotics/state_estimation_robotics.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>概览</h1>
-                
-                <p>This is the first paragraph of the document.</p>
-<p><a href="https://996.icu"><img alt="996.icu" src="https://img.shields.io/badge/link-996.icu-red.svg" /></a></p>
-<table>
-<thead>
-<tr>
-<th>First Header</th>
-<th>Second Header</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Content Cell</td>
-<td>Content Cell</td>
-</tr>
-<tr>
-<td>Content Cell</td>
-<td>Content Cell</td>
-</tr>
-</tbody>
-</table>
-<p><img alt="😄" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/4.0/png/64/1f604.png" title=":smile:" />这是干嘛</p>
-<pre class="uml-flowchart"><code>st=&gt;start: Start:&gt;http://www.google.com[blank]
-e=&gt;end:&gt;http://www.google.com
-op1=&gt;operation: My Operation
-sub1=&gt;subroutine: My Subroutine
-cond=&gt;condition: Yes
-or No?:&gt;http://www.google.com
-io=&gt;inputoutput: catch something...
-
-st-&gt;op1-&gt;cond
-cond(yes)-&gt;io-&gt;e
-cond(no)-&gt;sub1(right)-&gt;op1</code></pre>
-
-<pre class="uml-sequence-diagram"><code>Title: Here is a title
-A-&gt;B: Normal line
-B--&gt;C: Dashed line
-C-&gt;&gt;D: Open arrow
-D--&gt;&gt;A: Dashed open arrow</code></pre>
+                <h1 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h1>
                 
                   
                 
@@ -537,7 +646,7 @@ D--&gt;&gt;A: Dashed open arrow</code></pre>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../computer_vision/image_filtering/" title="图像滤波器" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../multiple_view_geometry/mvg/" title="概览" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -546,19 +655,19 @@ D--&gt;&gt;A: Dashed open arrow</code></pre>
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                图像滤波器
+                概览
               </span>
             </div>
           </a>
         
         
-          <a href="../cpp_version/" title="概览" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../projects/rpg_svo/structure/" title="算法框架" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                概览
+                算法框架
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -585,7 +694,7 @@ D--&gt;&gt;A: Dashed open arrow</code></pre>
       </div>
       
   <div class="md-footer-social">
-    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
     
       <a href="https://github.com/LSXiang" class="md-footer-social__link fa fa-github"></a>
     
@@ -597,12 +706,12 @@ D--&gt;&gt;A: Dashed open arrow</code></pre>
       
     </div>
     
-      <script src="../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
       
         
         
           
-          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
           
             
               
@@ -612,7 +721,7 @@ D--&gt;&gt;A: Dashed open arrow</code></pre>
           
         
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
