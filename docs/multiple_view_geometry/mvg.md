@@ -1,4 +1,7 @@
 
+# test
+
+
 Lorem ipsum dolor sit amet: $p(x|y) = \frac{p(y|x)p(x)}{p(y)}​$
 
 
@@ -27,15 +30,15 @@ $$
 >
 > > 你好啊
 
-## A setext style header {: #setext}
+## A setext style header
 
-### A hash style header {: #hash }
+### A hash style header
 
 
 
 <!-- [link](http://example.com){: class="foo bar" title="Some title!" } -->
 
-[link](http:www.baidu.com 'baidu') 
+[link](https://www.baidu.com 'baidu') 
 
 ```C++ hl_lines="1 3"
 int main(int argc, char** argv) {
@@ -56,6 +59,7 @@ int main(int argc, char** argv) {
 - **粗体**
   开关  
 
+### 按键
 
 ++ctrl+alt+delete++
 
@@ -73,7 +77,7 @@ is maintained by the W3C.
     nulla. Curabitur feugiat, tortor non consequat finibus, justo purus auctor
     massa, nec semper lorem quam in massa.
 
-Apple 
+==Apple :==
 :   Pomaceous fruit of plants of the genus Malus in
     the family Rosaceae.
 
@@ -126,3 +130,47 @@ import foo.bar
 import boo.baz
 import foo.bar.baz
 ```
+
+---
+Title:   My Document
+Summary: A brief description of my document.
+Authors: Waylan Limberg
+         John Doe
+Date:    October 2, 2007
+blank-value:
+base_url: http://example.com
+---
+
+This is the first paragraph of the document.
+
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+:smile:这是干嘛
+
+```flow
+st=>start: Start:>http://www.google.com[blank]
+e=>end:>http://www.google.com
+op1=>operation: My Operation
+sub1=>subroutine: My Subroutine
+cond=>condition: Yes
+or No?:>http://www.google.com
+io=>inputoutput: catch something...
+
+st->op1->cond
+cond(yes)->io->e
+cond(no)->sub1(right)->op1
+```
+
+```sequence
+Title: Here is a title
+A->B: Normal line
+B-->C: Dashed line
+C->>D: Open arrow
+D-->>A: Dashed open arrow
+```
+
