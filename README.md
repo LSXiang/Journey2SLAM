@@ -20,7 +20,7 @@ The following is a local simulation of the **Ubuntu** system to run this website
 
 #### 1. Prerequisites
 
-You need install `python3` , `git`, [`Python-Markdown`](https://python-markdown.github.io/),  [`MkDocs`](https://www.mkdocs.org/),  [`PyMdown Extensions`](https://facelessuser.github.io/pymdown-extensions), [`Pygments`](http://pygments.org/). Open one terminal and switch to the path where you want to download the project :
+You need install `python3` , `git`, [`Python-Markdown`](https://python-markdown.github.io/),  [`MkDocs`](https://www.mkdocs.org/),  [`PyMdown Extensions`](https://facelessuser.github.io/pymdown-extensions), [`Pygments`](http://pygments.org/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material). Open one terminal and switch to the path where you want to download the project :
 
 ```
 sudo apt-get install python3 git python3-pip
@@ -67,7 +67,7 @@ Then visit http://127.0.0.1:8000 in your local browser to see the website perfor
 
 #### 1. 需求
 
-你需要安装 `python3` , `git`, [`Python-Markdown`](https://python-markdown.github.io/),  [`MkDocs`](https://www.mkdocs.org/),  [`PyMdown Extensions`](https://facelessuser.github.io/pymdown-extensions), [`Pygments`](http://pygments.org/)。打开一个终端，并切换到您希望下载该项目的路径下：
+你需要安装 `python3` , `git`, [`Python-Markdown`](https://python-markdown.github.io/),  [`MkDocs`](https://www.mkdocs.org/),  [`PyMdown Extensions`](https://facelessuser.github.io/pymdown-extensions), [`Pygments`](http://pygments.org/) 和 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material) 。打开一个终端，并切换到您希望下载该项目的路径下：
 
 ```
 sudo apt-get install python3 git python3-pip
