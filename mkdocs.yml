@@ -1,7 +1,7 @@
 site_name: SLAM 之旅
 site_description: SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台
 site_author: Jacob.lsx
-site_url: https://github.com/LSXiang/Journey2SLAM
+site_url: https://lsxiang.github.io/Journey2SLAM
 
 # Repository
 repo_name: LSXiang/Journey2SLAM
@@ -19,7 +19,6 @@ theme:
   # Don't include MkDocs' JavaScript
   include_search_page: false
   search_index_only: true
-  # Default values, taken from mkdocs_theme.yml
   language: zh
   logo:
     icon: 'school'
@@ -31,7 +30,10 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  navigation_depth: 10
+  # navigation_depth: 10
+
+# Path
+docs_dir: docs
 
 # Navigation 
 nav:
@@ -66,15 +68,6 @@ google_analytics:
   - 'UA-XXXXXXXX-X'
   - 'auto'
 
-extra_javascript:
-  - //cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML
-  # - https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js
-  # - https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js
-  # - https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js
-  # - https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js
-
-extra_css:
-
 # Extensions
 markdown_extensions:
     # The Abbreviations extension adds the ability to define abbreviations.
@@ -96,7 +89,7 @@ markdown_extensions:
 
     # The Attribute Lists extension adds a syntax to define attributes on the 
     # various HTML elements in markdown’s output.
-  # - attr_list
+  - attr_list
 
     # The CodeHilite extension adds code/syntax highlighting to standard 
     # Python-Markdown code blocks using Pygments.
@@ -168,6 +161,14 @@ markdown_extensions:
     # The WikiLinks extension adds support for WikiLinks
   # - wikilinks
 
+    # The SmartyPants extension converts ASCII dashes, quotes and ellipses to their HTML entity equivalents.
+  # - smarty:
+  #     smart_dashes: true          # whether to convert dashes
+  #     smart_quotes: true 	        # whether to convert straight quotes
+  #     smart_angled_quotes: false  # whether to convert angled quotes
+  #     smart_ellipses: true 	      # whether to convert ellipses
+  #     substitutions: {} 	        # overwrite default substitutions
+
   ### PyMdown Extensions is a collection of extensions for Python Markdown.
   ### you can get detail from https://facelessuser.github.io/pymdown-extensions/
     # Arithmatex is an extension that preserves LaTeX math equations (x√y3) during the Markdown 
@@ -179,7 +180,7 @@ markdown_extensions:
 
     # BetterEm is a different approach to emphasis than Python Markdown's default.
     # It works similar but handles certain corner cases differently.
-  # - pymdownx.betterem:
+  - pymdownx.betterem:
   #     smart_enable: all
 
     # Caret is an extension that is syntactically built around the ^ character. 
@@ -198,8 +199,8 @@ markdown_extensions:
 
     # EscapeAll allows the escaping of any character, some with additional effects.
   - pymdownx.escapeall:
-      hardbreak: false  # Escaped newlines will be hard breaks: <br>.
-      nbsp: false       # Escaped spaces will be non-breaking spaces: &nbsp;.
+      hardbreak: true  # Escaped newlines will be hard breaks: <br>.
+      nbsp: true       # Escaped spaces will be non-breaking spaces: &nbsp;.
 
     # Extra is just like Python Markdown's Extra package except it uses PyMdown Extensions 
     # to substitute similar extensions.
@@ -208,25 +209,34 @@ markdown_extensions:
     # Highlight allows you to configure the syntax highlighting of SuperFences and InlineHilite.
     # Also passes standard Markdown indented code blocks through the syntax highlighter.
   - pymdownx.highlight:
-      # css_class: 'highlight'
+      css_class: 'highlight'
       # guess_lang: false
       # pygments_style: 'default'
       # noclasses: false
       # use_pygments: true
       # linenums: false
       # linenums_special: 1
-      # linenums_style: 'table'
+      linenums_style: 'table' # default 'table'
       # extend_pygments_lang:
 
     # InlineHilite highlights inline code: from module import function as func.
-  - pymdownx.inlinehilite
+  - pymdownx.inlinehilite:
+      custom_inline:
+        - name: math
+          class: arithmatex
+          format: !!python/name:pymdownx.arithmatex.inline_mathjax_format
 
     # Keys makes inserting key inputs into documents as easy as pressing Ctrl＋Alt＋Del.
   - pymdownx.keys
 
     # MagicLink linkafies URL and email links without having to wrap them in Markdown syntax.
     # Also, allows shortens repository issue, pull request, and commit links.
-  - pymdownx.magiclink
+  - pymdownx.magiclink:
+      repo_url_shortener: true
+      repo_url_shorthand: true
+      social_url_shorthand: true
+      user: Jacob.lsx
+      repo: Journey2SLAM
 
     # Mark allows you to mark words easily.
   - pymdownx.mark
@@ -235,7 +245,7 @@ markdown_extensions:
   # - pymdownx.pathconverter
 
     # ProgressBar creates progress bars quick and easy.
-  # - pymdownx.progressbar:
+  - pymdownx.progressbar:
   #     level_class: true       # Enables or disables the level class feature. The level class feature adds level classes in increments defined by progress_increment.
   #     add_classes:            # This option accepts a string of classes separated by spaces.
   #     progress_increment: 20  # Defines the increment at which the level_class classes are generated at.
@@ -253,13 +263,13 @@ markdown_extensions:
     # ordinal_numbers: true   # Add syntax for ordinal numbers.
 
     # Snippets include other Markdown or HTML snippets into the current Markdown file being parsed.
-  # - pymdownx.snippets
-  #     base_path:          # A string indicating a base path to be used resolve snippet locations.
-  #     encoding: 'utf-8'   # Encoding to use when reading in the snippets.
-  #     check_paths: false  # Make the build fail if a snippet can't be found.
+  - pymdownx.snippets:
+      base_path: docs/_configurations/_snippets # A string indicating a base path to be used resolve snippet locations.
+      # encoding: 'utf-8'   # Encoding to use when reading in the snippets.
+      # check_paths: false  # Make the build fail if a snippet can't be found.
 
     # StripHTML can strip out HTML comments and specific tag attributes.
-  # - pymdownx.striphtml
+  - pymdownx.striphtml
   #     css_class:
   #     style_plain_text: false 
   #     custom_inline:
@@ -287,12 +297,22 @@ markdown_extensions:
 
     # Tasklist allows inserting lists with check boxes.
   - pymdownx.tasklist:
-      # custom_checkbox: true     # Generate task lists in such a way as to allow for styling the check box with CSS.
+      custom_checkbox: true     # Generate task lists in such a way as to allow for styling the check box with CSS.
       clickable_checkbox: true  # Enable user to interact with checkboxes.
+
     # Tilde is syntactically built around the ~ character. 
     # It adds support for inserting subscripts and adds an easy way to place text in a <del> tag.
-    
   - pymdownx.tilde:
       smart_delete: true  # Use smart logic with delete characters.
       delete: true        # Enable delete feature.
       subscript: true     # Enable subscript feature.
+
+  - pymdownx.extrarawhtml:
+
+extra_javascript:
+  - _configurations/_theme_extra/theme_extra.js
+  # - js/extra.js
+
+extra_css:
+  - _configurations/_theme_extra/theme_extra.css
+  # - scss/extra.scss
