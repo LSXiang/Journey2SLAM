@@ -1,4 +1,4 @@
-# 欢迎来到 SLAM 之旅
+# 欢迎来到 **SLAM** 之旅
 
 **SLAM 之旅（Journey to SLAM）**是用于记录分享学习 [Simultaneous Localization and Mapping (SLAM)](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping "Simultaneous Localization and Mapping") 知识的平台。
 
