@@ -13,7 +13,7 @@
         <meta name="description" content="SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台">
       
       
-        <link rel="canonical" href="https://github.com/LSXiang/Journey2SLAM/computer_vision/computer_vision/">
+        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/computer_vision/computer_vision/">
       
       
         <meta name="author" content="Jacob.lsx">
@@ -70,6 +70,8 @@
     
       <link rel="manifest" href="../../manifest.webmanifest">
     
+    
+      <link rel="stylesheet" href="../../_configurations/_theme_extra/theme_extra.css">
     
     
       
@@ -144,7 +146,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://github.com/LSXiang/Journey2SLAM" title="SLAM 之旅" class="md-header-nav__button md-logo">
+        <a href="https://lsxiang.github.io/Journey2SLAM" title="SLAM 之旅" class="md-header-nav__button md-logo">
           
             <i class="md-icon">school</i>
           
@@ -314,7 +316,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" data-md-level="0">
   <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="https://github.com/LSXiang/Journey2SLAM" title="SLAM 之旅" class="md-nav__button md-logo">
+    <a href="https://lsxiang.github.io/Journey2SLAM" title="SLAM 之旅" class="md-nav__button md-logo">
       
         <i class="md-icon">school</i>
       
@@ -745,8 +747,6 @@
 </blockquote>
 <h2 id="a-setext-style-header">A setext style header<a class="headerlink" href="#a-setext-style-header" title="Permanent link">&para;</a></h2>
 <h3 id="a-hash-style-header">A hash style header<a class="headerlink" href="#a-hash-style-header" title="Permanent link">&para;</a></h3>
-<!-- [link](http://example.com){: class="foo bar" title="Some title!" } -->
-
 <p><a href="https://www.baidu.com" title="baidu">link</a> </p>
 <p><div class="highlight"><pre><span></span><span class="hll"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
 </span>  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
@@ -769,7 +769,7 @@
 <h3 id="_1">按键<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <p><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-delete">Del</kbd></span></p>
 <ul class="task-list">
-<li class="task-list-item"><input type="checkbox" checked/> tasklist  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> tasklist  </li>
 </ul>
 <p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification
 is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>
@@ -788,13 +788,13 @@ the family Rosaceae.</dd>
 </dl>
 <details class="note" open="open"><summary></summary><div class="superfences-tabs">
 <input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
-<label for="__tab_1_0">tab-title</label>
+<label for="__tab_1_0">Bash</label>
 <div class="superfences-content"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nv">STR</span><span class="o">=</span><span class="s2">&quot;Hello World!&quot;</span>
 <span class="nb">echo</span> <span class="nv">$STR</span>
 </pre></div></div>
 <input name="__tabs_1" type="radio" id="__tab_1_1" />
-<label for="__tab_1_1">tab-title</label>
+<label for="__tab_1_1">C</label>
 <div class="superfences-content"><div class="highlight"><pre><span></span><span class="cp">#include</span> 
 
 <span class="cpf">int main(void) {</span><span class="cp"></span>
@@ -802,7 +802,7 @@ the family Rosaceae.</dd>
 <span class="p">}</span>
 </pre></div></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
-<label for="__tab_1_2">tab-title</label>
+<label for="__tab_1_2">C++</label>
 <div class="superfences-content"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
@@ -811,7 +811,7 @@ the family Rosaceae.</dd>
 <span class="p">}</span>
 </pre></div></div>
 <input name="__tabs_1" type="radio" id="__tab_1_3" />
-<label for="__tab_1_3">tab-title</label>
+<label for="__tab_1_3">C#</label>
 <div class="superfences-content"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
@@ -835,16 +835,6 @@ the family Rosaceae.</dd>
 </pre></div>
 </td></tr></table>
 
-<hr />
-<p>Title:   My Document
-Summary: A brief description of my document.
-Authors: Waylan Limberg
-         John Doe
-Date:    October 2, 2007
-blank-value:
-base_url: <a href="http://example.com">http://example.com</a></p>
-<hr />
-<p>This is the first paragraph of the document.</p>
 <p><a href="https://996.icu"><img alt="996.icu" src="https://img.shields.io/badge/link-996.icu-red.svg" /></a></p>
 <table>
 <thead>
@@ -865,6 +855,126 @@ base_url: <a href="http://example.com">http://example.com</a></p>
 </tbody>
 </table>
 <p><img alt="😄" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/4.0/png/64/1f604.png" title=":smile:" />这是干嘛</p>
+<div class="admonition example">
+<p class="admonition-title">Flow Chart Example</p>
+<div class="superfences-tabs">
+<input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
+<label for="__tab_2_0">Source</label>
+<div class="superfences-content"><div class="highlight"><pre><span></span>```flow
+st=&gt;start: Start:&gt;http://www.google.com[blank]
+e=&gt;end:&gt;http://www.google.com
+op1=&gt;operation: My Operation
+sub1=&gt;subroutine: My Subroutine
+cond=&gt;condition: Yes
+or No?:&gt;http://www.google.com
+io=&gt;inputoutput: catch something...
+
+st-&gt;op1-&gt;cond
+cond(yes)-&gt;io-&gt;e
+cond(no)-&gt;sub1(right)-&gt;op1
+```
+</pre></div></div>
+<input name="__tabs_2" type="radio" id="__tab_2_1" />
+<label for="__tab_2_1">Output</label>
+<div class="superfences-content"><pre class="uml-flowchart"><code>st=&gt;start: Start:&gt;http://www.google.com[blank]
+e=&gt;end:&gt;http://www.google.com
+op1=&gt;operation: My Operation
+sub1=&gt;subroutine: My Subroutine
+cond=&gt;condition: Yes
+or No?:&gt;http://www.google.com
+io=&gt;inputoutput: catch something...
+
+st-&gt;op1-&gt;cond
+cond(yes)-&gt;io-&gt;e
+cond(no)-&gt;sub1(right)-&gt;op1</code></pre></div>
+</div>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Sequence Diagram Example</p>
+<div class="superfences-tabs">
+<input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
+<label for="__tab_3_0">Source</label>
+<div class="superfences-content"><div class="highlight"><pre><span></span>```sequence
+Title: Here is a title
+A-&gt;B: Normal line
+B--&gt;C: Dashed line
+C-&gt;&gt;D: Open arrow
+D--&gt;&gt;A: Dashed open arrow
+```
+</pre></div></div>
+<input name="__tabs_3" type="radio" id="__tab_3_1" />
+<label for="__tab_3_1">Output</label>
+<div class="superfences-content"><pre class="uml-sequence-diagram"><code>Title: Here is a title
+A-&gt;B: Normal line
+B--&gt;C: Dashed line
+C-&gt;&gt;D: Open arrow
+D--&gt;&gt;A: Dashed open arrow</code></pre></div>
+</div>
+</div>
+<p>
+<div class="progress progress-0plus">
+<div class="progress-bar" style="width:0.00%">
+<p class="progress-label">0%</p>
+</div>
+</div>
+<div class="progress progress-0plus">
+<div class="progress-bar" style="width:5.00%">
+<p class="progress-label">5%</p>
+</div>
+</div>
+<div class="progress progress-20plus">
+<div class="progress-bar" style="width:25.00%">
+<p class="progress-label">25%</p>
+</div>
+</div>
+<div class="progress progress-40plus">
+<div class="progress-bar" style="width:45.00%">
+<p class="progress-label">45%</p>
+</div>
+</div>
+<div class="progress progress-60plus">
+<div class="progress-bar" style="width:65.00%">
+<p class="progress-label">65%</p>
+</div>
+</div>
+<div class="progress progress-80plus">
+<div class="progress-bar" style="width:85.00%">
+<p class="progress-label">85%</p>
+</div>
+</div>
+<div class="progress progress-100plus">
+<div class="progress-bar" style="width:100.00%">
+<p class="progress-label">100%</p>
+</div>
+</div>
+</p>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"],
+    TeX: {
+        TagSide: "right",
+        TagIndent: ".8em",
+        MultLineWidth: "85%",
+        equationNumbers: {
+            autoNumber: "AMS",
+        }
+    },
+    showProcessingMessages: false,
+    messageStyle: 'none'
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
                 
                   
                 
@@ -962,7 +1072,7 @@ base_url: <a href="http://example.com">http://example.com</a></p>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
-        <script src="//cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script src="../../_configurations/_theme_extra/theme_extra.js"></script>
       
     
   </body>

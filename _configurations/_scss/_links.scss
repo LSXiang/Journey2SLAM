@@ -1,0 +1,28 @@
+// General styling for repository link icons
+.md-typeset {
+  .magiclink {
+    &::before {
+      position: relative;
+      padding-right: 0.25rem;
+      font-family: FontAwesome;
+      -moz-osx-font-smoothing: initial;
+      -webkit-font-smoothing: initial;
+      font-weight: 400;
+    }
+  }
+}
+
+// Assign icons to repository links
+@each $name, $icon in (
+  "github": "\f09b",
+  "gitlab": "\f296",
+  "bitbucket": "\f171"
+) {
+  .md-typeset {
+    .magiclink-repository.magiclink-#{$name} {
+      &::before {
+        content: "#{$icon}";
+      }
+    }
+  }
+}
