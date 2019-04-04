@@ -1,0 +1,110 @@
+/* Stripes */
+$pb-stripe: transparentize($clr-white, 0.2);
+
+.md-typeset {
+
+  /* Progress Bars */
+  .progress-label {
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    color: transparentize($clr-black, 0.5);
+    font-weight: 700;
+    line-height: 1.4rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .progress-bar {
+    height: 1.2rem;
+    float: left;
+    background-color: $clr-blue-a400;
+  }
+
+  /* Stripe animation */
+  .candystripe-animate {
+    .progress-bar{
+      animation: animate-stripes 3s linear infinite;
+    }
+  }
+
+  .progress {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 1.2rem;
+    margin: 0.5rem 0;
+    background-color: $clr-grey-200;
+
+    &.thin {
+      height: 0.4rem;
+      margin-top: 0.9rem;
+
+      .progress-label {
+        margin-top: -0.4rem;
+      }
+
+      .progress-bar {
+        height: 0.4rem;
+      }
+    }
+
+    &.candystripe .progress-bar {
+      background-image:
+        linear-gradient(
+          135deg,
+          $pb-stripe 27%,
+          transparent 27%,
+          transparent 52%,
+          $pb-stripe 52%,
+          $pb-stripe 77%,
+          transparent 77%,
+          transparent
+        );
+      background-size: 2rem 2rem;
+    }
+  }
+
+  @each $percent, $color in (
+    "100": $clr-green-a400,
+    "80":  $clr-green-a400,
+    "60":  $clr-yellow-700,
+    "40":  $clr-orange-a400,
+    "20":  $clr-red-a200,
+    "0":   $clr-red-a400
+  ) {
+    .progress-#{$percent}plus {
+      .progress-bar {
+        background-color: $color;
+      }
+    }
+  }
+
+  @each $names, $color in (
+    note seealso: $clr-blue-a400,
+    summary tldr: $clr-light-blue-a400,
+    tip hint important : $clr-teal-a700,
+    success check done: $clr-green-a400,
+    warning caution attention: $clr-orange-a400,
+    failure fail missing: $clr-red-a200,
+    danger error: $clr-red-a400,
+    bug: $clr-pink-a400,
+    quote cite: $clr-grey
+  ) {
+    .progress.#{nth($names, 1)} {
+      .progress-bar {
+        background-color: $color;
+      }
+    }
+  }
+
+  @keyframes animate-stripes {
+    0% {
+      background-position: 0 0;
+    }
+
+    100% {
+      background-position: 6rem 0;
+    }
+  }
+}
