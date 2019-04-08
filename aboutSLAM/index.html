@@ -13,7 +13,7 @@
         <meta name="description" content="SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台">
       
       
-        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/computer_vision/image_filtering/">
+        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/aboutSLAM/">
       
       
         <meta name="author" content="Jacob.lsx">
@@ -37,18 +37,18 @@
       
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
     
     
       
-        <title>图像滤波器 - SLAM 之旅</title>
+        <title>关于 SLAM - SLAM 之旅</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.3020aac5.css">
       
-        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.224b79ff.css">
       
       
         
@@ -57,7 +57,7 @@
       
     
     
-      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+      <script src="../assets/javascripts/modernizr.01ccdecf.js"></script>
     
     
       
@@ -66,12 +66,12 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
     
-      <link rel="manifest" href="../../manifest.webmanifest">
+      <link rel="manifest" href="../manifest.webmanifest">
     
     
-      <link rel="stylesheet" href="../../_configurations/_theme_extra/theme_extra.css">
+      <link rel="stylesheet" href="../_configurations/_theme_extra/theme_extra.css">
     
     
       
@@ -158,7 +158,7 @@
               SLAM 之旅
             </span>
             <span class="md-header-nav__topic">
-              图像滤波器
+              关于 SLAM
             </span>
           
         </div>
@@ -225,16 +225,14 @@
       
         
 
-  
-
-<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+<nav class="md-tabs" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
   <li class="md-tabs__item">
     
-      <a href="../.." title="主页" class="md-tabs__link">
+      <a href=".." title="主页" class="md-tabs__link md-tabs__link--active">
         主页
       </a>
     
@@ -248,7 +246,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../computer_vision/" title="计算机视觉" class="md-tabs__link md-tabs__link--active">
+        <a href="../computer_vision/computer_vision/" title="计算机视觉" class="md-tabs__link">
           计算机视觉
         </a>
       
@@ -261,7 +259,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../multiple_view_geometry/mvg/" title="多视几何" class="md-tabs__link">
+        <a href="../multiple_view_geometry/mvg/" title="多视几何" class="md-tabs__link">
           多视几何
         </a>
       
@@ -274,7 +272,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../state_estimation_robotics/state_estimation_robotics/" title="状态估计" class="md-tabs__link">
+        <a href="../state_estimation_robotics/state_estimation_robotics/" title="状态估计" class="md-tabs__link">
           状态估计
         </a>
       
@@ -291,7 +289,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../projects/rpg_svo/structure/" title="开源项目" class="md-tabs__link">
+        <a href="../projects/rpg_svo/structure/" title="开源项目" class="md-tabs__link">
           开源项目
         </a>
       
@@ -350,20 +348,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="主页" class="md-nav__link">
+    <a href=".." title="主页" class="md-nav__link">
       主页
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../../aboutSLAM/" title="关于 SLAM" class="md-nav__link">
-      关于 SLAM
     </a>
   </li>
 
@@ -375,9 +361,26 @@
   
 
 
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--active">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+    <a href="./" title="关于 SLAM" class="md-nav__link md-nav__link--active">
+      关于 SLAM
+    </a>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       计算机视觉
@@ -395,7 +398,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../computer_vision/" title="概述" class="md-nav__link">
+    <a href="../computer_vision/computer_vision/" title="概述" class="md-nav__link">
       概述
     </a>
   </li>
@@ -405,18 +408,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-    <a href="./" title="图像滤波器" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../computer_vision/image_filtering/" title="图像滤波器" class="md-nav__link">
       图像滤波器
     </a>
-    
   </li>
 
         
@@ -450,7 +446,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../multiple_view_geometry/mvg/" title="概览" class="md-nav__link">
+    <a href="../multiple_view_geometry/mvg/" title="概览" class="md-nav__link">
       概览
     </a>
   </li>
@@ -486,7 +482,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../state_estimation_robotics/state_estimation_robotics/" title="概览" class="md-nav__link">
+    <a href="../state_estimation_robotics/state_estimation_robotics/" title="概览" class="md-nav__link">
       概览
     </a>
   </li>
@@ -541,7 +537,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../projects/rpg_svo/structure/" title="算法框架" class="md-nav__link">
+    <a href="../projects/rpg_svo/structure/" title="算法框架" class="md-nav__link">
       算法框架
     </a>
   </li>
@@ -577,7 +573,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../projects/orb_slam/structure/" title="算法框架" class="md-nav__link">
+    <a href="../projects/orb_slam/structure/" title="算法框架" class="md-nav__link">
       算法框架
     </a>
   </li>
@@ -589,7 +585,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../projects/orb_slam/initialize/" title="初始化" class="md-nav__link">
+    <a href="../projects/orb_slam/initialize/" title="初始化" class="md-nav__link">
       初始化
     </a>
   </li>
@@ -617,12 +613,20 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/computer_vision/image_filtering.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/aboutSLAM.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>图像滤波器</h1>
+                  <h1>关于 SLAM</h1>
                 
-                
+                <p><a href="https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping" title="Simultaneous Localization and Mapping"><strong>Simultaneous Localization and Mapping (SLAM)</strong></a> <strong>即时定位与地图构建</strong> 是在未知环境中构建或更新地图，并同时利用地图信息跟踪定位的计算问题。虽然在最初看来像极了先有鸡还是先有蛋的问题，但对于某些环境下，至少在可控制的时间内，有几种算法可以近似地解决这个问题。目前为止的近似求解方法有 <a href="https://en.wikipedia.org/wiki/Particle_filter"><strong>粒子滤波</strong></a>、<a href="https://en.wikipedia.org/wiki/Extended_Kalman_filter"><strong>扩展卡尔曼滤波</strong></a> 和 <a href="https://en.wikipedia.org/wiki/GraphSLAM"><strong>GraphSLAM</strong></a>。随着人工智能的发展，也出现了 <strong>语义 SLAM (Semantic slam)</strong> 等新的求解方式，但就目前最为流行和广泛使用的还是 GraphSLAM 。</p>
+<p>近年来，「SLAM 技术」成为了越来越多学者研究的课题方向，随着该技术的成熟，它也被广泛的应用于市场上的诸多产品上，例如：自动驾驶汽车、无人驾驶飞行器、自动水下航行器、行星漫游者、较新的家用机器人，等等。因而市场对「SLAM 算法工程师」的需求也越来越多。然而 「SLAM 技术」涉及知识体系之广、而且大部分知识也相对较难，所以 「SLAM 算法」并非那么容易能够掌握精通。</p>
+<p>如果你喜欢该技术领域，想要在这个方向上有所发展，那么你就需要付出许多时间在这些知识中深挖。建议您可以考取相关领域的硕士及以上学历，这对你在市场竞争中能获取相当大的优势。当然这并非硬性规定，只要您对该技术感兴趣，并沉浸于研究之中，相信自己也可以成为该领域中优秀的人才之一。</p>
+<p>「双非渣本的我」在创建这个站点的最初目的就是用于记录和分享自己学习「SLAM 技术」的经过。正所谓好记性不如烂笔头，之前书面记录的学习笔记随着时间的推移，很不方便查阅并且易于丢失，CSDN、博创园等博客不太简美或整体化，并且可能不支持一些数学公式、强调格式等，抑或是存在各种碍眼广告。因而选着了这种形式来记录和分享这个学习过程。</p>
+<p>如果您对这个项目感兴趣，欢迎您  <iframe src="https://ghbtns.com/github-btn.html?user=LSXiang&repo=Journey2SLAM&type=star&count=true&size=large" frameborder="0" scrolling="0" width="125px" height="30px"></iframe> 或者 <iframe src="https://ghbtns.com/github-btn.html?user=LSXiang&repo=Journey2SLAM&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="125px" height="30px"></iframe> 该项目，或者持续关注该网址。如果您愿意分享您的学习过程到该网址，您可以阅读该项目的 <a href="https://github.com/LSXiang/Journey2SLAM/blob/master/README.md">README.md</a> 来共同编写该站点。</p>
+<p>下面分享一些个人认为值得关注公众号、网址：</p>
+<ul>
+<li></li>
+</ul>
                 
                   
                 
@@ -643,7 +647,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../computer_vision/" title="概述" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href=".." title="主页" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -652,19 +656,19 @@
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                概述
+                主页
               </span>
             </div>
           </a>
         
         
-          <a href="../../multiple_view_geometry/mvg/" title="概览" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../computer_vision/computer_vision/" title="概述" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                概览
+                概述
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -691,7 +695,7 @@
       </div>
       
   <div class="md-footer-social">
-    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
       <a href="https://github.com/LSXiang" class="md-footer-social__link fa fa-github"></a>
     
@@ -703,12 +707,12 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../assets/javascripts/application.dc02f8ce.js"></script>
       
         
         
           
-          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          <script src="../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
           
             
               
@@ -718,9 +722,9 @@
           
         
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
-        <script src="../../_configurations/_theme_extra/theme_extra.js"></script>
+        <script src="../_configurations/_theme_extra/theme_extra.js"></script>
       
     
   </body>
