@@ -38,8 +38,9 @@ docs_dir: docs
 # Navigation 
 nav:
 - 主页: index.md
+- 关于 SLAM: aboutSLAM.md
 - 计算机视觉: 
-    - 目录: computer_vision/computer_vision.md
+    - 概述: computer_vision/computer_vision.md
     - 图像滤波器: computer_vision/image_filtering.md
 - 多视几何: 
     - 概览: multiple_view_geometry/mvg.md
