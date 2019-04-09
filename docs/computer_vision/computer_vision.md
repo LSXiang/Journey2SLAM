@@ -1,5 +1,15 @@
 ## 前言
 
+!!! tips "什么是视觉、什么是计算机视觉"  
+    **视觉:**  
+    :    " Vision is the act of knowing what is where by looking ."    --Aristotle  
+	      『视觉是通过观察来知道什么在哪里的行为』　——亚里士多德  
+
+	  **计算机视觉:**  
+	:   维基百科的解释是『[计算机视觉](https://en.wikipedia.org/wiki/Computer_vision)是一个跨学科的科学领域，研究如何使计算机从数字图像或视频中获得高层次的理解』。换句话说，计算机视觉的目标是使计算机拥有人类或超越人类水平的视觉感知能力
+
+
+
 在进入[计算机视觉](https://en.wikipedia.org/wiki/Computer_vision)每一小节内容之前，先给出一些知名高校的课程 Slides 和公开课链接网址：  
 
 - [卡内基梅隆大学](http://www.cs.cmu.edu/~16385/) 
