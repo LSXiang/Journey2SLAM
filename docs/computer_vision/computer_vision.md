@@ -10,7 +10,7 @@
 
 
 
-在进入[计算机视觉](https://en.wikipedia.org/wiki/Computer_vision)每一小节内容之前，先给出一些知名高校的课程 Slides 和公开课链接网址：  
+在进入[计算机视觉基础](https://en.wikipedia.org/wiki/Computer_vision)每一小节内容之前，先给出一些知名高校的课程 Slides 和公开课链接网址：  
 
 - [卡内基梅隆大学](http://www.cs.cmu.edu/~16385/) 
 - [宾夕法尼亚州立大学](http://www.cse.psu.edu/~rtc12/CSE486/)
