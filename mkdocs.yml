@@ -39,7 +39,7 @@ docs_dir: docs
 nav:
 - 主页: index.md
 - 关于 SLAM: aboutSLAM.md
-- 计算机视觉: 
+- 计算机视觉基础: 
     - 概述: computer_vision/computer_vision.md
     - 图像滤波器: computer_vision/image_filtering.md
 - 多视几何: 
@@ -47,12 +47,15 @@ nav:
 - 状态估计: 
     - 概览: state_estimation_robotics/state_estimation_robotics.md
 - 开源项目:
+    - 概述: projects/projects.md
     - RPG-SVO:
       - 算法框架: projects/rpg_svo/structure.md
     - ORB-SLAM:
       - 算法框架: projects/orb_slam/structure.md
       - 初始化: projects/orb_slam/initialize.md
-# - 文档推荐
+- 其他:
+    - Markdown 写作模版: others/md_template.md
+    # - 待归类整合投稿: 
 
 # Customization
 extra:
