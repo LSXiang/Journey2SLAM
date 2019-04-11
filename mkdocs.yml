@@ -44,6 +44,7 @@ nav:
     - 图像滤波器: computer_vision/image_filtering.md
 - 多视几何: 
     - 概览: multiple_view_geometry/mvg.md
+    - 数学背景:线性代数: multiple_view_geometry/linear_algebra.md
 - 状态估计: 
     - 概览: state_estimation_robotics/state_estimation_robotics.md
 - 开源项目:
@@ -153,9 +154,9 @@ markdown_extensions:
   - toc:
   #     marker:           # Text to find and replace with the Table of Contents. Defaults to [TOC].
   #     title:            # Title to insert in the Table of Contents’ <div>. Defaults to None
-      permalink: true   # Set to True or a string to generate permanent links at the end of each header. Useful with Sphinx style sheets.
+      permalink: "\ue157"   # Set to True or a string to generate permanent links at the end of each header. Useful with Sphinx style sheets.
       baselevel: 1      # Base level for headers. Defaults to 1.
-  #     slugify           # Callable to generate anchors.
+      slugify: !!python/name:pymdownx.slugs.uslugify  # Callable to generate anchors.
   #     separator:        # Word separator. Character which replaces white space in id. Defaults to “-”.
   #     toc_depth:        # Define the range of section levels to include in the Table of Contents.Defaults to 6 (bottom).
 
@@ -273,7 +274,7 @@ markdown_extensions:
       # check_paths: false  # Make the build fail if a snippet can't be found.
 
     # StripHTML can strip out HTML comments and specific tag attributes.
-  - pymdownx.striphtml
+  - pymdownx.striphtml:
   #     css_class:
   #     style_plain_text: false 
   #     custom_inline:
@@ -288,7 +289,7 @@ markdown_extensions:
       custom_fences:        # Custom fences.
         - name: math
           class: arithmatex
-          format: !!python/name:pymdownx.arithmatex.inline_mathjax_format
+          format: !!python/name:pymdownx.arithmatex.fence_mathjax_format
         - name: flow
           class: uml-flowchart
           format: !!python/name:pymdownx.superfences.fence_code_format
