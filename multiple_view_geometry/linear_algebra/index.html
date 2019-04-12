@@ -1,0 +1,1353 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台">
+      
+      
+        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/multiple_view_geometry/linear_algebra/">
+      
+      
+        <meta name="author" content="Jacob.lsx">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="jp">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
+    
+    
+      
+        <title>数学背景:线性代数 - SLAM 之旅</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.3020aac5.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.224b79ff.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.01ccdecf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+      <link rel="manifest" href="../../manifest.webmanifest">
+    
+    
+      <link rel="stylesheet" href="../../_configurations/_theme_extra/theme_extra.css">
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-XXXXXXXX-X", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
+    viewBox="0 0 416 448" id="__github">
+  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
+        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
+        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
+        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
+        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
+        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
+        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
+        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
+        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
+        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
+        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
+        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
+        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
+        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
+        99.5z" />
+</svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#线性空间的基本概览" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://lsxiang.github.io/Journey2SLAM" title="SLAM 之旅" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon">school</i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              SLAM 之旅
+            </span>
+            <span class="md-header-nav__topic">
+              数学背景:线性代数
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/LSXiang/Journey2SLAM/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    LSXiang/Journey2SLAM
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../.." title="主页" class="md-tabs__link">
+        主页
+      </a>
+    
+  </li>
+
+      
+        
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../computer_vision/computer_vision/" title="计算机视觉基础" class="md-tabs__link">
+          计算机视觉基础
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../mvg/" title="多视几何" class="md-tabs__link md-tabs__link--active">
+          多视几何
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../state_estimation_robotics/state_estimation_robotics/" title="状态估计" class="md-tabs__link">
+          状态估计
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../projects/projects/" title="开源项目" class="md-tabs__link">
+          开源项目
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../others/md_template/" title="其他" class="md-tabs__link">
+          其他
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://lsxiang.github.io/Journey2SLAM" title="SLAM 之旅" class="md-nav__button md-logo">
+      
+        <i class="md-icon">school</i>
+      
+    </a>
+    SLAM 之旅
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/LSXiang/Journey2SLAM/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    LSXiang/Journey2SLAM
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="主页" class="md-nav__link">
+      主页
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../aboutSLAM/" title="关于 SLAM" class="md-nav__link">
+      关于 SLAM
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      计算机视觉基础
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        计算机视觉基础
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../computer_vision/computer_vision/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../computer_vision/image_filtering/" title="图像滤波器" class="md-nav__link">
+      图像滤波器
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      多视几何
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        多视几何
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mvg/" title="概览" class="md-nav__link">
+      概览
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        数学背景:线性代数
+      </label>
+    
+    <a href="./" title="数学背景:线性代数" class="md-nav__link md-nav__link--active">
+      数学背景:线性代数
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#线性空间的基本概览" title="线性空间的基本概览" class="md-nav__link">
+    线性空间的基本概览
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#向量空间" title="向量空间" class="md-nav__link">
+    向量空间
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#线性独立与基" title="线性独立与基" class="md-nav__link">
+    线性独立与基
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基的性质" title="基的性质" class="md-nav__link">
+    基的性质
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#内积与正交性" title="内积与正交性" class="md-nav__link">
+    内积与正交性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#内积" title="内积" class="md-nav__link">
+    内积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#实数域中的标准内积" title="实数域中的标准内积" class="md-nav__link">
+    实数域中的标准内积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#正交性-orthogonality" title="正交性 (Orthogonality)" class="md-nav__link">
+    正交性 (Orthogonality)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#矩阵的克罗内克乘积-kronecker-product-和-堆形式stack" title="矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)" class="md-nav__link">
+    矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#线性变换与矩阵群" title="线性变换与矩阵群" class="md-nav__link">
+    线性变换与矩阵群
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      状态估计
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        状态估计
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../state_estimation_robotics/state_estimation_robotics/" title="概览" class="md-nav__link">
+      概览
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      开源项目
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        开源项目
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projects/projects/" title="概述" class="md-nav__link">
+      概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      RPG-SVO
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        RPG-SVO
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projects/rpg_svo/structure/" title="算法框架" class="md-nav__link">
+      算法框架
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-3" type="checkbox" id="nav-6-3">
+    
+    <label class="md-nav__link" for="nav-6-3">
+      ORB-SLAM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-3">
+        ORB-SLAM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projects/orb_slam/structure/" title="算法框架" class="md-nav__link">
+      算法框架
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../projects/orb_slam/initialize/" title="初始化" class="md-nav__link">
+      初始化
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      其他
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        其他
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../others/md_template/" title="Markdown 写作模版" class="md-nav__link">
+      Markdown 写作模版
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#线性空间的基本概览" title="线性空间的基本概览" class="md-nav__link">
+    线性空间的基本概览
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#向量空间" title="向量空间" class="md-nav__link">
+    向量空间
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#线性独立与基" title="线性独立与基" class="md-nav__link">
+    线性独立与基
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#基的性质" title="基的性质" class="md-nav__link">
+    基的性质
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#内积与正交性" title="内积与正交性" class="md-nav__link">
+    内积与正交性
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#内积" title="内积" class="md-nav__link">
+    内积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#实数域中的标准内积" title="实数域中的标准内积" class="md-nav__link">
+    实数域中的标准内积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#正交性-orthogonality" title="正交性 (Orthogonality)" class="md-nav__link">
+    正交性 (Orthogonality)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#矩阵的克罗内克乘积-kronecker-product-和-堆形式stack" title="矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)" class="md-nav__link">
+    矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#线性变换与矩阵群" title="线性变换与矩阵群" class="md-nav__link">
+    线性变换与矩阵群
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/multiple_view_geometry/linear_algebra.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>数学背景:线性代数</h1>
+                
+                <h2 id="线性空间的基本概览">线性空间的基本概览<a class="headerlink" href="#线性空间的基本概览" title="Permanent link"></a></h2>
+<h3 id="向量空间">向量空间<a class="headerlink" href="#向量空间" title="Permanent link"></a></h3>
+<p>如果集合 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 在<em>矢量求和 (vector summation)</em>  </p>
+<div>
+<div class="MathJax_Preview">
++ : V \times V \to V
+</div>
+<script type="math/tex; mode=display">
++ : V \times V \to V
+</script>
+</div>
+<p>以及<em>标量乘法 (scalar multiplication)</em></p>
+<div>
+<div class="MathJax_Preview">
+\cdot : \mathbb{R} \times V \to V
+</div>
+<script type="math/tex; mode=display">
+\cdot : \mathbb{R} \times V \to V
+</script>
+</div>
+<p>运算下是闭合的，那么集合 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 就称为在 <span><span class="MathJax_Preview">\mathbb{R}</span><script type="math/tex">\mathbb{R}</script></span> 域上的<em>线性空间 (linear space)</em> 或 <em>向量空间 (vector space)</em> 。</p>
+<p>换言之，如果 <span><span class="MathJax_Preview">V​</span><script type="math/tex">V​</script></span> 是一个向量空间，那么对于任意的两个向量 <span><span class="MathJax_Preview">\mathbf{v_1}, \mathbf{v_2} \in V​</span><script type="math/tex">\mathbf{v_1}, \mathbf{v_2} \in V​</script></span> 和两个标量 <span><span class="MathJax_Preview">\alpha, \beta \in \mathbb{R}​</span><script type="math/tex">\alpha, \beta \in \mathbb{R}​</script></span> ，他们的线性组合 <span><span class="MathJax_Preview">\alpha \mathbf{v_1} + \beta \mathbf{v_2} \in V​</span><script type="math/tex">\alpha \mathbf{v_1} + \beta \mathbf{v_2} \in V​</script></span> 。此外，加法运算(<span><span class="MathJax_Preview">+​</span><script type="math/tex">+​</script></span>) 满足<strong>交换律</strong>和<strong>结合律</strong>，且存在<strong>幺元 (<span><span class="MathJax_Preview">0​</span><script type="math/tex">0​</script></span>)</strong> 以及每个元素存在<strong>逆 (<span><span class="MathJax_Preview">- \mathbf{v}​</span><script type="math/tex">- \mathbf{v}​</script></span>)</strong> 。标量乘法 (<span><span class="MathJax_Preview">\cdot​</span><script type="math/tex">\cdot​</script></span>) 在 <span><span class="MathJax_Preview">\mathbb{R}​</span><script type="math/tex">\mathbb{R}​</script></span> 域上有：<span><span class="MathJax_Preview">\alpha (\beta \mathbf{v}) = (\alpha \beta)\mathbf{v}​</span><script type="math/tex">\alpha (\beta \mathbf{v}) = (\alpha \beta)\mathbf{v}​</script></span>，　<span><span class="MathJax_Preview">1\mathbf{v} = \mathbf{v}​</span><script type="math/tex">1\mathbf{v} = \mathbf{v}​</script></span> 和 <span><span class="MathJax_Preview">0\mathbf{v} = \mathbf{0}​</span><script type="math/tex">0\mathbf{v} = \mathbf{0}​</script></span> 。加法和标量乘法满足<strong>分配率</strong>：<span><span class="MathJax_Preview">(\alpha + \beta) \mathbf{v} = \alpha \mathbf{v} + \beta \mathbf{v}​</span><script type="math/tex">(\alpha + \beta) \mathbf{v} = \alpha \mathbf{v} + \beta \mathbf{v}​</script></span>，　<span><span class="MathJax_Preview">\alpha(\mathbf{v} + \mathbf{u}) = \alpha \mathbf{v} + \alpha \mathbf{u}​</span><script type="math/tex">\alpha(\mathbf{v} + \mathbf{u}) = \alpha \mathbf{v} + \alpha \mathbf{u}​</script></span> 。<br />
+例如： <span><span class="MathJax_Preview">\mathbb{R}^n​</span><script type="math/tex">\mathbb{R}^n​</script></span> 就是实数域 <span><span class="MathJax_Preview">\mathbb{R}​</span><script type="math/tex">\mathbb{R}​</script></span> 上的线性空间。根据上述此时  <span><span class="MathJax_Preview">V = \mathbb{R}^n​</span><script type="math/tex">V = \mathbb{R}^n​</script></span> ， <span><span class="MathJax_Preview">\mathbf{v} = [x_1, \dotsc , x_n]^\top​</span><script type="math/tex">\mathbf{v} = [x_1, \dotsc , x_n]^\top​</script></span> 。</p>
+<p>一个集合 <span><span class="MathJax_Preview">W \subset V​</span><script type="math/tex">W \subset V​</script></span> ，<span><span class="MathJax_Preview">V​</span><script type="math/tex">V​</script></span> 是一个向量空间的话，如果 <span><span class="MathJax_Preview">0 \in W​</span><script type="math/tex">0 \in W​</script></span> 且集合 <span><span class="MathJax_Preview">W​</span><script type="math/tex">W​</script></span> 对于任意的 <span><span class="MathJax_Preview">\alpha \in \mathbb{R}​</span><script type="math/tex">\alpha \in \mathbb{R}​</script></span> 在 <span><span class="MathJax_Preview">+​</span><script type="math/tex">+​</script></span> 和 <span><span class="MathJax_Preview">\cdot​</span><script type="math/tex">\cdot​</script></span> 上是闭合的，那么 <span><span class="MathJax_Preview">W​</span><script type="math/tex">W​</script></span> 称为 <span><span class="MathJax_Preview">V​</span><script type="math/tex">V​</script></span> 的<strong>子空间 (subspace)</strong>。</p>
+<h3 id="线性独立与基">线性独立与基<a class="headerlink" href="#线性独立与基" title="Permanent link"></a></h3>
+<p>一组向量 <span><span class="MathJax_Preview">S = \{\mathbf{v_1}, \dotsc , \mathbf{v_k}\} \subset V</span><script type="math/tex">S = \{\mathbf{v_1}, \dotsc , \mathbf{v_k}\} \subset V</script></span> 张成的子空间，是由这些向量的所有线性组合构成的子空间：</p>
+<div>
+<div class="MathJax_Preview">
+span(S) = \{ \mathbf{v} \in V | \mathbf{v} = \sum_{i=1}^k \alpha_i \mathbf{v_i}\}
+</div>
+<script type="math/tex; mode=display">
+span(S) = \{ \mathbf{v} \in V | \mathbf{v} = \sum_{i=1}^k \alpha_i \mathbf{v_i}\}
+</script>
+</div>
+<p>如果，</p>
+<div>
+<div class="MathJax_Preview">
+\sum_{i=1}^k \alpha_i \mathbf{v}_i = \mathbf{0} \Rightarrow \alpha_i =  0   \forall i
+</div>
+<script type="math/tex; mode=display">
+\sum_{i=1}^k \alpha_i \mathbf{v}_i = \mathbf{0} \Rightarrow \alpha_i =  0   \forall i
+</script>
+</div>
+<p>那么集合 <span><span class="MathJax_Preview">S​</span><script type="math/tex">S​</script></span> 就被称为<strong>线性独立 (linearly independent)</strong> 。</p>
+<p>换句话说，如果集合 <span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span> 中的任意一个向量无法用其余向量的线性组合表示的话，那么称为线性独立，反之称为<strong>线性相关 (linearly dependent)</strong> 。</p>
+<p>一个向量集合 <span><span class="MathJax_Preview">B = \{\mathbf{v_1}, \dotsc, \mathbf{v}_n\}</span><script type="math/tex">B = \{\mathbf{v_1}, \dotsc, \mathbf{v}_n\}</script></span> 如果他是线性独立且它可以张成向量空间 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> ，那么称 <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> 是 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 的<strong>基 (basis)</strong>。基是线性无关向量的最大集合。</p>
+<h4 id="基的性质">基的性质<a class="headerlink" href="#基的性质" title="Permanent link"></a></h4>
+<p>如果 <span><span class="MathJax_Preview">B​</span><script type="math/tex">B​</script></span> 与 <span><span class="MathJax_Preview">B^{\prime}​</span><script type="math/tex">B^{\prime}​</script></span> 是线性空间 <span><span class="MathJax_Preview">V​</span><script type="math/tex">V​</script></span> 的两个基，那么：  </p>
+<ul>
+<li>
+<p><span><span class="MathJax_Preview">B​</span><script type="math/tex">B​</script></span> 与 <span><span class="MathJax_Preview">B^{\prime}​</span><script type="math/tex">B^{\prime}​</script></span> 将包含相同数量的线性独立向量，这个数量 <span><span class="MathJax_Preview">n​</span><script type="math/tex">n​</script></span> 被称为向量空间 <span><span class="MathJax_Preview">V​</span><script type="math/tex">V​</script></span> 的<strong>维度  (dimension)</strong> 。</p>
+</li>
+<li>
+<p>让 <span><span class="MathJax_Preview">B = \{ b_i \}_{i = i}^n</span><script type="math/tex">B = \{ b_i \}_{i = i}^n</script></span> 和 <span><span class="MathJax_Preview">B' = \{ b'_i \}_{i = i}^n</span><script type="math/tex">B' = \{ b'_i \}_{i = i}^n</script></span> ，那么 <span><span class="MathJax_Preview">B</span><script type="math/tex">B</script></span> 中的任意一个基向量都能够利用 <span><span class="MathJax_Preview">B^{\prime}</span><script type="math/tex">B^{\prime}</script></span> 的线性组合形式表示： </p>
+<div>
+<div class="MathJax_Preview">
+b_j = a_{1j} b'_1 + a_{2j} b'_2 + \dotsb + a_{nj} b'_n　　a_{ij} \in \mathbb{R}, i, j = 1, 2, \dotsc, n
+</div>
+<script type="math/tex; mode=display">
+b_j = a_{1j} b'_1 + a_{2j} b'_2 + \dotsb + a_{nj} b'_n　　a_{ij} \in \mathbb{R}, i, j = 1, 2, \dotsc, n
+</script>
+</div>
+<p>这里用于<strong>基底变换 (basis transform)</strong> 的系数 <span><span class="MathJax_Preview">a_{ij}</span><script type="math/tex">a_{ij}</script></span> 能够被组合成矩阵 <span><span class="MathJax_Preview">\mathbf{A}</span><script type="math/tex">\mathbf{A}</script></span> ，那么我们可以用矩阵的形式来表示 <span><span class="MathJax_Preview">B \doteq [ b_1, b_2, \dotsc, b_n ]</span><script type="math/tex">B \doteq [ b_1, b_2, \dotsc, b_n ]</script></span> 和 <span><span class="MathJax_Preview">B' \doteq [ b'_1, b'_2, \dotsc, b'_n ]</span><script type="math/tex">B' \doteq [ b'_1, b'_2, \dotsc, b'_n ]</script></span> 之间的变换关系了：</p>
+<div>
+<div class="MathJax_Preview">
+[ b_1, b_2, \dotsc, b_n ] = [ b'_1, b'_2, \dotsc, b'_n ] 
+    \begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+    a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+    \vdots  &amp; \vdots  &amp; \ddots &amp; \vdots  \\
+    a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} 
+  \end{bmatrix}
+</div>
+<script type="math/tex; mode=display">
+[ b_1, b_2, \dotsc, b_n ] = [ b'_1, b'_2, \dotsc, b'_n ] 
+    \begin{bmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    a_{n1} & a_{n2} & \cdots & a_{nn} 
+  \end{bmatrix}
+</script>
+</div>
+<p>即 <span><span class="MathJax_Preview">B = B' A</span><script type="math/tex">B = B' A</script></span> ，当矩阵 <span><span class="MathJax_Preview">\mathbf{A}</span><script type="math/tex">\mathbf{A}</script></span> 可逆时，有 <span><span class="MathJax_Preview">B’ = B A^{-1}</span><script type="math/tex">B’ = B A^{-1}</script></span> 。</p>
+</li>
+<li>
+<p>任意一个向量 <span><span class="MathJax_Preview">\mathbf{v} \in V​</span><script type="math/tex">\mathbf{v} \in V​</script></span> 都能够写成基向量的线性组合：</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{v} = x_1 b_1 + x_2 b_2 + \dotsb + x_n b_n = x'_1 b'_1 + x'_2 b'_2 + \dotsb + x'_n b'_n
+</div>
+<script type="math/tex; mode=display">
+\mathbf{v} = x_1 b_1 + x_2 b_2 + \dotsb + x_n b_n = x'_1 b'_1 + x'_2 b'_2 + \dotsb + x'_n b'_n
+</script>
+</div>
+<p>其中系数 <span><span class="MathJax_Preview">\{ x_i \in \mathbb{R} \}_{i=1}^n</span><script type="math/tex">\{ x_i \in \mathbb{R} \}_{i=1}^n</script></span> 和 <span><span class="MathJax_Preview">\{ x'_i \in \mathbb{R} \}_{i=1}^n</span><script type="math/tex">\{ x'_i \in \mathbb{R} \}_{i=1}^n</script></span> 是唯一且确定的，称为 <span><span class="MathJax_Preview">\mathbf{v}</span><script type="math/tex">\mathbf{v}</script></span> 在每一基底下的坐标。结合上一条性质，有：</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{v} 
+= 
+[ b_1, b_2, \dotsc, b_n ]
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+= 
+[ b'_1, b'_2, \dotsc, b'_n ] 
+\begin{bmatrix}
+  a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+  a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+</div>
+<script type="math/tex; mode=display">
+\mathbf{v} 
+= 
+[ b_1, b_2, \dotsc, b_n ]
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+= 
+[ b'_1, b'_2, \dotsc, b'_n ] 
+\begin{bmatrix}
+  a_{11} & a_{12} & \cdots & a_{1n} \\
+  a_{21} & a_{22} & \cdots & a_{2n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{n1} & a_{n2} & \cdots & a_{nn} 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+</script>
+</div>
+<p>由于 <span><span class="MathJax_Preview">\mathbf{v}</span><script type="math/tex">\mathbf{v}</script></span> 关于 <span><span class="MathJax_Preview">B^{\prime}</span><script type="math/tex">B^{\prime}</script></span> 的坐标是唯一的，因此可以得到一个向量从一个基底到另一个基底的坐标变换为：</p>
+<div>
+<div class="MathJax_Preview">
+\begin{bmatrix}
+x'_1 \\ x'_2 \\ \vdots \\ x'_n
+\end{bmatrix}
+= 
+\begin{bmatrix}
+  a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\
+  a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+  a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+</div>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+x'_1 \\ x'_2 \\ \vdots \\ x'_n
+\end{bmatrix}
+= 
+\begin{bmatrix}
+  a_{11} & a_{12} & \cdots & a_{1n} \\
+  a_{21} & a_{22} & \cdots & a_{2n} \\
+  \vdots & \vdots & \ddots & \vdots \\
+  a_{n1} & a_{n2} & \cdots & a_{nn} 
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ \vdots \\ x_n
+\end{bmatrix}
+</script>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">注意变换基底和变换坐标的区别</p>
+<div>
+<div class="MathJax_Preview">
+B' = B A^{-1},　　\mathbf{x}' = A \mathbf{x}
+​</div>
+<script type="math/tex; mode=display">
+B' = B A^{-1},　　\mathbf{x}' = A \mathbf{x}
+​</script>
+</div>
+</div>
+<h3 id="内积与正交性">内积与正交性<a class="headerlink" href="#内积与正交性" title="Permanent link"></a></h3>
+<h4 id="内积">内积<a class="headerlink" href="#内积" title="Permanent link"></a></h4>
+<p>当满足：  </p>
+<ol>
+<li><span><span class="MathJax_Preview">\langle u, \alpha v + \beta w \rangle =  \alpha \langle u, v \rangle + \beta \langle u, w \rangle，　\forall \alpha, \beta \in \mathbb{R}​</span><script type="math/tex">\langle u, \alpha v + \beta w \rangle =  \alpha \langle u, v \rangle + \beta \langle u, w \rangle，　\forall \alpha, \beta \in \mathbb{R}​</script></span> （线性的）</li>
+<li><span><span class="MathJax_Preview">\langle u, v \rangle ＝ \langle v, u \rangle​</span><script type="math/tex">\langle u, v \rangle ＝ \langle v, u \rangle​</script></span>  （对称的/均匀的）</li>
+<li><span><span class="MathJax_Preview">\langle v, v \rangle \geq 0​</span><script type="math/tex">\langle v, v \rangle \geq 0​</script></span> 且 <span><span class="MathJax_Preview">\langle v, v \rangle = 0 \Leftrightarrow v = 0​</span><script type="math/tex">\langle v, v \rangle = 0 \Leftrightarrow v = 0​</script></span> 　（正定的）</li>
+</ol>
+<p>那么，可以在向量空间上定义<strong>内积 (inner product) [或点积 (dot product)]</strong> 运算:</p>
+<div>
+<div class="MathJax_Preview">
+\langle \cdot , \cdot \rangle : V \times V \to \mathbb{R}
+</div>
+<script type="math/tex; mode=display">
+\langle \cdot , \cdot \rangle : V \times V \to \mathbb{R}
+</script>
+</div>
+<p>进而引申出<strong>模 (norm)</strong> :</p>
+<div>
+<div class="MathJax_Preview">
+|\cdot | : V \to \mathbb{R}, 　| \mathbf{v} | = \sqrt{\langle \mathbf{v} , \mathbf{v} \rangle}
+</div>
+<script type="math/tex; mode=display">
+|\cdot | : V \to \mathbb{R}, 　| \mathbf{v} | = \sqrt{\langle \mathbf{v} , \mathbf{v} \rangle}
+</script>
+</div>
+<p>以及<strong><a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">量度 (metric)</a></strong> :</p>
+<div>
+<div class="MathJax_Preview">
+d : V \times V \to \mathbb{R}, 　d( \mathbf{v}, \mathbf{w}) = | \mathbf{v} - \mathbf{w} | = \sqrt{\langle \mathbf{v} - \mathbf{w} , \mathbf{v} - \mathbf{w} \rangle}
+</div>
+<script type="math/tex; mode=display">
+d : V \times V \to \mathbb{R}, 　d( \mathbf{v}, \mathbf{w}) = | \mathbf{v} - \mathbf{w} | = \sqrt{\langle \mathbf{v} - \mathbf{w} , \mathbf{v} - \mathbf{w} \rangle}
+</script>
+</div>
+<p>用于测量长度与距离，使 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 称为一个<strong>量度空间 (metric space)</strong> 。自内积引申出量度以后，向量空间 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 亦称为<a href="https://en.wikipedia.org/wiki/Hilbert_space"><strong>希尔伯特空间 (Hibert space)</strong></a> 。</p>
+<h4 id="实数域中的标准内积">实数域中的标准内积<a class="headerlink" href="#实数域中的标准内积" title="Permanent link"></a></h4>
+<p>当 <span><span class="MathJax_Preview">V = \mathbb{R}</span><script type="math/tex">V = \mathbb{R}</script></span> 时，可以为标准基 <span><span class="MathJax_Preview">B = I_n</span><script type="math/tex">B = I_n</script></span> 定义一个标准内积形式:</p>
+<div>
+<div class="MathJax_Preview">
+\langle \mathbf{x},\mathbf{y} \rangle \doteq \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^n{x_i y_i}
+</div>
+<script type="math/tex; mode=display">
+\langle \mathbf{x},\mathbf{y} \rangle \doteq \mathbf{x}^\top \mathbf{y} = \sum_{i=1}^n{x_i y_i}
+</script>
+</div>
+<p>引申出<strong>标准模 (L<sub>2</sub>-norm)</strong> 或 <strong>欧几里得范数 (Euclidean norm)</strong> ：</p>
+<div>
+<div class="MathJax_Preview">
+\| \mathbf{x} \|_2 \doteq \sqrt{\mathbf{x}^\top \mathbf{x}} = \sqrt{x_1^2 + x_2^2 + \dotsb + x_n^2}
+</div>
+<script type="math/tex; mode=display">
+\| \mathbf{x} \|_2 \doteq \sqrt{\mathbf{x}^\top \mathbf{x}} = \sqrt{x_1^2 + x_2^2 + \dotsb + x_n^2}
+</script>
+</div>
+<p>在此基础上将利用基底变换矩阵 <span><span class="MathJax_Preview">\mathbf{A}​</span><script type="math/tex">\mathbf{A}​</script></span> 将 <span><span class="MathJax_Preview">B = I_n​</span><script type="math/tex">B = I_n​</script></span> 转换到一个新的基底 <span><span class="MathJax_Preview">B​</span><script type="math/tex">B​</script></span> ， 即 <span><span class="MathJax_Preview">I_n = B' A^{-1}​</span><script type="math/tex">I_n = B' A^{-1}​</script></span> 那么内积形式可以写成：</p>
+<div>
+<div class="MathJax_Preview">
+\langle \mathbf{x},\mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = (A \mathbf{x}')^\top (A \mathbf{y}') = \mathbf{x}'^\top A^\top A \mathbf{y}' \doteq \langle \mathbf{x}',\mathbf{y}' \rangle_{A^\top A}
+</div>
+<script type="math/tex; mode=display">
+\langle \mathbf{x},\mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = (A \mathbf{x}')^\top (A \mathbf{y}') = \mathbf{x}'^\top A^\top A \mathbf{y}' \doteq \langle \mathbf{x}',\mathbf{y}' \rangle_{A^\top A}
+</script>
+</div>
+<h4 id="正交性-orthogonality">正交性 (Orthogonality)<a class="headerlink" href="#正交性-orthogonality" title="Permanent link"></a></h4>
+<p>如果两个向量 <span><span class="MathJax_Preview">\mathbf{x}, \mathbf{y}</span><script type="math/tex">\mathbf{x}, \mathbf{y}</script></span> 正交，那么他们的内积为零，即 <span><span class="MathJax_Preview">\langle \mathbf{x}, \mathbf{y} \rangle = 0</span><script type="math/tex">\langle \mathbf{x}, \mathbf{y} \rangle = 0</script></span> ，通常表示为 <span><span class="MathJax_Preview">\mathbf{x} \bot \mathbf{y}</span><script type="math/tex">\mathbf{x} \bot \mathbf{y}</script></span> 。</p>
+<h4 id="矩阵的克罗内克乘积-kronecker-product-和-堆形式stack">矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)<a class="headerlink" href="#矩阵的克罗内克乘积-kronecker-product-和-堆形式stack" title="Permanent link"></a></h4>
+<p>矩阵 <span><span class="MathJax_Preview">A \in \mathbb{R}^{m \times n}​</span><script type="math/tex">A \in \mathbb{R}^{m \times n}​</script></span> 和 <span><span class="MathJax_Preview">B \in \mathbb{R}^{k \times l}​</span><script type="math/tex">B \in \mathbb{R}^{k \times l}​</script></span> de 克罗内克乘积定义为 <span><span class="MathJax_Preview">A \otimes B​</span><script type="math/tex">A \otimes B​</script></span> ，得到一个新的矩阵为：</p>
+<div>
+<div class="MathJax_Preview">
+A \otimes B =
+\begin{bmatrix}
+  a_{11} B &amp; a_{12} B &amp; \cdots &amp; a_{1n} B \\
+  a_{21} B &amp; a_{22} B &amp; \cdots &amp; a_{2n} B \\
+  \vdots   &amp; \vdots   &amp; \ddots &amp; \vdots \\
+  a_{m1} B &amp; a_{m2} B &amp; \cdots &amp; a_{mn} B 
+\end{bmatrix}
+\in \mathbb{R}^{mk \times nl}
+</div>
+<script type="math/tex; mode=display">
+A \otimes B =
+\begin{bmatrix}
+  a_{11} B & a_{12} B & \cdots & a_{1n} B \\
+  a_{21} B & a_{22} B & \cdots & a_{2n} B \\
+  \vdots   & \vdots   & \ddots & \vdots \\
+  a_{m1} B & a_{m2} B & \cdots & a_{mn} B 
+\end{bmatrix}
+\in \mathbb{R}^{mk \times nl}
+</script>
+</div>
+<p>矩阵 <span><span class="MathJax_Preview">A \in \mathbb{R}^{m \times n}</span><script type="math/tex">A \in \mathbb{R}^{m \times n}</script></span> 的堆形式被定义为 <span><span class="MathJax_Preview">A^s</span><script type="math/tex">A^s</script></span> ，它是通过矩阵 <span><span class="MathJax_Preview">{A}</span><script type="math/tex">{A}</script></span> 的 <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> 列向量 <span><span class="MathJax_Preview">a_1, \dotsc, a_n \in \mathbb{R}^n</span><script type="math/tex">a_1, \dotsc, a_n \in \mathbb{R}^n</script></span>堆积形成的。表示成：</p>
+<div>
+<div class="MathJax_Preview">
+A^s \doteq 
+\begin{bmatrix}
+a_1 \\ a_2 \\ \vdots \\ a_n
+\end{bmatrix}
+\in \mathbb{R}^{mn}
+</div>
+<script type="math/tex; mode=display">
+A^s \doteq 
+\begin{bmatrix}
+a_1 \\ a_2 \\ \vdots \\ a_n
+\end{bmatrix}
+\in \mathbb{R}^{mn}
+</script>
+</div>
+<p>克罗内克乘积和矩阵堆栈形式允许我们用许多不同但等价的方式重写涉及多个向量和矩阵的代数方程。比如方程：</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{u}^\top A \mathbf{v} = (\mathbf{v} \otimes \mathbf{u})^\top A^\top
+</div>
+<script type="math/tex; mode=display">
+\mathbf{u}^\top A \mathbf{v} = (\mathbf{v} \otimes \mathbf{u})^\top A^\top
+</script>
+</div>
+<p>当矩阵 <span><span class="MathJax_Preview">{A}</span><script type="math/tex">{A}</script></span> 是上式中唯一的未知量的时候，等号右边的形式是特别有用的。</p>
+<h2 id="线性变换与矩阵群">线性变换与矩阵群<a class="headerlink" href="#线性变换与矩阵群" title="Permanent link"></a></h2>
+<h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
+<ol>
+<li>Multiple View Geometry (IN2228) SS 2016, TU München : Chapter 1</li>
+<li>An Invitation to 3D Vision: From Images to Geometric Models : Appendix A</li>
+</ol>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"],
+    TeX: {
+        TagSide: "right",
+        TagIndent: ".8em",
+        MultLineWidth: "85%",
+        equationNumbers: {
+            autoNumber: "AMS",
+        }
+    },
+    showProcessingMessages: false,
+    messageStyle: 'none'
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js"></script>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../mvg/" title="概览" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  后退
+                </span>
+                概览
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../state_estimation_robotics/state_estimation_robotics/" title="概览" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  前进
+                </span>
+                概览
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2019. All rights reserved.
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://github.com/LSXiang" class="md-footer-social__link fa fa-github"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
+      
+        
+        
+          
+          <script src="../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../_configurations/_theme_extra/theme_extra.js"></script>
+      
+    
+  </body>
+</html>
