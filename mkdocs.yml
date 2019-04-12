@@ -144,7 +144,7 @@ markdown_extensions:
 
     # The New-Line-to-Break (nl2br) Extension will cause newlines to be treated as hard breaks
     # like StackOverflow and GitHub flavored Markdown do.
-  # - nl2br
+  - nl2br
 
     # The Sane Lists extension alters the behavior of the Markdown List syntax to be less surprising.
   # - sane_lists
