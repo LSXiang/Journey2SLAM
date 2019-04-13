@@ -1,4 +1,4 @@
-## 线性空间的基本概览
+## 线性空间的基本概念
 
 ### 向量空间
 
@@ -204,7 +204,7 @@ A \otimes B =
 \in \mathbb{R}^{mk \times nl}
 $$
 
-矩阵 $A \in \mathbb{R}^{m \times n}$ 的堆形式被定义为 $A^s$ ，它是通过矩阵 ${A}$ 的 $n$ 列向量 $a_1, \dotsc, a_n \in \mathbb{R}^n$堆积形成的。表示成：
+矩阵 $A \in \mathbb{R}^{m \times n}​$ 的堆形式被定义为 $A^s​$ ，它是通过矩阵 ${A}​$ 的 $n​$ 列向量 $a_1, \dotsc, a_n \in \mathbb{R}^n​$堆积形成的。表示成：
 
 $$
 A^s \doteq 
@@ -226,6 +226,99 @@ $$
 
 ## 线性变换与矩阵群
 
+### 线性变换
+
+线性代数研究线性空间之间线性变换的性质。 由于这些可以用矩阵表示，所以也可以说线性代数研究的是矩阵的性质。
+
+一个线性变换 $L​$ 将线性（向量）空间 $V​$ 转换到线性空间 $W​$ ，那么 $L​$ 被称为**映射 (map)**：
+
+- $L ( \mathbf{x} +\mathbf{y} ) = L (\mathbf{x} ) + L ( \mathbf{y})	 \qquad \forall \mathbf{x} , \mathbf{y} \in V$
+- $L ( \alpha \mathbf{x} ) = \alpha L (\mathbf{x} ) 	 \qquad \forall \mathbf{x} \in V, \alpha \in \mathbb{R}​$
+
+由于线性关系，$L$ 对空间 $V$ 的映射操作是唯一的，可以通过对 $V$ 中的基向量映射来定义。因而在标准基向量 $\{ e_1, \dotsc , e_n \}$ 下，映射 $L$ 可以被表示成一个矩阵 $A \in \mathbb{R}^{m \times n}$ ，有：
+
+$$
+L ( \mathbf{x} ) = A \mathbf{x} \qquad \forall \mathbf{x} \in V
+$$
+
+这里的矩阵 $A​$ 中的第 $i​$ 列就是标准基向量 $e_i \in \mathbb{R}^n​$ 在 $L​$ 映射下的像：
+
+$$
+A = [ L(e_1), \, L(e_2), \, \dotsc \, , L(e_n)] \quad \in \mathbb{R}^{m \times n}
+$$
+
+这里所有的 $m \times n​$ 维的矩阵集表示成 $\mathcal{M} (m, n)​$ 。当 $m = n​$ 的时候，矩阵集 $\mathcal{M} (m, n)  \doteq \mathcal{M} (n)​$ 在 $\mathbb{R}​$ 域中被称为**环 (ring)** ，即，它在矩阵乘法和矩阵加法上是封闭的。
+
+
+
+### 群
+
+存在某些线性变换集，它们构成一个**群 (Group)** 。在计算机视觉中遇到的线性映射或矩阵通常具有群的特殊代数结构。
+
+群是带有操作 $\circ : G \times G \to G$ 的集合：
+
+- 封闭性 (closed) ： $g_1 \circ g_2 \in G \quad \forall g_1, g_2 \in G$ ;
+- 结合律 (associative) ： $( g_1 \circ g_2 ) \circ g_3 = g_1 ( g_2 \circ g_3) \quad \forall g_1, g_2, g_3 \in G​$ ;
+- 幺元 (unit element) ： $\exists e \in G : e \circ g = g \circ e = g \quad \forall g \in G$ ;
+- 逆 (inverse) ： $\exists g^{-1} \in G : g \circ g^{-1} = g^{-1} \circ g = e \quad \forall g \in G​$ 
+
+
+
+#### 线性群 GL(n) 和 SL(n)
+
+所有的 $n \times n​$ 维*非奇异 (non-singular )* 群集与矩阵乘法运算构成一个群，这样的群通常被称为**一般线性群 (general linear group)** ，定义为 $G \! L(n)​$ ，即它包含所有的 $A \in \mathcal{M} (n) \; \text{且} \; det(A) \neq 0​$ 。
+
+所有的矩阵 $A \in G \! L(n)$ 且 $det(A) = +1$ 的子群被称为**特殊线性群 (special linear group)** ，记为 $S \! L(n)$ 。矩阵 $A$ 的逆也属于特殊线性群，因为 $det(A^{-1}) = dat(A)^{-1}$ 。
+
+
+
+#### 群的矩阵表达
+
+如果一个群 $G$ 存在**单射映射 (injective map)**[^单射映射 (injective map)] ，那么这个群具有矩阵表达式，也被称为**矩阵群 (matrix group)** :
+
+$$
+\mathcal{R} : G \to GL(n) \quad g \to \mathcal{R}(g)
+$$
+
+这种映射 $\mathcal{R}$ 维持了 $G$ 的**群结构 (group structure)**[^群结构 (group structure)] 。也就是说， $G$ 的组成元素与逆将通过以下形式的映射维持下来：
+
+$$
+\mathcal{R}(e) = I_{n \times n}, \quad \mathcal{R}(g \circ h) = \mathcal{R}(g) \mathcal{R}(h), \quad \forall g, h \in G
+$$
+
+群的矩阵表示的概念是，它们可以通过查看各自矩阵群的属性来分析更抽象的群。例如：物体的旋转形成一个群，因为存在中性元素（无旋转）和反向（反向旋转），并且旋转的任何级联也是旋转（围绕不同的轴）。 如果旋转由各自的矩阵表示，则研究旋转群的属性更容易。
+
+
+
+#### 仿射群 A(n)
+
+一个**仿射变换 (Affine transformation)** $L : \mathbb{R}^n \to \mathbb{R}^n$ 可以被一个矩阵 $A \in G \! L(n)$ 和向量 $b \in \mathbb{R}^n$ 定义成：
+
+$$
+L(\mathbf{x}) = A\mathbf{x} + b
+$$
+
+所有这些仿射变换的集合称为 $n$ 维的仿射组，用 $A(n)$ 表示。
+
+上式中的 $L : \mathbb{R}^n \to \mathbb{R}^n​$ 定义不是线性的，除非 $b = 0​$ 。通过引入**齐次坐标系 (homogeneous coordinates)** 将 
+
+$\mathbf{x} \in \mathbb{R}^n$ 升维成 $\binom{\mathbf{x}}{1}  \in \mathbb{R}^{n+1}$ ，那么 $L : \mathbb{R}^n \to \mathbb{R}^n$ 将变为：
+
+$$
+L : \mathbb{R}^{n+1} \to \mathbb{R}^{n+1}, \quad 
+\begin{pmatrix} \mathbf{x} \\ 1 \end{pmatrix}
+\to
+\begin{pmatrix} A & b \\ 0 & 1 \end{pmatrix}
+\begin{pmatrix} \mathbf{x} \\ 1 \end{pmatrix}
+$$
+
+这里的矩阵 $\begin{pmatrix} A & b \\ 0 & 1 \end{pmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)$ 的元素。仿射矩阵构成 $G \! L(n+1)$ 的一个子群。
+
+
+
+#### 正交群 O(n)
+
+
 
 
 
@@ -236,6 +329,14 @@ $$
 
 1.  Multiple View Geometry (IN2228) SS 2016, TU München : Chapter 1
 2.  An Invitation to 3D Vision: From Images to Geometric Models : Appendix A
+
+
+
+[^单射映射 (injective map)]: 一个映射 $f(\cdot)$ 满足 $f(x) \neq f(y) \; \forall x \neq y$ 那么这个映射被称为单射(injective map)。
+
+[^群结构 (group structure)]:  	这种映射在代数中称为群同态 (group homomorphism) 。
+
+
 
 
 
