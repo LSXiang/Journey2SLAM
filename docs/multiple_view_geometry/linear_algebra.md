@@ -266,7 +266,7 @@ $$
 
 #### 线性群 GL(n) 和 SL(n)
 
-所有的 $n \times n​$ 维*非奇异 (non-singular )* 群集与矩阵乘法运算构成一个群，这样的群通常被称为**一般线性群 (general linear group)** ，定义为 $G \! L(n)​$ ，即它包含所有的 $A \in \mathcal{M} (n) \; \text{且} \; det(A) \neq 0​$ 。
+所有的 $n \times n$ 维*非奇异 (non-singular )* 群集与矩阵乘法运算构成一个群，这样的群通常被称为**一般线性群 (general linear group)** ，定义为 $G \! L(n)$ ，即它包含所有的 $A \in \mathcal{M} (n) \; \text{且} \; det(A) \neq 0$ 。
 
 所有的矩阵 $A \in G \! L(n)$ 且 $det(A) = +1$ 的子群被称为**特殊线性群 (special linear group)** ，记为 $S \! L(n)$ 。矩阵 $A$ 的逆也属于特殊线性群，因为 $det(A^{-1}) = dat(A)^{-1}$ 。
 
@@ -318,6 +318,13 @@ $$
 
 #### 正交群 O(n)
 
+一个 $n \times n$ 维矩阵 $A$ （表示一个从 $\mathbb{R}^n$ 到自身的线性映射）是正交的，那么它的内积形式有：
+
+$$
+\langle A \mathbf{x}, A \mathbf{y} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}.
+$$
+
+所有 $n \times n$ **正交矩阵 (Orthogonal matrix)**的集合构成维n的正交群，用 $O(n)$ 表示。
 
 
 
