@@ -121,11 +121,12 @@ $$
     \end{bmatrix}
     $$
 
-
-!!! note "注意变换基底和变换坐标的区别"
+!!! note ""
+    **注意变换基底和变换坐标的区别：**  
+    
     $$
     B' = B A^{-1},　　\mathbf{x}' = A \mathbf{x}
-    ​$$
+    $$
 
 
 
@@ -191,7 +192,7 @@ $$
 
 #### 矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)
 
-矩阵 $A \in \mathbb{R}^{m \times n}​$ 和 $B \in \mathbb{R}^{k \times l}​$ de 克罗内克乘积定义为 $A \otimes B​$ ，得到一个新的矩阵为：
+矩阵 $A \in \mathbb{R}^{m \times n}​$ 和 $B \in \mathbb{R}^{k \times l}​$ 的克罗内克乘积定义为 $A \otimes B​$ ，得到一个新的矩阵为：
 
 $$
 A \otimes B =
@@ -268,7 +269,7 @@ $$
 
 所有的 $n \times n$ 维*非奇异 (non-singular )* 群集与矩阵乘法运算构成一个群，这样的群通常被称为**一般线性群 (general linear group)** ，定义为 $G \! L(n)$ ，即它包含所有的 $A \in \mathcal{M} (n) \; \text{且} \; det(A) \neq 0$ 。
 
-所有的矩阵 $A \in G \! L(n)$ 且 $det(A) = +1$ 的子群被称为**特殊线性群 (special linear group)** ，记为 $S \! L(n)$ 。矩阵 $A$ 的逆也属于特殊线性群，因为 $det(A^{-1}) = dat(A)^{-1}$ 。
+所有的矩阵 $A \in G \! L(n)$ 且 $det(A) = +1$ 的**子群 (subgroup)** 被称为**特殊线性群 (special linear group)** ，记为 $S \! L(n)$ 。矩阵 $A$ 的逆也属于特殊线性群，因为 $det(A^{-1}) = det(A)^{-1}$ 。
 
 
 
@@ -277,7 +278,7 @@ $$
 如果一个群 $G$ 存在**单射映射 (injective map)**[^单射映射 (injective map)] ，那么这个群具有矩阵表达式，也被称为**矩阵群 (matrix group)** :
 
 $$
-\mathcal{R} : G \to GL(n) \quad g \to \mathcal{R}(g)
+\mathcal{R} : G \to G \! L(n) \quad g \to \mathcal{R}(g)
 $$
 
 这种映射 $\mathcal{R}$ 维持了 $G$ 的**群结构 (group structure)**[^群结构 (group structure)] 。也就是说， $G$ 的组成元素与逆将通过以下形式的映射维持下来：
@@ -292,13 +293,13 @@ $$
 
 #### 仿射群 A(n)
 
-一个**仿射变换 (Affine transformation)** $L : \mathbb{R}^n \to \mathbb{R}^n$ 可以被一个矩阵 $A \in G \! L(n)$ 和向量 $b \in \mathbb{R}^n$ 定义成：
+一个**仿射变换 (Affine transformation)** $L : \mathbb{R}^n \to \mathbb{R}^n​$ 可以被一个矩阵 $A \in G \! L(n)​$ 和向量 $b \in \mathbb{R}^n​$ 定义成：
 
 $$
 L(\mathbf{x}) = A\mathbf{x} + b
 $$
 
-所有这些仿射变换的集合称为 $n$ 维的仿射组，用 $A(n)$ 表示。
+所有这些仿射变换的集合称为 $n$ 维的仿射群，用 $A(n)$ 表示。
 
 上式中的 $L : \mathbb{R}^n \to \mathbb{R}^n​$ 定义不是线性的，除非 $b = 0​$ 。通过引入**齐次坐标系 (homogeneous coordinates)** 将 
 
@@ -312,19 +313,72 @@ L : \mathbb{R}^{n+1} \to \mathbb{R}^{n+1}, \quad
 \begin{pmatrix} \mathbf{x} \\ 1 \end{pmatrix}
 $$
 
-这里的矩阵 $\begin{pmatrix} A & b \\ 0 & 1 \end{pmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)$ 的元素。仿射矩阵构成 $G \! L(n+1)$ 的一个子群。
+这里的矩阵 $\begin{pmatrix} A & b \\ 0 & 1 \end{pmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n​$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)​$ 的元素。仿射矩阵构成 $G \! L(n+1)​$ 的一个子群。
 
 
 
-#### 正交群 O(n)
+#### 正交群 (Orthogonal Group) O(n)
 
 一个 $n \times n$ 维矩阵 $A$ （表示一个从 $\mathbb{R}^n$ 到自身的线性映射）是正交的，那么它的内积形式有：
 
 $$
-\langle A \mathbf{x}, A \mathbf{y} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}.
+\langle A \mathbf{x}, A \mathbf{y} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n.
 $$
 
-所有 $n \times n$ **正交矩阵 (Orthogonal matrix)**的集合构成维n的正交群，用 $O(n)$ 表示。
+所有 $n \times n​$ **正交矩阵 (Orthogonal matrix)**的集合构成维n的正交群，用 $O(n)​$ 表示。显然 $O(n)​$ 是 $G \! L(n)​$ 的子群。如果矩阵 $R​$ 是一个正交矩阵，那么：
+
+$$
+\langle R \mathbf{x}, R \mathbf{y} \rangle = \mathbf{x}^{\top} R^\top R \mathbf{y} = \mathbf{x}^\top \mathbf{y}, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n.
+$$
+
+因此，必需有 $R^\top R = R R^\top = I​$ ，换句话说：
+
+$$
+O(n) = \{ R \in G\!L(n) | R^\top R = I \}
+$$
+
+上述恒等式表明，对任意的正交矩阵 $R​$ ，我们有 $det(R^\top R) = (det(R))^2 = det(I) = 1​$ ，也就是说正交矩阵 $R​$ 的**行列式 (determinant)**  $det(R)  \in  \{ \pm1\}​$ 。
+
+行列式值为 $+1​$ 的正交群被称为**特殊正交群 (Special orthogonal group)** 被定义为 $SO(n)​$ 。即，可以将 $SO(n)​$ 定义成正交群与特殊线性群的交集：$SO(n) = O(n) \cap S\!L(n)​$ 。当 $n = 3​$ 时， $SO(3)​$ 正好是 $3​$ 维的**旋转矩阵 (rotation matrix)** 。
+
+
+
+#### 欧几里德群 (Euclidean Group) E(n)
+
+正交群的仿射形式给出了欧几里德(变换)群。也就是，一个从 $\mathbb{R}^n​$ 到  $\mathbb{R}^n​$ 的**欧氏变换 (Euclidean transformation)** $L​$ 是由矩阵 $R \in O(n)​$ 和向量 $T \in \mathbb{R}^n​$ 共同定义的：
+
+$$
+L : \mathbb{R}^n \to \mathbb{R}^n; \quad \mathbf{x} \to R \mathbf{x} + T
+$$
+
+所有这些变换的集合称为 $n​$ 维的欧氏群，用 $E(n)​$ 表示。显然，欧氏群 $E(n)​$ 是仿射群 $A(n)​$ 的子群。因此欧氏群也可以利用齐次坐标升高一维，矩阵形式如下：
+
+$$
+E(n) = 
+\left \{
+\begin{pmatrix} R & T \\ 0 & 1 \end{pmatrix} \in \mathbb{R}^{(n+1) \times (n+1)} \;
+\middle| \; R \in O(n),\, T \in \mathbb{R}^n 
+\right \}
+$$
+
+如果矩阵 $R \in SO(n)$ ，那么欧氏群转变成**特殊欧氏群 (Special Euclidean Group)** ，被定义为 $S\!E(n)$ 。当 $n = 3$ 时， $SE(3)$ 表示为**刚体运动 (Rigid-body Motion)** ，这里的 $R$ 表示旋转， $T$ 表示位移。
+
+
+
+!!! trip ""
+    **由于目前介绍的所有变换群都具有自然矩阵表达式，所以它们都是矩阵群[^李群 (Lie group)]。总结一下他们之间的关系：**
+    
+
+    $$
+    SO(n) \subset O(n) \subset G\!L(n) \quad S\!E(n) \subset E(n) \subset A(n) \subset G\!L(n+1)
+    $$
+
+
+
+## 矩阵的值域、零空间(核)、秩和特征向量
+
+
+
 
 
 
@@ -342,6 +396,7 @@ $$
 [^单射映射 (injective map)]: 一个映射 $f(\cdot)$ 满足 $f(x) \neq f(y) \; \forall x \neq y$ 那么这个映射被称为单射(injective map)。
 
 [^群结构 (group structure)]:  	这种映射在代数中称为群同态 (group homomorphism) 。
+[^李群 (Lie group)]:  由于这些群体本身具有不同的结构，它们属于[**李群 (Lie Group)**](https://en.wikipedia.org/wiki/Lie_group) 。
 
 
 
