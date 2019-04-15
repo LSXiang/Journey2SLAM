@@ -365,7 +365,7 @@ $$
 
 
 
-!!! trip ""
+!!! note ""
     **由于目前介绍的所有变换群都具有自然矩阵表达式，所以它们都是矩阵群[^李群 (Lie group)]。总结一下他们之间的关系：**
     
 
@@ -376,6 +376,102 @@ $$
 
 
 ## 矩阵的值域、零空间(核)、秩和特征向量
+
+### 矩阵的值域
+
+设矩阵 $A \in \mathbb{R}^{m \times n}​$ 是一个将向量空间 $\mathbb{R}^n​$ 线性映射到  $\mathbb{R}^m​$ 的普通 $n \times m​$ 维矩阵。矩阵 $A \in \mathbb{R}^{m \times n}​$ 的[**值域 (Range)**](https://en.wikipedia.org/wiki/Row_and_column_spaces)或[**列向量张成 (Span) 的空间**](https://en.wikipedia.org/wiki/Linear_span)，记为 $range(A)​$ 或 $span(A)​$ ，被定义成由 $\mathbb{R}^n​$ 由矩阵 $A​$ 映射到 $\mathbb{R}^m​$ 下的子空间。
+$$
+range(A) = \{ \mathbf{y} \in \mathbb{R}^m \, | \, \exists \mathbf{x} \in \mathbb{R}^n : A \mathbf{x} = \mathbf{y} \}
+$$
+
+矩阵 $A​$ 的值域由它的列向量张成的空间给出。
+
+
+
+### 矩阵的零空间
+
+矩阵 $A \in \mathbb{R}^{m \times n}​$ 的[**零空间 (Null Space)** 或称为**核 (Kernel)**](https://en.wikipedia.org/wiki/Kernel_(linear_algebra)) ，记为 $null(A)​$ 或 $ker(A)​$，被定义为由矩阵 $A​$ 映射 $\mathbb{R}^n​$ 下的向量到 $0​$ 的那部分子向量 $\mathbf{x} \in \mathbb{R}^n​$ ：
+
+$$
+null(A) \equiv ker(A) = \{ \mathbf{x} \in \mathbb{R}^n \, | \, A \mathbf{x} = 0 \}
+$$
+
+矩阵 $A​$ 的零空间由正交于其行向量的向量给出。
+
+!!! note ""
+    当考虑 $A \mathbf{x} = \mathbf{b}$ 线性方程的解时，值域和零空间的概览是很有用的。只有当 $\mathbf{b} \in range(A)$ 的时候，该方程才有解。而只有当 $null(A) = \emptyset \, \text{(空集)}$ d的时候才存在唯一解，易证，假设 $\mathbf{x}_s$ 是方程 $A \mathbf{x} = \mathbf{b}$ 的一个解，且有 $\mathbf{x}_o \in ker(A)$ ，那么 $\mathbf{x}_s + \mathbf{x}_o$ 也是方程的解： $A ( \mathbf{x}_s + \mathbf{x}_o )  = A \mathbf{x}_s + A \mathbf{x}_o = \mathbf{b}$ 
+
+ 
+
+### 矩阵的秩
+
+矩阵的[**秩 (Rank)**](https://en.wikipedia.org/wiki/Rank_(linear_algebra)) 是矩阵本身值域的维度：
+
+$$
+rank(A) = dim(range(A))
+$$
+
+矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩有以下性质：
+
+1. $rank(A) = n - dim( ker(A))​$
+2. $0 \leq rank(A) \leq min\{ m, n \}$
+3. $rank(A)​$ 等于 $A​$ 的线性无关行 (或列) 向量的最大个数
+4. $rank(A)​$ 是 $A​$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
+5. 西尔维斯特的秩不等式 (Sylvester's inequality) ：让 $B \in \mathbb{R}^{n \times k}$ ，那么 $A B \in \mathbb{R}^{m \times k}$ 且 $rank(A) + rank(B) - n \leq rank(AB) \leq min \{ rank(A), \, rank(B) \}$ 
+6. 对于任何非奇异矩阵 $C \in \mathbb{R}^{m \times m}$ 和 $D \in \mathbb{R}^{n \times n}$ ，有 $rank(A) = rank(C\!A\!D)$ 
+
+
+
+### 特征值与特征向量
+
+让 $A \in \mathbb{C}^{n \times n}$ 是一个 $n \times n$ 的**复矩阵 (complex matrix)** 。一个非零向量 $\mathbf{v} \in \mathbb{C}^n$ 被称为复矩阵 $A​$ 的 **(右) 特征向量 (Eigenvector)** ，如果：
+
+$$
+A \mathbf{v} = \lambda \mathbf{v}, \quad \lambda \in \mathbb{C}
+$$
+
+而这里的 $\lambda​$ 称为 $A​$ 的**特征值 (Eigenvalue)** 。同理，如果 $\mathbf{\mathbf{\eta}}^\top A  = \lambda \mathbf{\eta}^\top , \; \lambda \in \mathbb{C}​$ 的话 $\mathbf{\eta}^\top \in \mathbb{C}^n​$ 被称为 **(右) 特征向量 (Eigenvector)** 。
+
+矩阵 $A​$ 的谱 $\sigma(A)​$ 是其所有特征值的集合。
+
+
+
+#### 特征值与特征向量的性质
+
+设 $A \in \mathbb{R}^{n \times n}$ 是一个方阵，那么有：
+
+1. 如果 $A \mathbf{v} = \lambda \mathbf{v}​$ ，那么对于同样的特征值 $\lambda​$ ，也存在对应的左特征向量 $\mathbf{\eta}^\top​$ 使得 $\mathbf{\mathbf{\eta}}^\top A  = \lambda \mathbf{\eta}^\top​$ ，反之亦然。因而 $\sigma(A) = \sigma(A^\top)​$ 
+2. 矩阵 $A​$ 的不同特征值对应的特征向量是线性无关的
+3. 矩阵 $A​$ 的所有特征值 $\sigma(A)​$ 都是 (特征) 多项式方程 $det(\lambda I - A) =0 ​$ 的根，因此 $det(A)​$ 等于$A​$ 所有特征值的乘积。
+4. 对于非奇异矩阵 $P​$ , 如果有 $B = P A P^{-1}​$ ，那么 $\sigma(B) = \sigma(A)​$ 
+5. 如果 $A​$ 是一个实矩阵，且 $\lambda \in \mathbb{C}​$ 是一个特征值，这意味着 $\lambda​$ 的共轭 $\bar{\lambda}​$ 也是一个特征值。简单地说，对于实矩阵有 $\sigma(A) = \bar{\sigma}(A)​$ 
+
+
+
+## 对称矩阵与反对称矩阵
+
+### 对称矩阵
+
+一个矩阵 $S \in \mathbb{R}^{n \times n}​$ ，如果 $S^\top = S​$ 的话 ，那么矩阵 $S​$ 被称为对称矩阵 (Symmetric Matrix) 。一个对称矩阵 $S​$ 如果 $\mathbf{x^\top} S \mathbf{x} \geq 0​$ ，那么称之为**半正定 (Positive Semi-definite)** ，记为 $S \geq 0 \;\text{或} \; S \succeq 0​$ ；又如果 $\mathbf{x^\top} S \mathbf{x} > 0​$ ，那么称之为**正定 (Positive Definite)** ，记为$S > 0 \;\text{或} \; S \succ 0​$  。
+
+
+
+#### 对称矩阵的性质
+
+让 $S \in \mathbb{R}^{n \times n}$ 是实对称矩阵，那么：
+
+1. 矩阵 $S​$ 的所有特征值是实数，即 $\sigma(S) \subset \mathbb{R}​$ 
+2. 矩阵 $S$ 对应于不同特征值 $\lambda_i \neq \lambda_j$ 的特征向量 $V_i$ 和 $V_j$ 是正交的
+3. 矩阵 $S$ 存在 $n$ 个标准正交特征向量，它们构成了 $\mathbb{R}^n$ 的一组基。让 $V = (\mathbf{v_1}, \dotsc, \mathbf{v_n}) \in O(n)$ 是矩阵 $S$ 特征向量构成的正交矩阵，且 $\Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}$ 是与之特征向量关联的特征值构成的对角矩阵，那么有 $S = V \Lambda V^\top​$ 
+4. 如果所有的特征值是 (非负的) 正数，那么矩阵 $S$ 是 (半)正定的
+5. 如果矩阵 $S \geq 0$ ，让其特征值从大到小排序 $\lambda_1 \geq \lambda_2 \geq \dotsb \geq \lambda_n$ ，那么有 $max_{\|\mathbf{x}\|_2 = 1} \langle \mathbf{x},\, S \mathbf{x} \rangle = \lambda_1$ 和 $min_{\|\mathbf{x}\|_2 = 1} \langle \mathbf{x},\, S \mathbf{x} \rangle = \lambda_n$ 
+
+
+
+### 矩阵的范数
+
+在空间上，矩阵 $A \in \mathbb{R}^{m \times n}$ 的**范数 (Norms)** 有很多种定义方式。他们可以通过矩阵 $A$ 在域中或者**上域空间 (codomain spaces)** 
+
 
 
 
@@ -398,7 +494,7 @@ $$
 [^群结构 (group structure)]:  	这种映射在代数中称为群同态 (group homomorphism) 。
 [^李群 (Lie group)]:  由于这些群体本身具有不同的结构，它们属于[**李群 (Lie Group)**](https://en.wikipedia.org/wiki/Lie_group) 。
 
-
+[^余子式 (Minor)]: 矩阵的 $k$ 阶[余子式](https://en.wikipedia.org/wiki/Minor_(linear_algebra))是矩阵$A$ 的$k \times k$ 子矩阵的行列式
 
 
 
