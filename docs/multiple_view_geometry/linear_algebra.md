@@ -417,7 +417,7 @@ $$
 1. $rank(A) = n - dim( ker(A))$
 2. $0 \leq rank(A) \leq min\{ m, n \}$
 3. $rank(A)$ 等于 $A$ 的线性无关行 (或列) 向量的最大个数
-4. $rank(A)$ 是 $A$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
+4. $rank(A)​$ 是 $A​$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
 5. 西尔维斯特的秩不等式 (Sylvester's inequality) ：让 $B \in \mathbb{R}^{n \times k}$ ，那么 $A B \in \mathbb{R}^{m \times k}$ 且 $rank(A) + rank(B) - n \leq rank(AB) \leq min \{ rank(A), \, rank(B) \}$ 
 6. 对于任何非奇异矩阵 $C \in \mathbb{R}^{m \times m}$ 和 $D \in \mathbb{R}^{n \times n}$ ，有 $rank(A) = rank(C\!A\!D)$ 
 
@@ -459,7 +459,7 @@ $$
 
 1. 矩阵 $S​$ 的所有特征值是实数，即 $\sigma(S) \subset \mathbb{R}​$ 
 2. 矩阵 $S$ 对应于不同特征值 $\lambda_i \neq \lambda_j$ 的特征向量 $V_i$ 和 $V_j$ 是正交的
-3. 矩阵 $S$ 存在 $n$ 个标准正交特征向量，它们构成了 $\mathbb{R}^n$ 的一组基。让 $V = (\mathbf{v_1}, \dotsc, \mathbf{v_n}) \in O(n)$ 是矩阵 $S$ 特征向量构成的正交矩阵，且 $\Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}$ 是与之特征向量关联的特征值构成的对角矩阵，那么有 $S = V \Lambda V^\top​$ 
+3. 矩阵 $S​$ 存在 $n​$ 个标准正交特征向量，它们构成了 $\mathbb{R}^n​$ 的一组基。让 $V = (\mathbf{v_1}, \dotsc, \mathbf{v_n}) \in O(n)​$ 是矩阵 $S​$ 特征向量构成的正交矩阵，且 $\Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}​$ 是与之特征向量关联的特征值构成的对角矩阵，那么有 $S = V \Lambda V^\top​$ 
 4. 如果所有的特征值是 (非负的) 正数，那么矩阵 $S$ 是 (半)正定的
 5. 如果矩阵 $S \geq 0$ ，让其特征值从大到小排序 $\lambda_1 \geq \lambda_2 \geq \dotsb \geq \lambda_n$ ，那么有 $max_{\|\mathbf{x}\|_2 = 1} \langle \mathbf{x},\, S \mathbf{x} \rangle = \lambda_1$ 和 $min_{\|\mathbf{x}\|_2 = 1} \langle \mathbf{x},\, S \mathbf{x} \rangle = \lambda_n$ 
 
@@ -473,7 +473,7 @@ $$
 \| A \|_2 \doteq \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \| A \mathbf{x} \|_2 = \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \sqrt{\langle \mathbf{x}, A^\top A \mathbf{x} \rangle}
 $$
 
-或者，可以将矩阵 $A​$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
+或者，可以将矩阵 $A$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
 
 $$
 \| A \|_f = \sqrt{ \sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2} = \sqrt{\text{trace}(A^\top A)} = \sqrt{ \sum_{i=1}^{\text{min}\{m,n\}} \sigma_i^2(A)}
@@ -494,7 +494,7 @@ $$
 
 ### 反对称矩阵
 
-一个矩阵 $A \in \mathbb{R}^{n \times n}$ ，如果 $A^\top =-A$ 的话 ，那么矩阵 $A$ 被称为**反对称矩阵 (skew-symmetric or anti-symmetric)** 。
+一个矩阵 $A \in \mathbb{R}^{n \times n}​$ ，如果 $A^\top =-A​$ 的话 ，那么矩阵 $A​$ 被称为**反对称矩阵 (skew-symmetric or anti-symmetric)** 。
 
 
 
@@ -502,7 +502,7 @@ $$
 
 设 $A \in \mathbb{R}^{n \times n}​$ 是反对称矩阵，那么：
 
-1. 矩阵 $A$ 的所有特征值不是 $0$ 就是纯虚数，也就是所有特征值形如 $i \omega \, ,i^2 = -1 \, ,\omega \in \mathbb{R}$ 
+1. 矩阵 $A​$ 的所有特征值不是 $0​$ 就是纯虚数，也就是所有特征值形如 $i \omega \, ,i^2 = -1 \, ,\omega \in \mathbb{R}​$ 
 2. 存在这样一个正交矩阵 $V$ 使得 $A = V \Lambda V^\top$ ，这里的 $\Lambda$ 是一个**区块对角化 (block-diagonal)** 矩阵  $\Lambda = diag \{ A_1, \dotsc , A_m, 0, \dotsc , 0 \}$ ，其中 $A_i$ 是实反对角矩阵，形式为：$\begin{bmatrix} 0 & a_i \\ -a_i & 0 \end{bmatrix} \in \mathbb{R}^{2 \times 2} , \; i = 1, \dotsc , m$ 因而，任何反对称矩阵的秩都是偶数。
 
 
@@ -529,9 +529,106 @@ $$
 
 
 
- 
+## 奇异值分解
+
+ 以上内容中，我们研究了矩阵的许多性质，如秩、制约、零空间和矩阵的诱导范数等。这些属性中有许多属性可以通过**奇异值分解 (Singular Value Decomposition, SVD)** 来获得。
+
+奇异值分解可以看作特征值和特征向量对非方阵的推广。奇异值分解的计算具有良好的数值条件。它对求解矩阵的逆、秩计算、线性最小二乘估计 (linear least-squares estimation) 、投影和定秩近似等线性代数问题非常有用。
+
+在实际应用中，奇异值分解得到了广泛的应用。
 
 
+
+### 奇异值的代数推导
+
+设矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩 $rank(A) = p$ ，且不失一般性有 $m \geq n$ ， 那么存在：
+
+$$
+A = U \Sigma V^\top
+$$
+
+其中：
+
+- $\exists U \in \mathbb{R^{m \times p}}$ 的列向量是正交的
+- $\exists V \in \mathbb{R^{n \times p}}$ 的列向量也是正交的
+- $\exists \Sigma \in \mathbb{R^{p \times p}} , \, \Sigma = diag\{\sigma_1, \sigma_2, \dotsb, \sigma_p \} \text{且} \sigma_1 \geq \sigma_2 \geq \dotsb \geq \sigma_p$ 
+
+以上是一般情况下的奇异值分解。当矩阵 $A$ 是一个 $n \times n$ 的对称方阵时有：
+
+$$
+A = V \Lambda V^\top, \quad \text{其中}\, V \in O(n), \, \Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}
+$$
+
+综上，奇异值分解能够将任意秩为 $p​$ (非方阵) 矩阵分解成如上所示的两个列向量正交的矩阵 $U​$ 和  $V​$ 。不过我们也要重视基于对称方阵特征值分解的奇异值分解。
+
+
+
+### 奇异值分解推导
+
+设矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩 $rank(A) = p$ ，且不失一般性有 $m \geq n$ ， 那么矩阵 $A^\top A \in \mathbb{R}^{n \times n}$ 是对称且半正定的。因此可以将它分解得到非负的特征值 $\sigma_1^2 \geq \dotsb \geq\sigma_p^2 \geq \dotsb \geq \sigma_n^2 \geq 0$ 和关联的特征向量 $\mathbf{v_1}, \dotsc, \mathbf{v_n}$ 。这里的 $\sigma_i$ 被称为奇异值。 
+
+由于 $ker(A^\top A) = ker(A), \,range(A^\top A) =  range{A^\top}$ (证明看参考文献2中的 Theorem A.25) ，因此有 $span \{ \mathbf{v_1}, \dotsc, \mathbf{v_p} \} = range(A^\top) , \, span \{ \mathbf{v_{p+1}}, \dotsc, \mathbf{v_n} \} = ker(A)$ 。
+
+让 $\mathbf{u} \doteq \frac{1}{\sigma_i} A \mathbf{v_i} \, \Leftrightarrow A \mathbf{v_i} = \sigma_i \mathbf{u_i}, \, i = 1, \dotsc, p​$ ，那么 $\{ \mathbf{u_i} \}_{i=1}^p​$ 是正交的，因为 $\langle \mathbf{u_i}, \mathbf{u_j} \rangle = \frac{1}{\sigma_i \sigma_j} \langle A \mathbf{v_i}, A \mathbf{v_j} \rangle = \frac{1}{\sigma_i \sigma_j} \langle \mathbf{v_i}, A^\top A \mathbf{v_j} \rangle = \delta_{ij}​$ 
+
+拓充 $\{ \mathbf{u_i} \}_{i=1}^p​$ 成 $\mathbb{R^m}​$ 中的基 $\{ \mathbf{u_i} \}_{i=1}^m​$ 。因为有 $A \mathbf{v_i} = \sigma_i \mathbf{u_i}​$ ，可得：
+
+$$
+A \begin{bmatrix} \mathbf{v_1}, \dotsc, \mathbf{v_n} \end{bmatrix} = \begin{bmatrix} \mathbf{u_1}, \dotsc, \mathbf{u_m} \end{bmatrix} 
+\begin{bmatrix}
+\sigma_1 & 0 & \cdots & \cdots & \cdots & 0 \\
+0 & \sigma_2 & \cdots & \cdots & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots & \vdots \\
+\vdots & \vdots & \vdots & \sigma_p & \vdots & \vdots \\
+\vdots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+0 & 0 & 0 & \vdots & \vdots & 0_n\\
+\vdots & \vdots & \vdots & \vdots & \vdots & \vdots \\
+0 & 0 & 0 & \cdots & \cdots & 0_m\\
+\end{bmatrix}
+$$
+
+定义上式为 $A \tilde{V} = \tilde{U} \tilde{\Sigma}$ ，因此有 $A = \tilde{U} \tilde{\Sigma}  \tilde{V}^\top$ 。
+
+现在我们简单的去除矩阵 $\tilde{U}$ 列中和 $\tilde{V}^\top$ 行中所有与奇异值 $0$ 相乘的那些行列，从而得到：
+
+$$
+A = U \Sigma V^\top, \quad \text{其中} \; U \in \mathbb{R}^{m \times p}, \, V \in \mathbb{R}^{n \times p}
+$$
+
+
+### 奇异值分解的几何意义
+
+针对于矩阵 $A \in \mathbb{R}^{n \times n}​$ 奇异值分解 $A = U \Sigma V^\top​$ 后得由到 $\mathbb{R}^n​$ 中正交基构成列向量的矩阵 $V = \begin{bmatrix} \mathbf{v_1}, \dotsc, \mathbf{v_n} \end{bmatrix}​$ 和 $U = \begin{bmatrix} \mathbf{u_1}, \dotsc, \mathbf{u_m} \end{bmatrix}​$ 。如果一个点 $\mathbf{x} \in \mathbb{R}^n​$ 通过矩阵 $A​$ 转换称点 $\mathbf{y} \in \mathbb{R}^n​$ ，那么以 $U​$ 为基底的点 $\mathbf{y}​$ 的坐标是通过以 $V​$ 为基底的点 $\mathbf{x}​$ 的坐标乘以对角矩阵 $\Sigma​$ 得到的，即，每个坐标只是由对应的奇异值缩放：
+
+$$
+\mathbf{y} = A \mathbf {x} = U \Sigma V^\top \mathbf{x} \iff U^\top \mathbf{y} = \Sigma V^\top \mathbf{x}
+$$
+
+设矩阵 $A \in \mathbb{R}^{n \times n}= U \Sigma V^\top​$ 是一个方阵。那么矩阵 $A​$ 将*单位球体 (unit sphere)* $\mathbb{S}^{n-1} \doteq \{ {\mathbf{x} \in \mathbb{R}^n :  \| \mathbf{x} \|_2 = 1} \}​$ 映射到具有 $\sigma_i \mathbf{u}_i​$ 为半轴的*椭圆体 (ellipsoid)* ，这里的 $\mathbf{u}_i​$ 是矩阵 $U​$ 的第 $i​$ 列。
+
+针对这一点证明：让 $A \mathbf{x} = \mathbf{y}​$ ，设集合  $\{ \mathbf{v_i} \}_{i=1}^n​$ 是 $\mathbb{R}^n​$ 中一组正交基，那么关联这个基底的点 $\mathbf{x}​$ 的坐标有：
+
+$$
+\begin{bmatrix} \alpha_1, \alpha_2 , \dotsc, \alpha_n \end{bmatrix}^\top = 
+\begin{bmatrix}
+\langle \mathbf{v}_1 , \mathbf{x} \rangle, \langle \mathbf{v}_2 , \mathbf{x} \rangle, \dotsc \langle \mathbf{v}_n , \mathbf{x} \rangle
+\end{bmatrix}^\top
+\, \iff \, \mathbf{\alpha} = V^\top \mathbf{x}
+$$
+
+因此有 $\mathbf{x} =  \sum_{i=1}^n \alpha_i \mathbf{v}_i$ 。那么关联  $\{ \mathbf{u_i} \}_{i=1}^n$ 基底的点 $\mathbf{y}$ 的坐标有：
+
+$$
+\begin{bmatrix} \beta_1, \beta_2 , \dotsc, \beta_n \end{bmatrix}^\top = 
+\begin{bmatrix}
+\langle \mathbf{u}_1 , \mathbf{y} \rangle, \langle \mathbf{u}_2 , \mathbf{y} \rangle, \dotsc \langle \mathbf{u}_n , \mathbf{y} \rangle
+\end{bmatrix}^\top
+\, \iff \, \mathbf{\beta} = U^\top \mathbf{y}
+$$
+
+因此有 $\mathbf{y} =  \sum_{i=1}^n \beta_i \mathbf{u}_i = A\mathbf{x} = \sum_{i=1}^{n} \sigma_i \mathbf{u}_i \mathbf{v}_i^\top \mathbf{x} = \sum_{i = 1}^n \sigma_i \langle \mathbf{v}_i, \mathbf{x} \rangle \mathbf{u}_i$ ，因此有$\beta_i = \sigma_i \alpha_i$ 。现在有 $\| \mathbf{x} \|_2^2 = \sum_{i=1} \alpha_i^2 = 1 , \, \forall \mathbf{x} \in \mathbb{S}^{n-1}$ ，那么有 $\sum_{i=1}^n  \beta_i^2 / \alpha_i^2 = 1$ 。这意味着点 $\mathbf{x}$ 表示变换后得到的点 $\mathbf{y}$ 位于一个沿以 $U$ 为基底轴方向的椭球面上。如下插图表示当 $n =2$ 时，一个单位圆通过非奇异 $A \in \mathbb{R}^{2 \times 2}​$ 映射到一个椭圆的情况。
+
+![二维下奇异值分解的几何意义](image/geometric_interpretation2svd.png)
 
 
 
