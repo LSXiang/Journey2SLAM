@@ -307,19 +307,19 @@ $\mathbf{x} \in \mathbb{R}^n$ 升维成 $\binom{\mathbf{x}}{1}  \in \mathbb{R}^{
 
 $$
 L : \mathbb{R}^{n+1} \to \mathbb{R}^{n+1}, \quad 
-\begin{pmatrix} \mathbf{x} \\ 1 \end{pmatrix}
+\begin{bmatrix} \mathbf{x} \\ 1 \end{bmatrix}
 \to
-\begin{pmatrix} A & b \\ 0 & 1 \end{pmatrix}
-\begin{pmatrix} \mathbf{x} \\ 1 \end{pmatrix}
+\begin{bmatrix} A & b \\ 0 & 1 \end{bmatrix}
+\begin{bmatrix} \mathbf{x} \\ 1 \end{bmatrix}
 $$
 
-这里的矩阵 $\begin{pmatrix} A & b \\ 0 & 1 \end{pmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n​$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)​$ 的元素。仿射矩阵构成 $G \! L(n+1)​$ 的一个子群。
+这里的矩阵 $\begin{bmatrix} A & b \\ 0 & 1 \end{bmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)$ 的元素。仿射矩阵构成 $G \! L(n+1)​$ 的一个子群。
 
 
 
 #### 正交群 (Orthogonal Group) O(n)
 
-一个 $n \times n$ 维矩阵 $A$ （表示一个从 $\mathbb{R}^n$ 到自身的线性映射）是正交的，那么它的内积形式有：
+一个 $n \times n​$ 维矩阵 $A​$ （表示一个从 $\mathbb{R}^n​$ 到自身的线性映射）是正交的，那么它的内积形式有：
 
 $$
 \langle A \mathbf{x}, A \mathbf{y} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n.
@@ -356,7 +356,7 @@ $$
 $$
 E(n) = 
 \left \{
-\begin{pmatrix} R & T \\ 0 & 1 \end{pmatrix} \in \mathbb{R}^{(n+1) \times (n+1)} \;
+\begin{bmatrix} R & T \\ 0 & 1 \end{bmatrix} \in \mathbb{R}^{(n+1) \times (n+1)} \;
 \middle| \; R \in O(n),\, T \in \mathbb{R}^n 
 \right \}
 $$
@@ -379,12 +379,13 @@ $$
 
 ### 矩阵的值域
 
-设矩阵 $A \in \mathbb{R}^{m \times n}​$ 是一个将向量空间 $\mathbb{R}^n​$ 线性映射到  $\mathbb{R}^m​$ 的普通 $n \times m​$ 维矩阵。矩阵 $A \in \mathbb{R}^{m \times n}​$ 的[**值域 (Range)**](https://en.wikipedia.org/wiki/Row_and_column_spaces)或[**列向量张成 (Span) 的空间**](https://en.wikipedia.org/wiki/Linear_span)，记为 $range(A)​$ 或 $span(A)​$ ，被定义成由 $\mathbb{R}^n​$ 由矩阵 $A​$ 映射到 $\mathbb{R}^m​$ 下的子空间。
+设矩阵 $A \in \mathbb{R}^{m \times n}$ 是一个将向量空间 $\mathbb{R}^n$ 线性映射到  $\mathbb{R}^m$ 的普通 $n \times m$ 维矩阵。矩阵 $A \in \mathbb{R}^{m \times n}$ 的[**值域 (Range)**](https://en.wikipedia.org/wiki/Row_and_column_spaces)或[**列向量张成 (Span) 的空间**](https://en.wikipedia.org/wiki/Linear_span)，记为 $range(A)$ 或 $span(A)$ ，被定义成由 $\mathbb{R}^n$ 由矩阵 $A$ 映射到 $\mathbb{R}^m$ 下的子空间。
+
 $$
 range(A) = \{ \mathbf{y} \in \mathbb{R}^m \, | \, \exists \mathbf{x} \in \mathbb{R}^n : A \mathbf{x} = \mathbf{y} \}
 $$
 
-矩阵 $A​$ 的值域由它的列向量张成的空间给出。
+矩阵 $A$ 的值域由它的列向量张成的空间给出。
 
 
 
@@ -396,7 +397,7 @@ $$
 null(A) \equiv ker(A) = \{ \mathbf{x} \in \mathbb{R}^n \, | \, A \mathbf{x} = 0 \}
 $$
 
-矩阵 $A​$ 的零空间由正交于其行向量的向量给出。
+矩阵 $A$ 的零空间由正交于其行向量的向量给出。
 
 !!! note ""
     当考虑 $A \mathbf{x} = \mathbf{b}$ 线性方程的解时，值域和零空间的概览是很有用的。只有当 $\mathbf{b} \in range(A)$ 的时候，该方程才有解。而只有当 $null(A) = \emptyset \, \text{(空集)}$ d的时候才存在唯一解，易证，假设 $\mathbf{x}_s$ 是方程 $A \mathbf{x} = \mathbf{b}$ 的一个解，且有 $\mathbf{x}_o \in ker(A)$ ，那么 $\mathbf{x}_s + \mathbf{x}_o$ 也是方程的解： $A ( \mathbf{x}_s + \mathbf{x}_o )  = A \mathbf{x}_s + A \mathbf{x}_o = \mathbf{b}$ 
@@ -413,10 +414,10 @@ $$
 
 矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩有以下性质：
 
-1. $rank(A) = n - dim( ker(A))​$
+1. $rank(A) = n - dim( ker(A))$
 2. $0 \leq rank(A) \leq min\{ m, n \}$
-3. $rank(A)​$ 等于 $A​$ 的线性无关行 (或列) 向量的最大个数
-4. $rank(A)​$ 是 $A​$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
+3. $rank(A)$ 等于 $A$ 的线性无关行 (或列) 向量的最大个数
+4. $rank(A)$ 是 $A$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
 5. 西尔维斯特的秩不等式 (Sylvester's inequality) ：让 $B \in \mathbb{R}^{n \times k}$ ，那么 $A B \in \mathbb{R}^{m \times k}$ 且 $rank(A) + rank(B) - n \leq rank(AB) \leq min \{ rank(A), \, rank(B) \}$ 
 6. 对于任何非奇异矩阵 $C \in \mathbb{R}^{m \times m}$ 和 $D \in \mathbb{R}^{n \times n}$ ，有 $rank(A) = rank(C\!A\!D)$ 
 
@@ -430,9 +431,9 @@ $$
 A \mathbf{v} = \lambda \mathbf{v}, \quad \lambda \in \mathbb{C}
 $$
 
-而这里的 $\lambda​$ 称为 $A​$ 的**特征值 (Eigenvalue)** 。同理，如果 $\mathbf{\mathbf{\eta}}^\top A  = \lambda \mathbf{\eta}^\top , \; \lambda \in \mathbb{C}​$ 的话 $\mathbf{\eta}^\top \in \mathbb{C}^n​$ 被称为 **(右) 特征向量 (Eigenvector)** 。
+而这里的 $\lambda$ 称为 $A$ 的**特征值 (Eigenvalue)** 。同理，如果 $\mathbf{\mathbf{\eta}}^\top A  = \lambda \mathbf{\eta}^\top , \; \lambda \in \mathbb{C}$ 的话 $\mathbf{\eta}^\top \in \mathbb{C}^n$ 被称为 **(右) 特征向量 (Eigenvector)** 。
 
-矩阵 $A​$ 的谱 $\sigma(A)​$ 是其所有特征值的集合。
+矩阵 $A$ 的谱 $\sigma(A)$ 是其所有特征值的集合。
 
 
 
@@ -440,11 +441,7 @@ $$
 
 设 $A \in \mathbb{R}^{n \times n}$ 是一个方阵，那么有：
 
-1. 如果 $A \mathbf{v} = \lambda \mathbf{v}​$ ，那么对于同样的特征值 $\lambda​$ ，也存在对应的左特征向量 $\mathbf{\eta}^\top​$ 使得 $\mathbf{\mathbf{\eta}}^\top A  = \lambda \mathbf{\eta}^\top​$ ，反之亦然。因而 $\sigma(A) = \sigma(A^\top)​$ 
-2. 矩阵 $A​$ 的不同特征值对应的特征向量是线性无关的
-3. 矩阵 $A​$ 的所有特征值 $\sigma(A)​$ 都是 (特征) 多项式方程 $det(\lambda I - A) =0 ​$ 的根，因此 $det(A)​$ 等于$A​$ 所有特征值的乘积。
-4. 对于非奇异矩阵 $P​$ , 如果有 $B = P A P^{-1}​$ ，那么 $\sigma(B) = \sigma(A)​$ 
-5. 如果 $A​$ 是一个实矩阵，且 $\lambda \in \mathbb{C}​$ 是一个特征值，这意味着 $\lambda​$ 的共轭 $\bar{\lambda}​$ 也是一个特征值。简单地说，对于实矩阵有 $\sigma(A) = \bar{\sigma}(A)​$ 
+1. 如果 $A \mathbf{v} = \lambda \mathbf{v}​$ ，那么对于同样的特征值 $\lambda​
 
 
 
@@ -452,7 +449,7 @@ $$
 
 ### 对称矩阵
 
-一个矩阵 $S \in \mathbb{R}^{n \times n}​$ ，如果 $S^\top = S​$ 的话 ，那么矩阵 $S​$ 被称为对称矩阵 (Symmetric Matrix) 。一个对称矩阵 $S​$ 如果 $\mathbf{x^\top} S \mathbf{x} \geq 0​$ ，那么称之为**半正定 (Positive Semi-definite)** ，记为 $S \geq 0 \;\text{或} \; S \succeq 0​$ ；又如果 $\mathbf{x^\top} S \mathbf{x} > 0​$ ，那么称之为**正定 (Positive Definite)** ，记为$S > 0 \;\text{或} \; S \succ 0​$  。
+一个矩阵 $S \in \mathbb{R}^{n \times n}$ ，如果 $S^\top = S$ 的话 ，那么矩阵 $S$ 被称为**对称矩阵 (Symmetric Matrix)** 。一个对称矩阵 $S$ 如果 $\mathbf{x^\top} S \mathbf{x} \geq 0$ ，那么称之为**半正定 (Positive Semi-definite)** ，记为 $S \geq 0 \;\text{或} \; S \succeq 0$ ；又如果 $\mathbf{x^\top} S \mathbf{x} > 0$ ，那么称之为**正定 (Positive Definite)** ，记为$S > 0 \;\text{或} \; S \succ 0$  。
 
 
 
@@ -470,7 +467,75 @@ $$
 
 ### 矩阵的范数
 
-在空间上，矩阵 $A \in \mathbb{R}^{m \times n}$ 的**范数 (Norms)** 有很多种定义方式。他们可以通过矩阵 $A$ 在域中或者**上域空间 (codomain spaces)** 
+在空间上，矩阵 $A \in \mathbb{R}^{m \times n}$ 的**范数 (Norms)** 有很多种定义方式。他们可以基于矩阵 $A$ 在域中或者[**上域空间 (codomain spaces)**](https://en.wikipedia.org/wiki/Codomain) 上的规范来定义。其中，矩阵 $A$ 的[**诱导二范数 (Induced 2-norm)**](https://en.wikipedia.org/wiki/Norm_(mathematics))被定义为：
+
+$$
+\| A \|_2 \doteq \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \| A \mathbf{x} \|_2 = \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \sqrt{\langle \mathbf{x}, A^\top A \mathbf{x} \rangle}
+$$
+
+或者，可以将矩阵 $A​$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
+
+$$
+\| A \|_f = \sqrt{ \sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2} = \sqrt{\text{trace}(A^\top A)} = \sqrt{ \sum_{i=1}^{\text{min}\{m,n\}} \sigma_i^2(A)}
+$$
+
+请注意，这些规范通常并不相同。由于矩阵 $A^\top A​$ 是对称半正定的，我们可以对角化它为：
+
+$$
+A^\top A = V diag\{\sigma_1^2 , \dotsc, \sigma_n^2 \} V^\top , \; \text{其中 } \sigma_1^2 \geq \sigma_i^2 \geq 0
+$$
+
+由此可得：
+
+$$
+\| A \|_2 = \sigma_1 \, , \quad \| A \|_f = \sqrt{\text{trace}(A^\top A)} = \sqrt{\sigma_1^2 + \dotsb + \sigma_n^2}
+$$
+
+
+### 反对称矩阵
+
+一个矩阵 $A \in \mathbb{R}^{n \times n}$ ，如果 $A^\top =-A$ 的话 ，那么矩阵 $A$ 被称为**反对称矩阵 (skew-symmetric or anti-symmetric)** 。
+
+
+
+#### 反对称矩阵的性质
+
+设 $A \in \mathbb{R}^{n \times n}​$ 是反对称矩阵，那么：
+
+1. 矩阵 $A$ 的所有特征值不是 $0$ 就是纯虚数，也就是所有特征值形如 $i \omega \, ,i^2 = -1 \, ,\omega \in \mathbb{R}$ 
+2. 存在这样一个正交矩阵 $V$ 使得 $A = V \Lambda V^\top$ ，这里的 $\Lambda$ 是一个**区块对角化 (block-diagonal)** 矩阵  $\Lambda = diag \{ A_1, \dotsc , A_m, 0, \dotsc , 0 \}$ ，其中 $A_i$ 是实反对角矩阵，形式为：$\begin{bmatrix} 0 & a_i \\ -a_i & 0 \end{bmatrix} \in \mathbb{R}^{2 \times 2} , \; i = 1, \dotsc , m$ 因而，任何反对称矩阵的秩都是偶数。
+
+
+
+#### 反对称矩阵的例子
+
+在计算机视觉中，定义一个向量 $\mathbf{u} \in \mathbb{R}^3​$ 通过 ”帽运算 (hat operator)“ 后得到一个常见的反对称矩阵，形如：
+
+$$
+\widehat{\mathbf{u}} = 
+\begin{bmatrix}
+0 & -u_3 & u_2 \\
+u_3 & 0 & -u_1 \\
+-u_2 & u_1 & 0
+\end{bmatrix}
+\in \mathbb{R^{3 \times 3}}
+$$
+
+可见， ”帽运算 (^) “ 是一个从向量空间 $\mathbb{R}^3$ 线性变换到反对称矩阵 $\mathbb{R^{3 \times 3}}$ 空间。
+
+而且，矩阵 $\widehat{\mathbf{u}}$ 满足 $\widehat{\mathbf{u}} \mathbf{v} = \mathbf{u} \times \mathbf{v}$ ，这里的 $\times$ 定义为在向量空间 $\mathbb{R}^3$ 上的标准向量**叉积 (cross product)**。当 $\mathbf{u}  \neq 0$ 时，有  $\text{rank} ( \widehat{\mathbf{u}} )  = 2$ ，且向量 $\mathbf{u} \in \mathbb{R}^3$ 所张成的空间正好是矩阵 $\widehat{\mathbf{u}}$ 的零空间，因为有 $\widehat{\mathbf{u}} \mathbf{u} = \mathbf{u^\top} \widehat{\mathbf{u}}$ 。
+
+如果矩阵 $A \in \mathbb{R}^{3 \times 3}, \; \text{det}(A) = 1$ ，那么有 $A^\top \widehat{\mathbf{u}} A = \widehat{A^{-1} \mathbf{u}}$ 。
+
+
+
+ 
+
+
+
+
+
+
 
 
 
