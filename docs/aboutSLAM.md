@@ -1,6 +1,8 @@
 [**Simultaneous Localization and Mapping (SLAM)**](https://en.wikipedia.org/wiki/Simultaneous_localization_and_mapping "Simultaneous Localization and Mapping") **即时定位与地图构建** 是在未知环境中构建或更新地图，并同时利用地图信息跟踪定位的计算问题。虽然在最初看来像极了先有鸡还是先有蛋的问题，但对于某些环境下，至少在可控制的时间内，有几种算法可以近似地解决这个问题。目前为止的近似求解方法有 [**粒子滤波**](https://en.wikipedia.org/wiki/Particle_filter)、[**扩展卡尔曼滤波**](https://en.wikipedia.org/wiki/Extended_Kalman_filter) 和 [**GraphSLAM**](https://en.wikipedia.org/wiki/GraphSLAM) 。随着人工智能的发展，也出现了 **语义 SLAM (Semantic slam)** 等新的求解方式，但就目前最为流行和广泛使用的还是 GraphSLAM 。
 
-近年来，「SLAM 技术」成为了越来越多学者研究的课题方向，随着该技术的成熟，它也被广泛的应用于市场上的诸多产品上，例如：自动驾驶汽车、无人驾驶飞行器、自动水下航行器、行星漫游者、较新的家用机器人，等等。因而市场对「SLAM 算法工程师」的需求也越来越多。然而 「SLAM 技术」涉及知识体系之广、而且大部分知识也相对较难，所以 「SLAM 技术」并非那么容易能够掌握精通。
+近年来，「SLAM 技术」成为了越来越多学者研究的课题方向，随着该技术的成熟，它也被广泛的应用于市场上的诸多产品上，例如：自动驾驶汽车、无人驾驶飞行器、自动水下航行器、行星漫游者、较新的家用机器人，等等。因而市场对「SLAM 算法工程师」的需求也越来越多。然而 「SLAM 技术」涉及知识体系之广、而且大部分知识也相对较难，所以 「SLAM 技术」并非那么容易能够掌握精通。下面给出大体的「SLAM 知识树 」([PNG图片](https://github.com/LSXiang/Journey2SLAM/blob/master/KnowledgeTree4SLAM.png)、[xmind文件](https://github.com/LSXiang/Journey2SLAM/blob/master/KnowledgeTree4SLAM.xmind) )
+
+![SLAM 知识树](KnowledgeTree4SLAM.png)
 
 如果你喜欢该技术领域，想要在这个方向上有所发展，那么你就需要付出许多时间在这些知识中深挖。建议您可以考取相关领域的硕士及以上学历，这对你在市场竞争中能获取相当大的优势。当然这并非硬性规定，只要您对该技术感兴趣，并沉浸于研究之中，相信自己也可以成为该领域中优秀的人才之一。
 
