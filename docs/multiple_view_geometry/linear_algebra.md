@@ -473,7 +473,7 @@ $$
 \| A \|_2 \doteq \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \| A \mathbf{x} \|_2 = \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \sqrt{\langle \mathbf{x}, A^\top A \mathbf{x} \rangle}
 $$
 
-或者，可以将矩阵 $A$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
+或者，可以将矩阵 $A​$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
 
 $$
 \| A \|_f = \sqrt{ \sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2} = \sqrt{\text{trace}(A^\top A)} = \sqrt{ \sum_{i=1}^{\text{min}\{m,n\}} \sigma_i^2(A)}
@@ -518,14 +518,14 @@ $$
 u_3 & 0 & -u_1 \\
 -u_2 & u_1 & 0
 \end{bmatrix}
-\in \mathbb{R^{3 \times 3}}
+\in \mathbb{R}^{3 \times 3}
 $$
 
 可见， ”帽运算 (^) “ 是一个从向量空间 $\mathbb{R}^3$ 线性变换到反对称矩阵 $\mathbb{R^{3 \times 3}}$ 空间。
 
 而且，矩阵 $\widehat{\mathbf{u}}$ 满足 $\widehat{\mathbf{u}} \mathbf{v} = \mathbf{u} \times \mathbf{v}$ ，这里的 $\times$ 定义为在向量空间 $\mathbb{R}^3$ 上的标准向量**叉积 (cross product)**。当 $\mathbf{u}  \neq 0$ 时，有  $\text{rank} ( \widehat{\mathbf{u}} )  = 2$ ，且向量 $\mathbf{u} \in \mathbb{R}^3$ 所张成的空间正好是矩阵 $\widehat{\mathbf{u}}$ 的零空间，因为有 $\widehat{\mathbf{u}} \mathbf{u} = \mathbf{u^\top} \widehat{\mathbf{u}}$ 。
 
-如果矩阵 $A \in \mathbb{R}^{3 \times 3}, \; \text{det}(A) = 1$ ，那么有 $A^\top \widehat{\mathbf{u}} A = \widehat{A^{-1} \mathbf{u}}$ 。
+如果矩阵 $A \in \mathbb{R}^{3 \times 3}, \; \text{det}(A) = 1​$ ，那么有 $A^\top \widehat{\mathbf{u}} A = \widehat{A^{-1} \mathbf{u}}​$ 。
 
 
 
@@ -549,9 +549,9 @@ $$
 
 其中：
 
-- $\exists U \in \mathbb{R^{m \times p}}$ 的列向量是正交的
-- $\exists V \in \mathbb{R^{n \times p}}$ 的列向量也是正交的
-- $\exists \Sigma \in \mathbb{R^{p \times p}} , \, \Sigma = diag\{\sigma_1, \sigma_2, \dotsb, \sigma_p \} \text{且} \sigma_1 \geq \sigma_2 \geq \dotsb \geq \sigma_p$ 
+- $\exists U \in \mathbb{R}^{m \times p}​$ 的列向量是正交的
+- $\exists V \in \mathbb{R}^{n \times p}​$ 的列向量也是正交的
+- $\exists \Sigma \in \mathbb{R}^{p \times p} , \, \Sigma = diag\{\sigma_1, \sigma_2, \dotsb, \sigma_p \} \text{且} \sigma_1 \geq \sigma_2 \geq \dotsb \geq \sigma_p$ 
 
 以上是一般情况下的奇异值分解。当矩阵 $A$ 是一个 $n \times n$ 的对称方阵时有：
 
@@ -565,7 +565,7 @@ $$
 
 ### 奇异值分解推导
 
-设矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩 $rank(A) = p$ ，且不失一般性有 $m \geq n$ ， 那么矩阵 $A^\top A \in \mathbb{R}^{n \times n}$ 是对称且半正定的。因此可以将它分解得到非负的特征值 $\sigma_1^2 \geq \dotsb \geq\sigma_p^2 \geq \dotsb \geq \sigma_n^2 \geq 0$ 和关联的特征向量 $\mathbf{v_1}, \dotsc, \mathbf{v_n}$ 。这里的 $\sigma_i$ 被称为奇异值。 
+设矩阵 $A \in \mathbb{R}^{m \times n}​$ 的秩 $rank(A) = p​$ ，且不失一般性有 $m \geq n​$ ， 那么矩阵 $A^\top A \in \mathbb{R}^{n \times n}​$ 是对称且半正定的。因此可以将它分解得到非负的特征值 $\sigma_1^2 \geq \dotsb \geq\sigma_p^2 \geq \dotsb \geq \sigma_n^2 \geq 0​$ 和关联的特征向量 $\mathbf{v_1}, \dotsc, \mathbf{v_n}​$ 。这里的 $\sigma_i​$ 被称为奇异值。 
 
 由于 $ker(A^\top A) = ker(A), \,range(A^\top A) =  range{A^\top}$ (证明看参考文献2中的 Theorem A.25) ，因此有 $span \{ \mathbf{v_1}, \dotsc, \mathbf{v_p} \} = range(A^\top) , \, span \{ \mathbf{v_{p+1}}, \dotsc, \mathbf{v_n} \} = ker(A)$ 。
 
@@ -632,7 +632,22 @@ $$
 
 
 
+### 广义逆的性质
 
+如果矩阵 $A \in \mathbb{R}^{m \times n}$ 的行列式不为零，即 $det(A) \neq 0$ ， 那么矩阵 $A$ 的二次式存在能够定义的逆矩阵。所有可逆矩阵的集合构成群 $G\!L(n)$ 。对于任意 (非二次) 矩阵 $A \in \mathbb{R}^{m \times n}$ 能够定义一个**广义逆 (generalized inverse，**也称为**伪逆 (Pseudo inverse))** ，如果矩阵 $A$ 的奇异值分解为 $A = U \Sigma V^\top$ ，那么它的伪逆被定义成：
+
+$$
+A^\dagger = V \Sigma^\dagger U, \quad
+\Sigma^\dagger = \begin{bmatrix} \Sigma_1^{-1} & 0 \\ 0 & 0 \end{bmatrix}_{n \times m}
+$$
+
+这里的 $\Sigma_1$ 是由矩阵 $A$ 的非零奇异值构成的对角矩阵。同时，伪逆可以用类似于二次可逆矩阵的逆的方式来使用：
+
+$$
+A A^\dagger A = A, \quad A^\dagger A A^\dagger = A^\dagger
+$$
+
+考虑一个线性系统 $A \mathbf{x} = \mathbf{b}$ 其中矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩 $r \leq min(m, n)$ 。那么最小二乘形式 $min \| A \mathbf{x} - \mathbf{b} \|_2$ 的解 $\mathbf{x}^*$ 可以通过 $\mathbf{x}^* = A^\dagger \mathbf{b}$ 获得。
 
 
 
@@ -648,6 +663,9 @@ $$
 
 1.  Multiple View Geometry (IN2228) SS 2016, TU München : Chapter 1
 2.  An Invitation to 3D Vision: From Images to Geometric Models : Appendix A
+3.  推荐观看「[麻省理工的线性代数公开课](http://open.163.com/special/opencourse/daishu.html)」
+
+
 
 
 
