@@ -44,7 +44,8 @@ nav:
     - 图像滤波器: computer_vision/image_filtering.md
 - 多视几何: 
     - 概览: multiple_view_geometry/mvg.md
-    - 数学背景:线性代数: multiple_view_geometry/linear_algebra.md
+    - 数学背景 - 线性代数: multiple_view_geometry/linear_algebra.md
+    - 三维运动场景的表示: multiple_view_geometry/RepreOf3DMoveScene.md
 - 状态估计: 
     - 概览: state_estimation_robotics/state_estimation_robotics.md
 - 开源项目:
