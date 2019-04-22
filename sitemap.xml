@@ -2,62 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/aboutSLAM/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/computer_vision/computer_vision/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/computer_vision/image_filtering/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/multiple_view_geometry/mvg/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/multiple_view_geometry/linear_algebra/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://lsxiang.github.io/Journey2SLAM/multiple_view_geometry/RepreOf3DMoveScene/</loc>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/state_estimation_robotics/state_estimation_robotics/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/projects/projects/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/projects/rpg_svo/structure/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/projects/orb_slam/structure/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/projects/orb_slam/initialize/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://lsxiang.github.io/Journey2SLAM/others/md_template/</loc>
-     <lastmod>2019-04-17</lastmod>
+     <lastmod>2019-04-22</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
