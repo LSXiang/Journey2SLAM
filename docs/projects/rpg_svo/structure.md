@@ -89,6 +89,22 @@ $$
 \end{align}
 $$
 
+为了找到最佳的更新量 $\mathrm{T}(\xi)$ ，我们可以通过求式 (4) 的偏导数并让它等于零：
+
+$$
+\begin{align}
+\sum_{i \in \hat{\mathcal{R}}} \triangledown \delta \mathrm{I} (\xi, \mathbf{u}_i)^\top \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0
+\end{align}
+$$
+
+为了求解上式，我们对当前状态进行线性化：
+
+$$
+\begin{align}
+\delta \mathrm{I} (\xi, \mathbf{u}_i) \approx \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0
+\end{align}
+$$
+
 
 
 
