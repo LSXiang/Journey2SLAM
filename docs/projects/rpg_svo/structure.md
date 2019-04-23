@@ -3,7 +3,7 @@
 半直接视觉里程计，所谓的半直接是指对图像中提取的特征点图像块进行直接匹配来获取相机的位姿，而不同于直接匹配法那么对整个图像使用直接匹配的方式来获取相机位姿。虽然*半直接 (Semi-Direct)* 法使用了特征块，但它的基础思想还是类似于*直接法 (Direct method)* 来获取位姿信息，这点与*特征点法  (Feature-Based method)* 的提取额一组稀疏特征点，使用特征描述子匹配，通过对极约束来估计位姿是不一样的。然而，半直接法与直接法不同的是它利用了特征块匹配，通过再投影误差最小化来对直接法估计的位姿进行优化。
 
 !!! tip  
-    虽然 SVO 并不是一个标准的完整 SLAM ，它没有后端优化与回环检查，但是 SVO 的代码结构清晰易于理解，很适合作为第一个入门项目。
+    虽然 SVO 并不是一个标准的完整 SLAM ，它舍弃了后端优化与回环检查部分，也基本没有建图功能，但是 SVO 的代码结构清晰易于理解，很适合作为第一个入门项目。
 
 
 
@@ -93,7 +93,7 @@ $$
 
 $$
 \begin{align}
-\sum_{i \in \hat{\mathcal{R}}} \triangledown \delta \mathrm{I} (\xi, \mathbf{u}_i)^\top \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0
+\sum_{i \in \bar{\mathcal{R}}} \nabla \delta \mathrm{I} (\xi, \mathbf{u}_i)^\top \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0
 \end{align}
 $$
 
@@ -101,10 +101,29 @@ $$
 
 $$
 \begin{align}
-\delta \mathrm{I} (\xi, \mathbf{u}_i) \approx \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0
+\delta \mathrm{I} (\xi, \mathbf{u}_i) \approx \delta \mathrm{I}(0, \mathbf{u}_i) + \nabla \delta \mathrm{I}(0, \mathbf{u}_i) \cdot \xi
 \end{align}
 $$
 
+其中雅克比矩阵 $\mathbf{J}_i := \nabla \delta \mathrm{I}(0, \mathbf{u}_i)$ 为图像残差对李代数的求导，可以通过链式求导得到:
+
+$$
+\begin{align}
+\frac{\partial \delta \mathrm{I} (\xi, \mathbf{u}_i)}{\partial \xi} = \left. \frac{\partial \mathrm{I}_{k-1}(\mathrm{a})}{\partial \mathrm{a}} \right|_{\mathrm{a} = \mathbf{u}_i} \cdot \left. \frac{\partial \pi (\mathrm{b})}{\partial \mathrm{b}} \right|_{\mathrm{b}=\mathbf{p}_i} \cdot \left. \frac{\mathrm{T}(\xi)}{\partial \xi} \right|_{\xi=0} \cdot \mathbf{p}_i
+\end{align}
+$$
+
+这中间最复杂的部分是位姿矩阵对李代数的求导。（#TODO）
+
+通过将式 (8) 代入式 (7) 并通过将雅克比堆叠成矩阵 $\mathbf{J}$ ，我们得到正规方程：
+
+$$
+\begin{align}
+\mathbf{J}^\top \mathbf{J} \xi = - \mathbf{J}^\top \delta \mathrm{I}(0)
+\end{align}
+$$
+
+注意，通过使用 inverse compositional 构造亮度残差方法，雅可比可以预先计算，因为它在所有迭代中保持不变。
 
 
 
@@ -158,14 +177,10 @@ $$
 
 
 
+## 参考
 
-
-
-
-
-
-
-
+1. [SVO: Fast Semi-Direct Monocular Visual Odometry](http://rpg.ifi.uzh.ch/docs/ICRA14_Forster.pdf) 
+2. [白巧克力亦唯心博客](https://blog.csdn.net/heyijia0327/article/details/51083398) 
 
 
 
