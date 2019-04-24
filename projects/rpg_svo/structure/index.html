@@ -659,6 +659,19 @@
     地图构建
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#深度计算" title="深度计算" class="md-nav__link">
+    深度计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -849,6 +862,19 @@
   <a href="#地图构建" title="地图构建" class="md-nav__link">
     地图构建
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#深度计算" title="深度计算" class="md-nav__link">
+    深度计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1081,6 +1107,13 @@
 </div>
 <p>上式中<mark class="critic">误差变成了像素重投影以后位置的差异 (不是像素值的差异)</mark> ，优化变量还是相机位姿，雅克比矩阵大小为 2×6 (坐标 <span><span class="MathJax_Preview">\mathbf{u}_i</span><script type="math/tex">\mathbf{u}_i</script></span> 分别对李代数变量 <span><span class="MathJax_Preview">\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)</span><script type="math/tex">\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)</script></span> 求导) 。这一步叫做 <strong>motion-only Bundler Adjustment</strong> 。同时根据这个误差定义，我们还能够对获取的三维点的坐标 <span><span class="MathJax_Preview">[x, y, z]^\top</span><script type="math/tex">[x, y, z]^\top</script></span> 进行优化，还是上面的误差像素位置误差形式，只不过优化变量变成三维点的坐标，这一步叫 <strong>Structure -only Bundler Adjustment</strong> ，优化过程中雅克比矩阵大小为 2×3 (坐标 <span><span class="MathJax_Preview">\mathbf{u}_i</span><script type="math/tex">\mathbf{u}_i</script></span> 分别对三维点的坐标 <span><span class="MathJax_Preview">[x, y, z]^\top</span><script type="math/tex">[x, y, z]^\top</script></span> 变量求导) 。</p>
 <h3 id="地图构建">地图构建<a class="headerlink" href="#地图构建" title="Permanent link"></a></h3>
+<p>地图模型通常用来存储三维空间点，在 SVO 中每一个 Key frame 通过深度估计能够得到特征点的三维坐标，这些收敛的三维坐标点通过特征点在 Key Frame 中进行保存。当新帧被选为关键帧时，它会被立即插入地图。同时，又在这个新的关键帧上检测新的特征点作为深度估计的 seed ，这些 seed 会不断融合之后的图像进行深度估计。但是，如果有些 seed 点 3D 点位置通过深度估计已经收敛了，此时 map 用一个 point_candidates 来保存这些尚未插入地图中的点。所以 SVO 地图上保存的是 Key Frame 以及还未插入地图关键帧中的已经收敛的 3D 点坐标（这些 3D 点坐标是在世界坐标系下的）。</p>
+<h4 id="深度计算">深度计算<a class="headerlink" href="#深度计算" title="Permanent link"></a></h4>
+<p>SVO 使用三角化估计特征点深度，这是多视角几何的基础内容，可以参考《Multiple View Geometry in Computer Vision》，或者白巧克力亦唯心的博客<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> （or #TODO）。SVO 中的每个新特征点对应一个深度估计，其初值为该帧的平均深度，并被赋予极大的不确定性。通过两帧图像的匹配点就可以计算出这一点的深度值，如果有多幅图像，那就能计算出这一点的多个深度值。这就像对同一个状态变量我们进行了多次测量，因此，可以用贝叶斯估计来对多个测量值进行融合，使得估计的不确定性缩小。如下图所示：</p>
+<p><img alt="Depth Estimation" src="../image/depth_estimation.png" /></p>
+<p>一开始深度估计的不确定性较大 (<span><span class="MathJax_Preview">\color{cyan}{\mathbf{\text{青色部分}}}</span><script type="math/tex">\color{cyan}{\mathbf{\text{青色部分}}}</script></span>) ，通过三角化得到一个深度估计值以后，能够极大的缩小这个不确定性 (<span><span class="MathJax_Preview">\color{teal}{\mathbf{\text{墨绿部分}}}</span><script type="math/tex">\color{teal}{\mathbf{\text{墨绿部分}}}</script></span>) 。 </p>
+<p>SVO 关于三角化计算深度的过程，主要是极线搜索确定匹配点。我们知道参考帧 <span><span class="MathJax_Preview">\mathrm{I}_r</span><script type="math/tex">\mathrm{I}_r</script></span> 中的一个特征的图像位置，假设它的深度值在 <span><span class="MathJax_Preview">[\mathrm{d}_{min},\mathrm{d}_{max}]</span><script type="math/tex">[\mathrm{d}_{min},\mathrm{d}_{max}]</script></span> 之间，那么根据这两个端点深度值，利用对极几何就能够计算出特征点在当前帧 <span><span class="MathJax_Preview">\mathrm{I}_k</span><script type="math/tex">\mathrm{I}_k</script></span> 中的大概位置 (位于极线段附近，即上图 <span><span class="MathJax_Preview">\mathrm{I}_k</span><script type="math/tex">\mathrm{I}_k</script></span> 中 <span><span class="MathJax_Preview">\color{cyan}{\mathbf{\text{青色线段}}}</span><script type="math/tex">\color{cyan}{\mathbf{\text{青色线段}}}</script></span>)  。确定了特征出现的极线段位置，就可以进行特征搜索匹配。如果极线段很短，小于两个像素，那直接使用前面面求位姿时提到的 Feature Alignment 光流法就可以比较准确地预测特征位置。如果极线段很长，那分两步走，第一步在极线段上间隔采样，对采样的多个特征块一一和参考帧中的特征块匹配，用 Zero mean Sum of Squared Differences 方法对各采样特征块评分，哪一个特征块得分最高，说明它和参考帧中的特征块最匹配。第二步就是在这个得分最高点附近使用 Feature Alignment 得到次像素精度的特征点位置。像素点位置确定了，就可以三角化计算深度了。 </p>
+<p><img alt="Depth Uncertainty" src="../image/depth_uncertainty.png" /></p>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1112,7 +1145,13 @@ MathJax.Hub.Config({
 <p>S. Baker and I. Matthews, “<a href="https://www.cs.cmu.edu/afs/cs/academic/class/15385-s12/www/lec_slides/Baker&amp;Matthews.pdf">Lucas-Kanade 20 Years On: A Unifying Framework</a>: Part 1,” International Journal of Computer Vision, vol. 56, no. 3, pp. 221–255, 2002.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
-<p><a href="https://blog.csdn.net/heyijia0327/article/details/51083398">白巧克力亦唯心博客</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p><a href="https://blog.csdn.net/heyijia0327/article/details/51083398">svo： semi-direct visual odometry 论文解析</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://blog.csdn.net/heyijia0327/article/details/50774104">Monocular slam 中的理论基础 (2) </a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://files.ifi.uzh.ch/rpg/website/rpg.ifi.uzh.ch/html/docs/ICRA14_Pizzoli.pdf">REMODE: Probabilistic, Monocular Dense Reconstruction in Real Time</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
