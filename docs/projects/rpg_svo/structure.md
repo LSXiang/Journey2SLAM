@@ -159,15 +159,21 @@ $$
 
 ### 地图构建
 
+地图模型通常用来存储三维空间点，在 SVO 中每一个 Key frame 通过深度估计能够得到特征点的三维坐标，这些收敛的三维坐标点通过特征点在 Key Frame 中进行保存。当新帧被选为关键帧时，它会被立即插入地图。同时，又在这个新的关键帧上检测新的特征点作为深度估计的 seed ，这些 seed 会不断融合之后的图像进行深度估计。但是，如果有些 seed 点 3D 点位置通过深度估计已经收敛了，此时 map 用一个 point_candidates 来保存这些尚未插入地图中的点。所以 SVO 地图上保存的是 Key Frame 以及还未插入地图关键帧中的已经收敛的 3D 点坐标（这些 3D 点坐标是在世界坐标系下的）。
+
+#### 深度计算
+
+SVO 使用三角化估计特征点深度，这是多视角几何的基础内容，可以参考《Multiple View Geometry in Computer Vision》，或者白巧克力亦唯心的博客[^4] （or #TODO）。SVO 中的每个新特征点对应一个深度估计，其初值为该帧的平均深度，并被赋予极大的不确定性。通过两帧图像的匹配点就可以计算出这一点的深度值，如果有多幅图像，那就能计算出这一点的多个深度值。这就像对同一个状态变量我们进行了多次测量，因此，可以用贝叶斯估计来对多个测量值进行融合，使得估计的不确定性缩小。如下图所示：
+
+![Depth Estimation](image/depth_estimation.png)
+
+一开始深度估计的不确定性较大 ($\color{cyan}{\mathbf{\text{青色部分}}}$) ，通过三角化得到一个深度估计值以后，能够极大的缩小这个不确定性 ($\color{teal}{\mathbf{\text{墨绿部分}}}$) 。 
+
+SVO 关于三角化计算深度的过程，主要是极线搜索确定匹配点。我们知道参考帧 $\mathrm{I}_r$ 中的一个特征的图像位置，假设它的深度值在 $[\mathrm{d}_{min},\mathrm{d}_{max}]$ 之间，那么根据这两个端点深度值，利用对极几何就能够计算出特征点在当前帧 $\mathrm{I}_k$ 中的大概位置 (位于极线段附近，即上图 $\mathrm{I}_k$ 中 $\color{cyan}{\mathbf{\text{青色线段}}}$)  。确定了特征出现的极线段位置，就可以进行特征搜索匹配。如果极线段很短，小于两个像素，那直接使用前面面求位姿时提到的 Feature Alignment 光流法就可以比较准确地预测特征位置。如果极线段很长，那分两步走，第一步在极线段上间隔采样，对采样的多个特征块一一和参考帧中的特征块匹配，用 Zero mean Sum of Squared Differences 方法对各采样特征块评分，哪一个特征块得分最高，说明它和参考帧中的特征块最匹配。第二步就是在这个得分最高点附近使用 Feature Alignment 得到次像素精度的特征点位置。像素点位置确定了，就可以三角化计算深度了。 
 
 
 
-
-
-
-
-
-
+![Depth Uncertainty](image/depth_uncertainty.png)
 
 
 
@@ -214,7 +220,11 @@ $$
 
 [^2]: S. Baker and I. Matthews, “[Lucas-Kanade 20 Years On: A Unifying Framework](https://www.cs.cmu.edu/afs/cs/academic/class/15385-s12/www/lec_slides/Baker&Matthews.pdf): Part 1,” International Journal of Computer Vision, vol. 56, no. 3, pp. 221–255, 2002.
 
-[^3]: [白巧克力亦唯心博客](https://blog.csdn.net/heyijia0327/article/details/51083398) 
+[^3]: [svo： semi-direct visual odometry 论文解析](https://blog.csdn.net/heyijia0327/article/details/51083398) 
+
+[^4]: [Monocular slam 中的理论基础 (2) ](https://blog.csdn.net/heyijia0327/article/details/50774104) 
+
+[^5]: [REMODE: Probabilistic, Monocular Dense Reconstruction in Real Time](https://files.ifi.uzh.ch/rpg/website/rpg.ifi.uzh.ch/html/docs/ICRA14_Pizzoli.pdf) 
 
 
 
