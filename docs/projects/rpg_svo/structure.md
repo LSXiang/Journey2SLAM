@@ -61,7 +61,7 @@ $$
 \end{align}
     $$
 
-    当然在优化过程中，亮度残差 $\delta I$ 的计算方式不止这一种形式：有**前向 (forwards)** ，**逆向 (inverse)** 之分，并且还有**叠加式 (additive)** 和**构造式 (compositional)** 之分。这方面可以读读光流法方面的论文，Baker 的大作[《Lucas-Kanade 20 Years On: A Unifying Framework》](https://www.cs.cmu.edu/afs/cs/academic/class/15385-s12/www/lec_slides/Baker&Matthews.pdf)。选择的方式不同，在迭代优化过程中计算雅克比矩阵的时候就有差别，一般为了减小计算量，都采用的是 **inverse compositional algorithm** 。 (#TODO 抑或是参考计算机视觉基础-光流篇) 
+    当然在优化过程中，亮度残差 $\delta I$ 的计算方式不止这一种形式：有**前向 (forwards)** ，**逆向 (inverse)** 之分，并且还有**叠加式 (additive)** 和**构造式 (compositional)** 之分。这方面可以读读光流法方面的论文 [^2]。选择的方式不同，在迭代优化过程中计算雅克比矩阵的时候就有差别，一般为了减小计算量，都采用的是 **inverse compositional algorithm** 。 (#TODO 抑或是参考计算机视觉基础-光流篇) 
 
 - **迭代优化更新位姿：**按理来说极短时间内的相邻两帧拍到空间中同一个点的亮度值应该没啥变化。但由于位姿是假设的一个值，所以重投影的点不准确，导致投影前后的亮度值是不相等的。不断优化位姿使得这些以特征点为中心的 $4 \times 4$ 像素块残差最小，就能得到优化后的位姿 $\mathrm{T}_{k, k-1}$ 。
 
@@ -113,7 +113,7 @@ $$
 \end{align}
 $$
 
-这中间最复杂的部分是位姿矩阵对李代数的求导。（#TODO）
+其中文章中导数的求解，请参考高博的[直接法](http://www.cnblogs.com/gaoxiang12/p/5689927.html)。（#TODO）
 
 通过将式 (8) 代入式 (7) 并通过将雅克比堆叠成矩阵 $\mathbf{J}$ ，我们得到正规方程：
 
@@ -123,10 +123,41 @@ $$
 \end{align}
 $$
 
-注意，通过使用 inverse compositional 构造亮度残差方法，雅可比可以预先计算，因为它在所有迭代中保持不变。
+注意，通过使用 inverse compositional 构造亮度残差方法，雅可比可以预先计算，因为它在所有迭代中保持不变，因此降低了计算量。
+
+以上通过当前帧与相邻前一帧反投影解算出了相对位姿 $\mathrm{T}_{k, k-1}$ ，由于三维点的位置不准确，这种 frame-to-frame 估计位姿的方式不可避免的会带来累计误差从而导致漂移，因而通过以上步骤求出的相机的姿态需要进一步优化。由此，进行一下步骤：Relaxation Through Feature Alignment 。
+
+#### 通过特征点对齐优化匹配关系
+
+为了减少偏移，相机的姿态应该通过已经建立好的地图模型，来进一步约束当前帧的位姿。利用初始的位姿 $\mathrm{T}_{k, k-1}$ 关系，可以大体的对当前图像中所有可见三维点的特征位置进行初步猜测，将能够观察到地图中已经收敛的特征点投影到当前帧中。但是由于估计位姿存在偏差，导致将地图中特征点重投影到 $\mathrm{I}_k$ 中的位置并不和真正的吻合，也就是还会有残差的存在。如下图所示：（图中 $\mathrm{I}_k$ 帧图像中的灰色特征块为真实位置，蓝色特征块为预测位置）
+
+![Feature Alignment](image/feature_alignment.png)
+
+对于每个地图中重投影的特征点，识别出观察角度最小关键帧 $\mathrm{I}_r$ 上的对应点 $\mathbf{u}_i$ 。由于 3D 点和相机姿态估计不准确，所有利用**特征对齐 (Feature Alignment)** 通过最小化当前图像 $\mathrm{I}_k$ 中 patch (蓝色方块) 与关键帧 $\mathrm{I}_r$ 中的参考 patch 的光度差值来{==优化当前图像中每个 patch 的 2D 位置==} $\color{red}{\mathbf{u'}_i}$ ：
+
+$$
+\mathbf{u'}_i = \arg \min\limits_{\mathbf{u'}_i} \frac{1}{2} \| \mathrm{I}_k(\mathbf{u'}_i) - \mathrm{A}_i \cdot \mathrm{I}_r{\mathbf{u}_i} \|^2, \quad \forall i.
+$$
+
+这种对齐使用 inverse compositional  Lucas-Kanade 算法来求解[^2]。并且注意，光度误差的前一部分是当前图像中 $\mathrm{I}_k$ 的亮度值，后一部分不是 $\mathrm{I}_{k-1}$ 而是 $\mathrm{I}_r$ 。由于是特征块对比，并且 3D 点所在的关键帧可能离当前帧比较远，所以光度误差和前面不一样的是还加了一个仿射变换 $\mathrm{A}_i$ ，需要对关键帧中的特征块进行旋转拉伸之类仿射变换后才能和当前帧的特征块对比。 这步不考虑极线约束，因为此时的位姿还是不准确的。这时候的迭代量计算方程和之前是一样的，只不过雅克比矩阵变了，这里的雅克比矩阵很好计算 $\mathbf{J} = \frac{\partial \mathrm{I}(\mathbf{u}_i)}{\partial \mathbf{u}_i}$ ，即为图像横纵两个方向的梯度。
+
+通过这一步我们能够得到优化后的特征点预测位置，它比之前通过相机位姿预测的位置更准，所以反过来，我们利用这个优化后的特征位置，能够进一步去优化相机位姿以及特征点的三维坐标。所以位姿估计的最后一步就是 Pose and Structure Refinement 。
+
+#### BA 优化
+
+利用上一步建立的 $(\mathbf{p_i \, , \, \mathbf{u}_i})$ 的对应关系，再次优化世界坐标系下的位姿 $\mathrm{T}_{k, w}$ ，以最小化重投影残差：
+
+$$
+\begin{align}
+\mathrm{T}_{k,w} = \arg \min\limits_{\mathrm{T}_{k,w}} \frac{1}{2} \sum_i \| \mathbf{u}_i - \pi (\mathrm{T}_{k,w} \; {}_w\mathbf{p}_i) \|^2
+\end{align}
+$$
+
+上式中{==误差变成了像素重投影以后位置的差异 (不是像素值的差异)==} ，优化变量还是相机位姿，雅克比矩阵大小为 2×6 (坐标 $\mathbf{u}_i$ 分别对李代数变量 $\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)$ 求导) 。这一步叫做 **motion-only Bundler Adjustment** 。同时根据这个误差定义，我们还能够对获取的三维点的坐标 $[x, y, z]^\top$ 进行优化，还是上面的误差像素位置误差形式，只不过优化变量变成三维点的坐标，这一步叫 **Structure -only Bundler Adjustment** ，优化过程中雅克比矩阵大小为 2×3 (坐标 $\mathbf{u}_i$ 分别对三维点的坐标 $[x, y, z]^\top$ 变量求导) 。
 
 
 
+### 地图构建
 
 
 
@@ -179,8 +210,11 @@ $$
 
 ## 参考
 
-1. [SVO: Fast Semi-Direct Monocular Visual Odometry](http://rpg.ifi.uzh.ch/docs/ICRA14_Forster.pdf) 
-2. [白巧克力亦唯心博客](https://blog.csdn.net/heyijia0327/article/details/51083398) 
+[^1]: Forster, Christian, Matia Pizzoli, and Davide Scaramuzza. "[SVO: Fast semi-direct monocular visual odometry.](http://rpg.ifi.uzh.ch/docs/ICRA14_Forster.pdf)" 2014 IEEE International Conference on Robotics and Automation (ICRA). IEEE, 2014.
+
+[^2]: S. Baker and I. Matthews, “[Lucas-Kanade 20 Years On: A Unifying Framework](https://www.cs.cmu.edu/afs/cs/academic/class/15385-s12/www/lec_slides/Baker&Matthews.pdf): Part 1,” International Journal of Computer Vision, vol. 56, no. 3, pp. 221–255, 2002.
+
+[^3]: [白巧克力亦唯心博客](https://blog.csdn.net/heyijia0327/article/details/51083398) 
 
 
 
