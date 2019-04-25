@@ -179,7 +179,7 @@ SVO 关于三角化计算深度的过程，主要是极线搜索确定匹配点�
 
 ![Depth Uncertainty](image/depth_uncertainty.png)
 
-它是通过假设特征点定位差一个像素偏差，来计算深度估计的不确定性。下面给出 SVO 代码算法推导，也可见参考5/6 [^5] [^6] 。
+它是通过假设特征点定位差一个像素偏差，来计算深度估计的不确定性。下面给出 SVO 代码算法推导，也可见参考 5[^5]、6[^6] 。
 
 已知量：$C_r$ 坐标系下的单位长度特征 $\mathbf{f}$ ，位移量 $\overrightarrow{C_r C_k} : \mathbf{t}$  ，特征 $\mathbf{f}$  的计算深度 $z$ ，以及一个像素偏差的误差角度 $\angle{err\_angle} = \arctan (1 /(2.0 * focal\_length))*2.0$ ，则：
 
@@ -197,7 +197,8 @@ $$
 
 有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 [^7]) ，代码中有关该模型算法的递推更新过程可以看参考 7 [^7] 中的 supplementary material 。
 
-下面结合 G. Vogiatzis 论文中的 Supplementary material 以及引用参考8/9 [^8][^9] ，粗劣的整理出证明推导。高斯与均匀混合分布给出一个好的测量值是在真实深度 $Z$ 为均值的正态分布附近，而一个离群值的测量值是在范围为 $[Z_{min}, Z_{max}]$ 的均匀分布的区间内，概率模型为：
+下面结合 G. Vogiatzis 论文中的 Supplementary material 以及引用参考 8[^8]、9[^9] ，粗劣的整理出证明推导。高斯与均匀混合分布给出一个好的测量值是在真实深度 $Z$ 为均值的正态分布附近，而一个离群值的测量值是在范围为 $[Z_{min}, Z_{max}]$ 的均匀分布的区间内，概率模型为：
+
 $$
 \mathrm{p}(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n | Z_{min}, Z_{max})
 $$
@@ -230,7 +231,7 @@ $$
 
 [^2]: S. Baker and I. Matthews, “[Lucas-Kanade 20 Years On: A Unifying Framework](https://www.cs.cmu.edu/afs/cs/academic/class/15385-s12/www/lec_slides/Baker&Matthews.pdf): Part 1,” International Journal of Computer Vision, vol. 56, no. 3, pp. 221–255, 2002.
 
-[^3]: [svo： semi-direct visual odometry 论文解析](https://blog.csdn.net/heyijia0327/article/details/51083398) 
+[^3]: [白巧克力亦唯心 - svo : semi-direct visual odometry 论文解析](https://blog.csdn.net/heyijia0327/article/details/51083398) 
 
 [^4]: [Monocular slam 中的理论基础 (2) ](https://blog.csdn.net/heyijia0327/article/details/50774104) 
 
@@ -239,8 +240,8 @@ $$
 [^6]: 《视觉 SLAM 十四讲》高翔等著：13.2.3 小节
 [^7]:  [G. Vogiatzis](http://www.george-vogiatzis.org/) and C. Hern´ andez, “[Video-based, Real-Time Multi View Stereo](http://www.george-vogiatzis.org/publications/ivcj2010.pdf),” Image and Vision Computing, vol. 29, no. 7, 2011.  [Supplementary matterial](http://www.george-vogiatzis.org/publications/ivcj2010supp.pdf) 
 
-
-
+[^8]: [路游侠 - SVO 解析](http://www.cnblogs.com/luyb/p/5773691.html) 
+[^9]: [可爱的小蚂蚁 - svo 的 Supplementary material 推导过程](https://blog.csdn.net/u013004597/article/details/52069741)
 
 
 
