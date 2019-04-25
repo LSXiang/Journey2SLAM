@@ -663,8 +663,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#深度计算" title="深度计算" class="md-nav__link">
-    深度计算
+  <a href="#深度估计" title="深度估计" class="md-nav__link">
+    深度估计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#深度值的不确定性计算" title="深度值的不确定性计算" class="md-nav__link">
+    深度值的不确定性计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#深度值更新" title="深度值更新" class="md-nav__link">
+    深度值更新
   </a>
   
 </li>
@@ -867,8 +881,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#深度计算" title="深度计算" class="md-nav__link">
-    深度计算
+  <a href="#深度估计" title="深度估计" class="md-nav__link">
+    深度估计
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#深度值的不确定性计算" title="深度值的不确定性计算" class="md-nav__link">
+    深度值的不确定性计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#深度值更新" title="深度值更新" class="md-nav__link">
+    深度值更新
   </a>
   
 </li>
@@ -1108,12 +1136,44 @@
 <p>上式中<mark class="critic">误差变成了像素重投影以后位置的差异 (不是像素值的差异)</mark> ，优化变量还是相机位姿，雅克比矩阵大小为 2×6 (坐标 <span><span class="MathJax_Preview">\mathbf{u}_i</span><script type="math/tex">\mathbf{u}_i</script></span> 分别对李代数变量 <span><span class="MathJax_Preview">\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)</span><script type="math/tex">\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)</script></span> 求导) 。这一步叫做 <strong>motion-only Bundler Adjustment</strong> 。同时根据这个误差定义，我们还能够对获取的三维点的坐标 <span><span class="MathJax_Preview">[x, y, z]^\top</span><script type="math/tex">[x, y, z]^\top</script></span> 进行优化，还是上面的误差像素位置误差形式，只不过优化变量变成三维点的坐标，这一步叫 <strong>Structure -only Bundler Adjustment</strong> ，优化过程中雅克比矩阵大小为 2×3 (坐标 <span><span class="MathJax_Preview">\mathbf{u}_i</span><script type="math/tex">\mathbf{u}_i</script></span> 分别对三维点的坐标 <span><span class="MathJax_Preview">[x, y, z]^\top</span><script type="math/tex">[x, y, z]^\top</script></span> 变量求导) 。</p>
 <h3 id="地图构建">地图构建<a class="headerlink" href="#地图构建" title="Permanent link"></a></h3>
 <p>地图模型通常用来存储三维空间点，在 SVO 中每一个 Key frame 通过深度估计能够得到特征点的三维坐标，这些收敛的三维坐标点通过特征点在 Key Frame 中进行保存。当新帧被选为关键帧时，它会被立即插入地图。同时，又在这个新的关键帧上检测新的特征点作为深度估计的 seed ，这些 seed 会不断融合之后的图像进行深度估计。但是，如果有些 seed 点 3D 点位置通过深度估计已经收敛了，此时 map 用一个 point_candidates 来保存这些尚未插入地图中的点。所以 SVO 地图上保存的是 Key Frame 以及还未插入地图关键帧中的已经收敛的 3D 点坐标（这些 3D 点坐标是在世界坐标系下的）。</p>
-<h4 id="深度计算">深度计算<a class="headerlink" href="#深度计算" title="Permanent link"></a></h4>
-<p>SVO 使用三角化估计特征点深度，这是多视角几何的基础内容，可以参考《Multiple View Geometry in Computer Vision》，或者白巧克力亦唯心的博客<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> （or #TODO）。SVO 中的每个新特征点对应一个深度估计，其初值为该帧的平均深度，并被赋予极大的不确定性。通过两帧图像的匹配点就可以计算出这一点的深度值，如果有多幅图像，那就能计算出这一点的多个深度值。这就像对同一个状态变量我们进行了多次测量，因此，可以用贝叶斯估计来对多个测量值进行融合，使得估计的不确定性缩小。如下图所示：</p>
+<h4 id="深度估计">深度估计<a class="headerlink" href="#深度估计" title="Permanent link"></a></h4>
+<p>SVO 中的每个新特征点对应一个深度估计，其初值为该帧的平均深度，并被赋予极大的不确定性。通过两帧图像的匹配点就可以计算出这一点的深度值，如果有多幅图像，那就能计算出这一点的多个深度值。这就像对同一个状态变量我们进行了多次测量，因此，可以用贝叶斯估计来对多个测量值进行融合，使得估计的不确定性缩小。如下图所示：</p>
 <p><img alt="Depth Estimation" src="../image/depth_estimation.png" /></p>
 <p>一开始深度估计的不确定性较大 (<span><span class="MathJax_Preview">\color{cyan}{\mathbf{\text{青色部分}}}</span><script type="math/tex">\color{cyan}{\mathbf{\text{青色部分}}}</script></span>) ，通过三角化得到一个深度估计值以后，能够极大的缩小这个不确定性 (<span><span class="MathJax_Preview">\color{teal}{\mathbf{\text{墨绿部分}}}</span><script type="math/tex">\color{teal}{\mathbf{\text{墨绿部分}}}</script></span>) 。 </p>
-<p>SVO 关于三角化计算深度的过程，主要是极线搜索确定匹配点。我们知道参考帧 <span><span class="MathJax_Preview">\mathrm{I}_r</span><script type="math/tex">\mathrm{I}_r</script></span> 中的一个特征的图像位置，假设它的深度值在 <span><span class="MathJax_Preview">[\mathrm{d}_{min},\mathrm{d}_{max}]</span><script type="math/tex">[\mathrm{d}_{min},\mathrm{d}_{max}]</script></span> 之间，那么根据这两个端点深度值，利用对极几何就能够计算出特征点在当前帧 <span><span class="MathJax_Preview">\mathrm{I}_k</span><script type="math/tex">\mathrm{I}_k</script></span> 中的大概位置 (位于极线段附近，即上图 <span><span class="MathJax_Preview">\mathrm{I}_k</span><script type="math/tex">\mathrm{I}_k</script></span> 中 <span><span class="MathJax_Preview">\color{cyan}{\mathbf{\text{青色线段}}}</span><script type="math/tex">\color{cyan}{\mathbf{\text{青色线段}}}</script></span>)  。确定了特征出现的极线段位置，就可以进行特征搜索匹配。如果极线段很短，小于两个像素，那直接使用前面面求位姿时提到的 Feature Alignment 光流法就可以比较准确地预测特征位置。如果极线段很长，那分两步走，第一步在极线段上间隔采样，对采样的多个特征块一一和参考帧中的特征块匹配，用 Zero mean Sum of Squared Differences 方法对各采样特征块评分，哪一个特征块得分最高，说明它和参考帧中的特征块最匹配。第二步就是在这个得分最高点附近使用 Feature Alignment 得到次像素精度的特征点位置。像素点位置确定了，就可以三角化计算深度了。 </p>
+<p>SVO 关于三角化计算深度的过程，主要是极线搜索确定匹配点。我们知道参考帧 <span><span class="MathJax_Preview">\mathrm{I}_r</span><script type="math/tex">\mathrm{I}_r</script></span> 中的一个特征的图像位置，假设它的深度值在 <span><span class="MathJax_Preview">[\mathrm{d}_{min},\mathrm{d}_{max}]</span><script type="math/tex">[\mathrm{d}_{min},\mathrm{d}_{max}]</script></span> 之间，那么根据这两个端点深度值，利用对极几何就能够计算出特征点在当前帧 <span><span class="MathJax_Preview">\mathrm{I}_k</span><script type="math/tex">\mathrm{I}_k</script></span> 中的大概位置 (位于极线段附近，即上图 <span><span class="MathJax_Preview">\mathrm{I}_k</span><script type="math/tex">\mathrm{I}_k</script></span> 中 <span><span class="MathJax_Preview">\color{cyan}{\mathbf{\text{青色线段}}}</span><script type="math/tex">\color{cyan}{\mathbf{\text{青色线段}}}</script></span>)  。确定了特征出现的极线段位置，就可以进行特征搜索匹配。如果极线段很短，小于两个像素，那直接使用前面面求位姿时提到的 Feature Alignment 光流法就可以比较准确地预测特征位置。如果极线段很长，那分两步走，第一步在极线段上间隔采样，对采样的多个特征块一一和参考帧中的特征块匹配，用 Zero mean Sum of Squared Differences 方法对各采样特征块评分，哪一个特征块得分最高，说明它和参考帧中的特征块最匹配。第二步就是在这个得分最高点附近使用 Feature Alignment 得到次像素精度的特征点位置。</p>
+<p>像素点位置确定了，就可以三角化计算深度了。 SVO 使用三角化计算特征点深度，使用的是中点法，关于这个三角化代码算法的推导见 <a href="https://github.com/uzh-rpg/rpg_svo/issues/62">Github Issue</a> 。这是多视角几何的基础内容，可以参考《Multiple View Geometry in Computer Vision》，或者白巧克力亦唯心的博客<sup id="fnref:4"><a class="footnote-ref" href="#fn:4">4</a></sup> （or #TODO）。</p>
+<h4 id="深度值的不确定性计算">深度值的不确定性计算<a class="headerlink" href="#深度值的不确定性计算" title="Permanent link"></a></h4>
+<p>在三角化计算深度的时候，还有一个很重要的量需要计算，那就是这个深度值的不确定度。它在后续的利用贝叶斯概率模型更新深度的过程中被用来确定更新权重 (就像卡尔曼滤波器中的协方差矩阵扮演的角色) 。SVO 中对特征点定位不准确导致的三角化深度误差分析如下图所示：</p>
 <p><img alt="Depth Uncertainty" src="../image/depth_uncertainty.png" /></p>
+<p>它是通过假设特征点定位差一个像素偏差，来计算深度估计的不确定性。下面给出 SVO 代码算法推导，也可见参考&#8538; <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">5</a></sup> <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">6</a></sup> 。</p>
+<p>已知量：<span><span class="MathJax_Preview">C_r</span><script type="math/tex">C_r</script></span> 坐标系下的单位长度特征 <span><span class="MathJax_Preview">\mathbf{f}</span><script type="math/tex">\mathbf{f}</script></span> ，位移量 <span><span class="MathJax_Preview">\overrightarrow{C_r C_k} : \mathbf{t}</span><script type="math/tex">\overrightarrow{C_r C_k} : \mathbf{t}</script></span>  ，特征 <span><span class="MathJax_Preview">\mathbf{f}</span><script type="math/tex">\mathbf{f}</script></span>  的计算深度 <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> ，以及一个像素偏差的误差角度 <span><span class="MathJax_Preview">\angle{err\_angle} = \arctan (1 /(2.0 * focal\_length))*2.0</span><script type="math/tex">\angle{err\_angle} = \arctan (1 /(2.0 * focal\_length))*2.0</script></span> ，则：</p>
+<div>
+<div class="MathJax_Preview">
+向量 \: \overrightarrow{C_k \: {}_r\mathrm{p}} : \mathbf{a} = \mathbf{f} \cdot z - \mathbf{t} \\
+\alpha = \arccos \big(\mathbf{f} \cdot \mathbf{t} \div ( \|\mathbf{f}\| \times \|\mathbf{t}\|) \big) \\
+\beta = \arccos \big(\mathbf{a} \cdot (-\mathbf{t}) \div ( \|\mathbf{a}\| \times \|\mathbf{t}\|) \big) \\
+\beta^+ = \beta + \angle{err\_angle} \\
+\gamma^+ =  \pi - \alpha - \beta^+ \\
+\frac{z^+}{\sin(\beta^+)} = \frac{\|\mathbf{t}\|}{\sin(\gamma^+)} \quad (正弦定理) \\
+\tau = z^+ - z
+</div>
+<script type="math/tex; mode=display">
+向量 \: \overrightarrow{C_k \: {}_r\mathrm{p}} : \mathbf{a} = \mathbf{f} \cdot z - \mathbf{t} \\
+\alpha = \arccos \big(\mathbf{f} \cdot \mathbf{t} \div ( \|\mathbf{f}\| \times \|\mathbf{t}\|) \big) \\
+\beta = \arccos \big(\mathbf{a} \cdot (-\mathbf{t}) \div ( \|\mathbf{a}\| \times \|\mathbf{t}\|) \big) \\
+\beta^+ = \beta + \angle{err\_angle} \\
+\gamma^+ =  \pi - \alpha - \beta^+ \\
+\frac{z^+}{\sin(\beta^+)} = \frac{\|\mathbf{t}\|}{\sin(\gamma^+)} \quad (正弦定理) \\
+\tau = z^+ - z
+</script>
+</div>
+<h4 id="深度值更新">深度值更新<a class="headerlink" href="#深度值更新" title="Permanent link"></a></h4>
+<p>有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 <sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>) ，代码中有关该模型算法的递推更新过程可以看参考 7 <sup id="fnref2:7"><a class="footnote-ref" href="#fn:7">7</a></sup> 中的 supplementary material 。</p>
+<p>下面结合 G. Vogiatzis 论文中的 Supplementary material 以及引用参考8/9 [<sup>8][</sup>9] ，粗劣的整理出证明推导。高斯与均匀混合分布给出一个好的测量值是在真实深度 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 为均值的正态分布附近，而一个离群值的测量值是在范围为 <span><span class="MathJax_Preview">[Z_{min}, Z_{max}]</span><script type="math/tex">[Z_{min}, Z_{max}]</script></span> 的均匀分布的区间内，概率模型为：<br />
+$$<br />
+mathrm{p}(x_n | Z, pi) = pi mathcal{N}(x_n | Z, tau_n^2) + (1-pi) mathcal{U}(x_n | Z_{min}, Z_{max})<br />
+$$</p>
+<p>注意，这里的 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 与上文中的不是同一个，其中这里 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 是为有效测量 (inlier) 的概率，<span><span class="MathJax_Preview">\tau</span><script type="math/tex">\tau</script></span> 是上一步计算的深度估计值的不确定量。</p>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1152,6 +1212,12 @@ MathJax.Hub.Config({
 </li>
 <li id="fn:5">
 <p><a href="https://files.ifi.uzh.ch/rpg/website/rpg.ifi.uzh.ch/html/docs/ICRA14_Pizzoli.pdf">REMODE: Probabilistic, Monocular Dense Reconstruction in Real Time</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>《视觉 SLAM 十四讲》高翔等著：13.2.3 小节&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p><a href="http://www.george-vogiatzis.org/">G. Vogiatzis</a> and C. Hern´ andez, “<a href="http://www.george-vogiatzis.org/publications/ivcj2010.pdf">Video-based, Real-Time Multi View Stereo</a>,” Image and Vision Computing, vol. 29, no. 7, 2011.  <a href="http://www.george-vogiatzis.org/publications/ivcj2010supp.pdf">Supplementary matterial</a>&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
