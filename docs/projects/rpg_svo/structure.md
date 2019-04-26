@@ -36,9 +36,7 @@ SVO 利用直接方法对相机的相对运动和特征对应进行了初步的�
 这个过程的数学表达为求一个关于刚体运动最大似然估计 $T_{k, k-1}$ ，即可以通过求在两个连续的相机姿态之间亮度残差的最小化负对数似然函数来得到：
 
 $$
-\begin{align}
-\mathrm{T}_{k,k-1} = \mathrm{arg\, \mathop{min}\limits_T} \iint_{\bar{\mathcal{R}}} \mathrm{\rho} [\delta I(\mathrm{T}, \mathbf{u})] \mathrm{d} \mathbf{u}
-\end{align}
+\mathrm{T}_{k,k-1} = \mathrm{arg\, \mathop{min}\limits_T} \iint_{\bar{\mathcal{R}}} \mathrm{\rho} [\delta I(\mathrm{T}, \mathbf{u})] \mathrm{d} \mathbf{u} \tag{1.1}
 $$
 
 因此这个过程可以分解为：
@@ -48,19 +46,15 @@ $$
 - **重投影：**亮度残差 $\delta I$ 由观测同一个三维空间点的像素间的光度差确定。准备工作中已知了 $I_{k-1}$ 中的某个特征在图像平面中位置 $\mathbf{u}$ 以及它们的深度 $\mathrm{d}_\mathbf{u}$ ，能够将该特征投影到三维空间 $\mathrm{p}_{k-1}$ 。由于该三维空间的坐标系是定义在 $I_{k-1}$ 相机坐标系下的，因此需要通过位姿变换 $T_{k, k-1}$ 将它投影到当前帧 $I_{k}$ 中，得到该点当前帧坐标系中的三维坐标 $\mathrm{p}_{k}$ 。最后通过相机内参，投影到 $I_{k}$ 的图像平面得到坐标 $\mathbf{u}'$ ，完成重投影。亮度残差 $\delta I$ 定义为：
 
     $$
-\begin{align}
-\delta I (\mathrm{T}, \mathbf{u}) = I_k \Big( \underbrace{ \pi \big( \underbrace{ \mathrm{T} \cdot \underbrace{\pi^{-1}(\mathbf{u}, \mathrm{d}_\mathbf{u}) \big)}_{1}}_2 }_3 \Big) - I_{k-1}(\mathbf{u}) \quad \forall \mathbf{u} \in \bar{\mathcal{R}}
-\end{align}
+\delta I (\mathrm{T}, \mathbf{u}) = I_k \Big( \underbrace{ \pi \big( \underbrace{ \mathrm{T} \cdot \underbrace{\pi^{-1}(\mathbf{u}, \mathrm{d}_\mathbf{u}) \big)}_{1}}_2 }_3 \Big) - I_{k-1}(\mathbf{u}) \quad \forall \mathbf{u} \in \bar{\mathcal{R}} \tag{1.2}
     $$
 
     公式中第 1 步为根据前一帧图像特征位置和深度逆投影到三维空间，第 2 步将三维坐标点旋转平移到当前帧坐标系下，第 3 步再将三维坐标点投影回当前帧图像坐标。其中上一帧 $I_{k-1}$ 和当前帧  $I_{k}$ 能共视到的特征集合为 $\bar{\mathcal{R}}$ ，即
     
     $$
-\begin{align}
-\bar{\mathcal{R}} = \{ \mathbf{u} | \mathbf{u} \in \mathcal{R}_{k-1} \wedge \pi (\mathrm{T} \cdot \pi^{-1}(\mathbf{u}, \mathrm{d}_\mathbf{u})) \in \Omega_k \}
-\end{align}
+\bar{\mathcal{R}} = \{ \mathbf{u} | \mathbf{u} \in \mathcal{R}_{k-1} \wedge \pi (\mathrm{T} \cdot \pi^{-1}(\mathbf{u}, \mathrm{d}_\mathbf{u})) \in \Omega_k \} \tag{1.3}
     $$
-
+    
     当然在优化过程中，亮度残差 $\delta I$ 的计算方式不止这一种形式：有**前向 (forwards)** ，**逆向 (inverse)** 之分，并且还有**叠加式 (additive)** 和**构造式 (compositional)** 之分。这方面可以读读光流法方面的论文 [^2]。选择的方式不同，在迭代优化过程中计算雅克比矩阵的时候就有差别，一般为了减小计算量，都采用的是 **inverse compositional algorithm** 。 (#TODO 抑或是参考计算机视觉基础-光流篇) 
 
 - **迭代优化更新位姿：**按理来说极短时间内的相邻两帧拍到空间中同一个点的亮度值应该没啥变化。但由于位姿是假设的一个值，所以重投影的点不准确，导致投影前后的亮度值是不相等的。不断优化位姿使得这些以特征点为中心的 $4 \times 4$ 像素块残差最小，就能得到优化后的位姿 $\mathrm{T}_{k, k-1}$ 。
@@ -68,59 +62,45 @@ $$
 将上述过程公式化如下：为简便起见，我们假设亮度残差服从单位方差正态分布，那么负对数最小化似然估计等同于最小二乘问题，即 $\rho[\cdot] \hat{=} \frac{1}{2} \|\cdot \| ^2$ 。因此位姿 $T_{k, k-1}$ 的最小化残差**损失函数 (Cost Function)** 为：
 
 $$
-\begin{align}
-\mathrm{T}_{k,k-1} = \arg  \min_\limits{\mathrm{T}_{k,k-1}} \frac{1}{2} \sum_{i \in \bar{\mathcal{R}}} \| \delta \mathrm{I}(\mathrm{T}_{k,k-1}, \mathbf{u}_i \|^2
-\end{align}
+\mathrm{T}_{k,k-1} = \arg  \min_\limits{\mathrm{T}_{k,k-1}} \frac{1}{2} \sum_{i \in \bar{\mathcal{R}}} \| \delta \mathrm{I}(\mathrm{T}_{k,k-1}, \mathbf{u}_i \|^2 \tag{1.4}
 $$
 
 上面的非线性最小化二乘问题，可以用高斯牛顿迭代法求解。设位姿变换的估计值为 $\hat{T}_{k, k-1}$ 、通过**旋转坐标 (twist coordinates)** $\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)$ 参数化估计的增量更新 $\mathrm{T}(\xi)$ 。依据图像 $I_{k-1}$ 的计算更新 $\mathrm{T}(\xi)$ ，通过 **inverse compositional** 构造亮度残差：
 
 $$
-\begin{align}
-\delta \mathrm{I}(\xi, \mathbf{u}_i) = \mathrm{I}_k \big(\pi(\hat{\mathrm{T}}_{k,k-1} \cdot \mathbf{p}_i) \big) - \mathrm{I}_k \big(\pi(\mathrm{T}(\xi) \cdot \mathbf{p}_i) \big)\, , \quad \mathbf{p}_i = \pi^{-1}(\mathbf{u}_i, \mathrm{d}\mathbf{u}_i)
-\end{align}
+\delta \mathrm{I}(\xi, \mathbf{u}_i) = \mathrm{I}_k \big(\pi(\hat{\mathrm{T}}_{k,k-1} \cdot \mathbf{p}_i) \big) - \mathrm{I}_k \big(\pi(\mathrm{T}(\xi) \cdot \mathbf{p}_i) \big)\, , \, \mathbf{p}_i = \pi^{-1}(\mathbf{u}_i, \mathrm{d}\mathbf{u}_i) \tag{1.5}
 $$
 
 当前的估计值通过下式跟新，
 
 $$
-\begin{align}
-\hat{\mathrm{T}}_{k,k-1} \gets \hat{\mathrm{T}}_{k,k-1} \cdot {\mathrm{T}}(\xi)^{-1}
-\end{align}
+\hat{\mathrm{T}}_{k,k-1} \gets \hat{\mathrm{T}}_{k,k-1} \cdot {\mathrm{T}}(\xi)^{-1} \tag{1.6}
 $$
 
 为了找到最佳的更新量 $\mathrm{T}(\xi)$ ，我们可以通过求式 (4) 的偏导数并让它等于零：
 
 $$
-\begin{align}
-\sum_{i \in \bar{\mathcal{R}}} \nabla \delta \mathrm{I} (\xi, \mathbf{u}_i)^\top \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0
-\end{align}
+\sum_{i \in \bar{\mathcal{R}}} \nabla \delta \mathrm{I} (\xi, \mathbf{u}_i)^\top \delta \mathrm{I}(\xi, \mathbf{u}_i) = 0 \tag{1.7}
 $$
 
 为了求解上式，我们对当前状态进行线性化：
 
 $$
-\begin{align}
-\delta \mathrm{I} (\xi, \mathbf{u}_i) \approx \delta \mathrm{I}(0, \mathbf{u}_i) + \nabla \delta \mathrm{I}(0, \mathbf{u}_i) \cdot \xi
-\end{align}
+\delta \mathrm{I} (\xi, \mathbf{u}_i) \approx \delta \mathrm{I}(0, \mathbf{u}_i) + \nabla \delta \mathrm{I}(0, \mathbf{u}_i) \cdot \xi \tag{1.8}
 $$
 
 其中雅克比矩阵 $\mathbf{J}_i := \nabla \delta \mathrm{I}(0, \mathbf{u}_i)$ 为图像残差对李代数的求导，可以通过链式求导得到:
 
 $$
-\begin{align}
-\frac{\partial \delta \mathrm{I} (\xi, \mathbf{u}_i)}{\partial \xi} = \left. \frac{\partial \mathrm{I}_{k-1}(\mathrm{a})}{\partial \mathrm{a}} \right|_{\mathrm{a} = \mathbf{u}_i} \cdot \left. \frac{\partial \pi (\mathrm{b})}{\partial \mathrm{b}} \right|_{\mathrm{b}=\mathbf{p}_i} \cdot \left. \frac{\mathrm{T}(\xi)}{\partial \xi} \right|_{\xi=0} \cdot \mathbf{p}_i
-\end{align}
+\frac{\partial \delta \mathrm{I} (\xi, \mathbf{u}_i)}{\partial \xi} = \left. \frac{\partial \mathrm{I}_{k-1}(\mathrm{a})}{\partial \mathrm{a}} \right|_{\mathrm{a} = \mathbf{u}_i} \cdot \left. \frac{\partial \pi (\mathrm{b})}{\partial \mathrm{b}} \right|_{\mathrm{b}=\mathbf{p}_i} \cdot \left. \frac{\mathrm{T}(\xi)}{\partial \xi} \right|_{\xi=0} \cdot \mathbf{p}_i \tag{1.9}
 $$
 
 其中文章中导数的求解，请参考高博的[直接法](http://www.cnblogs.com/gaoxiang12/p/5689927.html)。（#TODO）
 
-通过将式 (8) 代入式 (7) 并通过将雅克比堆叠成矩阵 $\mathbf{J}$ ，我们得到正规方程：
+通过将式 (1.8) 代入式 (1.7) 并通过将雅克比堆叠成矩阵 $\mathbf{J}$ ，我们得到正规方程：
 
 $$
-\begin{align}
-\mathbf{J}^\top \mathbf{J} \xi = - \mathbf{J}^\top \delta \mathrm{I}(0)
-\end{align}
+\mathbf{J}^\top \mathbf{J} \xi = - \mathbf{J}^\top \delta \mathrm{I}(0) \tag{1.10}
 $$
 
 注意，通过使用 inverse compositional 构造亮度残差方法，雅可比可以预先计算，因为它在所有迭代中保持不变，因此降低了计算量。
@@ -136,7 +116,7 @@ $$
 对于每个地图中重投影的特征点，识别出观察角度最小关键帧 $\mathrm{I}_r$ 上的对应点 $\mathbf{u}_i$ 。由于 3D 点和相机姿态估计不准确，所有利用**特征对齐 (Feature Alignment)** 通过最小化当前图像 $\mathrm{I}_k$ 中 patch (蓝色方块) 与关键帧 $\mathrm{I}_r$ 中的参考 patch 的光度差值来{==优化当前图像中每个 patch 的 2D 位置==} $\color{red}{\mathbf{u'}_i}$ ：
 
 $$
-\mathbf{u'}_i = \arg \min\limits_{\mathbf{u'}_i} \frac{1}{2} \| \mathrm{I}_k(\mathbf{u'}_i) - \mathrm{A}_i \cdot \mathrm{I}_r{\mathbf{u}_i} \|^2, \quad \forall i.
+\mathbf{u'}_i = \arg \min\limits_{\mathbf{u'}_i} \frac{1}{2} \| \mathrm{I}_k(\mathbf{u'}_i) - \mathrm{A}_i \cdot \mathrm{I}_r{\mathbf{u}_i} \|^2, \quad \forall i. \tag{1.11}
 $$
 
 这种对齐使用 inverse compositional  Lucas-Kanade 算法来求解[^2]。并且注意，光度误差的前一部分是当前图像中 $\mathrm{I}_k$ 的亮度值，后一部分不是 $\mathrm{I}_{k-1}$ 而是 $\mathrm{I}_r$ 。由于是特征块对比，并且 3D 点所在的关键帧可能离当前帧比较远，所以光度误差和前面不一样的是还加了一个仿射变换 $\mathrm{A}_i$ ，需要对关键帧中的特征块进行旋转拉伸之类仿射变换后才能和当前帧的特征块对比。 这步不考虑极线约束，因为此时的位姿还是不准确的。这时候的迭代量计算方程和之前是一样的，只不过雅克比矩阵变了，这里的雅克比矩阵很好计算 $\mathbf{J} = \frac{\partial \mathrm{I}(\mathbf{u}_i)}{\partial \mathbf{u}_i}$ ，即为图像横纵两个方向的梯度。
@@ -148,9 +128,7 @@ $$
 利用上一步建立的 $(\mathbf{p_i \, , \, \mathbf{u}_i})$ 的对应关系，再次优化世界坐标系下的位姿 $\mathrm{T}_{k, w}$ ，以最小化重投影残差：
 
 $$
-\begin{align}
-\mathrm{T}_{k,w} = \arg \min\limits_{\mathrm{T}_{k,w}} \frac{1}{2} \sum_i \| \mathbf{u}_i - \pi (\mathrm{T}_{k,w} \; {}_w\mathbf{p}_i) \|^2
-\end{align}
+\mathrm{T}_{k,w} = \arg \min\limits_{\mathrm{T}_{k,w}} \frac{1}{2} \sum_i \| \mathbf{u}_i - \pi (\mathrm{T}_{k,w} \; {}_w\mathbf{p}_i) \|^2 \tag{1.12}
 $$
 
 上式中{==误差变成了像素重投影以后位置的差异 (不是像素值的差异)==} ，优化变量还是相机位姿，雅克比矩阵大小为 2×6 (坐标 $\mathbf{u}_i$ 分别对李代数变量 $\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)$ 求导) 。这一步叫做 **motion-only Bundler Adjustment** 。同时根据这个误差定义，我们还能够对获取的三维点的坐标 $[x, y, z]^\top$ 进行优化，还是上面的误差像素位置误差形式，只不过优化变量变成三维点的坐标，这一步叫 **Structure -only Bundler Adjustment** ，优化过程中雅克比矩阵大小为 2×3 (坐标 $\mathbf{u}_i$ 分别对三维点的坐标 $[x, y, z]^\top$ 变量求导) 。
@@ -197,25 +175,85 @@ $$
 
 有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 [^7]) ，代码中有关该模型算法的递推更新过程可以看参考 7 [^7] 中的 supplementary material 。
 
-下面结合 G. Vogiatzis 论文中的 Supplementary material 以及引用参考 8[^8]、9[^9] ，粗劣的整理出证明推导。高斯与均匀混合分布给出一个好的测量值是在真实深度 $Z$ 为均值的正态分布附近，而一个离群值的测量值是在范围为 $[Z_{min}, Z_{max}]$ 的均匀分布的区间内，概率模型为：
+高斯与均匀混合分布给出：一个好的测量值是在真实深度 $Z$ 为均值的正态分布附近，而一个离群值的测量值是在范围为 $[Z_{min}, Z_{max}]$ 的均匀分布的区间内，概率模型为：
 
 $$
-\mathrm{p}(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n | Z_{min}, Z_{max})
+p(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n | Z_{min}, Z_{max}) \tag{2.1}
 $$
 
-注意，这里的 $\pi$ 与上文中的不是同一个，其中这里 $\pi$ 是为有效测量 (inlier) 的概率，$\tau$ 是上一步计算的深度估计值的不确定量。
+注意，这里的 $\pi$ 与上文中的不是同一个，其中这里 $\pi$ 是为有效测量的概率，$\tau$ 是上一步计算的深度估计值的不确定量。当我们得到同一 seed 的一系列测量值 $x_1, \dotsc, x_n$ 假设这些测量值独立。我们想从式 (2.1) 求出 $Z, \pi$ ，最为直观的做法是求解最大似然估计，然而参考 7 [^7] 作者 G. Vogiatzis 认为最大似然估计容易被局部极大值干扰，其结果并不准确，于是选择从最大后验概率求解，等价求解 $\arg \max_\limits{Z,\pi}p(Z, \pi| x_1, \dotsc, x_n)$ 。
 
+下面结合 G. Vogiatzis 论文 (参考 7 [^7] ) 中的 Supplementary material 以及引用参考 8[^8]、9[^9] ，粗劣的整理出该概率模型的后验概率 $p(Z, \pi| x_1, \dotsc, x_n)$ 可以用 Gaussian×Beta 分布来近似的证明推导。
 
+首先假设 $Z , \pi$ 的先验分布在没有任何其他信息的情况下，这些量在概率上是独立的，因此满足：
 
+$$
+p(Z,\pi) = p(Z) p(\pi) \tag{2.2}
+$$
 
+引入**二进制潜变量 (binary latent variables)** $y_1 \dotsc y_n$ ，那么有：
 
+$$
+p(x_n | Z, \pi, y_n) = \mathcal{N}(x_n|Z, \tau_n^2)^{y_n} \mathcal{U}(x_n)^{1-y_n} \tag{2.3}
+$$
 
+和
 
+$$
+p(y_n | \pi) = \pi^{y_n}(1-\pi)^{1-y_n} \tag{2.4}
+$$
 
+其中，当 $y_n = 1$ 的时候表示第 n 个测量值为内点 (inlier) (即，此次测量满足高斯分布) ，反之，当 $y_n = 0$ 的时候表示此次测量值为离群值 (outlier) (即，此次测量值属于均匀分布) 。当这些潜变量被 (2.3) 和 (2.4) 所描述的模型边缘化时，我们回到 (2.1) 的简单混合模型。令 $\mathcal{X} = [x_1, \dotsc, x_n] , \mathcal{Y} = [y_1, \dotsc, y_n]$ ，那么 $\mathcal{X, Y}, Z, \pi$ 的联合分布为：
 
+$$
+\begin{align*}
+p(\mathcal{X, Y},Z,\pi) &= p(\mathcal{X}|Z, \pi , \mathcal{Y}) p(Z, \pi, \mathcal{Y}) \\
+&= p(\mathcal{X}|Z, \pi , \mathcal{Y}) p(\mathcal{Y} |Z, \pi) p(Z,\pi) \\
+带入式子(2.2)得 \: &= p(\mathcal{X}|Z, \pi , \mathcal{Y}) p(\mathcal{Y} |Z, \pi) p(Z) p(\pi) \\
+由于\mathcal{Y}与Z无关 \: &= p(\mathcal{X}|Z, \pi , \mathcal{Y}) p(\mathcal{Y} | \pi) p(Z) p(\pi) \\
+&= \Bigg[ \prod\limits_{n=1}^N p(x_n|Z,\pi,y_n)p(y_n|\pi) \Bigg] p(Z)p(\pi)
+\end{align*} \tag{2.5}
+$$
 
+由于并不知道要求解的后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 是怎么样的形式，因此令 $q(\mathcal{Y}, Z, \pi)$ 是后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 的一个近似推断，且满足以下因式分解形式：
 
+$$
+q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{2.6}
+$$
 
+由变分推断理论，求解后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 的最佳近似分布等价于最小化它的 Kullback-Leibler 散度，由此推出 $q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)$ 需要满足：（这步未仔细研究，还不了解，读者可以先看参考10[^10] 中的 10.1.1 章节（变分推断之分解分布）、参考 11[^11] ，#TODO）
+
+$$
+\ln q_{Z,\pi}(Z, \pi) = E_\mathcal{Y}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.7}
+$$
+
+和
+
+$$
+\ln q_{\mathcal{Y}}(\mathcal{Y}) = E_{Z,\pi}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.8}
+$$
+
+其中 $E_\mathcal{Y}, \, E_{Z,\pi}$ 分别表示 $q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)$ 的期望，这里我们只关系 $Z, \pi$ 的估计，将式 (2.3) (2.4) (2.5) 带入 式 (2.7) 中
+
+$$
+\begin{align*}\ln q_{Z,\pi}(Z, \pi) &= E_\mathcal{Y}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \\
+&= E_\mathcal{Y} \Bigg[ \ln \bigg( \Big( \prod_\limits{n=1}^N p(x_n|Z,\pi,y_n) p(y_n|\pi) \Big)p(Z)p(\pi) \bigg) \Bigg] + const \\
+&= E_\mathcal{Y} \Bigg[ \ln \Big( \prod_\limits{n=1}^N \mathcal{N}(x_n|Z,\tau_n^2)^{y_n} \mathcal{U}(x_n)^{1-y_n} \pi^{y_n}(1-\pi)^{1-y_n} \Big) + \ln(Z) + \ln(\pi) \Bigg] + const \\
+&= E_\mathcal{Y} \Bigg[ \sum_\limits{n=1}^N y_n \ln \mathcal{N}(x_n|Z,\tau_n^2) + \sum_\limits{n=1}^N (1-y_n) \ln \mathcal{U}(x_n) + \sum_\limits{n=1}^N y_n \ln \pi + \sum_\limits{n=1}^N (1-y_n)\ln(1-\pi) \Big) \Bigg] \\
+& \quad + \ln(Z) + \ln(\pi) + const \\
+&= \sum_{n=1}^N E_\mathcal{Y}[y_n] \big(\ln \mathcal{N}(x_n|Z,\tau_n^2) + \ln \pi \big) + \sum_{n=1}^N E_\mathcal{Y}[1-y_n] \big(\ln \mathcal{U}(x_n) + \ln(1-\pi) \big) \\ 
+& \quad + \ln(Z) + \ln(\pi) + const
+\end{align*} \tag{2.9}
+$$
+
+对上式取两边取指数 (exponentiating) 得：
+
+$$
+q_{Z,\pi}(Z, \pi) = \Bigg[\prod_{n=1}^N \mathcal{N}(x_n|Z,\tau_n^2)^{r_n} \pi^S (1-\pi)^{N-S} p(Z) p(\pi) \Bigg] \tag{2.10} \\
+其中, \quad r_n = E_\mathcal{Y}[y_n], \, S = \sum_{n=1}^N r_n
+$$
+
+如果我们为 Z 和 π 选择共轭的先验，就可以证明的近似分布 式 (10) 具有 Gaussian×Beta 形式。
 
 
 
@@ -242,6 +280,9 @@ $$
 
 [^8]: [路游侠 - SVO 解析](http://www.cnblogs.com/luyb/p/5773691.html) 
 [^9]: [可爱的小蚂蚁 - svo 的 Supplementary material 推导过程](https://blog.csdn.net/u013004597/article/details/52069741)
+
+[^10]: Christopher M. Bishop. Pattern Recognition and Machine Learning (Information Science and Statistics). Springer, 1 edition, October 2007.
+[^11]: [参考 10 的翻译版本](https://mqshen.gitbooks.io/prml/content/Chapter10/variational/factorized_distributions.html)，膜拜大神
 
 
 
