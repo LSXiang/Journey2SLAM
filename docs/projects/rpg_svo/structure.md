@@ -236,14 +236,18 @@ $$
 其中 $E_\mathcal{Y}, \, E_{Z,\pi}$ 分别表示 $q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)$ 的期望，这里我们只关系 $Z, \pi$ 的估计，将式 (2.3) (2.4) (2.5) 带入 式 (2.7) 中
 
 $$
-\begin{align*}\ln q_{Z,\pi}(Z, \pi) &= E_\mathcal{Y}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \\
+\scriptsize{
+\begin{align*}
+& \small{ \ln q_{Z,\pi}(Z, \pi) } \\
 &= E_\mathcal{Y} \Bigg[ \ln \bigg( \Big( \prod_\limits{n=1}^N p(x_n|Z,\pi,y_n) p(y_n|\pi) \Big)p(Z)p(\pi) \bigg) \Bigg] + const \\
 &= E_\mathcal{Y} \Bigg[ \ln \Big( \prod_\limits{n=1}^N \mathcal{N}(x_n|Z,\tau_n^2)^{y_n} \mathcal{U}(x_n)^{1-y_n} \pi^{y_n}(1-\pi)^{1-y_n} \Big) + \ln(Z) + \ln(\pi) \Bigg] + const \\
-&= E_\mathcal{Y} \Bigg[ \sum_\limits{n=1}^N y_n \ln \mathcal{N}(x_n|Z,\tau_n^2) + \sum_\limits{n=1}^N (1-y_n) \ln \mathcal{U}(x_n) + \sum_\limits{n=1}^N y_n \ln \pi + \sum_\limits{n=1}^N (1-y_n)\ln(1-\pi) \Big) \Bigg] \\
+&= E_\mathcal{Y} \Bigg[ \sum_\limits{n=1}^N y_n \ln \mathcal{N}(x_n|Z,\tau_n^2) + \sum_\limits{n=1}^N (1-y_n) \ln \mathcal{U}(x_n) + \sum_\limits{n=1}^N y_n \ln \pi + \sum_\limits{n=1}^N (1-y_n)\ln(1-\pi) \Bigg] \\
 & \quad + \ln(Z) + \ln(\pi) + const \\
 &= \sum_{n=1}^N E_\mathcal{Y}[y_n] \big(\ln \mathcal{N}(x_n|Z,\tau_n^2) + \ln \pi \big) + \sum_{n=1}^N E_\mathcal{Y}[1-y_n] \big(\ln \mathcal{U}(x_n) + \ln(1-\pi) \big) \\ 
 & \quad + \ln(Z) + \ln(\pi) + const
-\end{align*} \tag{2.9}
+\end{align*}
+}
+\tag{2.9}
 $$
 
 对上式取两边取指数 (exponentiating) 得：
@@ -253,7 +257,41 @@ q_{Z,\pi}(Z, \pi) = \Bigg[\prod_{n=1}^N \mathcal{N}(x_n|Z,\tau_n^2)^{r_n} \pi^S 
 其中, \quad r_n = E_\mathcal{Y}[y_n], \, S = \sum_{n=1}^N r_n
 $$
 
-如果我们为 Z 和 π 选择共轭的先验，就可以证明的近似分布 式 (10) 具有 Gaussian×Beta 形式。
+如果我们为 Z 和 π 选择共轭的先验，就可以证明的近似分布式 (10) 具有 Gaussian×Beta 形式。因此给出了一个近似真实后验概率的模型：
+
+$$
+q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.11}
+$$
+
+这里的 $\mathcal{N}(Z|\mu, \sigma_n^2)$ ，而 $Beta(\pi|a,b)$ 通过 Gamma 函数 $\Gamma(a) = (a-1)!$ 来联合定义：
+
+$$
+Beta(\pi|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \pi^{a-1}(1-\pi)^{b-1} \tag{2.12}
+$$
+
+并且给出了该模型的迭代格式：
+
+$$
+q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.13}
+$$
+
+之所以是**约等于**是因为上式的右端形式并不是 Gaussian×Beta 分布，而是用 $q(Z,\pi|a_n,b_n,\mu_n,\sigma_n^2)$ 的一阶矩和二阶矩相等去近似右端项，进而更像参数（这里类似于 EKF 中的更新，通常一个高斯分布通过非线性变换后分布并非高斯，但是通常利用高斯分布的一阶矩和二阶矩去近似这个变换结果）。将 式 (2.1) (2.11) 代入上式的右端得：
+
+$$
+\big(\pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n) \big) \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.14}
+$$
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
