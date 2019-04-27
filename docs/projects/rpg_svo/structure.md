@@ -233,10 +233,10 @@ $$
 \ln q_{\mathcal{Y}}(\mathcal{Y}) = E_{Z,\pi}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.8}
 $$
 
-其中 $E_\mathcal{Y}, \, E_{Z,\pi}$ 分别表示 $q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)$ 的期望，这里我们只关系 $Z, \pi$ 的估计，将式 (2.3) (2.4) (2.5) 带入 式 (2.7) 中
+其中 $E_\mathcal{Y}, \, E_{Z,\pi}$ 分别表示 $q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)$ 的期望，这里我们只关系 $Z, \pi$ 的估计，将式 (2.3) (2.4) (2.5) 带入式 (2.7) 中：
 
 $$
-\scriptsize{
+\scriptsize {
 \begin{align*}
 & \small{ \ln q_{Z,\pi}(Z, \pi) } \\
 &= E_\mathcal{Y} \Bigg[ \ln \bigg( \Big( \prod_\limits{n=1}^N p(x_n|Z,\pi,y_n) p(y_n|\pi) \Big)p(Z)p(\pi) \bigg) \Bigg] + const \\
@@ -246,8 +246,8 @@ $$
 &= \sum_{n=1}^N E_\mathcal{Y}[y_n] \big(\ln \mathcal{N}(x_n|Z,\tau_n^2) + \ln \pi \big) + \sum_{n=1}^N E_\mathcal{Y}[1-y_n] \big(\ln \mathcal{U}(x_n) + \ln(1-\pi) \big) \\ 
 & \quad + \ln(Z) + \ln(\pi) + const
 \end{align*}
-}
 \tag{2.9}
+}
 $$
 
 对上式取两边取指数 (exponentiating) 得：
@@ -260,33 +260,111 @@ $$
 如果我们为 Z 和 π 选择共轭的先验，就可以证明的近似分布式 (10) 具有 Gaussian×Beta 形式。因此给出了一个近似真实后验概率的模型：
 
 $$
-q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.11}
+q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.11}
 $$
 
-这里的 $\mathcal{N}(Z|\mu, \sigma_n^2)$ ，而 $Beta(\pi|a,b)$ 通过 Gamma 函数 $\Gamma(a) = (a-1)!$ 来联合定义：
+这里的 $\mathcal{N}(Z|\mu, \sigma_n^2)$ ，而 $Beta(\pi|a,b)$ 通过 Gamma 函数 $\Gamma(n) = (n-1)!$ 来联合定义：
 
 $$
 Beta(\pi|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \pi^{a-1}(1-\pi)^{b-1} \tag{2.12}
 $$
 
-并且给出了该模型的迭代格式：
+并且给出了该模型的迭代式：
 
 $$
 q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.13}
 $$
 
-之所以是**约等于**是因为上式的右端形式并不是 Gaussian×Beta 分布，而是用 $q(Z,\pi|a_n,b_n,\mu_n,\sigma_n^2)$ 的一阶矩和二阶矩相等去近似右端项，进而更像参数（这里类似于 EKF 中的更新，通常一个高斯分布通过非线性变换后分布并非高斯，但是通常利用高斯分布的一阶矩和二阶矩去近似这个变换结果）。将 式 (2.1) (2.11) 代入上式的右端得：
+其中，这里的 $(\cdot)'$ 表示 n 时刻的参数， $(\cdot)$ 表示 n-1 时刻的参数。由迭代式可以看出新时刻的参数是通过上一时刻的参数和新的深度测量值来更新的。{==之所以是**约等于**是因为上式的右端形式并不是 Gaussian×Beta 分布，而是用 $q(Z,\pi|a',b',\mu',\sigma')$ 关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩相等去近似右端项，且两端的全概率等于 1，进而更新参数（这里类似于 EKF 中的更新，通常一个高斯分布通过非线性变换后分布并非高斯，但是通常利用高斯分布的一阶矩和二阶矩去近似这个变换结果）==}。将式 (2.1) (2.11) 代入上式的右端得：
 
 $$
-\big(\pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n) \big) \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.14}
+\big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.14}
 $$
 
+由于要求关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩，因此需要构造的关于 $Z$ 和 $\pi$ 为变量的式子，因此将上式变换如下 ({==这一步骤的思路是让式 (2.14) 转变成便于求关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩的形式==}) :
 
+$$
+\scriptsize{
+  \begin{align*}
+    & \quad \big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \\
+    &= \pi \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) + (1-\pi) \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b) \\
+    & 根据 \Gamma(n) = (n-1)! 的定义有：\\
+    & \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
+    &= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
+    & 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
+    & 因此将上式第1项中高斯分布乘积中的Z与其他参数分离， \\
+    & 为了方便只取 \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) 的指数项做推导: \\
+    & \fbox{$ \small{ \begin{align*}
+        & \overbrace{-\frac{(x-Z)^2}{2 \tau^2}}^{\mathcal{N}(x | Z, \tau^2)} \overbrace{-\frac{(Z-\mu)^2}{2\sigma^2}}^{\mathcal{N}(Z|\mu, \sigma^2)} \\
+        &= -\frac{(\sigma^2+\tau^2)Z^2 - 2(x \sigma^2 + \mu \tau^2)Z + \sigma^2 x^2 + \mu^2\tau^2}{2\tau^2\sigma^2} \\
+        &= -\frac{Z^2-2(\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})Z + (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 - (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 + \frac{\sigma^2x^2+\tau^2\mu^2}{\sigma^2+\tau^2}}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}} \\
+        &=-\frac{Z^2-2(\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})Z + (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}-\frac{- (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 + \frac{\sigma^2x^2+\tau^2\mu^2}{\sigma^2+\tau^2}}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}} \\
+        &=\underbrace{-\frac{(Z-\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}}_{\mathcal{N}\big(Z \big| \color{red}{ \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2}},\color{blue}{ \frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}\big)} \underbrace{-\frac{(x-\mu)^2}{2(\sigma^2+\tau^2)}}_{\mathcal{N}(x|\mu, \sigma^2+\tau^2)}
+      \end{align*}}$}
+  \end{align*}
+}
+$$
 
+根据上面的推导我们可以将式 (2.14) 转变成：
 
+$$
+\small{\begin{align*}\frac{a}{a+b} \mathcal{N}(x | u, \sigma^2 + \tau^2) \mathcal{N}(Z| \color{red}{m}, \color{blue}{s^2}) Beta(\pi|a+1,b) \\ + \frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)\end{align*}} \tag{2.15}
+$$
 
+其中有：
 
+$$
+s^2 = \frac{\tau^2\sigma^2}{\sigma^2+\tau^2} \to \frac{1}{s^2} = \frac{1}{\sigma^2} + \frac{1}{\tau^2} \tag{2.16}
+$$
 
+和
+
+$$
+m = \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2} \to m = s^2 (\frac{\mu}{\sigma^2} + \frac{x}{\tau^2}) \tag{2.17}
+$$
+
+式 (2.15) 令
+
+$$
+C_1 = \frac{a}{a+b} \mathcal{N}(x | u, \sigma^2 + \tau^2), \quad C_2 = \frac{b}{a+b} \mathcal{U}(x) \tag{2.18}
+$$
+
+易知 $C_1, C_2$ 是与 $Z, \pi$ 无关的系数，因此式 (2.15) 变为
+
+$$
+\scriptsize{ \begin{align*}
+& C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) \\
+& 上式的全概率为 \\
+& \int C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) dZ\, d\pi = C_1 +C_2 \\
+& 由于全概率需要为1，因此转变成 \\
+& \frac{C_1}{C_1 + C_2} \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + \frac{C_2}{C_1 + C_2} \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)
+\end{align*}
+}
+$$
+
+我们令
+
+$$
+C'_1 = \frac{C_1}{C_1 + C_2}, \quad C'_2 = \frac{C_2}{C_1 + C_2} \tag{2.19}
+$$
+
+由此归一化后的概率密度函数形式为：
+
+$$
+\small{ C'_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C'_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) } \tag{A}
+$$
+
+分别对上式 (A) 和 $q(Z,\pi|a',b',\mu',\sigma')$ 求关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩：
+
+$$
+\scriptsize{\begin{align*}
+& 先对 q(Z,\pi|a',b',\mu',\sigma') 求关于 Z 的一阶矩和二阶矩： \\
+& E[Z] = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+& \quad\;\;\!\;\! = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ = E[\mathcal{N}(Z|\mu',\sigma'^2)] = \mu' \\
+& D[Z] = \int Z^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+& \quad\;\;\!\;\! = \int (Z-u')^2 \, \mathcal{N}(Z|\mu',\sigma'^2) dZ + 2\mu' \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ +  \\
+\end{align*}}
+$$
 
 
 
