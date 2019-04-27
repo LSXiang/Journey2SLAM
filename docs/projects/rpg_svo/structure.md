@@ -139,7 +139,7 @@ $$
 
 地图模型通常用来存储三维空间点，在 SVO 中每一个 Key frame 通过深度估计能够得到特征点的三维坐标，这些收敛的三维坐标点通过特征点在 Key Frame 中进行保存。当新帧被选为关键帧时，它会被立即插入地图。同时，又在这个新的关键帧上检测新的特征点作为深度估计的 seed ，这些 seed 会不断融合之后的图像进行深度估计。但是，如果有些 seed 点 3D 点位置通过深度估计已经收敛了，此时 map 用一个 point_candidates 来保存这些尚未插入地图中的点。所以 SVO 地图上保存的是 Key Frame 以及还未插入地图关键帧中的已经收敛的 3D 点坐标（这些 3D 点坐标是在世界坐标系下的）。
 
-#### 深度估计
+#### 深度计算
 
 SVO 中的每个新特征点对应一个深度估计，其初值为该帧的平均深度，并被赋予极大的不确定性。通过两帧图像的匹配点就可以计算出这一点的深度值，如果有多幅图像，那就能计算出这一点的多个深度值。这就像对同一个状态变量我们进行了多次测量，因此，可以用贝叶斯估计来对多个测量值进行融合，使得估计的不确定性缩小。如下图所示：
 
@@ -171,11 +171,11 @@ $$
 \tau = z^+ - z
 $$
 
-#### 深度值更新
+#### 深度值估计更新
 
-有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 [^7]) ，代码中有关该模型算法的递推更新过程可以看参考 7 [^7] 中的 supplementary material 。
+有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 [^7]) 。
 
-高斯与均匀混合分布给出：一个好的测量值是在真实深度 $Z$ 为均值的正态分布附近，而一个离群值的测量值是在范围为 $[Z_{min}, Z_{max}]$ 的均匀分布的区间内，概率模型为：
+高斯与均匀混合分布给出：一个好的测量值是在真实深度 $Z$ 为均值的正态分布附近，而一个离群值的测量值是在范围为 $[Z_{min}, Z_{max}]$ 的均匀分布的区间内，因此 $x$ 概率密度函数为：
 
 $$
 p(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n | Z_{min}, Z_{max}) \tag{2.1}
@@ -183,7 +183,7 @@ $$
 
 注意，这里的 $\pi$ 与上文中的不是同一个，其中这里 $\pi$ 是为有效测量的概率，$\tau$ 是上一步计算的深度估计值的不确定量。当我们得到同一 seed 的一系列测量值 $x_1, \dotsc, x_n$ 假设这些测量值独立。我们想从式 (2.1) 求出 $Z, \pi$ ，最为直观的做法是求解最大似然估计，然而参考 7 [^7] 作者 G. Vogiatzis 认为最大似然估计容易被局部极大值干扰，其结果并不准确，于是选择从最大后验概率求解，等价求解 $\arg \max_\limits{Z,\pi}p(Z, \pi| x_1, \dotsc, x_n)$ 。
 
-下面结合 G. Vogiatzis 论文 (参考 7 [^7] ) 中的 Supplementary material 以及引用参考 8[^8]、9[^9] ，粗劣的整理出该概率模型的后验概率 $p(Z, \pi| x_1, \dotsc, x_n)$ 可以用 Gaussian×Beta 分布来近似的证明推导。
+下面结合 G. Vogiatzis 论文 (参考 7 [^7] ) 中的 Supplementary material 以及引用参考 8[^8]、9[^9] ，整理出该概率模型的后验概率 $p(Z, \pi| x_1, \dotsc, x_n)$ 可以用 Gaussian×Beta 分布来近似的证明推导，以及后验概率迭代形式的推导。
 
 首先假设 $Z , \pi$ 的先验分布在没有任何其他信息的情况下，这些量在概率上是独立的，因此满足：
 
@@ -221,7 +221,7 @@ $$
 q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{2.6}
 $$
 
-由变分推断理论，求解后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 的最佳近似分布等价于最小化它的 Kullback-Leibler 散度，由此推出 $q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)$ 需要满足：（这步未仔细研究，还不了解，读者可以先看参考10[^10] 中的 10.1.1 章节（变分推断之分解分布）、参考 11[^11] ，#TODO）
+由变分 (calculus of variations) 推断理论，求解后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 的最佳近似分布等价于最小化它的 Kullback-Leibler 散度，由此推出 $q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)$ 需要满足：（这步未仔细研究，还不了解，读者可以先看参考10[^10] 中的 10.1.1 章节（变分推断之分解分布）、参考 11[^11] ，#TODO）
 
 $$
 \ln q_{Z,\pi}(Z, \pi) = E_\mathcal{Y}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.7}
@@ -233,7 +233,7 @@ $$
 \ln q_{\mathcal{Y}}(\mathcal{Y}) = E_{Z,\pi}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.8}
 $$
 
-其中 $E_\mathcal{Y}, \, E_{Z,\pi}$ 分别表示 $q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)$ 的期望，这里我们只关系 $Z, \pi$ 的估计，将式 (2.3) (2.4) (2.5) 带入式 (2.7) 中：
+其中 $E_\mathcal{Y}, \, E_{Z,\pi}$ 分别表示 $q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)$ 的期望，这里我们只关心 $Z, \pi$ 的估计，将式 (2.3) (2.4) (2.5) 带入式 (2.7) 中：
 
 $$
 \scriptsize {
@@ -257,19 +257,19 @@ q_{Z,\pi}(Z, \pi) = \Bigg[\prod_{n=1}^N \mathcal{N}(x_n|Z,\tau_n^2)^{r_n} \pi^S 
 其中, \quad r_n = E_\mathcal{Y}[y_n], \, S = \sum_{n=1}^N r_n
 $$
 
-如果我们为 Z 和 π 选择共轭的先验，就可以证明的近似分布式 (10) 具有 Gaussian×Beta 形式。因此给出了一个近似真实后验概率的模型：
+如果我们为 Z 和 π 选择共轭先验，就可以证明的近似分布式 (10) 具有 Gaussian×Beta 形式。因此给出了一个近似真实后验的概密度函数函数：
 
 $$
 q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.11}
 $$
 
-这里的 $\mathcal{N}(Z|\mu, \sigma_n^2)$ ，而 $Beta(\pi|a,b)$ 通过 Gamma 函数 $\Gamma(n) = (n-1)!$ 来联合定义：
+这里的 $\mathcal{N}(Z|\mu, \sigma_n^2)$ 是高斯分布，以及[**贝塔分布**](https://zh.wikipedia.org/wiki/%CE%92%E5%88%86%E5%B8%83) $Beta(\pi|a,b)$ ：
 
 $$
 Beta(\pi|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \pi^{a-1}(1-\pi)^{b-1} \tag{2.12}
 $$
 
-并且给出了该模型的迭代式：
+其中 $\Gamma(\cdot)$ 是 [**Gamma 函数**](https://zh.wikipedia.org/wiki/%CE%93%E5%87%BD%E6%95%B0)，Gamma 函数具有 $\Gamma(x+1) = x\,\Gamma(x)$ 的递归形式。并且给出了该模型的迭代式：
 
 $$
 q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.13}
@@ -284,11 +284,12 @@ $$
 由于要求关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩，因此需要构造的关于 $Z$ 和 $\pi$ 为变量的式子，因此将上式变换如下 ({==这一步骤的思路是让式 (2.14) 转变成便于求关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩的形式==}) :
 
 $$
+\fbox{$
 \scriptsize{
   \begin{align*}
     & \quad \big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \\
     &= \pi \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) + (1-\pi) \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b) \\
-    & 根据 \Gamma(n) = (n-1)! 的定义有：\\
+    & 根据 \Gamma(x+1) = x\,\Gamma(x) 的性质有：\\
     & \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
     &= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
     & 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
@@ -302,7 +303,7 @@ $$
         &=\underbrace{-\frac{(Z-\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}}_{\mathcal{N}\big(Z \big| \color{red}{ \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2}},\color{blue}{ \frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}\big)} \underbrace{-\frac{(x-\mu)^2}{2(\sigma^2+\tau^2)}}_{\mathcal{N}(x|\mu, \sigma^2+\tau^2)}
       \end{align*}}$}
   \end{align*}
-}
+} $}
 $$
 
 根据上面的推导我们可以将式 (2.14) 转变成：
@@ -332,6 +333,7 @@ $$
 易知 $C_1, C_2$ 是与 $Z, \pi$ 无关的系数，因此式 (2.15) 变为
 
 $$
+\fbox{$
 \scriptsize{ \begin{align*}
 & C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) \\
 & 上式的全概率为 \\
@@ -339,7 +341,7 @@ $$
 & 由于全概率需要为1，因此转变成 \\
 & \frac{C_1}{C_1 + C_2} \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + \frac{C_2}{C_1 + C_2} \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)
 \end{align*}
-}
+} $}
 $$
 
 我们令
@@ -357,19 +359,60 @@ $$
 分别对上式 (A) 和 $q(Z,\pi|a',b',\mu',\sigma')$ 求关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩：
 
 $$
+\fbox{$
 \scriptsize{\begin{align*}
-& 先对 q(Z,\pi|a',b',\mu',\sigma') 求关于 Z 的一阶矩和二阶矩： \\
-& E[Z] = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
-& \quad\;\;\!\;\! = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ = E[\mathcal{N}(Z|\mu',\sigma'^2)] = \mu' \\
-& D[Z] = \int Z^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
-& \quad\;\;\!\;\! = \int (Z-u')^2 \, \mathcal{N}(Z|\mu',\sigma'^2) dZ + 2\mu' \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ +  \\
+  & 先对 q(Z,\pi|a',b',\mu',\sigma') =\mathcal{N}(Z|\mu', \sigma'^2)Beta(\pi|a',b') 求关于 Z 的一阶矩和二阶矩: \\
+  & E_Z = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+  & \quad = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ = E[\mathcal{N}(Z|\mu',\sigma'^2)] = \mu' \\
+  & D_Z = \int Z^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+  & \quad = \underbrace{\int (Z-u')^2 \, \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{D[\mathcal{N}(Z|\mu',\sigma'^2)]=\sigma'^2}} + 2\mu' \underbrace{\int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{E[\mathcal{N}(Z|\mu',\sigma'^2)]=\mu'}} - \mu^2 \underbrace{\int \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{=1}}  \\
+  & \qquad = \sigma'^2 + \mu'^2 \\ \\
+  & 对 q(Z,\pi|a',b',\mu',\sigma') 求关于 \pi 的一阶矩和二阶矩: \\
+  & E_\pi = \int \pi \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') d\pi \\
+  & \quad\! = \underbrace{\int \pi \, Beta(\pi|a',b') d\pi}_{\small{E[Beta(\pi|a',b')] = \frac{a'}{a'+b'}}} = \frac{a'}{a'+b'} \underbrace{\int Beta(\pi|a'+1,b') d\pi}_{\small{=1}} = \frac{a'}{a'+b'} \\
+  & D_\pi = \int \pi^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') d\pi \\
+  & \quad\! = \int \pi^2 \, Beta(\pi|a',b') d\pi = \frac{a'}{a'+b'} \frac{a'+1}{a'+b'+1} \underbrace{\int Beta(\pi|a'+1+1,b') d\pi}_{\small{=1}} \\
+  & 或 \; = \underbrace{\int (\pi-E_\pi)^2 \, Beta(\pi|a',b') d\pi}_{\small{D[Beta(\pi|a',b')] = \frac{a'b'}{(a'+b')^2(a'+b'+1)}}} - \underbrace{ 2E_\pi \int \pi \, Beta(\pi|a',b') d\pi}_{\small{2 E^2_\pi = 2\frac{a'^2}{(a'+b')^2}}} + \underbrace{E_\pi^2 \int Beta(\pi|a',b') d\pi}_{\small{E_\pi^2\cdot1 = \frac{a'^2}{(a'+b')^2}}} \\
+  & \quad\! = \frac{a'(a'+1)}{(a'+b')(a'+b'+1)} \\ \\ \\
+  & 根据上面求解的方式对 式(A) 求关于 Z 和 \pi 的一阶矩和二阶矩有: \\
+  & E'_Z = C'_1 m + C'_2\mu \quad D'_Z = C'_1(m^2+s^2) + C'_2(\mu^2+\sigma^2) \\ \\
+  & E'_\pi = C'_1\frac{a+1}{a+b+1} + C'_2\frac{a}{a+b+1} \quad D'_\pi = C'_1\frac{(a+1)(a+2)}{(a+b+1)(a+b+2)} + C'_2\frac{a(a+1)}{(a+b+1)(a+b+2)}
 \end{align*}}
+$}
 $$
 
+为了使迭代式 (式 2.13) 成立，需要令式子两端关于 $Z$ 和 $\pi$ 的一阶矩和二阶矩相等，所以有：
 
+令 $E_Z = E'_Z$ 得：
 
+$$
+\mu' = C'_1 m + C'_2\mu \tag{2.20}
+$$
 
+令 $D_Z = D'_Z$ 得：
 
+$$
+\sigma'^2+\mu'^2 = C'_1(m^2+s^2) + C'_2(\mu^2+\sigma^2) \tag{2.21}
+$$
+
+令 $E_\pi = E'_\pi$ 得：
+
+$$
+\frac{a'}{a'+b'} = C'_1\frac{a+1}{a+b+1} + C'_2\frac{a}{a+b+1} \tag{2.22}
+$$
+
+令 $D_\pi = D'_\pi$ 得：
+
+$$
+\begin{align*}
+  \frac{a'(a'+1)}{(a'+b')(a'+b'+1)} &= C'_1\frac{(a+1)(a+2)}{(a+b+1)(a+b+2)} \\
+  &\quad + C'_2\frac{a(a+1)}{(a+b+1)(a+b+2)} 
+\end{align*} \tag{2.23}
+$$
+
+由上面四个等式就可以通过 n-1 时刻的参数 $a, b, \mu, \sigma$ 求解 n 时刻的参数 $a', b', \mu', \sigma'$ 了。
+
+关于代码中的其他细节，请观看下一篇 「 SVO 代码解析」
 
 
 
