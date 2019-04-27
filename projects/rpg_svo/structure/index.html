@@ -663,8 +663,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#深度估计" title="深度估计" class="md-nav__link">
-    深度估计
+  <a href="#深度计算" title="深度计算" class="md-nav__link">
+    深度计算
   </a>
   
 </li>
@@ -677,8 +677,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#深度值更新" title="深度值更新" class="md-nav__link">
-    深度值更新
+  <a href="#深度值估计更新" title="深度值估计更新" class="md-nav__link">
+    深度值估计更新
   </a>
   
 </li>
@@ -881,8 +881,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#深度估计" title="深度估计" class="md-nav__link">
-    深度估计
+  <a href="#深度计算" title="深度计算" class="md-nav__link">
+    深度计算
   </a>
   
 </li>
@@ -895,8 +895,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#深度值更新" title="深度值更新" class="md-nav__link">
-    深度值更新
+  <a href="#深度值估计更新" title="深度值估计更新" class="md-nav__link">
+    深度值估计更新
   </a>
   
 </li>
@@ -1092,7 +1092,7 @@
 <p>上式中<mark class="critic">误差变成了像素重投影以后位置的差异 (不是像素值的差异)</mark> ，优化变量还是相机位姿，雅克比矩阵大小为 2×6 (坐标 <span><span class="MathJax_Preview">\mathbf{u}_i</span><script type="math/tex">\mathbf{u}_i</script></span> 分别对李代数变量 <span><span class="MathJax_Preview">\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)</span><script type="math/tex">\xi = (\omega, \upsilon)^\top \in \mathfrak{se}(3)</script></span> 求导) 。这一步叫做 <strong>motion-only Bundler Adjustment</strong> 。同时根据这个误差定义，我们还能够对获取的三维点的坐标 <span><span class="MathJax_Preview">[x, y, z]^\top</span><script type="math/tex">[x, y, z]^\top</script></span> 进行优化，还是上面的误差像素位置误差形式，只不过优化变量变成三维点的坐标，这一步叫 <strong>Structure -only Bundler Adjustment</strong> ，优化过程中雅克比矩阵大小为 2×3 (坐标 <span><span class="MathJax_Preview">\mathbf{u}_i</span><script type="math/tex">\mathbf{u}_i</script></span> 分别对三维点的坐标 <span><span class="MathJax_Preview">[x, y, z]^\top</span><script type="math/tex">[x, y, z]^\top</script></span> 变量求导) 。</p>
 <h3 id="地图构建">地图构建<a class="headerlink" href="#地图构建" title="Permanent link"></a></h3>
 <p>地图模型通常用来存储三维空间点，在 SVO 中每一个 Key frame 通过深度估计能够得到特征点的三维坐标，这些收敛的三维坐标点通过特征点在 Key Frame 中进行保存。当新帧被选为关键帧时，它会被立即插入地图。同时，又在这个新的关键帧上检测新的特征点作为深度估计的 seed ，这些 seed 会不断融合之后的图像进行深度估计。但是，如果有些 seed 点 3D 点位置通过深度估计已经收敛了，此时 map 用一个 point_candidates 来保存这些尚未插入地图中的点。所以 SVO 地图上保存的是 Key Frame 以及还未插入地图关键帧中的已经收敛的 3D 点坐标（这些 3D 点坐标是在世界坐标系下的）。</p>
-<h4 id="深度估计">深度估计<a class="headerlink" href="#深度估计" title="Permanent link"></a></h4>
+<h4 id="深度计算">深度计算<a class="headerlink" href="#深度计算" title="Permanent link"></a></h4>
 <p>SVO 中的每个新特征点对应一个深度估计，其初值为该帧的平均深度，并被赋予极大的不确定性。通过两帧图像的匹配点就可以计算出这一点的深度值，如果有多幅图像，那就能计算出这一点的多个深度值。这就像对同一个状态变量我们进行了多次测量，因此，可以用贝叶斯估计来对多个测量值进行融合，使得估计的不确定性缩小。如下图所示：</p>
 <p><img alt="Depth Estimation" src="../image/depth_estimation.png" /></p>
 <p>一开始深度估计的不确定性较大 (<span><span class="MathJax_Preview">\color{cyan}{\mathbf{\text{青色部分}}}</span><script type="math/tex">\color{cyan}{\mathbf{\text{青色部分}}}</script></span>) ，通过三角化得到一个深度估计值以后，能够极大的缩小这个不确定性 (<span><span class="MathJax_Preview">\color{teal}{\mathbf{\text{墨绿部分}}}</span><script type="math/tex">\color{teal}{\mathbf{\text{墨绿部分}}}</script></span>) 。 </p>
@@ -1123,9 +1123,9 @@
 \tau = z^+ - z
 </script>
 </div>
-<h4 id="深度值更新">深度值更新<a class="headerlink" href="#深度值更新" title="Permanent link"></a></h4>
-<p>有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 <sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>) ，代码中有关该模型算法的递推更新过程可以看参考 7 <sup id="fnref2:7"><a class="footnote-ref" href="#fn:7">7</a></sup> 中的 supplementary material 。</p>
-<p>高斯与均匀混合分布给出：一个好的测量值是在真实深度 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 为均值的正态分布附近，而一个离群值的测量值是在范围为 <span><span class="MathJax_Preview">[Z_{min}, Z_{max}]</span><script type="math/tex">[Z_{min}, Z_{max}]</script></span> 的均匀分布的区间内，概率模型为：</p>
+<h4 id="深度值估计更新">深度值估计更新<a class="headerlink" href="#深度值估计更新" title="Permanent link"></a></h4>
+<p>有了新的深度估计值和估计不确定量以后，就可以根据贝叶斯概率模型对深度值进行更新。SVO 对深度值的估计分布采用了高斯与均匀混合分布来表示 (见参考 7 <sup id="fnref:7"><a class="footnote-ref" href="#fn:7">7</a></sup>) 。</p>
+<p>高斯与均匀混合分布给出：一个好的测量值是在真实深度 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 为均值的正态分布附近，而一个离群值的测量值是在范围为 <span><span class="MathJax_Preview">[Z_{min}, Z_{max}]</span><script type="math/tex">[Z_{min}, Z_{max}]</script></span> 的均匀分布的区间内，因此 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 概率密度函数为：</p>
 <div>
 <div class="MathJax_Preview">
 p(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n | Z_{min}, Z_{max}) \tag{2.1}
@@ -1134,8 +1134,8 @@ p(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n |
 p(x_n | Z, \pi) = \pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n | Z_{min}, Z_{max}) \tag{2.1}
 </script>
 </div>
-<p>注意，这里的 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 与上文中的不是同一个，其中这里 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 是为有效测量的概率，<span><span class="MathJax_Preview">\tau</span><script type="math/tex">\tau</script></span> 是上一步计算的深度估计值的不确定量。当我们得到同一 seed 的一系列测量值 <span><span class="MathJax_Preview">x_1, \dotsc, x_n</span><script type="math/tex">x_1, \dotsc, x_n</script></span> 假设这些测量值独立。我们想从式 (2.1) 求出 <span><span class="MathJax_Preview">Z, \pi</span><script type="math/tex">Z, \pi</script></span> ，最为直观的做法是求解最大似然估计，然而参考 7 <sup id="fnref3:7"><a class="footnote-ref" href="#fn:7">7</a></sup> 作者 G. Vogiatzis 认为最大似然估计容易被局部极大值干扰，其结果并不准确，于是选择从最大后验概率求解，等价求解 <span><span class="MathJax_Preview">\arg \max_\limits{Z,\pi}p(Z, \pi| x_1, \dotsc, x_n)</span><script type="math/tex">\arg \max_\limits{Z,\pi}p(Z, \pi| x_1, \dotsc, x_n)</script></span> 。</p>
-<p>下面结合 G. Vogiatzis 论文 (参考 7 <sup id="fnref4:7"><a class="footnote-ref" href="#fn:7">7</a></sup> ) 中的 Supplementary material 以及引用参考 8<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>、9<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup> ，粗劣的整理出该概率模型的后验概率 <span><span class="MathJax_Preview">p(Z, \pi| x_1, \dotsc, x_n)</span><script type="math/tex">p(Z, \pi| x_1, \dotsc, x_n)</script></span> 可以用 Gaussian×Beta 分布来近似的证明推导。</p>
+<p>注意，这里的 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 与上文中的不是同一个，其中这里 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 是为有效测量的概率，<span><span class="MathJax_Preview">\tau</span><script type="math/tex">\tau</script></span> 是上一步计算的深度估计值的不确定量。当我们得到同一 seed 的一系列测量值 <span><span class="MathJax_Preview">x_1, \dotsc, x_n</span><script type="math/tex">x_1, \dotsc, x_n</script></span> 假设这些测量值独立。我们想从式 (2.1) 求出 <span><span class="MathJax_Preview">Z, \pi</span><script type="math/tex">Z, \pi</script></span> ，最为直观的做法是求解最大似然估计，然而参考 7 <sup id="fnref2:7"><a class="footnote-ref" href="#fn:7">7</a></sup> 作者 G. Vogiatzis 认为最大似然估计容易被局部极大值干扰，其结果并不准确，于是选择从最大后验概率求解，等价求解 <span><span class="MathJax_Preview">\arg \max_\limits{Z,\pi}p(Z, \pi| x_1, \dotsc, x_n)</span><script type="math/tex">\arg \max_\limits{Z,\pi}p(Z, \pi| x_1, \dotsc, x_n)</script></span> 。</p>
+<p>下面结合 G. Vogiatzis 论文 (参考 7 <sup id="fnref3:7"><a class="footnote-ref" href="#fn:7">7</a></sup> ) 中的 Supplementary material 以及引用参考 8<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">8</a></sup>、9<sup id="fnref:9"><a class="footnote-ref" href="#fn:9">9</a></sup> ，整理出该概率模型的后验概率 <span><span class="MathJax_Preview">p(Z, \pi| x_1, \dotsc, x_n)</span><script type="math/tex">p(Z, \pi| x_1, \dotsc, x_n)</script></span> 可以用 Gaussian×Beta 分布来近似的证明推导，以及后验概率迭代形式的推导。</p>
 <p>首先假设 <span><span class="MathJax_Preview">Z , \pi</span><script type="math/tex">Z , \pi</script></span> 的先验分布在没有任何其他信息的情况下，这些量在概率上是独立的，因此满足：</p>
 <div>
 <div class="MathJax_Preview">
@@ -1193,7 +1193,7 @@ q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{
 q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{2.6}
 </script>
 </div>
-<p>由变分推断理论，求解后验估计 <span><span class="MathJax_Preview">p(\mathcal{Y}, Z, \pi | \mathcal{X})</span><script type="math/tex">p(\mathcal{Y}, Z, \pi | \mathcal{X})</script></span> 的最佳近似分布等价于最小化它的 Kullback-Leibler 散度，由此推出 <span><span class="MathJax_Preview">q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)</span><script type="math/tex">q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)</script></span> 需要满足：（这步未仔细研究，还不了解，读者可以先看参考10<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup> 中的 10.1.1 章节（变分推断之分解分布）、参考 11<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup> ，#TODO）</p>
+<p>由变分 (calculus of variations) 推断理论，求解后验估计 <span><span class="MathJax_Preview">p(\mathcal{Y}, Z, \pi | \mathcal{X})</span><script type="math/tex">p(\mathcal{Y}, Z, \pi | \mathcal{X})</script></span> 的最佳近似分布等价于最小化它的 Kullback-Leibler 散度，由此推出 <span><span class="MathJax_Preview">q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)</span><script type="math/tex">q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)</script></span> 需要满足：（这步未仔细研究，还不了解，读者可以先看参考10<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">10</a></sup> 中的 10.1.1 章节（变分推断之分解分布）、参考 11<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">11</a></sup> ，#TODO）</p>
 <div>
 <div class="MathJax_Preview">
 \ln q_{Z,\pi}(Z, \pi) = E_\mathcal{Y}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.7}
@@ -1211,10 +1211,10 @@ q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{
 \ln q_{\mathcal{Y}}(\mathcal{Y}) = E_{Z,\pi}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.8}
 </script>
 </div>
-<p>其中 <span><span class="MathJax_Preview">E_\mathcal{Y}, \, E_{Z,\pi}</span><script type="math/tex">E_\mathcal{Y}, \, E_{Z,\pi}</script></span> 分别表示 <span><span class="MathJax_Preview">q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)</span><script type="math/tex">q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)</script></span> 的期望，这里我们只关系 <span><span class="MathJax_Preview">Z, \pi</span><script type="math/tex">Z, \pi</script></span> 的估计，将式 (2.3) (2.4) (2.5) 带入 式 (2.7) 中</p>
+<p>其中 <span><span class="MathJax_Preview">E_\mathcal{Y}, \, E_{Z,\pi}</span><script type="math/tex">E_\mathcal{Y}, \, E_{Z,\pi}</script></span> 分别表示 <span><span class="MathJax_Preview">q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)</span><script type="math/tex">q_{\mathcal{Y}}(\mathcal{Y}, \, q_{Z,\pi}(Z, \pi)</script></span> 的期望，这里我们只关心 <span><span class="MathJax_Preview">Z, \pi</span><script type="math/tex">Z, \pi</script></span> 的估计，将式 (2.3) (2.4) (2.5) 带入式 (2.7) 中：</p>
 <div>
 <div class="MathJax_Preview">
-\scriptsize{
+\scriptsize {
 \begin{align*}
 &amp; \small{ \ln q_{Z,\pi}(Z, \pi) } \\
 &amp;= E_\mathcal{Y} \Bigg[ \ln \bigg( \Big( \prod_\limits{n=1}^N p(x_n|Z,\pi,y_n) p(y_n|\pi) \Big)p(Z)p(\pi) \bigg) \Bigg] + const \\
@@ -1224,11 +1224,11 @@ q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{
 &amp;= \sum_{n=1}^N E_\mathcal{Y}[y_n] \big(\ln \mathcal{N}(x_n|Z,\tau_n^2) + \ln \pi \big) + \sum_{n=1}^N E_\mathcal{Y}[1-y_n] \big(\ln \mathcal{U}(x_n) + \ln(1-\pi) \big) \\ 
 &amp; \quad + \ln(Z) + \ln(\pi) + const
 \end{align*}
-}
 \tag{2.9}
+}
 </div>
 <script type="math/tex; mode=display">
-\scriptsize{
+\scriptsize {
 \begin{align*}
 & \small{ \ln q_{Z,\pi}(Z, \pi) } \\
 &= E_\mathcal{Y} \Bigg[ \ln \bigg( \Big( \prod_\limits{n=1}^N p(x_n|Z,\pi,y_n) p(y_n|\pi) \Big)p(Z)p(\pi) \bigg) \Bigg] + const \\
@@ -1238,8 +1238,8 @@ q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{
 &= \sum_{n=1}^N E_\mathcal{Y}[y_n] \big(\ln \mathcal{N}(x_n|Z,\tau_n^2) + \ln \pi \big) + \sum_{n=1}^N E_\mathcal{Y}[1-y_n] \big(\ln \mathcal{U}(x_n) + \ln(1-\pi) \big) \\ 
 & \quad + \ln(Z) + \ln(\pi) + const
 \end{align*}
-}
 \tag{2.9}
+}
 </script>
 </div>
 <p>对上式取两边取指数 (exponentiating) 得：</p>
@@ -1253,16 +1253,16 @@ q_{Z,\pi}(Z, \pi) = \Bigg[\prod_{n=1}^N \mathcal{N}(x_n|Z,\tau_n^2)^{r_n} \pi^S 
 其中, \quad r_n = E_\mathcal{Y}[y_n], \, S = \sum_{n=1}^N r_n
 </script>
 </div>
-<p>如果我们为 Z 和 π 选择共轭的先验，就可以证明的近似分布式 (10) 具有 Gaussian×Beta 形式。因此给出了一个近似真实后验概率的模型：</p>
+<p>如果我们为 Z 和 π 选择共轭先验，就可以证明的近似分布式 (10) 具有 Gaussian×Beta 形式。因此给出了一个近似真实后验的概密度函数函数：</p>
 <div>
 <div class="MathJax_Preview">
-q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.11}
+q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.11}
 </div>
 <script type="math/tex; mode=display">
-q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.11}
+q(Z,\pi|a,b,\mu,\sigma^2) \doteq \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.11}
 </script>
 </div>
-<p>这里的 <span><span class="MathJax_Preview">\mathcal{N}(Z|\mu, \sigma_n^2)</span><script type="math/tex">\mathcal{N}(Z|\mu, \sigma_n^2)</script></span> ，而 <span><span class="MathJax_Preview">Beta(\pi|a,b)</span><script type="math/tex">Beta(\pi|a,b)</script></span> 通过 Gamma 函数 <span><span class="MathJax_Preview">\Gamma(a) = (a-1)!</span><script type="math/tex">\Gamma(a) = (a-1)!</script></span> 来联合定义：</p>
+<p>这里的 <span><span class="MathJax_Preview">\mathcal{N}(Z|\mu, \sigma_n^2)</span><script type="math/tex">\mathcal{N}(Z|\mu, \sigma_n^2)</script></span> 是高斯分布，以及<a href="https://zh.wikipedia.org/wiki/%CE%92%E5%88%86%E5%B8%83"><strong>贝塔分布</strong></a> <span><span class="MathJax_Preview">Beta(\pi|a,b)</span><script type="math/tex">Beta(\pi|a,b)</script></span> ：</p>
 <div>
 <div class="MathJax_Preview">
 Beta(\pi|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \pi^{a-1}(1-\pi)^{b-1} \tag{2.12}
@@ -1271,7 +1271,7 @@ Beta(\pi|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \pi^{a-1}(1-\pi)^{b-1} \t
 Beta(\pi|a,b) = \frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)} \pi^{a-1}(1-\pi)^{b-1} \tag{2.12}
 </script>
 </div>
-<p>并且给出了该模型的迭代格式：</p>
+<p>其中 <span><span class="MathJax_Preview">\Gamma(\cdot)</span><script type="math/tex">\Gamma(\cdot)</script></span> 是 <a href="https://zh.wikipedia.org/wiki/%CE%93%E5%87%BD%E6%95%B0"><strong>Gamma 函数</strong></a>，Gamma 函数具有 <span><span class="MathJax_Preview">\Gamma(x+1) = x\,\Gamma(x)</span><script type="math/tex">\Gamma(x+1) = x\,\Gamma(x)</script></span> 的递归形式。并且给出了该模型的迭代式：</p>
 <div>
 <div class="MathJax_Preview">
 q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.13}
@@ -1280,15 +1280,233 @@ q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.
 q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.13}
 </script>
 </div>
-<p>之所以是<strong>约等于</strong>是因为上式的右端形式并不是 Gaussian×Beta 分布，而是用 <span><span class="MathJax_Preview">q(Z,\pi|a_n,b_n,\mu_n,\sigma_n^2)</span><script type="math/tex">q(Z,\pi|a_n,b_n,\mu_n,\sigma_n^2)</script></span> 的一阶矩和二阶矩相等去近似右端项，进而更像参数（这里类似于 EKF 中的更新，通常一个高斯分布通过非线性变换后分布并非高斯，但是通常利用高斯分布的一阶矩和二阶矩去近似这个变换结果）。将 式 (2.1) (2.11) 代入上式的右端得：</p>
+<p>其中，这里的 <span><span class="MathJax_Preview">(\cdot)'</span><script type="math/tex">(\cdot)'</script></span> 表示 n 时刻的参数， <span><span class="MathJax_Preview">(\cdot)</span><script type="math/tex">(\cdot)</script></span> 表示 n-1 时刻的参数。由迭代式可以看出新时刻的参数是通过上一时刻的参数和新的深度测量值来更新的。<mark class="critic">之所以是<strong>约等于</strong>是因为上式的右端形式并不是 Gaussian×Beta 分布，而是用 <span><span class="MathJax_Preview">q(Z,\pi|a',b',\mu',\sigma')</span><script type="math/tex">q(Z,\pi|a',b',\mu',\sigma')</script></span> 关于 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 和 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 的一阶矩和二阶矩相等去近似右端项，且两端的全概率等于 1，进而更新参数（这里类似于 EKF 中的更新，通常一个高斯分布通过非线性变换后分布并非高斯，但是通常利用高斯分布的一阶矩和二阶矩去近似这个变换结果）</mark>。将式 (2.1) (2.11) 代入上式的右端得：</p>
 <div>
 <div class="MathJax_Preview">
-\big(\pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n) \big) \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.14}
+\big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.14}
 </div>
 <script type="math/tex; mode=display">
-\big(\pi \mathcal{N}(x_n | Z, \tau_n^2) + (1-\pi) \mathcal{U}(x_n) \big) \mathcal{N}(Z|\mu, \sigma_n^2)Beta(\pi|a,b) \tag{2.14}
+\big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \tag{2.14}
 </script>
 </div>
+<p>由于要求关于 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 和 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 的一阶矩和二阶矩，因此需要构造的关于 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 和 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 为变量的式子，因此将上式变换如下 (<mark class="critic">这一步骤的思路是让式 (2.14) 转变成便于求关于 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 和 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 的一阶矩和二阶矩的形式</mark>) :</p>
+<div>
+<div class="MathJax_Preview">
+\fbox{$
+\scriptsize{
+  \begin{align*}
+    &amp; \quad \big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \\
+    &amp;= \pi \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) + (1-\pi) \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b) \\
+    &amp; 根据 \Gamma(x+1) = x\,\Gamma(x) 的性质有：\\
+    &amp; \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
+    &amp;= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
+    &amp; 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
+    &amp; 因此将上式第1项中高斯分布乘积中的Z与其他参数分离， \\
+    &amp; 为了方便只取 \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) 的指数项做推导: \\
+    &amp; \fbox{$ \small{ \begin{align*}
+        &amp; \overbrace{-\frac{(x-Z)^2}{2 \tau^2}}^{\mathcal{N}(x | Z, \tau^2)} \overbrace{-\frac{(Z-\mu)^2}{2\sigma^2}}^{\mathcal{N}(Z|\mu, \sigma^2)} \\
+        &amp;= -\frac{(\sigma^2+\tau^2)Z^2 - 2(x \sigma^2 + \mu \tau^2)Z + \sigma^2 x^2 + \mu^2\tau^2}{2\tau^2\sigma^2} \\
+        &amp;= -\frac{Z^2-2(\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})Z + (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 - (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 + \frac{\sigma^2x^2+\tau^2\mu^2}{\sigma^2+\tau^2}}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}} \\
+        &amp;=-\frac{Z^2-2(\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})Z + (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}-\frac{- (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 + \frac{\sigma^2x^2+\tau^2\mu^2}{\sigma^2+\tau^2}}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}} \\
+        &amp;=\underbrace{-\frac{(Z-\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}}_{\mathcal{N}\big(Z \big| \color{red}{ \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2}},\color{blue}{ \frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}\big)} \underbrace{-\frac{(x-\mu)^2}{2(\sigma^2+\tau^2)}}_{\mathcal{N}(x|\mu, \sigma^2+\tau^2)}
+      \end{align*}}$}
+  \end{align*}
+} $}
+</div>
+<script type="math/tex; mode=display">
+\fbox{$
+\scriptsize{
+  \begin{align*}
+    & \quad \big(\pi \mathcal{N}(x | Z, \tau^2) + (1-\pi) \mathcal{U}(x) \big) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) \\
+    &= \pi \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2)Beta(\pi|a,b) + (1-\pi) \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b) \\
+    & 根据 \Gamma(x+1) = x\,\Gamma(x) 的性质有：\\
+    & \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
+    &= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
+    & 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
+    & 因此将上式第1项中高斯分布乘积中的Z与其他参数分离， \\
+    & 为了方便只取 \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) 的指数项做推导: \\
+    & \fbox{$ \small{ \begin{align*}
+        & \overbrace{-\frac{(x-Z)^2}{2 \tau^2}}^{\mathcal{N}(x | Z, \tau^2)} \overbrace{-\frac{(Z-\mu)^2}{2\sigma^2}}^{\mathcal{N}(Z|\mu, \sigma^2)} \\
+        &= -\frac{(\sigma^2+\tau^2)Z^2 - 2(x \sigma^2 + \mu \tau^2)Z + \sigma^2 x^2 + \mu^2\tau^2}{2\tau^2\sigma^2} \\
+        &= -\frac{Z^2-2(\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})Z + (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 - (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 + \frac{\sigma^2x^2+\tau^2\mu^2}{\sigma^2+\tau^2}}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}} \\
+        &=-\frac{Z^2-2(\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})Z + (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}-\frac{- (\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2 + \frac{\sigma^2x^2+\tau^2\mu^2}{\sigma^2+\tau^2}}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}} \\
+        &=\underbrace{-\frac{(Z-\frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2})^2}{2\frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}}_{\mathcal{N}\big(Z \big| \color{red}{ \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2}},\color{blue}{ \frac{\tau^2\sigma^2}{\sigma^2+\tau^2}}\big)} \underbrace{-\frac{(x-\mu)^2}{2(\sigma^2+\tau^2)}}_{\mathcal{N}(x|\mu, \sigma^2+\tau^2)}
+      \end{align*}}$}
+  \end{align*}
+} $}
+</script>
+</div>
+<p>根据上面的推导我们可以将式 (2.14) 转变成：</p>
+<div>
+<div class="MathJax_Preview">
+\small{\begin{align*}\frac{a}{a+b} \mathcal{N}(x | u, \sigma^2 + \tau^2) \mathcal{N}(Z| \color{red}{m}, \color{blue}{s^2}) Beta(\pi|a+1,b) \\ + \frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)\end{align*}} \tag{2.15}
+</div>
+<script type="math/tex; mode=display">
+\small{\begin{align*}\frac{a}{a+b} \mathcal{N}(x | u, \sigma^2 + \tau^2) \mathcal{N}(Z| \color{red}{m}, \color{blue}{s^2}) Beta(\pi|a+1,b) \\ + \frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)\end{align*}} \tag{2.15}
+</script>
+</div>
+<p>其中有：</p>
+<div>
+<div class="MathJax_Preview">
+s^2 = \frac{\tau^2\sigma^2}{\sigma^2+\tau^2} \to \frac{1}{s^2} = \frac{1}{\sigma^2} + \frac{1}{\tau^2} \tag{2.16}
+</div>
+<script type="math/tex; mode=display">
+s^2 = \frac{\tau^2\sigma^2}{\sigma^2+\tau^2} \to \frac{1}{s^2} = \frac{1}{\sigma^2} + \frac{1}{\tau^2} \tag{2.16}
+</script>
+</div>
+<p>和</p>
+<div>
+<div class="MathJax_Preview">
+m = \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2} \to m = s^2 (\frac{\mu}{\sigma^2} + \frac{x}{\tau^2}) \tag{2.17}
+</div>
+<script type="math/tex; mode=display">
+m = \frac{x\sigma^2+\mu\tau^2}{\sigma^2+\tau^2} \to m = s^2 (\frac{\mu}{\sigma^2} + \frac{x}{\tau^2}) \tag{2.17}
+</script>
+</div>
+<p>式 (2.15) 令</p>
+<div>
+<div class="MathJax_Preview">
+C_1 = \frac{a}{a+b} \mathcal{N}(x | u, \sigma^2 + \tau^2), \quad C_2 = \frac{b}{a+b} \mathcal{U}(x) \tag{2.18}
+</div>
+<script type="math/tex; mode=display">
+C_1 = \frac{a}{a+b} \mathcal{N}(x | u, \sigma^2 + \tau^2), \quad C_2 = \frac{b}{a+b} \mathcal{U}(x) \tag{2.18}
+</script>
+</div>
+<p>易知 <span><span class="MathJax_Preview">C_1, C_2</span><script type="math/tex">C_1, C_2</script></span> 是与 <span><span class="MathJax_Preview">Z, \pi</span><script type="math/tex">Z, \pi</script></span> 无关的系数，因此式 (2.15) 变为</p>
+<div>
+<div class="MathJax_Preview">
+\fbox{$
+\scriptsize{ \begin{align*}
+&amp; C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) \\
+&amp; 上式的全概率为 \\
+&amp; \int C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) dZ\, d\pi = C_1 +C_2 \\
+&amp; 由于全概率需要为1，因此转变成 \\
+&amp; \frac{C_1}{C_1 + C_2} \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + \frac{C_2}{C_1 + C_2} \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)
+\end{align*}
+} $}
+</div>
+<script type="math/tex; mode=display">
+\fbox{$
+\scriptsize{ \begin{align*}
+& C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) \\
+& 上式的全概率为 \\
+& \int C_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) dZ\, d\pi = C_1 +C_2 \\
+& 由于全概率需要为1，因此转变成 \\
+& \frac{C_1}{C_1 + C_2} \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + \frac{C_2}{C_1 + C_2} \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)
+\end{align*}
+} $}
+</script>
+</div>
+<p>我们令</p>
+<div>
+<div class="MathJax_Preview">
+C'_1 = \frac{C_1}{C_1 + C_2}, \quad C'_2 = \frac{C_2}{C_1 + C_2} \tag{2.19}
+</div>
+<script type="math/tex; mode=display">
+C'_1 = \frac{C_1}{C_1 + C_2}, \quad C'_2 = \frac{C_2}{C_1 + C_2} \tag{2.19}
+</script>
+</div>
+<p>由此归一化后的概率密度函数形式为：</p>
+<div>
+<div class="MathJax_Preview">
+\small{ C'_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C'_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) } \tag{A}
+</div>
+<script type="math/tex; mode=display">
+\small{ C'_1 \mathcal{N}(Z| m, s^2) Beta(\pi|a+1,b)  + C'_2 \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1) } \tag{A}
+</script>
+</div>
+<p>分别对上式 (A) 和 <span><span class="MathJax_Preview">q(Z,\pi|a',b',\mu',\sigma')</span><script type="math/tex">q(Z,\pi|a',b',\mu',\sigma')</script></span> 求关于 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 和 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 的一阶矩和二阶矩：</p>
+<div>
+<div class="MathJax_Preview">
+\fbox{$
+\scriptsize{\begin{align*}
+  &amp; 先对 q(Z,\pi|a',b',\mu',\sigma') =\mathcal{N}(Z|\mu', \sigma'^2)Beta(\pi|a',b') 求关于 Z 的一阶矩和二阶矩: \\
+  &amp; E_Z = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+  &amp; \quad = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ = E[\mathcal{N}(Z|\mu',\sigma'^2)] = \mu' \\
+  &amp; D_Z = \int Z^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+  &amp; \quad = \underbrace{\int (Z-u')^2 \, \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{D[\mathcal{N}(Z|\mu',\sigma'^2)]=\sigma'^2}} + 2\mu' \underbrace{\int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{E[\mathcal{N}(Z|\mu',\sigma'^2)]=\mu'}} - \mu^2 \underbrace{\int \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{=1}}  \\
+  &amp; \qquad = \sigma'^2 + \mu'^2 \\ \\
+  &amp; 对 q(Z,\pi|a',b',\mu',\sigma') 求关于 \pi 的一阶矩和二阶矩: \\
+  &amp; E_\pi = \int \pi \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') d\pi \\
+  &amp; \quad\! = \underbrace{\int \pi \, Beta(\pi|a',b') d\pi}_{\small{E[Beta(\pi|a',b')] = \frac{a'}{a'+b'}}} = \frac{a'}{a'+b'} \underbrace{\int Beta(\pi|a'+1,b') d\pi}_{\small{=1}} = \frac{a'}{a'+b'} \\
+  &amp; D_\pi = \int \pi^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') d\pi \\
+  &amp; \quad\! = \int \pi^2 \, Beta(\pi|a',b') d\pi = \frac{a'}{a'+b'} \frac{a'+1}{a'+b'+1} \underbrace{\int Beta(\pi|a'+1+1,b') d\pi}_{\small{=1}} \\
+  &amp; 或 \; = \underbrace{\int (\pi-E_\pi)^2 \, Beta(\pi|a',b') d\pi}_{\small{D[Beta(\pi|a',b')] = \frac{a'b'}{(a'+b')^2(a'+b'+1)}}} - \underbrace{ 2E_\pi \int \pi \, Beta(\pi|a',b') d\pi}_{\small{2 E^2_\pi = 2\frac{a'^2}{(a'+b')^2}}} + \underbrace{E_\pi^2 \int Beta(\pi|a',b') d\pi}_{\small{E_\pi^2\cdot1 = \frac{a'^2}{(a'+b')^2}}} \\
+  &amp; \quad\! = \frac{a'(a'+1)}{(a'+b')(a'+b'+1)} \\ \\ \\
+  &amp; 根据上面求解的方式对 式(A) 求关于 Z 和 \pi 的一阶矩和二阶矩有: \\
+  &amp; E'_Z = C'_1 m + C'_2\mu \quad D'_Z = C'_1(m^2+s^2) + C'_2(\mu^2+\sigma^2) \\ \\
+  &amp; E'_\pi = C'_1\frac{a+1}{a+b+1} + C'_2\frac{a}{a+b+1} \quad D'_\pi = C'_1\frac{(a+1)(a+2)}{(a+b+1)(a+b+2)} + C'_2\frac{a(a+1)}{(a+b+1)(a+b+2)}
+\end{align*}}
+$}
+</div>
+<script type="math/tex; mode=display">
+\fbox{$
+\scriptsize{\begin{align*}
+  & 先对 q(Z,\pi|a',b',\mu',\sigma') =\mathcal{N}(Z|\mu', \sigma'^2)Beta(\pi|a',b') 求关于 Z 的一阶矩和二阶矩: \\
+  & E_Z = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+  & \quad = \int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ = E[\mathcal{N}(Z|\mu',\sigma'^2)] = \mu' \\
+  & D_Z = \int Z^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') dZ \\
+  & \quad = \underbrace{\int (Z-u')^2 \, \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{D[\mathcal{N}(Z|\mu',\sigma'^2)]=\sigma'^2}} + 2\mu' \underbrace{\int Z \, \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{E[\mathcal{N}(Z|\mu',\sigma'^2)]=\mu'}} - \mu^2 \underbrace{\int \mathcal{N}(Z|\mu',\sigma'^2) dZ}_{\small{=1}}  \\
+  & \qquad = \sigma'^2 + \mu'^2 \\ \\
+  & 对 q(Z,\pi|a',b',\mu',\sigma') 求关于 \pi 的一阶矩和二阶矩: \\
+  & E_\pi = \int \pi \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') d\pi \\
+  & \quad\! = \underbrace{\int \pi \, Beta(\pi|a',b') d\pi}_{\small{E[Beta(\pi|a',b')] = \frac{a'}{a'+b'}}} = \frac{a'}{a'+b'} \underbrace{\int Beta(\pi|a'+1,b') d\pi}_{\small{=1}} = \frac{a'}{a'+b'} \\
+  & D_\pi = \int \pi^2 \, \mathcal{N}(Z|\mu',\sigma'^2)Beta(\pi|a',b') d\pi \\
+  & \quad\! = \int \pi^2 \, Beta(\pi|a',b') d\pi = \frac{a'}{a'+b'} \frac{a'+1}{a'+b'+1} \underbrace{\int Beta(\pi|a'+1+1,b') d\pi}_{\small{=1}} \\
+  & 或 \; = \underbrace{\int (\pi-E_\pi)^2 \, Beta(\pi|a',b') d\pi}_{\small{D[Beta(\pi|a',b')] = \frac{a'b'}{(a'+b')^2(a'+b'+1)}}} - \underbrace{ 2E_\pi \int \pi \, Beta(\pi|a',b') d\pi}_{\small{2 E^2_\pi = 2\frac{a'^2}{(a'+b')^2}}} + \underbrace{E_\pi^2 \int Beta(\pi|a',b') d\pi}_{\small{E_\pi^2\cdot1 = \frac{a'^2}{(a'+b')^2}}} \\
+  & \quad\! = \frac{a'(a'+1)}{(a'+b')(a'+b'+1)} \\ \\ \\
+  & 根据上面求解的方式对 式(A) 求关于 Z 和 \pi 的一阶矩和二阶矩有: \\
+  & E'_Z = C'_1 m + C'_2\mu \quad D'_Z = C'_1(m^2+s^2) + C'_2(\mu^2+\sigma^2) \\ \\
+  & E'_\pi = C'_1\frac{a+1}{a+b+1} + C'_2\frac{a}{a+b+1} \quad D'_\pi = C'_1\frac{(a+1)(a+2)}{(a+b+1)(a+b+2)} + C'_2\frac{a(a+1)}{(a+b+1)(a+b+2)}
+\end{align*}}
+$}
+</script>
+</div>
+<p>为了使迭代式 (式 2.13) 成立，需要令式子两端关于 <span><span class="MathJax_Preview">Z</span><script type="math/tex">Z</script></span> 和 <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span> 的一阶矩和二阶矩相等，所以有：</p>
+<p>令 <span><span class="MathJax_Preview">E_Z = E'_Z</span><script type="math/tex">E_Z = E'_Z</script></span> 得：</p>
+<div>
+<div class="MathJax_Preview">
+\mu' = C'_1 m + C'_2\mu \tag{2.20}
+</div>
+<script type="math/tex; mode=display">
+\mu' = C'_1 m + C'_2\mu \tag{2.20}
+</script>
+</div>
+<p>令 <span><span class="MathJax_Preview">D_Z = D'_Z</span><script type="math/tex">D_Z = D'_Z</script></span> 得：</p>
+<div>
+<div class="MathJax_Preview">
+\sigma'^2+\mu'^2 = C'_1(m^2+s^2) + C'_2(\mu^2+\sigma^2) \tag{2.21}
+</div>
+<script type="math/tex; mode=display">
+\sigma'^2+\mu'^2 = C'_1(m^2+s^2) + C'_2(\mu^2+\sigma^2) \tag{2.21}
+</script>
+</div>
+<p>令 <span><span class="MathJax_Preview">E_\pi = E'_\pi</span><script type="math/tex">E_\pi = E'_\pi</script></span> 得：</p>
+<div>
+<div class="MathJax_Preview">
+\frac{a'}{a'+b'} = C'_1\frac{a+1}{a+b+1} + C'_2\frac{a}{a+b+1} \tag{2.22}
+</div>
+<script type="math/tex; mode=display">
+\frac{a'}{a'+b'} = C'_1\frac{a+1}{a+b+1} + C'_2\frac{a}{a+b+1} \tag{2.22}
+</script>
+</div>
+<p>令 <span><span class="MathJax_Preview">D_\pi = D'_\pi</span><script type="math/tex">D_\pi = D'_\pi</script></span> 得：</p>
+<div>
+<div class="MathJax_Preview">
+\begin{align*}
+  \frac{a'(a'+1)}{(a'+b')(a'+b'+1)} &amp;= C'_1\frac{(a+1)(a+2)}{(a+b+1)(a+b+2)} \\
+  &amp;\quad + C'_2\frac{a(a+1)}{(a+b+1)(a+b+2)} 
+\end{align*} \tag{2.23}
+</div>
+<script type="math/tex; mode=display">
+\begin{align*}
+  \frac{a'(a'+1)}{(a'+b')(a'+b'+1)} &= C'_1\frac{(a+1)(a+2)}{(a+b+1)(a+b+2)} \\
+  &\quad + C'_2\frac{a(a+1)}{(a+b+1)(a+b+2)} 
+\end{align*} \tag{2.23}
+</script>
+</div>
+<p>由上面四个等式就可以通过 n-1 时刻的参数 <span><span class="MathJax_Preview">a, b, \mu, \sigma</span><script type="math/tex">a, b, \mu, \sigma</script></span> 求解 n 时刻的参数 <span><span class="MathJax_Preview">a', b', \mu', \sigma'</span><script type="math/tex">a', b', \mu', \sigma'</script></span> 了。</p>
+<p>关于代码中的其他细节，请观看下一篇 「 SVO 代码解析」</p>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1332,7 +1550,7 @@ MathJax.Hub.Config({
 <p>《视觉 SLAM 十四讲》高翔等著：13.2.3 小节&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 6 in the text">&#8617;</a></p>
 </li>
 <li id="fn:7">
-<p><a href="http://www.george-vogiatzis.org/">G. Vogiatzis</a> and C. Hern´ andez, “<a href="http://www.george-vogiatzis.org/publications/ivcj2010.pdf">Video-based, Real-Time Multi View Stereo</a>,” Image and Vision Computing, vol. 29, no. 7, 2011.  <a href="http://www.george-vogiatzis.org/publications/ivcj2010supp.pdf">Supplementary matterial</a>&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+<p><a href="http://www.george-vogiatzis.org/">G. Vogiatzis</a> and C. Hern´ andez, “<a href="http://www.george-vogiatzis.org/publications/ivcj2010.pdf">Video-based, Real-Time Multi View Stereo</a>,” Image and Vision Computing, vol. 29, no. 7, 2011.  <a href="http://www.george-vogiatzis.org/publications/ivcj2010supp.pdf">Supplementary matterial</a>&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:7" title="Jump back to footnote 7 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:7" title="Jump back to footnote 7 in the text">&#8617;</a></p>
 </li>
 <li id="fn:8">
 <p><a href="http://www.cnblogs.com/luyb/p/5773691.html">路游侠 - SVO 解析</a>&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 8 in the text">&#8617;</a></p>
