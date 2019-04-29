@@ -221,7 +221,7 @@ $$
 q(\mathcal{Y}, Z, \pi) = q_{\mathcal{Y}}(\mathcal{Y}) \, q_{Z,\pi}(Z, \pi) \tag{2.6}
 $$
 
-由变分 (calculus of variations) 推断理论，求解后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 的最佳近似分布等价于最小化它的 Kullback-Leibler 散度，由此推出 $q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)$ 需要满足：（这步未仔细研究，还不了解，读者可以先看参考10[^10] 中的 10.1.1 章节（变分推断之分解分布）、参考 11[^11] ，#TODO）
+由变分 (calculus of variations) 推断理论，求解后验估计 $p(\mathcal{Y}, Z, \pi | \mathcal{X})$ 的最佳近似分布等价于最小化 $q(\mathcal{Y}, Z, \pi)$ 与 $p(\mathcal{X, Y},Z,\pi)$ 的 Kullback-Leibler 散度，由此推出 $q_{\mathcal{Y}}(\mathcal{Y}) , \: q_{Z,\pi}(Z, \pi)$ 需要满足：（这步未仔细研究，读者可以先看参考10[^10] 中的 10.1.1 章节（变分推断之分解分布）、参考 11[^11] ，#TODO）
 
 $$
 \ln q_{Z,\pi}(Z, \pi) = E_\mathcal{Y}[\ln p(\mathcal{X, Y}, Z, \pi)] + const \tag{2.7}
