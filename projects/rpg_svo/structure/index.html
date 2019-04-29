@@ -38,11 +38,11 @@
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
     
     
       
-        <title>算法框架 - SLAM 之旅</title>
+        <title>SVO 算法框架 - SLAM 之旅</title>
       
     
     
@@ -162,7 +162,7 @@
               SLAM 之旅
             </span>
             <span class="md-header-nav__topic">
-              算法框架
+              SVO 算法框架
             </span>
           
         </div>
@@ -404,8 +404,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../computer_vision/computer_vision/" title="概述" class="md-nav__link">
-      概述
+    <a href="../../../computer_vision/computer_vision/" title="计算机视觉基础概览" class="md-nav__link">
+      计算机视觉基础概览
     </a>
   </li>
 
@@ -452,8 +452,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../multiple_view_geometry/mvg/" title="概览" class="md-nav__link">
-      概览
+    <a href="../../../multiple_view_geometry/mvg/" title="多视几何概览" class="md-nav__link">
+      多视几何概览
     </a>
   </li>
 
@@ -512,8 +512,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../state_estimation_robotics/state_estimation_robotics/" title="概览" class="md-nav__link">
-      概览
+    <a href="../../../state_estimation_robotics/state_estimation_robotics/" title="状态估计概览" class="md-nav__link">
+      状态估计概览
     </a>
   </li>
 
@@ -550,8 +550,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../projects/" title="概述" class="md-nav__link">
-      概述
+    <a href="../../projects/" title="开源项目概览" class="md-nav__link">
+      开源项目概览
     </a>
   </li>
 
@@ -590,11 +590,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        算法框架
+        SVO 算法框架
       </label>
     
-    <a href="./" title="算法框架" class="md-nav__link md-nav__link--active">
-      算法框架
+    <a href="./" title="SVO 算法框架" class="md-nav__link md-nav__link--active">
+      SVO 算法框架
     </a>
     
       
@@ -694,6 +694,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#总结" title="总结" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#参考" title="参考" class="md-nav__link">
     参考
   </a>
@@ -741,8 +748,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../orb_slam/structure/" title="算法框架" class="md-nav__link">
-      算法框架
+    <a href="../../orb_slam/structure/" title="ORB-SLAM 算法框架" class="md-nav__link">
+      ORB-SLAM 算法框架
     </a>
   </li>
 
@@ -912,6 +919,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#总结" title="总结" class="md-nav__link">
+    总结
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#参考" title="参考" class="md-nav__link">
     参考
   </a>
@@ -937,7 +951,7 @@
                   <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/projects/rpg_svo/structure.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>算法框架</h1>
+                  <h1>SVO 算法框架</h1>
                 
                 <h2 id="svo--semi-direct-visual-odometry">SVO : Semi-Direct Visual Odometry<a class="headerlink" href="#svo--semi-direct-visual-odometry" title="Permanent link"></a></h2>
 <p>半直接视觉里程计，所谓的半直接是指对图像中提取的特征点图像块进行直接匹配来获取相机的位姿，而不同于直接匹配法那么对整个图像使用直接匹配的方式来获取相机位姿。虽然<em>半直接 (Semi-Direct)</em> 法使用了特征块，但它的基础思想还是类似于<em>直接法 (Direct method)</em> 来获取位姿信息，这点与<em>特征点法  (Feature-Based method)</em> 的提取额一组稀疏特征点，使用特征描述子匹配，通过对极约束来估计位姿是不一样的。然而，半直接法与直接法不同的是它利用了特征块匹配，通过再投影误差最小化来对直接法估计的位姿进行优化。</p>
@@ -1505,8 +1519,10 @@ $}
 \end{align*} \tag{2.23}
 </script>
 </div>
-<p>由上面四个等式就可以通过 n-1 时刻的参数 <span><span class="MathJax_Preview">a, b, \mu, \sigma</span><script type="math/tex">a, b, \mu, \sigma</script></span> 求解 n 时刻的参数 <span><span class="MathJax_Preview">a', b', \mu', \sigma'</span><script type="math/tex">a', b', \mu', \sigma'</script></span> 了。</p>
-<p>关于代码中的其他细节，请观看下一篇 「 SVO 代码解析」</p>
+<p>由上面四个等式就可以通过 n-1 时刻的参数 <span><span class="MathJax_Preview">a, b, \mu, \sigma</span><script type="math/tex">a, b, \mu, \sigma</script></span> 求解 n 时刻的参数 <span><span class="MathJax_Preview">a', b', \mu', \sigma'</span><script type="math/tex">a', b', \mu', \sigma'</script></span> 了。因此在加入新的测量时，通过迭代式 (2.14) 近似后验概率分布会得到更新，当 <span><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> 小于给定阈值时，认为估计的深度值已经收敛，计算对应特征点的三维坐标，并加入地图。</p>
+<h2 id="总结">总结<a class="headerlink" href="#总结" title="Permanent link"></a></h2>
+<p>SVO 相对于目前其他开源的方案，它的最大优势是速度极快。这是因为它使用了稀疏的直接法，既不用费力的去计算描述子用于特征匹配，也不必像稠密或半稠密法那么处理大量的信息，因此 SVO 在低端的计算平台上也可以打到实时性。但也由于 SVO 针对目标应用平台选为了无人机的俯视相机，围绕该特点应用场景设计也使得 SVO 的局限性比较大，并且为了计算速度，直接舍弃了后端优化月回环检查，也基本没有重定位能力。因此我们可以称它仅仅是个里程计，而非完整的 SLAM 。</p>
+<p>关于代码中的其他细节，请观看下一篇 「 SVO 代码解析」。</p>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1586,7 +1602,7 @@ MathJax.Hub.Config({
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../../projects/" title="概述" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../../projects/" title="开源项目概览" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1595,19 +1611,19 @@ MathJax.Hub.Config({
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                概述
+                开源项目概览
               </span>
             </div>
           </a>
         
         
-          <a href="../../orb_slam/structure/" title="算法框架" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../orb_slam/structure/" title="ORB-SLAM 算法框架" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                算法框架
+                ORB-SLAM 算法框架
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -1646,7 +1662,7 @@ MathJax.Hub.Config({
       
     </div>
     
-      <script src="../../../assets/javascripts/application.267712eb.js"></script>
+      <script src="../../../assets/javascripts/application.dc02f8ce.js"></script>
       
         
         
