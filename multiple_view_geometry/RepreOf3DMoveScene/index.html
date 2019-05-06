@@ -505,10 +505,9 @@
     三维重建的起源
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#三维欧式空间" title="三维欧式空间" class="md-nav__link">
     三维欧式空间
   </a>
@@ -523,13 +522,29 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#叉积" title="叉积" class="md-nav__link">
+    叉积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#反对称矩阵" title="反对称矩阵" class="md-nav__link">
+    反对称矩阵
+  </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#刚体运动" title="刚体运动" class="md-nav__link">
+    刚体运动
+  </a>
   
 </li>
       
@@ -764,10 +779,9 @@
     三维重建的起源
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#三维欧式空间" title="三维欧式空间" class="md-nav__link">
     三维欧式空间
   </a>
@@ -782,13 +796,29 @@
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#叉积" title="叉积" class="md-nav__link">
+    叉积
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#反对称矩阵" title="反对称矩阵" class="md-nav__link">
+    反对称矩阵
+  </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#刚体运动" title="刚体运动" class="md-nav__link">
+    刚体运动
+  </a>
   
 </li>
       
@@ -822,7 +852,7 @@
 <p>透视投影的概念起源于古希腊 (Euclid of Alexandria,  400 B.C.) 和文艺复兴时期 (Brunelleschi &amp; Alberti, 1435)。透视投影的研究引出了<strong>投影几何 (projective geometry)</strong> 领域。</p>
 <p>关于多视几何的第一个研究工作成果是来至于 Erwin Kruppa (1913) ，他指出五个点的两个视图足以确定两个视图之间的相对变换（运动） 和点的三维位置（结构）。Longuet-Higgins 在 1981 年提出了一种基于两视图<strong>对极约束 (epipolar constraint)</strong> 恢复运动结构重建的线性算法。在几本教科书中总结了一系列关于这方面的著作 (Faugeras 1993, Kanatani 1993, Maybank 1993, Weng et al. 1993) 。对三个视图的扩展由 Spetsakis 和 Aloimonos 87、90、Shashua 94 和 Hartley 95 研究发布的。多视图和正交投影的因子分解技术是由 Tomasi 和 Kanade 于 1992 年研究发布的。</p>
 <p>相机运动与三维位置的联合估计称为<strong>运动结构重建 (structure and motion)</strong> 或<strong>视觉 SLAM (visual SLAM)</strong> 。</p>
-<h3 id="三维欧式空间">三维欧式空间<a class="headerlink" href="#三维欧式空间" title="Permanent link"></a></h3>
+<h2 id="三维欧式空间">三维欧式空间<a class="headerlink" href="#三维欧式空间" title="Permanent link"></a></h2>
 <p>一般来说，欧几里得空间是一个集合，它的元素满足欧几里得的五个公理。三维的欧几里得空间 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 是由以下式为坐标的所有点 <span><span class="MathJax_Preview">P \in \mathbb{E}^3</span><script type="math/tex">P \in \mathbb{E}^3</script></span> 组成的。</p>
 <div>
 <div class="MathJax_Preview">
@@ -835,7 +865,7 @@
 </script>
 </div>
 <p>通过这样一个<strong>笛卡尔 (Cartesian) 坐标系</strong>的赋值，可以在 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 和 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 之间建立一一对应关系。这里的 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 可以被视为等同于 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 。这意味着允许我们当讨论一个点 ( <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> ) 和坐标 ( <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> ) 犹如是一回事一样。笛卡尔坐标是使测量距离和角度成为可能的第一步。为此，必须为 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 赋予<strong>度量标准 (metric)</strong> 。 度量的精确定义依赖于向量的概念。</p>
-<h4 id="向量">向量<a class="headerlink" href="#向量" title="Permanent link"></a></h4>
+<h3 id="向量">向量<a class="headerlink" href="#向量" title="Permanent link"></a></h3>
 <p>在欧式空间中，一个向量 <span><span class="MathJax_Preview">\mathbf{v}</span><script type="math/tex">\mathbf{v}</script></span> 由一对点 <span><span class="MathJax_Preview">q, p \in \mathbb{E}^3</span><script type="math/tex">q, p \in \mathbb{E}^3</script></span> 确定，被定义为链接 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 到 <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> 的有向箭头记号，表示称 <span><span class="MathJax_Preview">\mathbf{v} = \overrightarrow{pq}</span><script type="math/tex">\mathbf{v} = \overrightarrow{pq}</script></span> 。这里的点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 通常被称为是向量 <span><span class="MathJax_Preview">\mathbf{v}</span><script type="math/tex">\mathbf{v}</script></span> 的基点。假使点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 的坐标为 <span><span class="MathJax_Preview">\mathbf{X}</span><script type="math/tex">\mathbf{X}</script></span> ，点 <span><span class="MathJax_Preview">q</span><script type="math/tex">q</script></span> 的坐标为 <span><span class="MathJax_Preview">\mathbf{Y}</span><script type="math/tex">\mathbf{Y}</script></span> ，那么向量 <span><span class="MathJax_Preview">\mathbf{v}</span><script type="math/tex">\mathbf{v}</script></span> 的坐标为：</p>
 <div>
 <div class="MathJax_Preview">
@@ -849,7 +879,7 @@
 <div class="admonition note">
 <p>需要注意：点和向量是不同的几何对象。这一点很重要，我们很快就会看到，因为刚体运动对点和向量的作用是不同的。</p>
 </div>
-<p>所有自由向量 <span><span class="MathJax_Preview">\mathbf{v} \in \mathbb{R}^3</span><script type="math/tex">\mathbf{v} \in \mathbb{R}^3</script></span> 的集合构成一个线性向量空间。通过确定 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 和 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 之间的联系， <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 的欧几里德度量标准仅由向量空间 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 上的一个<strong>内积 (inner product，或称为点积，dot product)</strong> 定义。有了这样一个度规，我们不仅可以测量点之间的距离（向量的模）或向量之间的角度，还可以计算曲线的长度或区域的体积。</p>
+<p>所有自由向量 <span><span class="MathJax_Preview">\mathbf{v} \in \mathbb{R}^3</span><script type="math/tex">\mathbf{v} \in \mathbb{R}^3</script></span> 的集合构成一个线性向量空间。通过确定 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 和 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 之间的联系， <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 的欧几里德度量标准仅由向量空间 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 上的一个<strong>内积 (inner product，或称为点积，dot product)</strong> 定义。有了这样一个度量标准 (metric) ，我们不仅可以测量点之间的距离（向量的模）或向量之间的角度，还可以计算曲线的长度或区域的体积。</p>
 <p>运动粒子 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 在 <span><span class="MathJax_Preview">\mathbb{E}^3</span><script type="math/tex">\mathbb{E}^3</script></span> 中的运动轨迹可用曲线 <span><span class="MathJax_Preview">\gamma(\cdot) : t \mapsto \mathbf{X} \in \mathbb{R}^3, t \in [0, 1]</span><script type="math/tex">\gamma(\cdot) : t \mapsto \mathbf{X} \in \mathbb{R}^3, t \in [0, 1]</script></span> 来描述，则曲线的总长度为：</p>
 <div>
 <div class="MathJax_Preview">
@@ -860,6 +890,83 @@ l(\gamma(\cdot)) = \int_0^1 \| \dot{\mathbf{X}} (t) dt \|
 </script>
 </div>
 <p>这里的 <span><span class="MathJax_Preview">\dot{\mathbf{X}} (t) = \frac{\mathrm d}{\mathrm d t} \big( \mathbf{X} (t) \big) \in \mathbb{R}^3</span><script type="math/tex">\dot{\mathbf{X}} (t) = \frac{\mathrm d}{\mathrm d t} \big( \mathbf{X} (t) \big) \in \mathbb{R}^3</script></span> 被称为曲线的切向量。 </p>
+<h3 id="叉积">叉积<a class="headerlink" href="#叉积" title="Permanent link"></a></h3>
+<p>在向量空间 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 上可以定义一个叉积运算，运算形式如下：</p>
+<div>
+<div class="MathJax_Preview">
+\times : \mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}^3: \quad \mathbf{u} \times \mathbf{v} = \begin{bmatrix} u_2 v_3 - u_3 v_2  \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{bmatrix} \in \mathbb{R}^3
+</div>
+<script type="math/tex; mode=display">
+\times : \mathbb{R}^3 \times \mathbb{R}^3 \to \mathbb{R}^3: \quad \mathbf{u} \times \mathbf{v} = \begin{bmatrix} u_2 v_3 - u_3 v_2  \\ u_3 v_1 - u_1 v_3 \\ u_1 v_2 - u_2 v_1 \end{bmatrix} \in \mathbb{R}^3
+</script>
+</div>
+<p>其中，向量 <span><span class="MathJax_Preview">\mathbf{u, v}</span><script type="math/tex">\mathbf{u, v}</script></span> 的叉积结果是一个垂直于它们的向量。由于 <span><span class="MathJax_Preview">\mathbf{u} \times \mathbf{v} = - \mathbf{v} \times \mathbf{u}</span><script type="math/tex">\mathbf{u} \times \mathbf{v} = - \mathbf{v} \times \mathbf{u}</script></span> ，两个向量的外积正交于它的每个因子，因子的顺序决定了叉积结果的<em>方向 (orientation)</em>。这个方向满足<strong>右手法则 (Right-hand rule)</strong> 。</p>
+<h3 id="反对称矩阵">反对称矩阵<a class="headerlink" href="#反对称矩阵" title="Permanent link"></a></h3>
+<p>固定 <span><span class="MathJax_Preview">\mathbf{u}</span><script type="math/tex">\mathbf{u}</script></span> 可以因此一个通过反对称矩阵定义的线性映射： <span><span class="MathJax_Preview">\mathbf{v} \to \mathbf{u} \times \mathbf{v}</span><script type="math/tex">\mathbf{v} \to \mathbf{u} \times \mathbf{v}</script></span> ，该反对称矩阵表示成 <span><span class="MathJax_Preview">\hat{\mathbf{u}} \in \mathbb{R}^{3\times3}</span><script type="math/tex">\hat{\mathbf{u}} \in \mathbb{R}^{3\times3}</script></span> ，称为 “<span><span class="MathJax_Preview">\mathbf{u}</span><script type="math/tex">\mathbf{u}</script></span> <strong>hat</strong>” 。在一些文献中，反对称矩阵 <span><span class="MathJax_Preview">\hat{\mathbf{u}}</span><script type="math/tex">\hat{\mathbf{u}}</script></span> 也可以表示成 <span><span class="MathJax_Preview">\mathbf{u}_\times \, \text{或} \, [\mathbf{u}]_\times</span><script type="math/tex">\mathbf{u}_\times \, \text{或} \, [\mathbf{u}]_\times</script></span> ：</p>
+<div>
+<div class="MathJax_Preview">
+\hat{\mathbf{u}} \doteq
+\begin{bmatrix}
+  0 &amp; -u_3 &amp; u_2 \\ u_3 &amp; 0 &amp; -u_1 \\ -u_2 &amp; u_1 &amp; 0
+\end{bmatrix}
+\in \mathbb{R}^{3\times3}
+</div>
+<script type="math/tex; mode=display">
+\hat{\mathbf{u}} \doteq
+\begin{bmatrix}
+  0 & -u_3 & u_2 \\ u_3 & 0 & -u_1 \\ -u_2 & u_1 & 0
+\end{bmatrix}
+\in \mathbb{R}^{3\times3}
+</script>
+</div>
+<p>因此，我们可将叉积写成 <span><span class="MathJax_Preview">\mathbf{u} \times \mathbf{v} = \hat{\mathbf{u}} \mathbf{v}</span><script type="math/tex">\mathbf{u} \times \mathbf{v} = \hat{\mathbf{u}} \mathbf{v}</script></span> 。反对称矩阵有 <span><span class="MathJax_Preview">\hat{\mathbf{u}}^\top = -\hat{\mathbf{u}}</span><script type="math/tex">\hat{\mathbf{u}}^\top = -\hat{\mathbf{u}}</script></span> 。</p>
+<p>反之，每一个反对称矩阵 <span><span class="MathJax_Preview">M = -M^\top \in \mathbb{R}^{3\times3}</span><script type="math/tex">M = -M^\top \in \mathbb{R}^{3\times3}</script></span> 可以通过向量 <span><span class="MathJax_Preview">\mathbf{u} \in \mathbb{R}^3</span><script type="math/tex">\mathbf{u} \in \mathbb{R}^3</script></span> 来关联识别。<strong>帽 (hat)</strong> , <span><span class="MathJax_Preview">\wedge : \mathbb{R}^3 \to SO(3); \; \mathbf{u} \to \hat{\mathbf{u}}</span><script type="math/tex">\wedge : \mathbb{R}^3 \to SO(3); \; \mathbf{u} \to \hat{\mathbf{u}}</script></span> 运算符定义了一个<em>同构 (isomorphism)</em> 在空间 <span><span class="MathJax_Preview">\mathbb{R}^3</span><script type="math/tex">\mathbb{R}^3</script></span> 和所有由 <span><span class="MathJax_Preview">3\times3</span><script type="math/tex">3\times3</script></span> 反对称矩阵构成的 <span><span class="MathJax_Preview">SO(3)</span><script type="math/tex">SO(3)</script></span> 的子空间。它的逆操作称为 <strong>vee</strong> 操作 <span><span class="MathJax_Preview">\vee : SO(3) \to \mathbb{R}^3; \; \hat{\mathbf{u}} \to \hat{\mathbf{u}}^\vee = \mathbf{u}</span><script type="math/tex">\vee : SO(3) \to \mathbb{R}^3; \; \hat{\mathbf{u}} \to \hat{\mathbf{u}}^\vee = \mathbf{u}</script></span> 。</p>
+<h2 id="刚体运动">刚体运动<a class="headerlink" href="#刚体运动" title="Permanent link"></a></h2>
+<p>刚体的运动保持刚体上任意一对点 <span><span class="MathJax_Preview">(p,q)</span><script type="math/tex">(p,q)</script></span> 之间的距离恒为 <span><span class="MathJax_Preview">d</span><script type="math/tex">d</script></span> 。如下图所示：</p>
+<p><img alt="Rigid-Body Motion" src="../image/rigid-body motion.png" /></p>
+<p>因此，如果 <span><span class="MathJax_Preview">\mathbf{X}(t)</span><script type="math/tex">\mathbf{X}(t)</script></span> 和 <span><span class="MathJax_Preview">\mathbf{Y}(t)</span><script type="math/tex">\mathbf{Y}(t)</script></span> 是物体上任意两点 <span><span class="MathJax_Preview">p,q</span><script type="math/tex">p,q</script></span> 的坐标，那么它们的距离是恒定的：</p>
+<div>
+<div class="MathJax_Preview">
+\| \mathbf{X}(t) - \mathbf{Y}(t) \| \equiv 常数, \quad \forall t \in \mathbb{R} \tag{1}
+</div>
+<script type="math/tex; mode=display">
+\| \mathbf{X}(t) - \mathbf{Y}(t) \| \equiv 常数, \quad \forall t \in \mathbb{R} \tag{1}
+</script>
+</div>
+<p><strong>刚体运动 (rigid-body motion)</strong> (或 <strong>刚体变换 (rigid-body transformation)</strong> ) 是一组映射，描述刚体上每个点的坐标如何在满足上式条件下随时间变化。将该映射表示成：</p>
+<div>
+<div class="MathJax_Preview">
+g_t : \mathbb{R}^3 \to \mathbb{R}^3; \quad \mathbf{X} \to g_t({\mathbf{X}}) \quad t \in [0, T]
+</div>
+<script type="math/tex; mode=display">
+g_t : \mathbb{R}^3 \to \mathbb{R}^3; \quad \mathbf{X} \to g_t({\mathbf{X}}) \quad t \in [0, T]
+</script>
+</div>
+<p>且需要维持向量的模与叉积满足以下两个式子：</p>
+<ul>
+<li><span><span class="MathJax_Preview">\|g_t (\mathrm{v})\| = \|\mathrm{v}\|, \; \forall \mathrm{v} \in \mathbb{R}^3</span><script type="math/tex">\|g_t (\mathrm{v})\| = \|\mathrm{v}\|, \; \forall \mathrm{v} \in \mathbb{R}^3</script></span> </li>
+<li><span><span class="MathJax_Preview">g_t(\mathrm{u}) \times g_t(\mathrm{v}) = g_t(\mathrm{u} \times \mathrm{v}), \forall \mathrm{u}, \mathrm{v} \in \mathbb{R}^3</span><script type="math/tex">g_t(\mathrm{u}) \times g_t(\mathrm{v}) = g_t(\mathrm{u} \times \mathrm{v}), \forall \mathrm{u}, \mathrm{v} \in \mathbb{R}^3</script></span> </li>
+</ul>
+<p>所有这些运动或变换的集合用 <span><span class="MathJax_Preview">SE(3)</span><script type="math/tex">SE(3)</script></span> 表示。刚体运动引起的映射或变换称为<strong>特殊欧几里德变换 (special Euclidean transformation)</strong> 。“特殊” 一词表示转换是保持方向的。</p>
+<p>根据上面刚体运动的定义，内积可以依赖范数通过<em>极化恒等式 (polarization identity)</em> 来定义：</p>
+<div>
+<div class="MathJax_Preview">
+\langle u,v \rangle = \frac{1}{4} (\|u+v\|^2 - \|u-v\|^2)
+</div>
+<script type="math/tex; mode=display">
+\langle u,v \rangle = \frac{1}{4} (\|u+v\|^2 - \|u-v\|^2)
+</script>
+</div>
+<p>因此我们也可以说刚体运动是一个保持内积和外积的映射，而且根据定义可知道刚体运动也保留了<strong>三重积 (triple product)</strong> ：</p>
+<div>
+<div class="MathJax_Preview">
+\langle g_t(u), g_t(v)\times g_t(w) \rangle = \langle u,v\times w \rangle, \forall u,v,w \in \mathbb{R}^3
+</div>
+<script type="math/tex; mode=display">
+\langle g_t(u), g_t(v)\times g_t(w) \rangle = \langle u,v\times w \rangle, \forall u,v,w \in \mathbb{R}^3
+</script>
+</div>
+<p>由于三重积对应于由这三个向量张成的平行六面体的体积，刚体运动也保留了<strong>体积 (volume)</strong> 。</p>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     config: ["MMLorHTML.js"],
