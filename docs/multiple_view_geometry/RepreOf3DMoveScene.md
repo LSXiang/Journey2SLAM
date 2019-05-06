@@ -75,7 +75,49 @@ $$
 
 
 
-## 
+## 刚体运动
+
+刚体的运动保持刚体上任意一对点 $(p,q)$ 之间的距离恒为 $d$ 。如下图所示：
+
+![Rigid-Body Motion](image/rigid-body motion.png)
+
+因此，如果 $\mathbf{X}(t)$ 和 $\mathbf{Y}(t)$ 是物体上任意两点 $p,q$ 的坐标，那么它们的距离是恒定的：
+
+$$
+\| \mathbf{X}(t) - \mathbf{Y}(t) \| \equiv 常数, \quad \forall t \in \mathbb{R} \tag{1}
+$$
+
+**刚体运动 (rigid-body motion)** (或 **刚体变换 (rigid-body transformation)** ) 是一组映射，描述刚体上每个点的坐标如何在满足上式条件下随时间变化。将该映射表示成：
+
+$$
+g_t : \mathbb{R}^3 \to \mathbb{R}^3; \quad \mathbf{X} \to g_t({\mathbf{X}}) \quad t \in [0, T]
+$$
+
+且需要维持向量的模与叉积满足以下两个式子：
+
+- $\|g_t (\mathrm{v})\| = \|\mathrm{v}\|, \; \forall \mathrm{v} \in \mathbb{R}^3$ 
+- $g_t(\mathrm{u}) \times g_t(\mathrm{v}) = g_t(\mathrm{u} \times \mathrm{v}), \forall \mathrm{u}, \mathrm{v} \in \mathbb{R}^3$ 
+
+所有这些运动或变换的集合用 $SE(3)$ 表示。刚体运动引起的映射或变换称为**特殊欧几里德变换 (special Euclidean transformation)** 。“特殊” 一词表示转换是保持方向的。
+
+根据上面刚体运动的定义，内积可以依赖范数通过*极化恒等式 (polarization identity)* 来定义：
+
+$$
+\langle u,v \rangle = \frac{1}{4} (\|u+v\|^2 - \|u-v\|^2)
+$$
+
+因此我们也可以说刚体运动是一个保持内积和外积的映射，而且根据定义可知道刚体运动也保留了**三重积 (triple product)** ：
+
+$$
+\langle g_t(u), g_t(v)\times g_t(w) \rangle = \langle u,v\times w \rangle, \forall u,v,w \in \mathbb{R}^3
+$$
+
+由于三重积对应于由这三个向量张成的平行六面体的体积，刚体运动也保留了**体积 (volume)** 。
+
+
+
+
+
 
 
 
