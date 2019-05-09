@@ -51,10 +51,11 @@ nav:
 - 开源项目:
     - 开源项目概览: projects/projects.md
     - RPG-SVO:
-      - SVO 算法框架: projects/rpg_svo/structure.md
+      - SVO 算法框架: projects/rpg_svo/algorithm_framework.md
+      - SVO 代码解析: projects/rpg_svo/code_analysis.md
     - ORB-SLAM:
-      - ORB-SLAM 算法框架: projects/orb_slam/structure.md
-      - 初始化: projects/orb_slam/initialize.md
+      - ORB-SLAM 算法框架: projects/orb_slam/algorithm_framework.md
+      - ORB-SLAM 代码解析: projects/orb_slam/code_analysis.md
 - 其他:
     - Markdown 写作模版: others/md_template.md
     # - 待归类整合文稿: 
