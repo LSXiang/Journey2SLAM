@@ -13,7 +13,7 @@
         <meta name="description" content="SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台">
       
       
-        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/projects/rpg_svo/structure/">
+        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/projects/rpg_svo/algorithm_framework/">
       
       
         <meta name="author" content="Jacob.lsx">
@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
     
     
       
@@ -718,6 +718,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../code_analysis/" title="SVO 代码解析" class="md-nav__link">
+      SVO 代码解析
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -748,7 +760,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../orb_slam/structure/" title="ORB-SLAM 算法框架" class="md-nav__link">
+    <a href="../../orb_slam/algorithm_framework/" title="ORB-SLAM 算法框架" class="md-nav__link">
       ORB-SLAM 算法框架
     </a>
   </li>
@@ -760,8 +772,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../orb_slam/initialize/" title="初始化" class="md-nav__link">
-      初始化
+    <a href="../../orb_slam/code_analysis/" title="ORB-SLAM 代码解析" class="md-nav__link">
+      ORB-SLAM 代码解析
     </a>
   </li>
 
@@ -948,7 +960,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/projects/rpg_svo/structure.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/projects/rpg_svo/algorithm_framework.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                   <h1>SVO 算法框架</h1>
@@ -1314,8 +1326,8 @@ q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.
     &amp; 根据 \Gamma(x+1) = x\,\Gamma(x) 的性质有：\\
     &amp; \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
     &amp;= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
-    &amp; 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
-    &amp; 因此将上式第1项中高斯分布乘积中的Z与其他参数分离， \\
+    &amp; 我们发现上式中的第1项中存在以 Z 或者 \pi 为参数的项 \mathcal{N}(x | Z, \tau^2)，\\
+    &amp; 因此将上式第1项中高斯分布乘积中的Z与其他参数分离，进行变形 \\
     &amp; 为了方便只取 \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) 的指数项做推导: \\
     &amp; \fbox{$ \small{ \begin{align*}
         &amp; \overbrace{-\frac{(x-Z)^2}{2 \tau^2}}^{\mathcal{N}(x | Z, \tau^2)} \overbrace{-\frac{(Z-\mu)^2}{2\sigma^2}}^{\mathcal{N}(Z|\mu, \sigma^2)} \\
@@ -1336,8 +1348,8 @@ q(Z,\pi|a',b',\mu',\sigma') \approx p(x|Z,\pi) q(Z,\pi|a,b,\mu,\sigma^2) \tag{2.
     & 根据 \Gamma(x+1) = x\,\Gamma(x) 的性质有：\\
     & \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
     &= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
-    & 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
-    & 因此将上式第1项中高斯分布乘积中的Z与其他参数分离， \\
+    & 我们发现上式中的第1项中存在以 Z 或者 \pi 为参数的项 \mathcal{N}(x | Z, \tau^2)，\\
+    & 因此将上式第1项中高斯分布乘积中的Z与其他参数分离，进行变形 \\
     & 为了方便只取 \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) 的指数项做推导: \\
     & \fbox{$ \small{ \begin{align*}
         & \overbrace{-\frac{(x-Z)^2}{2 \tau^2}}^{\mathcal{N}(x | Z, \tau^2)} \overbrace{-\frac{(Z-\mu)^2}{2\sigma^2}}^{\mathcal{N}(Z|\mu, \sigma^2)} \\
@@ -1617,13 +1629,13 @@ MathJax.Hub.Config({
           </a>
         
         
-          <a href="../../orb_slam/structure/" title="ORB-SLAM 算法框架" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../code_analysis/" title="SVO 代码解析" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                ORB-SLAM 算法框架
+                SVO 代码解析
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -1662,7 +1674,7 @@ MathJax.Hub.Config({
       
     </div>
     
-      <script src="../../../assets/javascripts/application.267712eb.js"></script>
+      <script src="../../../assets/javascripts/application.dc02f8ce.js"></script>
       
         
         
