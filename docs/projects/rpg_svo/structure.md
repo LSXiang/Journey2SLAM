@@ -292,8 +292,8 @@ $$
     & 根据 \Gamma(x+1) = x\,\Gamma(x) 的性质有：\\
     & \quad \quad Beta(\pi|a,b) = \frac{1}{\pi} \frac{a}{a+b} Beta(\pi|a+1,b) = \frac{1}{1-\pi} \frac{b}{a+b} Beta(\pi|a,b+1) \\
     &= \underbrace{\frac{a}{a+b} \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a+1,b)}_{1} + \underbrace{\frac{b}{a+b} \mathcal{U}(x) \mathcal{N}(Z|\mu, \sigma^2) Beta(\pi|a,b+1)}_{2} \\
-    & 我们发现上式中的第1项中存在不属于 Z 和 \pi 为变量的项 \mathcal{N}(x | Z, \tau^2)，\\
-    & 因此将上式第1项中高斯分布乘积中的Z与其他参数分离， \\
+    & 我们发现上式中的第1项中存在以 Z 或者 \pi 为参数的项 \mathcal{N}(x | Z, \tau^2)，\\
+    & 因此将上式第1项中高斯分布乘积中的Z与其他参数分离，进行变形 \\
     & 为了方便只取 \mathcal{N}(x | Z, \tau^2) \mathcal{N}(Z|\mu, \sigma^2) 的指数项做推导: \\
     & \fbox{$ \small{ \begin{align*}
         & \overbrace{-\frac{(x-Z)^2}{2 \tau^2}}^{\mathcal{N}(x | Z, \tau^2)} \overbrace{-\frac{(Z-\mu)^2}{2\sigma^2}}^{\mathcal{N}(Z|\mu, \sigma^2)} \\
