@@ -639,6 +639,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#第二帧" title="第二帧" class="md-nav__link">
+    第二帧
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#后续帧的里程估计" title="后续帧的里程估计" class="md-nav__link">
+    后续帧的里程估计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#稀疏直接法" title="稀疏直接法" class="md-nav__link">
+    稀疏直接法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#重投影" title="重投影" class="md-nav__link">
+    重投影
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -789,6 +823,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#第二帧" title="第二帧" class="md-nav__link">
+    第二帧
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#后续帧的里程估计" title="后续帧的里程估计" class="md-nav__link">
+    后续帧的里程估计
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#稀疏直接法" title="稀疏直接法" class="md-nav__link">
+    稀疏直接法
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#重投影" title="重投影" class="md-nav__link">
+    重投影
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -835,8 +903,66 @@
 <p>图像是通过 <code>FrameHandlerMono::addImage</code> 函数加载进里程计算法中的。在每一新建 <code>Frame</code> 类指针变量时，对图像进行提取图像金字塔，默认 5 层、尺度因子为 2 。接着进入 <code>FrameHandlerMono::processFirstFrame</code> 函数处理第一帧图像。</p>
 <ol>
 <li>创建一个位姿变换矩阵赋给第一帧的 <code>T_f_w_</code> (表示从世界坐标到相机坐标的变换矩阵) </li>
-<li>创建一个特征检测器，默认设置特征提取的金字塔为 0~3 层，栅格大小为 30 。调用特征检测函数提取当前帧中的 Fast 特征角点。为了适应多尺度变化，对图像金字塔的多层图像提取 Fast 角点，紧接通过小窗口做非最大值抑制。最后对同一层图像坐落在同一网格中的 Fast 角点求 shiTomasi 得分，取得分最高的强角点。              </li>
+<li>创建一个特征检测器，默认设置特征提取的金字塔为 0~3 层，栅格大小为 30 。调用特征检测函数提取当前帧中的 Fast 特征角点。为了适应多尺度变化，对图像金字塔的多层图像提取 Fast 角点，紧接通过小窗口做非最大值抑制。之后对同一层图像坐落在同一网格中的 Fast 角点求 shiTomasi 得分，取得分最高的强角点。（关于 Fast 角点，与 shiTomasi 角点/得分这部分知识可以参考 xxx计算机视觉基础-特征点提取xxx #TODO）</li>
+<li>判定特征数与门限值进行比较，如果特征点数少于门限值则下一帧图像重新进行以上操作，否则将提取的所有角点暂存储在向量容器中，用于后续做光流跟踪。并将该帧设置为关键帧，添加到地图中。</li>
 </ol>
+<h3 id="第二帧">第二帧<a class="headerlink" href="#第二帧" title="Permanent link"></a></h3>
+<p>这里的第二帧，实际上是指在能够与第一帧图像较好的进行三角化并计算出空间点和计算 Homography 矩阵并恢复位姿变换矩阵这段期间的所有帧图像都当作第二帧来处理。</p>
+<ol>
+<li>利用 LK 光流法跟踪第一帧提取的特征点。作者一直使用第一帧检测的特征点为基准，然后后面来的帧一直用第一帧的特征点做光流跟踪。个人感觉这种做法鲁棒性并不好， 应该改成当前帧和前一帧做光流跟踪，而不是一直只用第一帧跟踪，这样修改之后初始化鲁邦了很多，特别是在畸变较大的摄像头上。</li>
+<li>去掉跟踪丢失的特征点，并计算所有跟踪良好的关联角点的像素距离。如果跟踪点数少于阈值，则退出并返回 FAILURE 。否则，判定所有跟踪良好的关联角点的像素距离的中位数是否大于阈值，如果是，则进行下一步骤，否则返回非关键帧等待下一帧重复以上步骤。</li>
+<li>将第一帧和第二帧关联角点各自图像坐标系下的单位球坐标（图像坐标系下的三维空间单位向量）转换成单位平面坐标来计算 Homography 矩阵。作者利用 OpenCV 自带的 <code>cv::findHomography</code> 函数来计算单应矩阵，采用了<strong>随机采样一致性 (RANSAC)</strong>  方式，并设置重投影误差需要小于 2 个像素点。然后利用「 <strong>Faugeras SVD-based decomposition</strong> 」<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> 方式恢复出两帧之间的变换矩阵。（关于单应矩阵的计算以及从单应矩阵求取变换矩阵的算法可参考 xxx多视几何-单应矩阵xxx  #TODO，我对这部分代码做了注解，可以参考 <a href="https://github.com/LSXiang/SVIO/blob/master/vikit_common/src/homography.cpp"><code>homography.cpp</code></a> ）</li>
+<li>利用上一步解算的变换矩阵计算特征点在当前帧坐标系下的 3D 位置坐标，以及分离出内点 (inlier) 与外点 (outlier) 并统计个数，其中利用了中点法三角化求解深度值（算法推导参考 <a href="https://github.com/uzh-rpg/rpg_svo/issues/62">issue</a> ）。如果内点个数少于阈值，则返回错误，否则从这些内点的 3D 位置坐标提取深度信息，然后选着中位数作为均值，调节地图大小以使得地图平均深度等于指定比率。之后，计算当前帧与世界坐标系下变换矩阵，并根据地图深度尺寸比率重新计算当前帧与世界坐标系的位移量。最后为每一个内点创建世界坐标系下的 3D 坐标，并将这些关联世界坐标系的 3D 特征点的角点信息添加到第一帧和当前帧中。</li>
+<li>如果你选着了使用 G2O 则进行两帧之间的 Bundle Adjustment 。设置当前帧为关键帧，并计算当前帧中观察到的 3D 空间特征点到当前图像的深度均值和最小值。之后将当前帧添加到深度滤波器和地图中。</li>
+</ol>
+<h2 id="后续帧的里程估计">后续帧的里程估计<a class="headerlink" href="#后续帧的里程估计" title="Permanent link"></a></h2>
+<p>完成初始化过程之后，接下来就是针对更新的每一帧图像来计算里程了。而这一部分的所有算法过程可以参考「<a href="../algorithm_framework/#svo-算法架构">SVO 算法架构</a>」。</p>
+<ol>
+<li>
+<h4 id="稀疏直接法">稀疏直接法<a class="headerlink" href="#稀疏直接法" title="Permanent link"></a></h4>
+<p>系数直接法设置是在 <code>Config::kltMaxLevel(), Config::kltMinLevel()</code> 这几层图像金字塔层之间迭代，默认值为 4 与 2 。如果摄像头原始图像的大小为 752×480 ，那么在默认情况下，那么直接法从第 4 层金字塔图像大小为 47×30 开始优化，优化得到一个结果作为初始值传给下个金字塔层进行直接法迭代优化位姿，最后结束迭代的第 2 层金字塔的分辨率是 188×120 。直接法应用了 4×4 的像素块进行对比求取残差，并利用高斯牛顿法进行迭代更新。程序统计直接法最终返回的是成功跟踪计算残差的特征点数。</p>
+</li>
+<li>
+<h4 id="重投影">重投影<a class="headerlink" href="#重投影" title="Permanent link"></a></h4>
+<p>重投影过程首先是获取地图中能够与当前帧存在共视的关键帧。共视的判断是通过投影关键帧中的 5 个关键特征点（位于图像中间和四个边角）到当前帧中，判断是这些关键特征点是否能够别当前帧所观察得到。如果存在共视，那么计算参考关键帧与当前帧之间的距离，然后按照距离从小到大排序，默认情况只从投影距离较小的 10 帧关键参考帧中的已经存在空间 3D 坐标的特征点到当前图像中，且通过记录空间点最后投影图像的 id (<code>point-&gt;last_projected_kf_id_</code>) 确保了同一个空间特征点只投影一次。</p>
+<blockquote>
+<p>这里引用 白巧克力亦唯心 (贺博) <a href="https://blog.csdn.net/heyijia0327/article/details/51649082">博客</a>中关于地图点和关键帧上的图像特征点是如何联系的来捋顺下这部分的描述的。</p>
+<p><img alt="Feature Reproject" src="../image/feature_reproject.png" /> </p>
+<p>如下图所示，首先地图点 <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> 存储的是他们在世界坐标系中三维坐标，因此，他们可以自由的投放到任意帧上去。另外，地图点记录了哪些帧上的特征点能够观测到它，比如，通过 <span><span class="MathJax_Preview">P_i^2 , P_j^2</span><script type="math/tex">P_i^2 , P_j^2</script></span> 能够找到地图点 <span><span class="MathJax_Preview">P_2</span><script type="math/tex">P_2</script></span> ，反过来，地图点 <span><span class="MathJax_Preview">P_2</span><script type="math/tex">P_2</script></span> 也知道图像中特征 <span><span class="MathJax_Preview">P_i^2 , P_j^2</span><script type="math/tex">P_i^2 , P_j^2</script></span> 能够观测到它。 </p>
+<p>现在，回到关键帧重投影步骤，找到关键帧后，遍历关键帧上的特征点，通过特征点找到地图点，然后一一投影到当前帧。注意，一个地图 point 点只需要投一次，所以比如 <span><span class="MathJax_Preview">P_2</span><script type="math/tex">P_2</script></span> 通过 <span><span class="MathJax_Preview">\text{refframe}_i</span><script type="math/tex">\text{refframe}_i</script></span> 投影了一次，就不用通过 <span><span class="MathJax_Preview">\text{refframe}_j</span><script type="math/tex">\text{refframe}_j</script></span> 再投一次了。</p>
+</blockquote>
+<p>投影完关键帧中的特征点之后，紧接着是把地图中没有插入到关键帧中的候选点 <code>point_candidates_</code> 也全部投入到当前帧中。最后针对每一个 cell 中特征点的质量（这里的质量是通过这些特征点被观察到的次数来衡量的）进行排序然后进行重投影操作。</p>
+</li>
+<li></li>
+</ol>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"],
+    TeX: {
+        TagSide: "right",
+        TagIndent: ".8em",
+        MultLineWidth: "85%",
+        equationNumbers: {
+            autoNumber: "AMS",
+        }
+    },
+    showProcessingMessages: false,
+    messageStyle: 'none'
+});
+</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js' async></script>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.researchgate.net/publication/243764888_Motion_and_Structure_from_Motion_in_a_Piecewise_Planar_Environment">Motion and structure from motion in a piecewise plannar environment</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
                   
                 
