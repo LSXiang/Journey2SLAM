@@ -114,8 +114,8 @@ SVO中重定位，实现很简单，就是在跟丢之后，仍然假设当前�
 [^1]: [Motion and structure from motion in a piecewise plannar environment](https://www.researchgate.net/publication/243764888_Motion_and_Structure_from_Motion_in_a_Piecewise_Planar_Environment)
 
 [^2]: [SVO 代码笔记](https://blog.csdn.net/heyijia0327/article/details/51649082) 
-[^3]: [SVO 详细解读](www.cnblogs.com/ilekoaiq/p/8659631.html) 
-[^4]: [一步步完善视觉里程计 系列](http://fengbing.net/)
+[^3]: [SVO 详细解读](https://www.cnblogs.com/ilekoaiq/p/8659631.html) 
+[^4]: [一步步完善视觉里程计 系列](http://fengbing.net) 
 
 
 
