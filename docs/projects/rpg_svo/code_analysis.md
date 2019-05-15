@@ -2,7 +2,72 @@
 
 SVO 的下载编译可以参照 SVO 作者写的教程：https://github.com/uzh-rpg/rpg_svo/wiki 。如果手上没有摄像头的话，作者提供了数据集，可以参照文档先跑跑试试。
 
-下面给出利用 [**MYNT-EYE(S)**](https://mynt-eye-s-sdk.readthedocs.io/zh_CN/latest/index.html) 摄像头运行 SVO 程序的简单实践过程。作者提供的数据集选用的是 ATAN 相机模型，然而 MYNT-EYE 选用 Pinhole 模型。利用 MYNT-EYE 官方提供的 SDK 运行摄像头，关于摄像头标定这部分这里就不展开。根据 live.launch 我们知道需要提供摄像头的 Mono 图像数据，以及该摄像头的标定参数。#TODO
+下面给出利用 [**MYNT-EYE(S)**](https://mynt-eye-s-sdk.readthedocs.io/zh_CN/latest/index.html) 摄像头运行 SVO 程序的简单实践过程。作者提供的数据集选用的是 ATAN 相机模型，然而 MYNT-EYE 选用 Pinhole 模型。利用 MYNT-EYE 官方提供的 SDK 运行摄像头，关于摄像头标定这部分这里就不展开。根据 live.launch 我们知道需要提供摄像头的 Mono 图像数据，以及该摄像头的标定参数。下面简单给出我的实现过程。
+
+在 `svo_ros/param` 文件夹下创建 `MYNT-EYE` 左目摄像头的标定参数文件，命名为 `mynteye_pinhole_left.yaml` ：
+
+```yaml
+cam_model: Pinhole
+cam_width: 752
+cam_height: 480
+cam_fx: 357.77341636441826722
+cam_fy: 358.22830460728204116
+cam_cx: 396.35636517871080287
+cam_cy: 249.02802206835875154
+cam_d0: -0.28849480567934699
+cam_d1: 0.06557692100207448
+cam_d2: 0.00058043720553085
+cam_d3: 0.00017708338176132
+```
+
+然后在 `svo_ros/launch` 文件夹下创建启动文件，命名为 `mynteyt-live.launch` ：
+
+```xml
+<launch>
+
+  <node pkg="svo_ros" type="vo" name="svo" clear_params="true" output="screen">
+  
+    <!-- Camera topic to subscribe to -->
+    <param name="cam_topic" value="/mynteye/left/image_raw" type="str" />
+    
+    <!-- Camera calibration file -->
+    <rosparam file="$(find svo_ros)/param/mynteye_pinhole_left.yaml" />
+    
+    <!-- Default parameter settings: choose between vo_fast and vo_accurate -->
+    <rosparam file="$(find svo_ros)/param/vo_fast.yaml" />
+
+  </node>
+
+<!--  <node pkg="rqt_svo" type="rqt_svo" name="rqt_svo" />-->
+  
+  <node pkg="rviz" type="rviz" name="odometry_rviz" args="-d $(find svo_ros)/rviz_config.rviz"/>
+        
+</launch>
+```
+
+然后分别在两个 `Terminal` 中启动 SVO 和 MYNT-EYE ：
+
+```bash
+source $(path-to-svo-catkin-wokespace)/devel/setup.bash
+roslaunch svo_ros mynteye-live.launch 
+```
+
+```bash
+source $(path-to-mynteye-catkin-wokespace)/devel/setup.bash
+roslaunch mynt_eye_ros_wrapper mynteye.launch
+```
+
+然后运行效果如下：（#TODO 添加视频，待上传）
+
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+      <source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+      <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
+      <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+      <p>Your user agent does not support the HTML5 Video element.</p>
+    </video>
+从视频效果来看，SVO 的整体表现还是相当不错的。当然这与 MYNT-EYE 为全局曝光有一定的关系，并且我在桌面上提供了相对较多的纹理可观的特征。个人的目标是将 SVO 修改称可以可前视并添加多摄像机模型以及添加 IMU 使之成为 SVIO （即表现力为现在未开源的 SVO2 ）。
+
+下面为对 SVO 的代码解读，有些内容想分散到各知识结构部分，添加了 #TODO ，但是都对这部分内容给出了目前已有的相关文档链接。
 
 
 
