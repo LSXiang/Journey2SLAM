@@ -57,14 +57,10 @@ source $(path-to-mynteye-catkin-wokespace)/devel/setup.bash
 roslaunch mynt_eye_ros_wrapper mynteye.launch
 ```
 
-然后运行效果如下：（#TODO 添加视频，待上传）
+然后运行效果如下：
 
-<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
-      <source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
-      <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
-      <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
-      <p>Your user agent does not support the HTML5 Video element.</p>
-    </video>
+<iframe height=480 width=640 src="//player.bilibili.com/player.html?aid=52568604&cid=91997375&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 从视频效果来看，SVO 的整体表现还是相当不错的。当然这与 MYNT-EYE 为全局曝光有一定的关系，并且我在桌面上提供了相对较多的纹理可观的特征。个人的目标是将 SVO 修改称可以可前视并添加多摄像机模型以及添加 IMU 使之成为 SVIO （即表现力为现在未开源的 SVO2 ）。
 
 下面为对 SVO 的代码解读，有些内容想分散到各知识结构部分，添加了 #TODO ，但是都对这部分内容给出了目前已有的相关文档链接。
