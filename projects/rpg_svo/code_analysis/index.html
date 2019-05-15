@@ -941,7 +941,63 @@
                 
                 <h2 id="svo-运行实践">SVO 运行实践<a class="headerlink" href="#svo-运行实践" title="Permanent link"></a></h2>
 <p>SVO 的下载编译可以参照 SVO 作者写的教程：<a href="https://github.com/uzh-rpg/rpg_svo/wiki">https://github.com/uzh-rpg/rpg_svo/wiki</a> 。如果手上没有摄像头的话，作者提供了数据集，可以参照文档先跑跑试试。</p>
-<p>下面给出利用 <a href="https://mynt-eye-s-sdk.readthedocs.io/zh_CN/latest/index.html"><strong>MYNT-EYE(S)</strong></a> 摄像头运行 SVO 程序的简单实践过程。作者提供的数据集选用的是 ATAN 相机模型，然而 MYNT-EYE 选用 Pinhole 模型。利用 MYNT-EYE 官方提供的 SDK 运行摄像头，关于摄像头标定这部分这里就不展开。根据 live.launch 我们知道需要提供摄像头的 Mono 图像数据，以及该摄像头的标定参数。#TODO</p>
+<p>下面给出利用 <a href="https://mynt-eye-s-sdk.readthedocs.io/zh_CN/latest/index.html"><strong>MYNT-EYE(S)</strong></a> 摄像头运行 SVO 程序的简单实践过程。作者提供的数据集选用的是 ATAN 相机模型，然而 MYNT-EYE 选用 Pinhole 模型。利用 MYNT-EYE 官方提供的 SDK 运行摄像头，关于摄像头标定这部分这里就不展开。根据 live.launch 我们知道需要提供摄像头的 Mono 图像数据，以及该摄像头的标定参数。下面简单给出我的实现过程。</p>
+<p>在 <code>svo_ros/param</code> 文件夹下创建 <code>MYNT-EYE</code> 左目摄像头的标定参数文件，命名为 <code>mynteye_pinhole_left.yaml</code> ：</p>
+<div class="highlight"><pre><span></span><span class="nt">cam_model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pinhole</span>
+<span class="nt">cam_width</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">752</span>
+<span class="nt">cam_height</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">480</span>
+<span class="nt">cam_fx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">357.77341636441826722</span>
+<span class="nt">cam_fy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">358.22830460728204116</span>
+<span class="nt">cam_cx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">396.35636517871080287</span>
+<span class="nt">cam_cy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">249.02802206835875154</span>
+<span class="nt">cam_d0</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">-0.28849480567934699</span>
+<span class="nt">cam_d1</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.06557692100207448</span>
+<span class="nt">cam_d2</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.00058043720553085</span>
+<span class="nt">cam_d3</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0.00017708338176132</span>
+</pre></div>
+
+<p>然后在 <code>svo_ros/launch</code> 文件夹下创建启动文件，命名为 <code>mynteyt-live.launch</code> ：</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;launch&gt;</span>
+
+  <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;svo_ros&quot;</span> <span class="na">type=</span><span class="s">&quot;vo&quot;</span> <span class="na">name=</span><span class="s">&quot;svo&quot;</span> <span class="na">clear_params=</span><span class="s">&quot;true&quot;</span> <span class="na">output=</span><span class="s">&quot;screen&quot;</span><span class="nt">&gt;</span>
+  
+    <span class="c">&lt;!-- Camera topic to subscribe to --&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">&quot;cam_topic&quot;</span> <span class="na">value=</span><span class="s">&quot;/mynteye/left/image_raw&quot;</span> <span class="na">type=</span><span class="s">&quot;str&quot;</span> <span class="nt">/&gt;</span>
+    
+    <span class="c">&lt;!-- Camera calibration file --&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">file=</span><span class="s">&quot;$(find svo_ros)/param/mynteye_pinhole_left.yaml&quot;</span> <span class="nt">/&gt;</span>
+    
+    <span class="c">&lt;!-- Default parameter settings: choose between vo_fast and vo_accurate --&gt;</span>
+    <span class="nt">&lt;rosparam</span> <span class="na">file=</span><span class="s">&quot;$(find svo_ros)/param/vo_fast.yaml&quot;</span> <span class="nt">/&gt;</span>
+
+  <span class="nt">&lt;/node&gt;</span>
+
+<span class="c">&lt;!--  &lt;node pkg=&quot;rqt_svo&quot; type=&quot;rqt_svo&quot; name=&quot;rqt_svo&quot; /&gt;--&gt;</span>
+  
+  <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;rviz&quot;</span> <span class="na">type=</span><span class="s">&quot;rviz&quot;</span> <span class="na">name=</span><span class="s">&quot;odometry_rviz&quot;</span> <span class="na">args=</span><span class="s">&quot;-d $(find svo_ros)/rviz_config.rviz&quot;</span><span class="nt">/&gt;</span>
+        
+<span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+
+<p>然后分别在两个 <code>Terminal</code> 中启动 SVO 和 MYNT-EYE ：</p>
+<div class="highlight"><pre><span></span><span class="nb">source</span> <span class="k">$(</span>path-to-svo-catkin-wokespace<span class="k">)</span>/devel/setup.bash
+roslaunch svo_ros mynteye-live.launch 
+</pre></div>
+
+<div class="highlight"><pre><span></span><span class="nb">source</span> <span class="k">$(</span>path-to-mynteye-catkin-wokespace<span class="k">)</span>/devel/setup.bash
+roslaunch mynt_eye_ros_wrapper mynteye.launch
+</pre></div>
+
+<p>然后运行效果如下：（#TODO 添加视频，待上传）</p>
+<video id="video" controls="" preload="none" poster="http://media.w3.org/2010/05/sintel/poster.png">
+      <source id="mp4" src="http://media.w3.org/2010/05/sintel/trailer.mp4" type="video/mp4">
+      <source id="webm" src="http://media.w3.org/2010/05/sintel/trailer.webm" type="video/webm">
+      <source id="ogv" src="http://media.w3.org/2010/05/sintel/trailer.ogv" type="video/ogg">
+      <p>Your user agent does not support the HTML5 Video element.</p>
+    </video>
+
+<p>从视频效果来看，SVO 的整体表现还是相当不错的。当然这与 MYNT-EYE 为全局曝光有一定的关系，并且我在桌面上提供了相对较多的纹理可观的特征。个人的目标是将 SVO 修改称可以可前视并添加多摄像机模型以及添加 IMU 使之成为 SVIO （即表现力为现在未开源的 SVO2 ）。</p>
+<p>下面为对 SVO 的代码解读，有些内容想分散到各知识结构部分，添加了 #TODO ，但是都对这部分内容给出了目前已有的相关文档链接。</p>
 <h2 id="初始化">初始化<a class="headerlink" href="#初始化" title="Permanent link"></a></h2>
 <p>在介绍初始化前，先简单介绍一下关于 <code>SVO_ROS</code> 的节点函数。当运行 <code>roslaunch</code> 调用 svo 之后，来到 <code>rpg_svo/svo_ros/ src/vo_node.cpp</code> 文件下运行 main 函数。</p>
 <ol>
