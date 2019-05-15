@@ -943,7 +943,7 @@
 <p>SVO 的下载编译可以参照 SVO 作者写的教程：<a href="https://github.com/uzh-rpg/rpg_svo/wiki">https://github.com/uzh-rpg/rpg_svo/wiki</a> 。如果手上没有摄像头的话，作者提供了数据集，可以参照文档先跑跑试试。</p>
 <p>下面给出利用 <a href="https://mynt-eye-s-sdk.readthedocs.io/zh_CN/latest/index.html"><strong>MYNT-EYE(S)</strong></a> 摄像头运行 SVO 程序的简单实践过程。作者提供的数据集选用的是 ATAN 相机模型，然而 MYNT-EYE 选用 Pinhole 模型。利用 MYNT-EYE 官方提供的 SDK 运行摄像头，关于摄像头标定这部分这里就不展开。根据 live.launch 我们知道需要提供摄像头的 Mono 图像数据，以及该摄像头的标定参数。下面简单给出我的实现过程。</p>
 <p>在 <code>svo_ros/param</code> 文件夹下创建 <code>MYNT-EYE</code> 左目摄像头的标定参数文件，命名为 <code>mynteye_pinhole_left.yaml</code> ：</p>
-<div class="highlight"><pre><span></span><span class="nt">cam_model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pinhole</span>
+<div class="codehilite"><pre><span></span><span class="nt">cam_model</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Pinhole</span>
 <span class="nt">cam_width</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">752</span>
 <span class="nt">cam_height</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">480</span>
 <span class="nt">cam_fx</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">357.77341636441826722</span>
@@ -957,7 +957,7 @@
 </pre></div>
 
 <p>然后在 <code>svo_ros/launch</code> 文件夹下创建启动文件，命名为 <code>mynteyt-live.launch</code> ：</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;launch&gt;</span>
+<div class="codehilite"><pre><span></span><span class="nt">&lt;launch&gt;</span>
 
   <span class="nt">&lt;node</span> <span class="na">pkg=</span><span class="s">&quot;svo_ros&quot;</span> <span class="na">type=</span><span class="s">&quot;vo&quot;</span> <span class="na">name=</span><span class="s">&quot;svo&quot;</span> <span class="na">clear_params=</span><span class="s">&quot;true&quot;</span> <span class="na">output=</span><span class="s">&quot;screen&quot;</span><span class="nt">&gt;</span>
   
@@ -980,11 +980,11 @@
 </pre></div>
 
 <p>然后分别在两个 <code>Terminal</code> 中启动 SVO 和 MYNT-EYE ：</p>
-<div class="highlight"><pre><span></span><span class="nb">source</span> <span class="k">$(</span>path-to-svo-catkin-wokespace<span class="k">)</span>/devel/setup.bash
+<div class="codehilite"><pre><span></span><span class="nb">source</span> <span class="k">$(</span>path-to-svo-catkin-wokespace<span class="k">)</span>/devel/setup.bash
 roslaunch svo_ros mynteye-live.launch 
 </pre></div>
 
-<div class="highlight"><pre><span></span><span class="nb">source</span> <span class="k">$(</span>path-to-mynteye-catkin-wokespace<span class="k">)</span>/devel/setup.bash
+<div class="codehilite"><pre><span></span><span class="nb">source</span> <span class="k">$(</span>path-to-mynteye-catkin-wokespace<span class="k">)</span>/devel/setup.bash
 roslaunch mynt_eye_ros_wrapper mynteye.launch
 </pre></div>
 
@@ -1050,7 +1050,7 @@ roslaunch mynt_eye_ros_wrapper mynteye.launch
 </li>
 <li>
 <h4 id="ba-优化">BA 优化<a class="headerlink" href="#ba-优化" title="Permanent link"></a></h4>
-<p>利用上一步重投影以后的特征点开始进行当前帧的位姿及结构优化。位姿优化用到了核函数 <code>TukeyWeightFunction</code> ，根据误差模型来调整误差权重，Tukey's hard re-descending function 可以参考<a href="http://en.wikipedia.org/wiki/Redescending_M-estimator">维基百科</a>。位姿优化的时候，会根据投影误差丢掉一些误差大的特征点，最后留下来进行位姿优化的这些特征点被变量 <code>sfba_n_edges_final</code> 记录下来，利用它来判断跟踪质量好不好 <code>setTrackingQuality(sfba_n_edges_final)</code>  函数判断跟踪不好的依据是，用于位姿优化的点数 <code>sfba_n_edges_final</code> 小于一个阈值，或者比上一帧中用于优化的点减少了很多。</p>
+<p>利用上一步重投影以后的特征点开始进行当前帧的位姿及结构优化。位姿优化用到了核函数 <code>TukeyWeightFunction</code> ，根据误差模型来调整误差权重，Tukey&rsquo;s hard re-descending function 可以参考<a href="http://en.wikipedia.org/wiki/Redescending_M-estimator">维基百科</a>。位姿优化的时候，会根据投影误差丢掉一些误差大的特征点，最后留下来进行位姿优化的这些特征点被变量 <code>sfba_n_edges_final</code> 记录下来，利用它来判断跟踪质量好不好 <code>setTrackingQuality(sfba_n_edges_final)</code>  函数判断跟踪不好的依据是，用于位姿优化的点数 <code>sfba_n_edges_final</code> 小于一个阈值，或者比上一帧中用于优化的点减少了很多。</p>
 <p>优化地图点是现实寻找（默认为 20 个）空间点中最后一次优化较早的空间点，然后针对每一个空间点优化其三维位置，使得它在它被观察到的每个关键帧上的重投影误差最小。默认每个地图点优化 5 次。如果这次优化的误差平方和小于上次优化的误差平方和，就接受这次的优化结果。</p>
 </li>
 </ol>

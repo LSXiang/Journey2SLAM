@@ -868,7 +868,7 @@
 <h2 id="a-setext-style-header">A setext style header<a class="headerlink" href="#a-setext-style-header" title="Permanent link"></a></h2>
 <h3 id="a-hash-style-header">A hash style header<a class="headerlink" href="#a-hash-style-header" title="Permanent link"></a></h3>
 <p><a href="https://www.baidu.com" title="baidu">link</a> </p>
-<p><div class="highlight"><pre><span></span><span class="hll"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
+<p><div class="codehilite"><pre><span></span><span class="hll"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span> <span class="n">argv</span><span class="p">)</span> <span class="p">{</span>
 </span>  <span class="k">if</span> <span class="p">(</span><span class="n">argc</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
 <span class="hll">    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span>  <span class="p">}</span>
@@ -887,9 +887,9 @@
   开关  </li>
 </ul>
 <h3 id="按键">按键<a class="headerlink" href="#按键" title="Permanent link"></a></h3>
-<p><span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-alt">Alt</kbd><span>+</span><kbd class="key-delete">Del</kbd></span></p>
+<p><span class="keys"><kbd class="key-control">Ctrl</kbd><span>＋</span><kbd class="key-alt">Alt</kbd><span>＋</span><kbd class="key-delete">Del</kbd></span></p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" checked/><span class="task-list-indicator"></span></label> tasklist  </li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> tasklist  </li>
 </ul>
 <p>The <abbr title="Hyper Text Markup Language">HTML</abbr> specification<br />
 is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>
@@ -909,13 +909,13 @@ the family Rosaceae.</dd>
 <details class="note" open="open"><summary></summary><div class="superfences-tabs">
 <input name="__tabs_1" type="radio" id="__tab_1_0" checked="checked" />
 <label for="__tab_1_0">Bash</label>
-<div class="superfences-content"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="ch">#!/bin/bash</span>
 <span class="nv">STR</span><span class="o">=</span><span class="s2">&quot;Hello World!&quot;</span>
 <span class="nb">echo</span> <span class="nv">$STR</span>
 </pre></div></div>
 <input name="__tabs_1" type="radio" id="__tab_1_1" />
 <label for="__tab_1_1">C</label>
-<div class="superfences-content"><div class="highlight"><pre><span></span><span class="cp">#include</span> 
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cp">#include</span> 
 
 <span class="cpf">int main(void) {</span><span class="cp"></span>
   <span class="n">printf</span><span class="p">(</span><span class="s">&quot;hello, world</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
@@ -923,7 +923,7 @@ the family Rosaceae.</dd>
 </pre></div></div>
 <input name="__tabs_1" type="radio" id="__tab_1_2" />
 <label for="__tab_1_2">C++</label>
-<div class="superfences-content"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Hello, world!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
@@ -932,7 +932,7 @@ the family Rosaceae.</dd>
 </pre></div></div>
 <input name="__tabs_1" type="radio" id="__tab_1_3" />
 <label for="__tab_1_3">C#</label>
-<div class="superfences-content"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+<div class="superfences-content"><div class="codehilite"><pre><span></span><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">Program</span> <span class="p">{</span>
   <span class="k">static</span> <span class="k">void</span> <span class="nf">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
@@ -945,10 +945,10 @@ the family Rosaceae.</dd>
 <details class="note" open="open"><summary>Open styled details</summary><details class="danger"><summary>Nested details!</summary><p>And more content again.</p>
 </details>
 </details>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>2
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="hll">&quot;&quot;&quot;Some file.&quot;&quot;&quot;
+5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="hll">&quot;&quot;&quot;Some file.&quot;&quot;&quot;
 </span>import foo.bar
 <span class="hll">import boo.baz
 </span>import foo.bar.baz
@@ -980,7 +980,7 @@ the family Rosaceae.</dd>
 <div class="superfences-tabs">
 <input name="__tabs_2" type="radio" id="__tab_2_0" checked="checked" />
 <label for="__tab_2_0">Source</label>
-<div class="superfences-content"><div class="highlight"><pre><span></span>```flow
+<div class="superfences-content"><div class="codehilite"><pre><span></span>```flow
 st=&gt;start: Start:&gt;http://www.google.com[blank]
 e=&gt;end:&gt;http://www.google.com
 op1=&gt;operation: My Operation
@@ -1014,7 +1014,7 @@ cond(no)-&gt;sub1(right)-&gt;op1</code></pre></div>
 <div class="superfences-tabs">
 <input name="__tabs_3" type="radio" id="__tab_3_0" checked="checked" />
 <label for="__tab_3_0">Source</label>
-<div class="superfences-content"><div class="highlight"><pre><span></span>```sequence
+<div class="superfences-content"><div class="codehilite"><pre><span></span>```sequence
 Title: Here is a title
 A-&gt;B: Normal line
 B--&gt;C: Dashed line
