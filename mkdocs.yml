@@ -80,13 +80,13 @@ markdown_extensions:
     # The Table of Contents extension generates a Table of Contents from a Markdown document and 
     # adds it into the resulting HTML document.
   - toc:
-  #     marker:           # Text to find and replace with the Table of Contents. Defaults to [TOC].
-  #     title:            # Title to insert in the Table of Contents’ <div>. Defaults to None
+      # marker:           # Text to find and replace with the Table of Contents. Defaults to [TOC].
+      # title:            # Title to insert in the Table of Contents’ <div>. Defaults to None
       permalink: "\ue157"   # Set to True or a string to generate permanent links at the end of each header. Useful with Sphinx style sheets.
       baselevel: 1      # Base level for headers. Defaults to 1.
       slugify: !!python/name:pymdownx.slugs.uslugify  # Callable to generate anchors.
-  #     separator:        # Word separator. Character which replaces white space in id. Defaults to “-”.
-  #     toc_depth:        # Define the range of section levels to include in the Table of Contents.Defaults to 6 (bottom).
+      # separator:        # Word separator. Character which replaces white space in id. Defaults to “-”.
+      # toc_depth:        # Define the range of section levels to include in the Table of Contents.Defaults to 6 (bottom).
 
     # The Admonition extension adds rST-style admonitions to Markdown documents.
     # directive types: "attention", "caution", "danger", "error", "hint", 
@@ -100,16 +100,16 @@ markdown_extensions:
 
     # The SmartyPants extension converts ASCII dashes, quotes and ellipses to their HTML entity equivalents.
   - smarty:
-  #     smart_dashes: true          # whether to convert dashes
-  #    smart_quotes: false 	        # whether to convert straight quotes
-  #     smart_angled_quotes: false  # whether to convert angled quotes
-  #     smart_ellipses: true 	      # whether to convert ellipses
-  #     substitutions: {} 	        # overwrite default substitutions
+      # smart_dashes: true          # whether to convert dashes
+      # smart_quotes: true  	      # whether to convert straight quotes
+      # smart_angled_quotes: false  # whether to convert angled quotes
+      # smart_ellipses: true 	      # whether to convert ellipses
+      # substitutions: {} 	        # overwrite default substitutions
 
     # BetterEm is a different approach to emphasis than Python Markdown's default.
     # It works similar but handles certain corner cases differently.
   - pymdownx.betterem:
-  #     smart_enable: all
+      smart_enable: all
 
     # The Attribute Lists extension adds a syntax to define attributes on the 
     # various HTML elements in markdown’s output.
@@ -142,12 +142,12 @@ markdown_extensions:
 
     # The CodeHilite extension adds code/syntax highlighting to standard 
     # Python-Markdown code blocks using Pygments.
-  # - codehilite:
-  #     use_pygments: true  # Defaults to True
-  #     guess_lang: false   # Automatic language detection， defaults to true.
-  #     linenums:         # Use line numbers, 'true' of 'false', defaults to None.
-  #     noclasses:        # Use inline styles instead of CSS classes. Defaults to False.
-  #     css_class:        # Set CSS class name for the wrapper <div> tag. Defaults to codehilite
+  - codehilite:
+      use_pygments: true  # Defaults to True
+      # guess_lang: false   # Automatic language detection， defaults to true.
+      # linenums:         # Use line numbers, 'true' of 'false', defaults to None.
+      # noclasses:        # Use inline styles instead of CSS classes. Defaults to False.
+      # css_class:        # Set CSS class name for the wrapper <div> tag. Defaults to codehilite
 
     # The Fenced Code Blocks extension adds a secondary way to define code blocks,
     # which overcomes a few limitations of the indented code blocks.
@@ -194,9 +194,9 @@ markdown_extensions:
     # and other syntaxes. Combine multiple fences together in tabbed groups, and even create special
     # custom fences for content like UML.
   - pymdownx.superfences:
-      # highlight_code: true  # Enable or disable code highlighting.
+      highlight_code: true  # Enable or disable code highlighting.
       preserve_tabs: true   # Experimental feature that preserves tabs in fenced code blocks.
-      # disable_indented_code_blocks: false # Disables Python Markdown's indented code block parsing. This is nice if you only ever use fenced blocks.
+      disable_indented_code_blocks: false # Disables Python Markdown's indented code block parsing. This is nice if you only ever use fenced blocks.
       custom_fences:        # Custom fences.
         - name: math
           class: arithmatex
@@ -243,9 +243,9 @@ markdown_extensions:
     # Tilde is syntactically built around the ~ character. 
     # It adds support for inserting subscripts and adds an easy way to place text in a <del> tag.
   - pymdownx.tilde:
-  #     smart_delete: true  # Use smart logic with delete characters.
-  #     delete: true        # Enable delete feature.
-  #     subscript: true     # Enable subscript feature.
+      smart_delete: true  # Use smart logic with delete characters.
+      delete: true        # Enable delete feature.
+      subscript: true     # Enable subscript feature.
 
     # Caret is an extension that is syntactically built around the ^ character. 
     # It adds support for inserting supers^cripts^ and adds an easy way to place text in an <ins> tag.
@@ -253,15 +253,15 @@ markdown_extensions:
 
     # SmartSymbols inserts commonly used Unicode characters via simple ASCII representations: =/= → ≠.
   - pymdownx.smartsymbols:
-    # trademark:       true 	# Add syntax for trademark symbol.
-    # copyright:       true 	# True 	Add syntax for copyright symbol.
-    # registered:      true 	# Add syntax for registered symbol.
-    # care_of:         true 	# Add syntax for care / of.
-    # plusminus:       true 	# Add syntax for plus / minus.
-    # arrows:          true 	# Add syntax for creating arrows.
-    # notequal:        true 	# Add syntax for not equal symbol.
-    # fractions:       true   # Add syntax for common fractions.
-    # ordinal_numbers: true   # Add syntax for ordinal numbers.
+      # trademark:       true 	# Add syntax for trademark symbol.
+      # copyright:       true 	# True 	Add syntax for copyright symbol.
+      # registered:      true 	# Add syntax for registered symbol.
+      # care_of:         true 	# Add syntax for care / of.
+      # plusminus:       true 	# Add syntax for plus / minus.
+      # arrows:          true 	# Add syntax for creating arrows.
+      # notequal:        true 	# Add syntax for not equal symbol.
+      # fractions:       true   # Add syntax for common fractions.
+      # ordinal_numbers: true   # Add syntax for ordinal numbers.
 
     # Emoji makes adding emoji via Markdown easy 😄.
   - pymdownx.emoji:
@@ -275,13 +275,13 @@ markdown_extensions:
     # Tasklist allows inserting lists with check boxes.
   - pymdownx.tasklist:
       custom_checkbox: true     # Generate task lists in such a way as to allow for styling the check box with CSS.
-  #     clickable_checkbox: true  # Enable user to interact with checkboxes.
+      # clickable_checkbox: true  # Enable user to interact with checkboxes.
 
     # ProgressBar creates progress bars quick and easy.
   - pymdownx.progressbar:
-  #     level_class: true       # Enables or disables the level class feature. The level class feature adds level classes in increments defined by progress_increment.
-  #     add_classes:            # This option accepts a string of classes separated by spaces.
-  #     progress_increment: 20  # Defines the increment at which the level_class classes are generated at.
+      # level_class: true       # Enables or disables the level class feature. The level class feature adds level classes in increments defined by progress_increment.
+      # add_classes:            # This option accepts a string of classes separated by spaces.
+      # progress_increment: 20  # Defines the increment at which the level_class classes are generated at.
 
     # Arithmatex is an extension that preserves LaTeX math equations (x√y3) during the Markdown 
     # conversion process so that they can be used with MathJax.
@@ -292,9 +292,9 @@ markdown_extensions:
 
     # StripHTML can strip out HTML comments and specific tag attributes.
   - pymdownx.striphtml:
-  #     css_class:
-  #     style_plain_text: false 
-  #     custom_inline:
+      # css_class:
+      # style_plain_text: false 
+      # custom_inline:
 
     # Snippets include other Markdown or HTML snippets into the current Markdown file being parsed.
   - pymdownx.snippets:
