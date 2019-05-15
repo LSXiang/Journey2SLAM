@@ -152,14 +152,6 @@ markdown_extensions:
     # The Fenced Code Blocks extension adds a secondary way to define code blocks,
     # which overcomes a few limitations of the indented code blocks.
   - fenced_code
-    
-    # The Legacy Attributes extension restores Python-Markdown’s original attribute 
-    # setting syntax. Older versions of Python Markdown (prior to 3.0) included built-in
-    # and undocumented support for defining attributes on elements. Most users have never
-    # made use of the syntax and it has been deprecated in favor of Attribute Lists. 
-    # This extension restores the legacy behavior for users who have existing documents 
-    # which use the syntax.
-  - legacy_attr
 
     # The Legacy EM extension restores Markdown’s original behavior for emphasis 
     # and strong syntax when using underscores.
@@ -183,6 +175,14 @@ markdown_extensions:
 
     # B64 converts all local images in a document to base64 encoding and embeds them in the document.
   # - b64
+
+    # The Legacy Attributes extension restores Python-Markdown’s original attribute 
+    # setting syntax. Older versions of Python Markdown (prior to 3.0) included built-in
+    # and undocumented support for defining attributes on elements. Most users have never
+    # made use of the syntax and it has been deprecated in favor of Attribute Lists. 
+    # This extension restores the legacy behavior for users who have existing documents 
+    # which use the syntax.
+  # - legacy_attr
 
 
   ### PyMdown Extensions is a collection of extensions for Python Markdown.
@@ -312,12 +312,12 @@ markdown_extensions:
     # Critic adds handling and support of Critic Markup.
   - pymdownx.critic
 
-    # Extra is just like Python Markdown's Extra package except it uses PyMdown Extensions 
-    # to substitute similar extensions.
-  - pymdownx.extra
-
     # PathConverter converts paths to absolute or relative to a given base path.
   - pymdownx.pathconverter
+
+    # Extra is just like Python Markdown's Extra package except it uses PyMdown Extensions 
+    # to substitute similar extensions.
+  # - pymdownx.extra
 
 
 extra_javascript:
