@@ -43,7 +43,11 @@ nav:
     - 计算机视觉基础概览: computer_vision/computer_vision.md
     - 图像滤波器: computer_vision/image_filtering.md
     - 特征提取与匹配: 
-        - Harris 角点: computer_vision/harris.md
+        - Harris 角点: computer_vision/Harris.md
+        - Fast 角点: computer_vision/FAST.md
+        - ORB 特征: computer_vision/ORB.md
+        - SIFT 特征: computer_vision/SIFT.md
+        - SUFT 特征: computer_vision/SUFT.md
 - 多视几何: 
     - 多视几何概览: multiple_view_geometry/mvg.md
     - 数学背景 - 线性代数: multiple_view_geometry/linear_algebra.md
