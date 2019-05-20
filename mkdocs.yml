@@ -42,6 +42,8 @@ nav:
 - 计算机视觉基础: 
     - 计算机视觉基础概览: computer_vision/computer_vision.md
     - 图像滤波器: computer_vision/image_filtering.md
+    - 特征提取与匹配: 
+        - Harris 角点: computer_vision/harris.md
 - 多视几何: 
     - 多视几何概览: multiple_view_geometry/mvg.md
     - 数学背景 - 线性代数: multiple_view_geometry/linear_algebra.md
