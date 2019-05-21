@@ -42,7 +42,7 @@
     
     
       
-        <title>Harris 角点 - SLAM 之旅</title>
+        <title>Harris 角点检测 - SLAM 之旅</title>
       
     
     
@@ -162,7 +162,7 @@
               SLAM 之旅
             </span>
             <span class="md-header-nav__topic">
-              Harris 角点
+              Harris 角点检测
             </span>
           
         </div>
@@ -458,11 +458,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Harris 角点
+        Harris 角点检测
       </label>
     
-    <a href="./" title="Harris 角点" class="md-nav__link md-nav__link--active">
-      Harris 角点
+    <a href="./" title="Harris 角点检测" class="md-nav__link md-nav__link--active">
+      Harris 角点检测
     </a>
     
       
@@ -522,8 +522,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shi-tomasi算法" title="Shi-Tomasi算法" class="md-nav__link">
-    Shi-Tomasi算法
+  <a href="#shi-tomasi-算法" title="Shi-Tomasi 算法" class="md-nav__link">
+    Shi-Tomasi 算法
   </a>
   
 </li>
@@ -552,8 +552,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../FAST/" title="Fast 角点" class="md-nav__link">
-      Fast 角点
+    <a href="../FAST/" title="Fast 角点检测" class="md-nav__link">
+      Fast 角点检测
     </a>
   </li>
 
@@ -935,8 +935,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#shi-tomasi算法" title="Shi-Tomasi算法" class="md-nav__link">
-    Shi-Tomasi算法
+  <a href="#shi-tomasi-算法" title="Shi-Tomasi 算法" class="md-nav__link">
+    Shi-Tomasi 算法
   </a>
   
 </li>
@@ -967,7 +967,7 @@
                   <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/computer_vision/Harris.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Harris 角点</h1>
+                  <h1>Harris 角点检测</h1>
                 
                 <h2 id="特征检测">特征检测<a class="headerlink" href="#特征检测" title="Permanent link"></a></h2>
 <p><strong>特征检测 (Feature detection)</strong> 也称为<strong>角点检测 (Corner detection)</strong>，特征检测和匹配是许多计算机视觉应用中的一个重要组成部分，广泛应用于运动检测。图像匹配、视频跟踪、三维建模以及目标识别领域中。在 SLAM 前端，往往需要通过<strong>特征跟踪 (Feature tracking)</strong> 来先初步恢复相机的位姿。那么一张图向中的哪些特征是适合用来做匹配跟踪呢？通常拥有交大对比尺度（梯度）的图像块是比较容易定位的，又由于单一方向的直线段存在 “孔径问题 (aperture problem)” ，因而拥有至少两个（明显）不同方向梯度的图像块最容易定位。如下图所示：</p>
@@ -1224,7 +1224,7 @@ F(x,y,\sigma_n) > F(x,y,\sigma_l) \;,\; l = n-1, n+1
 </li>
 </ul>
 <p>这样既可确定在位置空间和尺度空间均满足条件的 Harris 角点。</p>
-<h2 id="shi-tomasi算法">Shi-Tomasi算法<a class="headerlink" href="#shi-tomasi算法" title="Permanent link"></a></h2>
+<h2 id="shi-tomasi-算法">Shi-Tomasi 算法<a class="headerlink" href="#shi-tomasi-算法" title="Permanent link"></a></h2>
 <p>Shi-Tomasi 算法是 Harris 算法的改进。Harris 算法最原始的定义是将矩阵 <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span> 的行列式值与 <span><span class="MathJax_Preview">M</span><script type="math/tex">M</script></span> 的迹相减，再将差值同预先给定的阈值进行比较。后来 Jianbo Shi 和 Carlo Tomasi 提出改进的方法，若两个特征值中较小的一个大于最小阈值，则会得到强角点。</p>
 <p>Harris 角点的响应值 <span><span class="MathJax_Preview">R</span><script type="math/tex">R</script></span> 为：</p>
 <div>
@@ -1326,13 +1326,13 @@ MathJax.Hub.Config({
           </a>
         
         
-          <a href="../FAST/" title="Fast 角点" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../FAST/" title="Fast 角点检测" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                Fast 角点
+                Fast 角点检测
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

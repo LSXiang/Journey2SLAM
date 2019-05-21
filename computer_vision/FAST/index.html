@@ -42,7 +42,7 @@
     
     
       
-        <title>Fast 角点 - SLAM 之旅</title>
+        <title>Fast 角点检测 - SLAM 之旅</title>
       
     
     
@@ -162,7 +162,7 @@
               SLAM 之旅
             </span>
             <span class="md-header-nav__topic">
-              Fast 角点
+              Fast 角点检测
             </span>
           
         </div>
@@ -451,8 +451,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../Harris/" title="Harris 角点" class="md-nav__link">
-      Harris 角点
+    <a href="../Harris/" title="Harris 角点检测" class="md-nav__link">
+      Harris 角点检测
     </a>
   </li>
 
@@ -470,11 +470,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Fast 角点
+        Fast 角点检测
       </label>
     
-    <a href="./" title="Fast 角点" class="md-nav__link md-nav__link--active">
-      Fast 角点
+    <a href="./" title="Fast 角点检测" class="md-nav__link md-nav__link--active">
+      Fast 角点检测
     </a>
     
       
@@ -509,6 +509,13 @@
         <li class="md-nav__item">
   <a href="#非极大值抑制" title="非极大值抑制" class="md-nav__link">
     非极大值抑制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#算法特点" title="算法特点" class="md-nav__link">
+    算法特点
   </a>
   
 </li>
@@ -888,6 +895,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#算法特点" title="算法特点" class="md-nav__link">
+    算法特点
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#参考" title="参考" class="md-nav__link">
     参考
   </a>
@@ -913,7 +927,7 @@
                   <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/computer_vision/FAST.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Fast 角点</h1>
+                  <h1>Fast 角点检测</h1>
                 
                 <h2 id="fast-角点原理">FAST 角点原理<a class="headerlink" href="#fast-角点原理" title="Permanent link"></a></h2>
 <p>FAST的全称为 Features From Accelerated Segment Test 。是由 Edward Rosten 和 Tom Drummond 在 2006 年发表的  Machine learning for high-speed corner detection <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>  文章中提出。FAST 角点定义为：若某像素点与周围邻域足够多的像素点处于不同区域，则该像素可能为角点。考虑灰度图像，即若某像素点的灰度值比周围邻域足够多的像素点的灰度值大或小，则该点可能为角点。与其他特征点相比较而言，FAST 在进行角点检测时，计算速度更快，实时性更好。</p>
@@ -934,13 +948,6 @@
 </li>
 </ul>
 <p>一种快速排除大部分非角点像素的高效的测试方法是先仅仅检查周围 1、5、9、13 四个位置的像素，如果位置 1 和 9 与中心像素 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 点的灰度差小于给定阈值，则 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 点不可能是角点，直接排除；否则进一步判断位置 5 和 13 与中心像素的灰度差。如果这四个像素中至少有 3 个像素与 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 点的灰度差超过阈值，则再考察邻域圆上 16 个像素点与中心点的灰度差，如果有连续至少 9 个超过给定阈值的像素则认为 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 是角点。</p>
-<p>上述的算法效率确实很高，但是它有一些缺点：</p>
-<ol>
-<li>当我们设置 <span><span class="MathJax_Preview">n&lt;12</span><script type="math/tex">n<12</script></span> 时就不能使用快速算法来过滤非角点的点</li>
-<li>检测出来的角点不是最优的，这是因为它的效率取决于问题的排序与角点的分布</li>
-<li>对于角点分析的结果被丢弃了</li>
-<li>多个特征点容易挤在一起</li>
-</ol>
 <h2 id="角点分类器">角点分类器<a class="headerlink" href="#角点分类器" title="Permanent link"></a></h2>
 <ul>
 <li>
@@ -1018,6 +1025,15 @@ V = \max \left( \sum_{x \in S_{bright}} \left| I_{p\to x} - I_p \right| - t \;,\
 </script>
 </div>
 <p>上式中， <span><span class="MathJax_Preview">S_{bright}</span><script type="math/tex">S_{bright}</script></span> 是 16 个邻域像素点中灰度值大于 <span><span class="MathJax_Preview">I_p + t</span><script type="math/tex">I_p + t</script></span> 的像素点的集合，而 <span><span class="MathJax_Preview">S_{dark}</span><script type="math/tex">S_{dark}</script></span> 表示的是那些灰度值小于<span><span class="MathJax_Preview">I_p - t</span><script type="math/tex">I_p - t</script></span> 的像素点。</p>
+<h2 id="算法特点">算法特点<a class="headerlink" href="#算法特点" title="Permanent link"></a></h2>
+<ul>
+<li>FAST 算法比其他大多数角点检测算法要快</li>
+<li>受图像噪声以及设定阈值影响大</li>
+<li>当设置 <span><span class="MathJax_Preview">n&lt;12</span><script type="math/tex">n<12</script></span> 时，不能用快速方法过滤非角点</li>
+<li>检测出来的角点不是最优的，因为它的效率取决于问题的排序与角点的分布</li>
+<li>多个特征点容易挤在一起</li>
+<li>FAST 不产生多尺度特征，而且没有方向信息不具备旋转不变性</li>
+</ul>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1070,7 +1086,7 @@ MathJax.Hub.Config({
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../Harris/" title="Harris 角点" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../Harris/" title="Harris 角点检测" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1079,7 +1095,7 @@ MathJax.Hub.Config({
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                Harris 角点
+                Harris 角点检测
               </span>
             </div>
           </a>
