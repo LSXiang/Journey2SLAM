@@ -189,7 +189,7 @@ $$
 
 
 
-## Shi-Tomasi算法
+## Shi-Tomasi 算法
 
 Shi-Tomasi 算法是 Harris 算法的改进。Harris 算法最原始的定义是将矩阵 $M$ 的行列式值与 $M$ 的迹相减，再将差值同预先给定的阈值进行比较。后来 Jianbo Shi 和 Carlo Tomasi 提出改进的方法，若两个特征值中较小的一个大于最小阈值，则会得到强角点。
 
