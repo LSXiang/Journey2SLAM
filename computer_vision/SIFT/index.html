@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
     
     
       
@@ -136,6 +136,10 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#简介" tabindex="1" class="md-skip">
+        跳转至
+      </a>
     
     
       <header class="md-header" data-md-component="header">
@@ -489,9 +493,110 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        SIFT 特征
+      </label>
+    
     <a href="./" title="SIFT 特征" class="md-nav__link md-nav__link--active">
       SIFT 特征
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#简介" title="简介" class="md-nav__link">
+    简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#尺度空间极值检测" title="尺度空间极值检测" class="md-nav__link">
+    尺度空间极值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#构建尺度空间" title="构建尺度空间" class="md-nav__link">
+    构建尺度空间
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#尺度空间的参数确定" title="尺度空间的参数确定" class="md-nav__link">
+    尺度空间的参数确定
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#第一组第一层图像的生成" title="第一组第一层图像的生成" class="md-nav__link">
+    第一组第一层图像的生成
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#局部极值检测" title="局部极值检测" class="md-nav__link">
+    局部极值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#每组尺度空间需要的层数" title="每组尺度空间需要的层数" class="md-nav__link">
+    每组尺度空间需要的层数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#关键点定位" title="关键点定位" class="md-nav__link">
+    关键点定位
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -789,6 +894,109 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#简介" title="简介" class="md-nav__link">
+    简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#尺度空间极值检测" title="尺度空间极值检测" class="md-nav__link">
+    尺度空间极值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#构建尺度空间" title="构建尺度空间" class="md-nav__link">
+    构建尺度空间
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#尺度空间的参数确定" title="尺度空间的参数确定" class="md-nav__link">
+    尺度空间的参数确定
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#第一组第一层图像的生成" title="第一组第一层图像的生成" class="md-nav__link">
+    第一组第一层图像的生成
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#局部极值检测" title="局部极值检测" class="md-nav__link">
+    局部极值检测
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#每组尺度空间需要的层数" title="每组尺度空间需要的层数" class="md-nav__link">
+    每组尺度空间需要的层数
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#关键点定位" title="关键点定位" class="md-nav__link">
+    关键点定位
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -799,7 +1007,122 @@
                 
                   <h1>SIFT 特征</h1>
                 
-                
+                <h2 id="简介">简介<a class="headerlink" href="#简介" title="Permanent link"></a></h2>
+<p>尺度不变特征变换 (Scale-invariant feature transform, SIFT) <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup><sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> 是计算机视觉中一种检测、描述和匹配图像局部特征点的方法，通过在不同的尺度空间中检测极值点或特征点 (Conrner Point, Interest Point) ，提取出其位置、尺度和旋转不变量，并生成特征描述子，最后用于图像的特征点匹配。SIFT 特征凭借其良好的性能广泛应用于运动跟踪 (Motion tracking) 、图像拼接 (Automatic mosaicing) 、3D 重建 (3D reconstruction) 、移动机器人导航 (Mobile robot navigation) 以及目标识别 (Object Recognition) 等领域。</p>
+<h2 id="尺度空间极值检测">尺度空间极值检测<a class="headerlink" href="#尺度空间极值检测" title="Permanent link"></a></h2>
+<p>为了使检测到的特征点具备尺度不变性，使能够在不同尺度检测到尽可能完整的特征点或关键点，则需要借助尺度空间理论来描述图像的多尺度特征。相关研究证明高斯卷积核是实现尺度变换的唯一线性核。因此可用图像的高斯金字塔表示尺度空间，而且尺度规范化的 LoG 算子具有尺度不变性，在具体实现中，可用高斯差分 (DoG) 算子近似 LoG 算子，在构建的尺度空间中检测稳定的特征点。</p>
+<h3 id="构建尺度空间">构建尺度空间<a class="headerlink" href="#构建尺度空间" title="Permanent link"></a></h3>
+<p>尺度空间理论的基本思想是：在图像处理模型中引入一个被视为尺度的参数，通过连续变化尺度参数获取多尺度下的空间表示序列，对这些空间序列提取某些特征描述子，抽象成特征向量，实现图像在不同尺度或不同分辨率的特征提取。尺度空间中各尺度图像的模糊程度逐渐变大，模拟人在由近到远时目标在人眼视网膜上的成像过程。而且尺度空间需满足一定的不变性，包括图像灰度不变性、对比度不变性、平移不变性、尺度不变性以及旋转不变性等。在某些情况下甚至要求尺度空间算子具备仿射不变性。</p>
+<p>图像的尺度空间 <span><span class="MathJax_Preview">L(x,y,\sigma)</span><script type="math/tex">L(x,y,\sigma)</script></span> 可以定义为输入图像 <span><span class="MathJax_Preview">I(x,y)</span><script type="math/tex">I(x,y)</script></span> 与可变尺度的高斯函数 <span><span class="MathJax_Preview">G(x,y,\sigma)</span><script type="math/tex">G(x,y,\sigma)</script></span> 进行卷积：</p>
+<div>
+<div class="MathJax_Preview">
+L(x,y,\sigma) = G(x,y,\sigma) * I(x,y) \\
+G(x,y,\sigma) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
+</div>
+<script type="math/tex; mode=display">
+L(x,y,\sigma) = G(x,y,\sigma) * I(x,y) \\
+G(x,y,\sigma) = \frac{1}{2\pi\sigma^2}e^{-\frac{x^2+y^2}{2\sigma^2}}
+</script>
+</div>
+<p>式中， <span><span class="MathJax_Preview">(x,y)</span><script type="math/tex">(x,y)</script></span> 是图像的空间坐标，高斯函数 <span><span class="MathJax_Preview">G(x,y,\sigma)</span><script type="math/tex">G(x,y,\sigma)</script></span> 中的 <span><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> 是尺度坐标 (尺度变化因子) ， <span><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> 大小决定图像的平滑程度，值越大图像模糊得越严重。大尺度对应图像的概貌特征，小尺度对应图像的细节特征。一般根据 <span><span class="MathJax_Preview">3\sigma</span><script type="math/tex">3\sigma</script></span> 原则，高斯核矩阵的大小设为 <span><span class="MathJax_Preview">(6\sigma+1)\times(6\sigma+1)</span><script type="math/tex">(6\sigma+1)\times(6\sigma+1)</script></span> 。</p>
+<p>在使用高斯金字塔构建尺度空间时，主要分成两部分，对图像做降采样，以及对图像做不同尺度的高斯模糊。对图像做降采样得到不同尺度的图像，也就是不同的组 (Octave) ，后面的 Octave (高一层的金字塔) 为上一个 Octave (低一层的金字塔) 降采样得到，图像宽高分别为上一个 Octave 的 <span><span class="MathJax_Preview">1/2</span><script type="math/tex">1/2</script></span> 。每组 (Octave) 又分为若干层 (Interval) ，通过对图像做不同尺度的高斯模糊得到。为了有效地在尺度空间检测稳定的关键点，提出了高斯差分尺度空间 (Difference-of-Gaussian (DoG) Scale-Space) <span><span class="MathJax_Preview">D(x,y,\sigma)</span><script type="math/tex">D(x,y,\sigma)</script></span> ， <span><span class="MathJax_Preview">D(x,y,\sigma)</span><script type="math/tex">D(x,y,\sigma)</script></span> 可以通过由变化尺度因子 <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> 分隔的相邻不同尺度的高斯差分核与图像卷积生成：</p>
+<div>
+<div class="MathJax_Preview">
+\begin{align*}
+D(x,y,\sigma) &amp;= \left( G(x,y,k\sigma) - G(x,y,\sigma) \right) * I(x,y) \\
+&amp;= L(x,y,k\sigma) - L(x,y,\sigma)
+\end{align*}
+</div>
+<script type="math/tex; mode=display">
+\begin{align*}
+D(x,y,\sigma) &= \left( G(x,y,k\sigma) - G(x,y,\sigma) \right) * I(x,y) \\
+&= L(x,y,k\sigma) - L(x,y,\sigma)
+\end{align*}
+</script>
+</div>
+<p>图像的高斯金字塔和高斯差分金字塔如下图所示，高斯差分图像由高斯金字塔中同一组 (Octave) 内相邻层 (Interval) 的图像作差得到。</p>
+<p><img alt="图像高斯金字塔" src="../image/DoG.png" /></p>
+<h3 id="尺度空间的参数确定">尺度空间的参数确定<a class="headerlink" href="#尺度空间的参数确定" title="Permanent link"></a></h3>
+<p>在由图像金字塔表示的尺度空间中，图像的 Octave 由原始图像的大小和塔顶图像的大小决定。</p>
+<div>
+<div class="MathJax_Preview">
+Octave = \log_2(\min(width_0,height_0)) - \log_2(\min(width,height))
+</div>
+<script type="math/tex; mode=display">
+Octave = \log_2(\min(width_0,height_0)) - \log_2(\min(width,height))
+</script>
+</div>
+<p>其中， <span><span class="MathJax_Preview">width_0, \, height_0</span><script type="math/tex">width_0, \, height_0</script></span> 分别为原始图像的宽和高， <span><span class="MathJax_Preview">width, \, height</span><script type="math/tex">width, \, height</script></span> 分别为金字塔塔顶图像的宽和高。例如：对于一幅大小为 512×512 的图像，当塔顶图像大小为 4×4 时，图像的组数为 <span><span class="MathJax_Preview">Octave=7</span><script type="math/tex">Octave=7</script></span> 。</p>
+<p>尺度参数 <span><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> 的取值与金字塔的组数和层数相关，设第一组第一层的尺度参数取值为 <span><span class="MathJax_Preview">\sigma(1,1) = \sigma_0</span><script type="math/tex">\sigma(1,1) = \sigma_0</script></span> ，一般 <span><span class="MathJax_Preview">\sigma_0</span><script type="math/tex">\sigma_0</script></span> 取 <span><span class="MathJax_Preview">1.6</span><script type="math/tex">1.6</script></span> 。则第 <span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> 组第 <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> 层的 <span><span class="MathJax_Preview">\sigma(m,n)</span><script type="math/tex">\sigma(m,n)</script></span> 取值为</p>
+<div>
+<div class="MathJax_Preview">
+\sigma(m,n) = \sigma_0 \cdot 2^{m-1} \cdot k^{n-1}, \quad k=2^\frac{1}{S}
+</div>
+<script type="math/tex; mode=display">
+\sigma(m,n) = \sigma_0 \cdot 2^{m-1} \cdot k^{n-1}, \quad k=2^\frac{1}{S}
+</script>
+</div>
+<p>式中， <span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span> 是金字塔中每组的有效层数，<span><span class="MathJax_Preview">k=2^\frac{1}{S}</span><script type="math/tex">k=2^\frac{1}{S}</script></span> 是变化尺度因子。在检测极值点前对原始图像的高斯平滑会导致图像高频信息的丢失，所以在建立尺度空间之前，先利用双线性插值将图像扩大为原来的两倍，以保留原始图像信息，增加特征点数量。</p>
+<h4 id="第一组第一层图像的生成">第一组第一层图像的生成<a class="headerlink" href="#第一组第一层图像的生成" title="Permanent link"></a></h4>
+<p>根据上述说明，为了得到更多的特征点，需要将图像扩大为原来的两倍。根据图像反走样的需要，通常假设输入图像 <span><span class="MathJax_Preview">I(x,y)</span><script type="math/tex">I(x,y)</script></span> 是经过高斯平滑处理的，其值为 <span><span class="MathJax_Preview">\sigma' = 0.5</span><script type="math/tex">\sigma' = 0.5</script></span> ，即半个像元。意思就是说我们采集到的图像 <span><span class="MathJax_Preview">I(x,y)</span><script type="math/tex">I(x,y)</script></span> ，已经被 <span><span class="MathJax_Preview">\sigma' = 0.5</span><script type="math/tex">\sigma' = 0.5</script></span> 的高斯滤波器平滑过了。那么，经过双线性插值扩大为原来的两倍后的图像 <span><span class="MathJax_Preview">I'(x,y)</span><script type="math/tex">I'(x,y)</script></span> 可以看为是被 <span><span class="MathJax_Preview">2\sigma' = 1</span><script type="math/tex">2\sigma' = 1</script></span> 高斯平滑处理过的。所以我们不能直接对扩大两倍后的图像 <span><span class="MathJax_Preview">I'(x,y)</span><script type="math/tex">I'(x,y)</script></span> 直接用 <span><span class="MathJax_Preview">\sigma_0 = 1.6</span><script type="math/tex">\sigma_0 = 1.6</script></span> 的高斯滤波器平滑，而应该用 <span><span class="MathJax_Preview">\sqrt{\sigma_0^2 - (2\sigma'^2)}</span><script type="math/tex">\sqrt{\sigma_0^2 - (2\sigma'^2)}</script></span> 的高斯滤波器去平滑图像 <span><span class="MathJax_Preview">I'(x,y)</span><script type="math/tex">I'(x,y)</script></span> ，即：</p>
+<div>
+<div class="MathJax_Preview">
+I_{pyr(1,1)}(x,y) = I'(x,y) * G(x,y,\sqrt{\sigma_0^2 - (2\sigma'^2)})
+</div>
+<script type="math/tex; mode=display">
+I_{pyr(1,1)}(x,y) = I'(x,y) * G(x,y,\sqrt{\sigma_0^2 - (2\sigma'^2)})
+</script>
+</div>
+<h3 id="局部极值检测">局部极值检测<a class="headerlink" href="#局部极值检测" title="Permanent link"></a></h3>
+<p>为了寻找 DoG 尺度空间的极值点，每一个采样点要和其所有邻域像素相比较，如下图所示，中间检测点与其同尺度的 8 个邻域像素点以及上下相邻两层对应的 9×2 个像素点一共 26 个点作比较，以确保在图像空间和尺度空间都能检测到极值点。一个像素点如果在 DoG 尺度空间本层及上下两层的 26 邻域中取得最大或最小值时，就可以认为该点是图像在该尺度下的一个特征点。</p>
+<p><img alt="Extremum of the DoG" src="../image/extremum_DoG.png" /></p>
+<h4 id="每组尺度空间需要的层数">每组尺度空间需要的层数<a class="headerlink" href="#每组尺度空间需要的层数" title="Permanent link"></a></h4>
+<p>如上所述，在极值比较的过程中，每一组差分图像的首末两层是无法比较的，为了在每组中检测 <span><span class="MathJax_Preview">S</span><script type="math/tex">S</script></span> 个尺度的极值点，则DoG金字塔每组须有 <span><span class="MathJax_Preview">S+2</span><script type="math/tex">S+2</script></span> 层图像，高斯金字塔每组须有 <span><span class="MathJax_Preview">S+3</span><script type="math/tex">S+3</script></span> 层图像。另外，在降采样时，高斯金字塔中后一组 (Octive) 的底层图像是由前一组图像的倒数第 <span><span class="MathJax_Preview">3</span><script type="math/tex">3</script></span> 张图像 ( <span><span class="MathJax_Preview">S+1</span><script type="math/tex">S+1</script></span> 层) 隔点采样得到。这样也保证了尺度变化的连续性，如下图所示：</p>
+<p><img alt="variable scale Gaussian" src="../image/variable_scale_Gaussian.png" /></p>
+<p>根据上图，假设每组层数 <span><span class="MathJax_Preview">S=3</span><script type="math/tex">S=3</script></span> ，则 <span><span class="MathJax_Preview">k=2^\frac{1}{S} = 2^\frac{1}{3}</span><script type="math/tex">k=2^\frac{1}{S} = 2^\frac{1}{3}</script></span> ，在高斯金字塔中，第一个 Octave 第 <span><span class="MathJax_Preview">S+1</span><script type="math/tex">S+1</script></span> 层图像的尺度为 <span><span class="MathJax_Preview">k^3\sigma = 2\sigma</span><script type="math/tex">k^3\sigma = 2\sigma</script></span> ，经降采样后得到第二个 Octave 的第 1 层图像，尺度仍为 <span><span class="MathJax_Preview">2\sigma</span><script type="math/tex">2\sigma</script></span> 。在 DoG 尺度空间中，第一组 (1<sup>st</sup>-Octave) 图像中间三项的尺度分别为 <span><span class="MathJax_Preview">(k\sigma, k^2\sigma, k^3\sigma)</span><script type="math/tex">(k\sigma, k^2\sigma, k^3\sigma)</script></span> ，下一组中间三项为 <span><span class="MathJax_Preview">(2k\sigma, 2k^2\sigma, 2k^3\sigma)</span><script type="math/tex">(2k\sigma, 2k^2\sigma, 2k^3\sigma)</script></span> ，其 “首项” <span><span class="MathJax_Preview">2k\sigma = 2^\frac{4}{3}</span><script type="math/tex">2k\sigma = 2^\frac{4}{3}</script></span> ，与 上一组 “末项” <span><span class="MathJax_Preview">k^3\sigma = 2^\frac{3}{3}\sigma</span><script type="math/tex">k^3\sigma = 2^\frac{3}{3}\sigma</script></span> 尺度变化连续，变化尺度为 <span><span class="MathJax_Preview">k=2^\frac{1}{S} = 2^\frac{1}{3}</span><script type="math/tex">k=2^\frac{1}{S} = 2^\frac{1}{3}</script></span> 。</p>
+<h2 id="关键点定位">关键点定位<a class="headerlink" href="#关键点定位" title="Permanent link"></a></h2>
+<p>在 DoG 尺度空间检测到的极值点是离散的，通过拟合三元二次函数可以精确定位关键点的位置和尺度，达到亚像素精度。同时去除低对比度的检测点和不稳定的边缘点，以增强匹配稳定性，提高抗噪声能力。</p>
+<h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    config: ["MMLorHTML.js"],
+    jax: ["input/TeX", "output/HTML-CSS", "output/NativeMML"],
+    extensions: ["MathMenu.js", "MathZoom.js"],
+    TeX: {
+        TagSide: "right",
+        TagIndent: ".8em",
+        MultLineWidth: "85%",
+        equationNumbers: {
+            autoNumber: "AMS",
+        }
+    },
+    showProcessingMessages: false,
+    messageStyle: 'none'
+});
+</script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js' async></script>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://www.cs.ubc.ca/~lowe/papers/ijcv04.pdf">Distinctive Image Features from Scale-Invariant Keypoints</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="http://cgit.nutn.edu.tw:8080/cgit/PaperDL/iccv99.pdf">Object Recognition from Local Scale-Invariant Features</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p>Slides : <a href="https://people.cs.umass.edu/~elm/Teaching/ppt/SIFT.pdf">Object Recognition from Local Scale-Invariant Feature</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Senit_Co 博客：<a href="https://senitco.github.io/2017/06/24/image-feature-sift/">图像特征之SIFT特征匹配</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>思维之际博客：<a href="https://www.cnblogs.com/ronny/p/4028776.html">SIFT定位算法关键步骤的说明</a>&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
                   
                 
@@ -880,7 +1203,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
       
         
         
