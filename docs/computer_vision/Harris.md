@@ -227,9 +227,9 @@ $$
 [^4]: [A COMBINED CORNER AND EDGE DETECTOR](http://www.bmva.org/bmvc/1988/avc-88-023.pdf)
 [^5]: [Scale & Affine Invariant Interest Point Detectors](https://www.robots.ox.ac.uk/~vgg/research/affine/det_eval_files/mikolajczyk_ijcv2004.pdf)
 [^6]: [Code: Harris Detector](https://github.com/ronnyyoung/ImageFeatures)
-[^7]: [思维之际博客](https://www.cnblogs.com/ronny/p/4009425.html)
+[^7]: [思维之际博客：Harris 角点](https://www.cnblogs.com/ronny/p/4009425.html)
 
-
+[^8]: Senit_Co 博客：[图像特征之 Harris 角点检测](https://senitco.github.io/2017/06/18/image-feature-harris/)
 
 
 

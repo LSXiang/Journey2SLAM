@@ -96,9 +96,9 @@ $$
 
 [^1]: [FAST Corner Detection -- Edward Rosten](http://www.edwardrosten.com/work/fast.html) 
 
-[^2]: [思维之际博客](https://www.cnblogs.com/ronny/p/4078710.html)
+[^2]: [思维之际博客：FAST特征点检测](https://www.cnblogs.com/ronny/p/4078710.html) 
 
-
+[^3]:  Senit_Co 博客：[图像特征之FAST角点检测](https://senitco.github.io/2017/06/30/image-feature-fast/) 
 
 
 

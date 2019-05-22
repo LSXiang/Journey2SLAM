@@ -158,7 +158,9 @@ $$
 [^1]: Ethan Rublee, Vincent Rabaud, Kurt Konolige, Gary R. Bradski: [ORB: An efficient alternative to SIFT or SURFhttp](http://www.willowgarage.com/sites/default/files/orb_final.pdf)
 [^2]:M. Calonder, V. Lepetit, C. Strecha, and P. Fua. [Brief: Binary robust independent elementary features](http://vision.stanford.edu/teaching/cs231b_spring1415/papers/BRIEF.pdf) 
 
-[^3]: [思维之际博客](https://www.cnblogs.com/ronny/p/4083537.html)
+[^3]: 思维之际博客：[BRIEF 特征描述子](https://www.cnblogs.com/ronny/p/4081362.html) 、[ORB特征点检测](https://www.cnblogs.com/ronny/p/4083537.html) 
+
+[^4]: Senit_Co 博客：[图像特征描述子之ORB](https://senitco.github.io/2017/07/09/image-feature-orb/)  、[图像特征描述子之BRIEF](https://senitco.github.io/2017/07/05/image-feature-brief/)
 
 
 
