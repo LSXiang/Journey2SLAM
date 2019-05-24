@@ -48,6 +48,7 @@ nav:
         - ORB 特征: computer_vision/ORB.md
         - SIFT 特征: computer_vision/SIFT.md
         - SUFT 特征: computer_vision/SUFT.md
+        - Haar 特征: computer_vision/Haar.md
 - 多视几何: 
     - 多视几何概览: multiple_view_geometry/mvg.md
     - 数学背景 - 线性代数: multiple_view_geometry/linear_algebra.md
