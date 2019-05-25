@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
       <link rel="shortcut icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
     
     
       
@@ -497,6 +497,18 @@
   <li class="md-nav__item">
     <a href="../../../computer_vision/SUFT/" title="SUFT 特征" class="md-nav__link">
       SUFT 特征
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../computer_vision/Haar/" title="Haar 特征" class="md-nav__link">
+      Haar 特征
     </a>
   </li>
 
@@ -1618,7 +1630,7 @@ $}
 <p>由上面四个等式就可以通过 n-1 时刻的参数 <span><span class="MathJax_Preview">a, b, \mu, \sigma</span><script type="math/tex">a, b, \mu, \sigma</script></span> 求解 n 时刻的参数 <span><span class="MathJax_Preview">a', b', \mu', \sigma'</span><script type="math/tex">a', b', \mu', \sigma'</script></span> 了。因此在加入新的测量时，通过迭代式 (2.14) 近似后验概率分布会得到更新，当 <span><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> 小于给定阈值时，认为估计的深度值已经收敛，计算对应特征点的三维坐标，并加入地图。</p>
 <h2 id="总结">总结<a class="headerlink" href="#总结" title="Permanent link"></a></h2>
 <p>SVO 相对于目前其他开源的方案，它的最大优势是速度极快。这是因为它使用了稀疏的直接法，既不用费力的去计算描述子用于特征匹配，也不必像稠密或半稠密法那么处理大量的信息，因此 SVO 在低端的计算平台上也可以打到实时性。但也由于 SVO 针对目标应用平台选为了无人机的俯视相机，围绕该特点应用场景设计也使得 SVO 的局限性比较大，并且为了计算速度，直接舍弃了后端优化月回环检查，也基本没有重定位能力。因此我们可以称它仅仅是个里程计，而非完整的 SLAM 。</p>
-<p>关于代码中的其他细节，请观看下一篇 「 SVO 代码解析」。</p>
+<p>关于代码中的其他细节，请观看下一篇 「 <a href="../code_analysis/">SVO 代码解析</a>」。</p>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1758,7 +1770,7 @@ MathJax.Hub.Config({
       
     </div>
     
-      <script src="../../../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../../../assets/javascripts/application.267712eb.js"></script>
       
         
         

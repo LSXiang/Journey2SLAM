@@ -13,7 +13,7 @@
         <meta name="description" content="SLAM 之旅（Journey to SLAM）是用于记录分享学习 SLAM 知识的平台">
       
       
-        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/computer_vision/FAST/">
+        <link rel="canonical" href="https://lsxiang.github.io/Journey2SLAM/computer_vision/Haar/">
       
       
         <meta name="author" content="Jacob.lsx">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Fast 角点检测 - SLAM 之旅</title>
+        <title>Haar 特征 - SLAM 之旅</title>
       
     
     
@@ -137,7 +137,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#fast-角点原理" tabindex="1" class="md-skip">
+      <a href="#简介" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -162,7 +162,7 @@
               SLAM 之旅
             </span>
             <span class="md-header-nav__topic">
-              Fast 角点检测
+              Haar 特征
             </span>
           
         </div>
@@ -461,80 +461,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Fast 角点检测
-      </label>
-    
-    <a href="./" title="Fast 角点检测" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../FAST/" title="Fast 角点检测" class="md-nav__link">
       Fast 角点检测
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">目录</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#fast-角点原理" title="FAST 角点原理" class="md-nav__link">
-    FAST 角点原理
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#算法步骤" title="算法步骤" class="md-nav__link">
-    算法步骤
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#角点分类器" title="角点分类器" class="md-nav__link">
-    角点分类器
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#非极大值抑制" title="非极大值抑制" class="md-nav__link">
-    非极大值抑制
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#算法特点" title="算法特点" class="md-nav__link">
-    算法特点
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#参考" title="参考" class="md-nav__link">
-    参考
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -578,11 +509,119 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../Haar/" title="Haar 特征" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Haar 特征
+      </label>
+    
+    <a href="./" title="Haar 特征" class="md-nav__link md-nav__link--active">
       Haar 特征
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#简介" title="简介" class="md-nav__link">
+    简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#多种haar-like特征" title="多种Haar-like特征" class="md-nav__link">
+    多种Haar-like特征
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#快速计算积分图" title="快速计算——积分图" class="md-nav__link">
+    快速计算——积分图
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#积分图构建" title="积分图构建" class="md-nav__link">
+    积分图构建
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#矩形特征计算" title="矩形特征计算" class="md-nav__link">
+    矩形特征计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#旋转矩形特征的计算" title="旋转矩形特征的计算" class="md-nav__link">
+    旋转矩形特征的计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adaboost分类器" title="AdaBoost分类器" class="md-nav__link">
+    AdaBoost分类器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#算法流程" title="算法流程" class="md-nav__link">
+    算法流程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -879,37 +918,76 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#fast-角点原理" title="FAST 角点原理" class="md-nav__link">
-    FAST 角点原理
+  <a href="#简介" title="简介" class="md-nav__link">
+    简介
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#算法步骤" title="算法步骤" class="md-nav__link">
-    算法步骤
+  <a href="#多种haar-like特征" title="多种Haar-like特征" class="md-nav__link">
+    多种Haar-like特征
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#角点分类器" title="角点分类器" class="md-nav__link">
-    角点分类器
+  <a href="#快速计算积分图" title="快速计算——积分图" class="md-nav__link">
+    快速计算——积分图
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#积分图构建" title="积分图构建" class="md-nav__link">
+    积分图构建
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#矩形特征计算" title="矩形特征计算" class="md-nav__link">
+    矩形特征计算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#旋转矩形特征的计算" title="旋转矩形特征的计算" class="md-nav__link">
+    旋转矩形特征的计算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#非极大值抑制" title="非极大值抑制" class="md-nav__link">
-    非极大值抑制
+  <a href="#adaboost分类器" title="AdaBoost分类器" class="md-nav__link">
+    AdaBoost分类器
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#算法流程" title="算法流程" class="md-nav__link">
+    算法流程
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#算法特点" title="算法特点" class="md-nav__link">
-    算法特点
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -936,116 +1014,192 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/computer_vision/FAST.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/LSXiang/Journey2SLAM/edit/master/docs/computer_vision/Haar.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Fast 角点检测</h1>
+                  <h1>Haar 特征</h1>
                 
-                <h2 id="fast-角点原理">FAST 角点原理<a class="headerlink" href="#fast-角点原理" title="Permanent link"></a></h2>
-<p>FAST的全称为 Features From Accelerated Segment Test 。是由 Edward Rosten 和 Tom Drummond 在 2006 年发表的  Machine learning for high-speed corner detection <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>  文章中提出。FAST 角点定义为：若某像素点与周围邻域足够多的像素点处于不同区域，则该像素可能为角点。考虑灰度图像，即若某像素点的灰度值比周围邻域足够多的像素点的灰度值大或小，则该点可能为角点。与其他特征点相比较而言，FAST 在进行角点检测时，计算速度更快，实时性更好。</p>
-<h2 id="算法步骤">算法步骤<a class="headerlink" href="#算法步骤" title="Permanent link"></a></h2>
+                <h2 id="简介">简介<a class="headerlink" href="#简介" title="Permanent link"></a></h2>
+<p>Haar 特征<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>是一种用于目标检测或识别的图像特征描述子，Haar 特征通常和 AdaBoost 分类器组合使用，而且由于 Haar 特征提取的实时性以及 AdaBoost 分类的准确率，使其成为人脸检测以及识别领域较为经典的算法。</p>
+<h2 id="多种haar-like特征">多种Haar-like特征<a class="headerlink" href="#多种haar-like特征" title="Permanent link"></a></h2>
+<p>在 Haar-like 特征<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup><sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>提出之前，传统的人脸检测算法一般是基于图像像素值进行的，计算量较大且实时性较差。 Papageorgiou 等人最早将 Harr 小波用于人脸特征表示，Viola 和 Jones 则在此基础上，提出了多种形式的 Haar 特征。Lienhart 等人对 Haar 矩形特征做了进一步的扩展，加入了旋转 <span><span class="MathJax_Preview">45^{\circ}</span><script type="math/tex">45^{\circ}</script></span> 的矩形特征，因此现有的 Haar 特征模板主要如下图所示：</p>
+<p><img alt="Haar-like 矩形特征" src="../image/Haar_like.png" /></p>
+<p>在计算 Haar 特征值时，用白色区域像素值的和减去黑色区域像素值的和，也就是说白色区域的权值为正值，黑色区域的权值为负值，而且权值与矩形区域的面积成反比，抵消两种矩形区域面积不等造成的影响，保证 Haar 特征值在灰度分布均匀的区域特征值趋近于 0 。Haar 特征在一定程度上反应了图像灰度的局部变化，在人脸检测中，脸部的一些特征可由矩形特征简单刻画，例如，眼睛比周围区域的颜色要深，鼻梁比两侧颜色要浅等。</p>
+<p>Haar-like 矩形特征分为多类，特征模板可用于图像中的任一位置，而且大小也可任意变化，因此 Haar 特征的取值受到特征模板的类别、位置以及大小这三种因素的影响，使得在一固定大小的图像窗口内，可以提取出大量的 Haar 特征。例如，在一个 <span><span class="MathJax_Preview">24\times 24</span><script type="math/tex">24\times 24</script></span> 的检测窗口内，矩形特征的数量可以达到 16 万个。这样就需要解决两个重要问题，快速计算 Haar 矩形特征值——积分图；筛选有效的矩形特征用于分类识别—— AdaBoost 分类器。</p>
+<h2 id="快速计算积分图">快速计算——积分图<a class="headerlink" href="#快速计算积分图" title="Permanent link"></a></h2>
+<h3 id="积分图构建">积分图构建<a class="headerlink" href="#积分图构建" title="Permanent link"></a></h3>
+<p>在一个图像窗口中，可以提取出大量的 Haar 矩形特征区域，如果在计算 Haar 特征值时，每次都遍历矩形特征区域，将会造成大量重复计算，严重浪费时间。而积分图正是一种快速计算矩形特征的方法，其主要思想是将图像起始像素点到每一个像素点之间所形成的矩形区域的像素值的和，作为一个元素保存下来，也就是将原始图像转换为积分图 (或者求和图) ，这样在求某一矩形区域的像素和时，只需索引矩形区域 4 个角点在积分图中的取值，进行普通的加减运算，即可求得 Haar 特征值，整个过程只需遍历一次图像，计算特征的时间复杂度为常数 (O(1)) 。因此可以大大提升计算效率。</p>
+<p>积分图中元素的公式定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+I_i(x,y) = \sum_{x'\leq x,y'\leq y} I(x',y')
+</div>
+<script type="math/tex; mode=display">
+I_i(x,y) = \sum_{x'\leq x,y'\leq y} I(x',y')
+</script>
+</div>
+<p>上式含义是在 <span><span class="MathJax_Preview">(x,y)</span><script type="math/tex">(x,y)</script></span> (第 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 行第 <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> 列) 位置处，积分图中元素为原图像中对应像素左上角所有像素值之和。在具体实现时，可用下式进行迭代运算。</p>
+<div>
+<div class="MathJax_Preview">
+s(x,y)=s(x,y-1)+I(x,y) \\
+I_i(x,y)=I_i(x-1,y)+s(x,y)
+</div>
+<script type="math/tex; mode=display">
+s(x,y)=s(x,y-1)+I(x,y) \\
+I_i(x,y)=I_i(x-1,y)+s(x,y)
+</script>
+</div>
+<p><span><span class="MathJax_Preview">s(x,y)</span><script type="math/tex">s(x,y)</script></span> 为行元素累加值，初始值 <span><span class="MathJax_Preview">s(x,-1)=0,I_i(-1,y)=0</span><script type="math/tex">s(x,-1)=0,I_i(-1,y)=0</script></span> 。</p>
+<h4 id="矩形特征计算">矩形特征计算<a class="headerlink" href="#矩形特征计算" title="Permanent link"></a></h4>
+<p>构建好积分图后，图像中任何矩形区域的像素值累加和都可以通过简单的加减运算快速得到，如下图所示，矩形区域 D 的像素和值计算公式如下： </p>
+<div>
+<div class="MathJax_Preview">
+Sum(D)=I_i(x_4, y_4)-I_i(x_2,y_2)-I_i(x_3,y_3)+I_i(x_1,y_1)
+</div>
+<script type="math/tex; mode=display">
+Sum(D)=I_i(x_4, y_4)-I_i(x_2,y_2)-I_i(x_3,y_3)+I_i(x_1,y_1)
+</script>
+</div>
+<p><img alt="矩形区域求和示意图" src="../image/rectangle.png" /></p>
+<p>在下图中，以水平向右为 x 轴正方向，垂直向下为 y 轴正方向，可定义积分图公式 Summed Area Table (<span><span class="MathJax_Preview">SAT(x,y)</span><script type="math/tex">SAT(x,y)</script></span> )</p>
+<div>
+<div class="MathJax_Preview">
+SAT(x,y)=\sum_{x'\leq x,y'\leq y} I(x',y')
+</div>
+<script type="math/tex; mode=display">
+SAT(x,y)=\sum_{x'\leq x,y'\leq y} I(x',y')
+</script>
+</div>
+<p>以及迭代求解式对于左上角坐标为 <span><span class="MathJax_Preview">(x,y)</span><script type="math/tex">(x,y)</script></span> ，宽高为 <span><span class="MathJax_Preview">(w,h)</span><script type="math/tex">(w,h)</script></span> 的矩形区域 <span><span class="MathJax_Preview">r(x,y,w,h,0)</span><script type="math/tex">r(x,y,w,h,0)</script></span> ，可利用积分图 <span><span class="MathJax_Preview">SAT(x,y)</span><script type="math/tex">SAT(x,y)</script></span> 求取像素和值</p>
+<div>
+<div class="MathJax_Preview">
+\scriptsize{
+\begin{align*}
+RecSum(r) &amp;= SAT(x+w-1, y+h-1) \\ &amp;+ SAT(x-1, y-1) \\ &amp;- SAT(x+w-1, y-1) \\ &amp;-SAT(x-1,y+h-1)
+\end{align*}
+}
+</div>
+<script type="math/tex; mode=display">
+\scriptsize{
+\begin{align*}
+RecSum(r) &= SAT(x+w-1, y+h-1) \\ &+ SAT(x-1, y-1) \\ &- SAT(x+w-1, y-1) \\ &-SAT(x-1,y+h-1)
+\end{align*}
+}
+</script>
+</div>
+<p><img alt="积分图求矩形区域和值" src="../image/integral_rectangle.png.png" /></p>
+<h4 id="旋转矩形特征的计算">旋转矩形特征的计算<a class="headerlink" href="#旋转矩形特征的计算" title="Permanent link"></a></h4>
+<p>对于旋转矩形特征，相应的有 <span><span class="MathJax_Preview">45^{\circ}</span><script type="math/tex">45^{\circ}</script></span> 倾斜积分图用于快速计算 Haar 特征值，如下图所示，倾斜积分图的定义为像素点左上角 <span><span class="MathJax_Preview">45^{\circ}</span><script type="math/tex">45^{\circ}</script></span> 区域和左下角 <span><span class="MathJax_Preview">45^{\circ}</span><script type="math/tex">45^{\circ}</script></span> 区域的像素和，公式表示如下：</p>
+<div>
+<div class="MathJax_Preview">
+RSAT(x,y)=\sum_{x'\leq x,x'\leq x-\left|y-y'\right|} I(x',y')
+</div>
+<script type="math/tex; mode=display">
+RSAT(x,y)=\sum_{x'\leq x,x'\leq x-\left|y-y'\right|} I(x',y')
+</script>
+</div>
+<p>其递推公式计算如下：</p>
+<div>
+<div class="MathJax_Preview">
+\scriptsize{
+RSAT(x,y)=RSAT(x-1,y-1)+RSAT(x-1,y)-RSAT(x-2,y-1)+I(x,y) \\
+RSAT(x,y)=RSAT(x,y)+RSAT(x-1,y+1)-RSAT(x-2,y)
+}
+</div>
+<script type="math/tex; mode=display">
+\scriptsize{
+RSAT(x,y)=RSAT(x-1,y-1)+RSAT(x-1,y)-RSAT(x-2,y-1)+I(x,y) \\
+RSAT(x,y)=RSAT(x,y)+RSAT(x-1,y+1)-RSAT(x-2,y)
+}
+</script>
+</div>
+<p>其中 <span><span class="MathJax_Preview">RSAT(-1,y)=RSAT(-2,y)=RSAT(x,-1)=0</span><script type="math/tex">RSAT(-1,y)=RSAT(-2,y)=RSAT(x,-1)=0</script></span> 也可直接通过下式递归计算：</p>
+<div>
+<div class="MathJax_Preview">
+\scriptsize{
+RSAT(x,y)=RSAT(x-1,y-1)+RSAT(x+1,y-1)-RSAT(x,y-2)+I(x-1,y)+I(x,y)
+}
+</div>
+<script type="math/tex; mode=display">
+\scriptsize{
+RSAT(x,y)=RSAT(x-1,y-1)+RSAT(x+1,y-1)-RSAT(x,y-2)+I(x-1,y)+I(x,y)
+}
+</script>
+</div>
+<p>以上 3 个积分图计算公式是等价的。</p>
+<p><img alt="倾斜积分图求倾斜矩形区域和值" src="../image/integral_rotation_rectangle.png" /></p>
+<p>如下图所示，构建好倾斜积分图后，可快速计算倾斜矩形区域<span><span class="MathJax_Preview">r=(x,y,w,h,45^{\circ})</span><script type="math/tex">r=(x,y,w,h,45^{\circ})</script></span>的像素和值</p>
+<div>
+<div class="MathJax_Preview">
+\scriptsize{
+\begin{align*}
+RecSum(r) &amp;=RSAT(x+w-1,y+w-1) \\
+&amp;+RSAT(x-h-1,y+h-1) \\
+&amp;-RSAT(x-1,y-1) \\
+&amp;-RSAT(x+w-1-h,y+w-1+h)
+\end{align*}
+}
+</div>
+<script type="math/tex; mode=display">
+\scriptsize{
+\begin{align*}
+RecSum(r) &=RSAT(x+w-1,y+w-1) \\
+&+RSAT(x-h-1,y+h-1) \\
+&-RSAT(x-1,y-1) \\
+&-RSAT(x+w-1-h,y+w-1+h)
+\end{align*}
+}
+</script>
+</div>
+<p><img alt="倾斜矩形区域求和示意图" src="../image/rotated_rectangle.png" /></p>
+<h2 id="adaboost分类器">AdaBoost分类器<a class="headerlink" href="#adaboost分类器" title="Permanent link"></a></h2>
+<p>由输入图像得到积分图，通过取不同种类、大小的 Haar 特征模板，并在不同位置处，利用积分图提取 Haar 矩形特征，可快速得到大量Haar特征值，AdaBoost 分类器可用于对提取的 Haar 特征 (通常需要做归一化处理) 进行训练分类，并应用于人脸检测中。AdaBoost 是一种集成分类器，由若干个强分类级联而成，而每个强分类器又由若干个弱分类器 (例如：决策树) 组合训练得到。</p>
+<p>弱分类器的定义如下：</p>
+<div>
+<div class="MathJax_Preview">
+h_j(x)=\begin{cases} 1,&amp;p_j f_j(x) &lt; p_j \theta_j \\ 0, &amp; otherwise \end{cases}
+</div>
+<script type="math/tex; mode=display">
+h_j(x)=\begin{cases} 1,&p_j f_j(x) < p_j \theta_j \\ 0, & otherwise \end{cases}
+</script>
+</div>
+<p>上式中 <span><span class="MathJax_Preview">p_j</span><script type="math/tex">p_j</script></span> 是为了控制不等式的方向而设置的参数。 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 表示一个图像窗口，<span><span class="MathJax_Preview">f_j(x)</span><script type="math/tex">f_j(x)</script></span> 表示提取的 Haar 特征，阈值 <span><span class="MathJax_Preview">\theta</span><script type="math/tex">\theta</script></span> 用于判断该窗口是否为目标区域 (人脸) 。</p>
+<h3 id="算法流程">算法流程<a class="headerlink" href="#算法流程" title="Permanent link"></a></h3>
 <ul>
 <li>
-<p>从图像中选取一个像素 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> ，其灰度值为 <span><span class="MathJax_Preview">I_p</span><script type="math/tex">I_p</script></span> </p>
+<p>假设训练样本为 <span><span class="MathJax_Preview">(x_i,y_i),i=0,1,...,n</span><script type="math/tex">(x_i,y_i),i=0,1,...,n</script></span>，<span><span class="MathJax_Preview">y_i</span><script type="math/tex">y_i</script></span> 取值为 0 (负样本)、1 (正样本)</p>
 </li>
 <li>
-<p>设定一个合适的阈值 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> </p>
+<p>初始化权重 <span><span class="MathJax_Preview">w_1,i=\dfrac{1}{2m},y_i=\dfrac{1}{2l}</span><script type="math/tex">w_1,i=\dfrac{1}{2m},y_i=\dfrac{1}{2l}</script></span> ，其中<span><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span>表示负样本的个数，<span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>表示正样本的个数</p>
 </li>
 <li>
-<p>以该像素点为中心考虑一个半径为 3 的离散化的 <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham</a> 圆，圆边界上有 16 个像素（如下图所示）</p>
-<p><img alt="FAST Corner" src="../image/FAST_corner.png" /></p>
-</li>
-<li>
-<p>如果圆上有 <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> 个连续像素点的灰度值小于 <span><span class="MathJax_Preview">I_p-t</span><script type="math/tex">I_p-t</script></span> 或者大于 <span><span class="MathJax_Preview">I_p+t</span><script type="math/tex">I_p+t</script></span> ，那么这个点即可判断为角点（ <span><span class="MathJax_Preview">n</span><script type="math/tex">n</script></span> 的值可取12 或 9）</p>
+<p>For <span><span class="MathJax_Preview">t =1,2,...,T</span><script type="math/tex">t =1,2,...,T</script></span> </p>
 </li>
 </ul>
-<p>一种快速排除大部分非角点像素的高效的测试方法是先仅仅检查周围 1、5、9、13 四个位置的像素，如果位置 1 和 9 与中心像素 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 点的灰度差小于给定阈值，则 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 点不可能是角点，直接排除；否则进一步判断位置 5 和 13 与中心像素的灰度差。如果这四个像素中至少有 3 个像素与 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 点的灰度差超过阈值，则再考察邻域圆上 16 个像素点与中心点的灰度差，如果有连续至少 9 个超过给定阈值的像素则认为 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 是角点。</p>
-<h2 id="角点分类器">角点分类器<a class="headerlink" href="#角点分类器" title="Permanent link"></a></h2>
+<ol>
+<li>归一化权值：<span><span class="MathJax_Preview">w_{t,i} = \dfrac{w_{t,i}}{\Sigma_{j=1}^n w_{t,j}}</span><script type="math/tex">w_{t,i} = \dfrac{w_{t,i}}{\Sigma_{j=1}^n w_{t,j}}</script></span> </li>
+<li>对于每个(种)特征，训练一个分类器 (<span><span class="MathJax_Preview">h_j</span><script type="math/tex">h_j</script></span>) ，每个分类器只使用一种 Haar 特征进行训练。分类误差为 <span><span class="MathJax_Preview">\varepsilon_j = \sum_i w_i \left | h_j (x_i) - y_i \right|</span><script type="math/tex">\varepsilon_j = \sum_i w_i \left | h_j (x_i) - y_i \right|</script></span> ， <span><span class="MathJax_Preview">h_j</span><script type="math/tex">h_j</script></span> 为特征分类器，<span><span class="MathJax_Preview">x_i</span><script type="math/tex">x_i</script></span> 为训练图像样本。</li>
+<li>选择最低误差的分类器 <span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span> </li>
+<li>更新训练样本的权值 <span><span class="MathJax_Preview">w_{t+1,i} = w_{t,i} \beta_t^{1-e_i}</span><script type="math/tex">w_{t+1,i} = w_{t,i} \beta_t^{1-e_i}</script></span>，分类正确 <span><span class="MathJax_Preview">e_i=0</span><script type="math/tex">e_i=0</script></span> ，分类错误 <span><span class="MathJax_Preview">e_i=1</span><script type="math/tex">e_i=1</script></span> ， <span><span class="MathJax_Preview">\beta_t=\dfrac{\varepsilon_t}{1-\varepsilon_t}</span><script type="math/tex">\beta_t=\dfrac{\varepsilon_t}{1-\varepsilon_t}</script></span> </li>
+</ol>
 <ul>
 <li>
-<p>选取需要检测的场景的多张图像进行 FAST 角点检测，选取合适的阈值 <span><span class="MathJax_Preview">n(n&lt;12)</span><script type="math/tex">n(n<12)</script></span> ，提取多个特征点作为训练数据</p>
-</li>
-<li>
-<p>对于图像上的点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> ,它周围邻域圆上位置为 <span><span class="MathJax_Preview">x, \; x \in \{1, \dotsc, 16\}</span><script type="math/tex">x, \; x \in \{1, \dotsc, 16\}</script></span> 的点表示为 <span><span class="MathJax_Preview">p \to x</span><script type="math/tex">p \to x</script></span> ，可以用下面的判断公式将该点 <span><span class="MathJax_Preview">p \to x</span><script type="math/tex">p \to x</script></span> 分为 3 类</p>
+<p>最后的强分类器为</p>
 <div>
 <div class="MathJax_Preview">
-  S_{p \to s} = 
-\begin{cases}
-    d, &amp; I_{p \to x} &lt; I_p - t &amp; (darker) \\
-    s, &amp; I_p -t \leq I_{p \to x} \leq I_p + t &amp; (similar) \\
-    b, &amp; I_p + t &lt; I_{p \to x} &amp;(brighter)
-\end{cases}
-  </div>
-<script type="math/tex; mode=display">
-  S_{p \to s} = 
-\begin{cases}
-    d, & I_{p \to x} < I_p - t & (darker) \\
-    s, & I_p -t \leq I_{p \to x} \leq I_p + t & (similar) \\
-    b, & I_p + t < I_{p \to x} &(brighter)
-\end{cases}
-  </script>
-</div>
-</li>
-<li>
-<p>设 <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> 为训练图像集中所有像素点的集合，我们任意 16 个位置中的一个位置 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> ，可以把集合 <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> 分为三个部分 <span><span class="MathJax_Preview">P_d</span><script type="math/tex">P_d</script></span> 、 <span><span class="MathJax_Preview">P_s</span><script type="math/tex">P_s</script></span> 和 <span><span class="MathJax_Preview">P_b</span><script type="math/tex">P_b</script></span> ，其中 <span><span class="MathJax_Preview">P_d</span><script type="math/tex">P_d</script></span> 的定义如下， <span><span class="MathJax_Preview">P_s</span><script type="math/tex">P_s</script></span> 和 <span><span class="MathJax_Preview">P_b</span><script type="math/tex">P_b</script></span> 的定义与其类似</p>
-<div>
-<div class="MathJax_Preview">
-P_b = \{ p \in P : S_{p \to s} = b \}
+h(x)=\begin{cases} 1, &amp; \sum_{t=1}^T \alpha_t h_t \geq \dfrac{1}{2} \Sigma_{t=1}^T \alpha_t \\ 0,&amp; otherwise \end{cases}
 </div>
 <script type="math/tex; mode=display">
-P_b = \{ p \in P : S_{p \to s} = b \}
+h(x)=\begin{cases} 1, & \sum_{t=1}^T \alpha_t h_t \geq \dfrac{1}{2} \Sigma_{t=1}^T \alpha_t \\ 0,& otherwise \end{cases}
 </script>
 </div>
-<p>换句话说，对于任意给定的位置 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> ，它都可以把所有图像中的点分为三类，第一类 <span><span class="MathJax_Preview">P_d</span><script type="math/tex">P_d</script></span> 包括了所有位置 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 处的像素在阈值 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 下暗于中心像素，第二类 <span><span class="MathJax_Preview">P_s</span><script type="math/tex">P_s</script></span> 包括了所有位置 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 处的像素在阈值 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 下近似于中心像素， <span><span class="MathJax_Preview">P_b</span><script type="math/tex">P_b</script></span> 包括了所有位置 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 处的像素在阈值 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 下亮于中心像素</p>
-</li>
-<li>
-<p>对每个特征点定义一个 bool 变量 <span><span class="MathJax_Preview">K_p</span><script type="math/tex">K_p</script></span> ，如果 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 是一个角点，则 <span><span class="MathJax_Preview">K_p</span><script type="math/tex">K_p</script></span> 为真，否则为假</p>
-</li>
-<li>
-<p>对提取的特征点集进行训练，使用 <span><span class="MathJax_Preview">\mathrm{ID}_3</span><script type="math/tex">\mathrm{ID}_3</script></span> 算法建立一颗决策树，通过第 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 个像素点进行决策树的划分，对集合 <span><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> ，得到熵值为</p>
-<div>
-<div class="MathJax_Preview">
-H(P) = (c+\hat{c}) \log_2(c+\hat{c}) - c \log_2 c - \hat{c} \log_2 \hat{c}
-</div>
-<script type="math/tex; mode=display">
-H(P) = (c+\hat{c}) \log_2(c+\hat{c}) - c \log_2 c - \hat{c} \log_2 \hat{c}
-</script>
-</div>
-<p>其中 <span><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> 为角点的数目， <span><span class="MathJax_Preview">\hat{x}</span><script type="math/tex">\hat{x}</script></span> 为非角点的数目。由此得到的信息增益为</p>
-<div>
-<div class="MathJax_Preview">
-\Delta H = H(P)-H(P_d)-H(P_s)-H(P_b)
-</div>
-<script type="math/tex; mode=display">
-\Delta H = H(P)-H(P_d)-H(P_s)-H(P_b)
-</script>
-</div>
-<p>选择信息增益最大位置进行划分，得到决策树</p>
-</li>
-<li>
-<p>使用决策树对类似场景进行特征点的检测与分类</p>
+<p>其中 <span><span class="MathJax_Preview">\alpha_t=log(\dfrac{1}{\beta_t})</span><script type="math/tex">\alpha_t=log(\dfrac{1}{\beta_t})</script></span> 。</p>
 </li>
 </ul>
-<h2 id="非极大值抑制">非极大值抑制<a class="headerlink" href="#非极大值抑制" title="Permanent link"></a></h2>
-<p>对于邻近位置存在多个特征点的情况，需要进一步做非极大值抑制 (Non-Maximal Suppression) 。给每个已经检测到的角点一个量化的值 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> ，然后比较相邻角点的 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 值，保留局部邻域内 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 值最大的点。 <span><span class="MathJax_Preview">V</span><script type="math/tex">V</script></span> 值可定义为特征点与邻域 16 个像素点灰度绝对差值的和，即</p>
-<div>
-<div class="MathJax_Preview">
-V = \max \left( \sum_{x \in S_{bright}} \left| I_{p\to x} - I_p \right| - t \;,\; \sum_{x \in S_{dark}} \left| I_{p\to x} - I_p \right| - t \right)
-</div>
-<script type="math/tex; mode=display">
-V = \max \left( \sum_{x \in S_{bright}} \left| I_{p\to x} - I_p \right| - t \;,\; \sum_{x \in S_{dark}} \left| I_{p\to x} - I_p \right| - t \right)
-</script>
-</div>
-<p>上式中， <span><span class="MathJax_Preview">S_{bright}</span><script type="math/tex">S_{bright}</script></span> 是 16 个邻域像素点中灰度值大于 <span><span class="MathJax_Preview">I_p + t</span><script type="math/tex">I_p + t</script></span> 的像素点的集合，而 <span><span class="MathJax_Preview">S_{dark}</span><script type="math/tex">S_{dark}</script></span> 表示的是那些灰度值小于<span><span class="MathJax_Preview">I_p - t</span><script type="math/tex">I_p - t</script></span> 的像素点。</p>
-<h2 id="算法特点">算法特点<a class="headerlink" href="#算法特点" title="Permanent link"></a></h2>
-<ul>
-<li>FAST 算法比其他大多数角点检测算法要快</li>
-<li>受图像噪声以及设定阈值影响大</li>
-<li>当设置 <span><span class="MathJax_Preview">n&lt;12</span><script type="math/tex">n<12</script></span> 时，不能用快速方法过滤非角点</li>
-<li>检测出来的角点不是最优的，因为它的效率取决于问题的排序与角点的分布</li>
-<li>多个特征点容易挤在一起</li>
-<li>FAST 不产生多尺度特征，而且没有方向信息不具备旋转不变性</li>
-</ul>
+<p>在训练多个弱分类器得到强分类器的过程中，采用了两次加权的处理方法，一是对样本进行加权，在迭代过程中，提高错分样本的权重；二是对筛选出的弱分类器 <span><span class="MathJax_Preview">h_t</span><script type="math/tex">h_t</script></span> 进行加权，弱分类器准确率越高，权重越大。此外，还需进一步对强分类器进行级联，以提高检测正确率并降低误识率。级联分类器如下所示：</p>
+<p><img alt="级联分类器" src="../image/cascade.png" /></p>
+<p>首先将所有待检测的子窗口输入到第一个分类器中，如果某个子窗口判决通过，则进入下一个分类器继续检测识别，否则该子窗口直接退出检测流程，也就是说后续分类器不需要处理该子窗口。通过这样一种级联的方式可以去除一些误识为目标的子窗口，降低误识率。例如，单个强分类器，99% 的目标窗口可以通过，同时50%的非目标窗口也能通过，假设有 20 个强分类器级联，那么最终的正确检测率为 <span><span class="MathJax_Preview">0.99^{20}=98\%</span><script type="math/tex">0.99^{20}=98\%</script></span> ，而错误识别率为 <span><span class="MathJax_Preview">0.50^{20} \approx 0.0001\%</span><script type="math/tex">0.50^{20} \approx 0.0001\%</script></span> ，在不影响检测准确率的同时，大大降低了误识率。当然前提是单个强分类器的准确率非常高，这样级联多个分类器才能不影响最终的准确率或者影响很小。</p>
+<p>在一幅图像中，为了能够检测到不同位置的目标区域，需要以一定步长遍历整幅图像；而对于不同大小的目标，则需要改变检测窗口的尺寸，或者固定窗口而缩放图像。这样，最后检测到的子窗口必然存在相互重叠的情况，因此需要进一步对这些重叠的子窗口进行合并，也就是非极大值抑制 (NMS, non-maximum suppression) ，同时剔除零散分布的错误检测窗口。</p>
 <h2 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h2>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
@@ -1071,13 +1225,16 @@ MathJax.Hub.Config({
 <hr />
 <ol>
 <li id="fn:1">
-<p><a href="http://www.edwardrosten.com/work/fast.html">FAST Corner Detection &ndash; Edward Rosten</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p><a href="http://wearables.cc.gatech.edu/paper_of_week/viola01rapid.pdf">Rapid Object Detection using a Boosted Cascade of Simple Features</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 <li id="fn:2">
-<p><a href="https://www.cnblogs.com/ronny/p/4078710.html">思维之际博客：FAST特征点检测</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+<p><a href="https://link.springer.com/content/pdf/10.1007%2F978-3-540-45243-0_39.pdf">Empirical Analysis of Detection Cascades of Boosted Classifiers for Rapid Object Detection</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
 </li>
 <li id="fn:3">
-<p>Senit_Co 博客：<a href="https://senitco.github.io/2017/06/30/image-feature-fast/">图像特征之FAST角点检测</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+<p><a href="https://pdfs.semanticscholar.org/72e0/8cf12730135c5ccd7234036e04536218b6c1.pdf">Paper: An Extended Set of Haar-like Features for Rapid Object Detection</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Senit_Co 博客: <a href="https://senitco.github.io/2017/06/15/image-feature-haar/">图像特征提取之Haar特征</a>&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 4 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -1101,7 +1258,7 @@ MathJax.Hub.Config({
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../Harris/" title="Harris 角点检测" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../SUFT/" title="SUFT 特征" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1110,19 +1267,19 @@ MathJax.Hub.Config({
                 <span class="md-footer-nav__direction">
                   后退
                 </span>
-                Harris 角点检测
+                SUFT 特征
               </span>
             </div>
           </a>
         
         
-          <a href="../ORB/" title="ORB 特征" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../multiple_view_geometry/mvg/" title="多视几何概览" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   前进
                 </span>
-                ORB 特征
+                多视几何概览
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
