@@ -57,12 +57,14 @@ $$
 以及迭代求解式对于左上角坐标为 $(x,y)$ ，宽高为 $(w,h)$ 的矩形区域 $r(x,y,w,h,0)$ ，可利用积分图 $SAT(x,y)$ 求取像素和值
 
 $$
+\scriptsize{
 \begin{align*}
-RecSum(r) &= \quad SAT(x+w-1, y+h-1) \\ & \quad + SAT(x-1, y-1) \\ & \quad - SAT(x+w-1, y-1) \\ & \quad -SAT(x-1,y+h-1)
+RecSum(r) &= SAT(x+w-1, y+h-1) \\ &+ SAT(x-1, y-1) \\ &- SAT(x+w-1, y-1) \\ &-SAT(x-1,y+h-1)
 \end{align*}
+}
 $$
 
-<img src="https://ooo.0o0.ooo/2017/06/25/594fb9abd4e14.jpg" alt="integer.jpg" title="积分图求矩形区域和值" />
+![积分图求矩形区域和值](image/integral_rectangle.png.png)
 
 
 
@@ -93,23 +95,28 @@ $$
 
 以上 3 个积分图计算公式是等价的。
 
-<img src="https://ooo.0o0.ooo/2017/06/25/594fb9abd4190.jpg" alt="titled interger.jpg" title="倾斜积分图求倾斜矩形区域和值" />
+![倾斜积分图求倾斜矩形区域和值](image/integral_rotation_rectangle.png)
 
 如下图所示，构建好倾斜积分图后，可快速计算倾斜矩形区域$r=(x,y,w,h,45^{\circ})$的像素和值
 
 $$
 \scriptsize{
-RecSum(r)=RSAT(x+w,y+w)+RSAT(x-h,y+h)-RSAT(x,y)-RSAT(x+w-h,y+w+h)
+\begin{align*}
+RecSum(r) &=RSAT(x+w-1,y+w-1) \\
+&+RSAT(x-h-1,y+h-1) \\
+&-RSAT(x-1,y-1) \\
+&-RSAT(x+w-1-h,y+w-1+h)
+\end{align*}
 }
 $$
 
-<img src="https://ooo.0o0.ooo/2017/06/25/594fb9abe7aa1.jpg" alt="rotated rectangle.jpg" title="倾斜矩形区域求和示意图" />
+![倾斜矩形区域求和示意图](image/rotated_rectangle.png)
 
 
 
 ## AdaBoost分类器
 
-由输入图像得到积分图，通过取不同种类、大小的Haar特征模板，并在不同位置处，利用积分图提取Haar矩形特征，可快速得到大量Haar特征值，AdaBoost分类器可用于对提取的Haar特征(通常需要做归一化处理)进行训练分类，并应用于人脸检测中。AdaBoost是一种集成分类器，由若干个强分类级联而成，而每个强分类器又由若干个弱分类器(例如决策树)组合训练得到。
+由输入图像得到积分图，通过取不同种类、大小的 Haar 特征模板，并在不同位置处，利用积分图提取 Haar 矩形特征，可快速得到大量Haar特征值，AdaBoost 分类器可用于对提取的 Haar 特征 (通常需要做归一化处理) 进行训练分类，并应用于人脸检测中。AdaBoost 是一种集成分类器，由若干个强分类级联而成，而每个强分类器又由若干个弱分类器 (例如：决策树) 组合训练得到。
 
 弱分类器的定义如下：
 
@@ -142,13 +149,13 @@ $$
     
     其中 $\alpha_t=log(\dfrac{1}{\beta_t})$ 。
 
-在训练多个弱分类器得到强分类器的过程中，采用了两次加权的处理方法，一是对样本进行加权，在迭代过程中，提高错分样本的权重；二是对筛选出的弱分类器$h\_t$进行加权，弱分类器准确率越高，权重越大。此外，还需进一步对强分类器进行级联，以提高检测正确率并降低误识率。级联分类器如下所示：
+在训练多个弱分类器得到强分类器的过程中，采用了两次加权的处理方法，一是对样本进行加权，在迭代过程中，提高错分样本的权重；二是对筛选出的弱分类器 $h_t$ 进行加权，弱分类器准确率越高，权重越大。此外，还需进一步对强分类器进行级联，以提高检测正确率并降低误识率。级联分类器如下所示：
 
-<img src="https://ooo.0o0.ooo/2017/06/26/59506e87bf0f5.jpg" alt="cascade.jpg" title="级联分类器" />
+![级联分类器](image/cascade.png)
 
 首先将所有待检测的子窗口输入到第一个分类器中，如果某个子窗口判决通过，则进入下一个分类器继续检测识别，否则该子窗口直接退出检测流程，也就是说后续分类器不需要处理该子窗口。通过这样一种级联的方式可以去除一些误识为目标的子窗口，降低误识率。例如，单个强分类器，99% 的目标窗口可以通过，同时50%的非目标窗口也能通过，假设有 20 个强分类器级联，那么最终的正确检测率为 $0.99^{20}=98\%$ ，而错误识别率为 $0.50^{20} \approx 0.0001\%$ ，在不影响检测准确率的同时，大大降低了误识率。当然前提是单个强分类器的准确率非常高，这样级联多个分类器才能不影响最终的准确率或者影响很小。
 
-在一幅图像中，为了能够检测到不同位置的目标区域，需要以一定步长遍历整幅图像；而对于不同大小的目标，则需要改变检测窗口的尺寸，或者固定窗口而缩放图像。这样，最后检测到的子窗口必然存在相互重叠的情况，因此需要进一步对这些重叠的子窗口进行合并，也就是非极大值抑制 (NMS,non-maximum suppression) ，同时剔除零散分布的错误检测窗口。
+在一幅图像中，为了能够检测到不同位置的目标区域，需要以一定步长遍历整幅图像；而对于不同大小的目标，则需要改变检测窗口的尺寸，或者固定窗口而缩放图像。这样，最后检测到的子窗口必然存在相互重叠的情况，因此需要进一步对这些重叠的子窗口进行合并，也就是非极大值抑制 (NMS, non-maximum suppression) ，同时剔除零散分布的错误检测窗口。
 
 
 
@@ -158,7 +165,7 @@ $$
 [^2]: [Empirical Analysis of Detection Cascades of Boosted Classifiers for Rapid Object Detection](https://link.springer.com/content/pdf/10.1007%2F978-3-540-45243-0_39.pdf) 
 [^3]: [Paper: An Extended Set of Haar-like Features for Rapid Object Detection](https://pdfs.semanticscholar.org/72e0/8cf12730135c5ccd7234036e04536218b6c1.pdf) 
 
-
+[^4]: Senit_Co 博客: [图像特征提取之Haar特征](https://senitco.github.io/2017/06/15/image-feature-haar/) 
 
 
 
