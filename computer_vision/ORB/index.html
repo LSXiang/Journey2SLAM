@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
     
     
       
@@ -1090,10 +1090,10 @@ R = \det M - \alpha (trace \, M)^2
 <p>FAST 检测特征点不具备尺度不变性，可以借助尺度空间理论构建图像高斯金字塔，然后在每一层金字塔图像上检测角点，以实现尺度不变性。对于 FAST 特征点不具有方向，即不具备旋转不变性。原论文中提出了一种利用灰度质心法来解决这个问题，而带有方向的 FAST 角点被称为 oFAST 。灰度质心法假设灰度质心法假设角点的灰度与质心之间存在一个偏移，这个向量可以用于表示一个方向。换言之，在半径为 <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span> 的邻域内求取灰度质心，从特征点到灰度质心的向量，定义为该特征点的主方向。对于任意一个特征点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 来说，我们定义 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 的邻域像素的矩为：</p>
 <div>
 <div class="MathJax_Preview">
-m_{pq} = \sum_{x,y\in \bigcirc_r} = x^p y^q I(x,y)
+m_{pq} = \sum_{x,y\in \bigcirc_r} x^p y^q I(x,y)
 </div>
 <script type="math/tex; mode=display">
-m_{pq} = \sum_{x,y\in \bigcirc_r} = x^p y^q I(x,y)
+m_{pq} = \sum_{x,y\in \bigcirc_r} x^p y^q I(x,y)
 </script>
 </div>
 <p>其中 <span><span class="MathJax_Preview">I(x,y)</span><script type="math/tex">I(x,y)</script></span> 表示像素灰度值，<span><span class="MathJax_Preview">\bigcirc_r</span><script type="math/tex">\bigcirc_r</script></span> 是半径为 <span><span class="MathJax_Preview">r</span><script type="math/tex">r</script></span> 离散化的 <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm">Bresenham</a> 圆形窗口，零阶矩 <span><span class="MathJax_Preview">m_{00}</span><script type="math/tex">m_{00}</script></span> 即图像领域窗口内所有像素的灰度和， <span><span class="MathJax_Preview">m_{10}</span><script type="math/tex">m_{10}</script></span> 和 <span><span class="MathJax_Preview">m_{01}</span><script type="math/tex">m_{01}</script></span> 分别是相对于 <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> 与 <span><span class="MathJax_Preview">y</span><script type="math/tex">y</script></span> 的一阶矩，因此图像局部邻域的中心矩或者质心可定义为：</p>
@@ -1333,7 +1333,7 @@ MathJax.Hub.Config({
       
     </div>
     
-      <script src="../../assets/javascripts/application.267712eb.js"></script>
+      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
       
         
         
