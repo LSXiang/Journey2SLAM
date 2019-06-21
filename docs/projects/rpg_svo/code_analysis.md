@@ -60,7 +60,6 @@ roslaunch mynt_eye_ros_wrapper mynteye.launch
 然后运行效果如下：
 
 <iframe height=480 width=640 src="//player.bilibili.com/player.html?aid=52568604&cid=91997375&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
 从视频效果来看，SVO 的整体表现还是相当不错的。当然这与 MYNT-EYE 为全局曝光有一定的关系，并且我在桌面上提供了相对较多的纹理可观的特征。个人的目标是将 SVO 修改称可以可前视并添加多摄像机模型以及添加 IMU 使之成为 SVIO （即表现力为现在未开源的 SVO2 ）。
 
 下面为对 SVO 的代码解读，有些内容想分散到各知识结构部分，添加了 #TODO ，但是都对这部分内容给出了目前已有的相关文档链接。
@@ -88,7 +87,7 @@ roslaunch mynt_eye_ros_wrapper mynteye.launch
 图像是通过 `FrameHandlerMono::addImage` 函数加载进里程计算法中的。在每一新建 `Frame` 类指针变量时，对图像进行提取图像金字塔，默认 5 层、尺度因子为 2 。接着进入 `FrameHandlerMono::processFirstFrame` 函数处理第一帧图像。
 
 1. 创建一个位姿变换矩阵赋给第一帧的 `T_f_w_` (表示从世界坐标到相机坐标的变换矩阵) 
-2. 创建一个特征检测器，默认设置特征提取的金字塔为 0~3 层，栅格大小为 30 。调用特征检测函数提取当前帧中的 Fast 特征角点。为了适应多尺度变化，对图像金字塔的多层图像提取 Fast 角点，紧接通过小窗口做非最大值抑制。之后对同一层图像坐落在同一网格中的 Fast 角点求 shiTomasi 得分，取得分最高的强角点。（关于 Fast 角点，与 shiTomasi 角点/得分这部分知识可以参考 xxx计算机视觉基础-特征点提取xxx #TODO）
+2. 创建一个特征检测器，默认设置特征提取的金字塔为 0~3 层，栅格大小为 30 。调用特征检测函数提取当前帧中的 Fast 特征角点。为了适应多尺度变化，对图像金字塔的多层图像提取 Fast 角点，紧接通过小窗口做非最大值抑制。之后对同一层图像坐落在同一网格中的 Fast 角点求 shiTomasi 得分，取得分最高的强角点。（关于 Fast 角点，与 Shi-Tomasi 角点/得分这部分知识可以参考「计算机视觉基础 - 特征点提取与匹配 - [FAST 角点检测](../../computer_vision/FAST.md) / [Shi-Tomasi 算法](../../computer_vision/Harris.md#shi-tomasi-算法)」）
 3. 判定特征数与门限值进行比较，如果特征点数少于门限值则下一帧图像重新进行以上操作，否则将提取的所有角点暂存储在向量容器中，用于后续做光流跟踪。并将该帧设置为关键帧，添加到地图中。
 
 
