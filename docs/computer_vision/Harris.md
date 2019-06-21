@@ -68,7 +68,7 @@ $$
 
 将梯度向量视为一组 $(dx，dy)$点，其质心定义为 $(0,0)$ 。通过散射矩阵 $M(x,y)$ 对该组点进行椭圆分析，根据不同情况分析椭圆参数。而 $x$ 和 $y$ 的导数分布可以用椭圆形状和大小的主成分来特征化，如下图所示：
 
-![principal component ellipse](/home/jacob/projects/Journey2SLAM/docs/computer_vision/image/principal_component_ellipse.png)
+![principal component ellipse](image/principal_component_ellipse.png)
 
 二次项函数本质上是一个椭圆函数，椭圆的曲率和尺寸可由 $M(x,y)$ 的特征值 $λ1, λ2$ 决定，椭圆方向由 $M(x,y)$ 的特征向量决定，椭圆方程和其图形分别如下所示：
 
