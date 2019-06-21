@@ -1106,7 +1106,7 @@ roslaunch mynt_eye_ros_wrapper mynteye.launch
 <p>图像是通过 <code>FrameHandlerMono::addImage</code> 函数加载进里程计算法中的。在每一新建 <code>Frame</code> 类指针变量时，对图像进行提取图像金字塔，默认 5 层、尺度因子为 2 。接着进入 <code>FrameHandlerMono::processFirstFrame</code> 函数处理第一帧图像。</p>
 <ol>
 <li>创建一个位姿变换矩阵赋给第一帧的 <code>T_f_w_</code> (表示从世界坐标到相机坐标的变换矩阵) </li>
-<li>创建一个特征检测器，默认设置特征提取的金字塔为 0~3 层，栅格大小为 30 。调用特征检测函数提取当前帧中的 Fast 特征角点。为了适应多尺度变化，对图像金字塔的多层图像提取 Fast 角点，紧接通过小窗口做非最大值抑制。之后对同一层图像坐落在同一网格中的 Fast 角点求 shiTomasi 得分，取得分最高的强角点。（关于 Fast 角点，与 shiTomasi 角点/得分这部分知识可以参考 xxx计算机视觉基础-特征点提取xxx #TODO）</li>
+<li>创建一个特征检测器，默认设置特征提取的金字塔为 0~3 层，栅格大小为 30 。调用特征检测函数提取当前帧中的 Fast 特征角点。为了适应多尺度变化，对图像金字塔的多层图像提取 Fast 角点，紧接通过小窗口做非最大值抑制。之后对同一层图像坐落在同一网格中的 Fast 角点求 shiTomasi 得分，取得分最高的强角点。（关于 Fast 角点，与 Shi-Tomasi 角点/得分这部分知识可以参考「计算机视觉基础 - 特征点提取与匹配 - <a href="../../../computer_vision/FAST/">FAST 角点检测</a> / <a href="../../../computer_vision/Harris/#shi-tomasi-算法">Shi-Tomasi 算法</a>」）</li>
 <li>判定特征数与门限值进行比较，如果特征点数少于门限值则下一帧图像重新进行以上操作，否则将提取的所有角点暂存储在向量容器中，用于后续做光流跟踪。并将该帧设置为关键帧，添加到地图中。</li>
 </ol>
 <h3 id="第二帧">第二帧<a class="headerlink" href="#第二帧" title="Permanent link"></a></h3>
