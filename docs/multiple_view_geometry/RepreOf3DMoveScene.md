@@ -71,7 +71,7 @@ $$
 
 因此，我们可将叉积写成 $\mathbf{u} \times \mathbf{v} = \hat{\mathbf{u}} \mathbf{v}$ 。反对称矩阵有 $\hat{\mathbf{u}}^\top = -\hat{\mathbf{u}}$ 。
 
-反之，每一个反对称矩阵 $M = -M^\top \in \mathbb{R}^{3\times3}$ 可以通过向量 $\mathbf{u} \in \mathbb{R}^3$ 来关联识别。**帽 (hat)** , $\wedge : \mathbb{R}^3 \to SO(3); \; \mathbf{u} \to \hat{\mathbf{u}}$ 运算符定义了一个*同构 (isomorphism)* 在空间 $\mathbb{R}^3$ 和所有由 $3\times3$ 反对称矩阵构成的 $SO(3)$ 的子空间。它的逆操作称为 **vee** 操作 $\vee : SO(3) \to \mathbb{R}^3; \; \hat{\mathbf{u}} \to \hat{\mathbf{u}}^\vee = \mathbf{u}$ 。
+反之，每一个反对称矩阵 $M = -M^\top \in \mathbb{R}^{3\times3}$ 可以通过向量 $\mathbf{u} \in \mathbb{R}^3$ 来关联识别。**帽 (hat)** , $\wedge : \mathbb{R}^3 \to so(3); \; \mathbf{u} \to \hat{\mathbf{u}}$ 运算符定义了一个*同构 (isomorphism)* 在空间 $\mathbb{R}^3$ 和所有由 $3\times3$ 反对称矩阵构成的 $so(3)$ 的子空间。它的逆操作称为 **vee** 操作 $\vee : so(3) \to \mathbb{R}^3; \; \hat{\mathbf{u}} \to \hat{\mathbf{u}}^\vee = \mathbf{u}$ 。
 
 
 
@@ -93,7 +93,7 @@ $$
 g_t : \mathbb{R}^3 \to \mathbb{R}^3; \quad \mathbf{X} \to g_t({\mathbf{X}}) \quad t \in [0, T]
 $$
 
-且需要维持向量的模与叉积满足以下两个式子：
+且需要维持向量的**模 (norm)** 与**叉积 (cross product)** 满足以下两个式子：
 
 - $\|g_t (\mathrm{v})\| = \|\mathrm{v}\|, \; \forall \mathrm{v} \in \mathbb{R}^3$ 
 - $g_t(\mathrm{u}) \times g_t(\mathrm{v}) = g_t(\mathrm{u} \times \mathrm{v}), \forall \mathrm{u}, \mathrm{v} \in \mathbb{R}^3$ 
@@ -113,6 +113,97 @@ $$
 $$
 
 由于三重积对应于由这三个向量张成的平行六面体的体积，刚体运动也保留了**体积 (volume)** 。
+
+
+
+### 刚体旋转的表达
+
+如下图所示，刚体的旋转可以看作绕固定点 $o$ 沿着轴 $\omega$ 旋转。设参考系坐标 $W$ (实线) 是固定的，而旋转刚体的坐标系 $C$ (虚线) 与刚体绑定在一起。
+
+![Rotation of a rigid body](image/Rotation4Rigid-body.png)
+
+坐标系 $C$ 相对于坐标系 $W$ 的构型 (或 “方位”) 由三个标准正交向量 $\mathbf{r}_1 = g_*(\mathbf{e}_1), \mathbf{r}_2 = g_*(\mathbf{e}_2), \mathbf{r}_3 = g_*(\mathbf{e}_3) \in \mathbb{R}^3$ 相对于世界坐标系 $W$ 的坐标变换决定。这三个向量 $\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3$ 分别是沿着坐标系 $C$ 的三个主轴 $x, y, z$ 的单位向量。因此旋转矩阵的构型可以通过一个 $3 \times 3$ 的矩阵进行定义：
+
+$$
+R_{wc} \doteq [\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3] \quad \in \mathbb{R}^{3 \times 3}
+$$
+
+其中三个向量 $\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3$ 按照顺序堆叠成矩阵的三列。由于向量 $\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3$ 来自正交坐标系，因此有
+
+$$
+\mathbf{r}_i^\top \mathbf{r}_j = \delta_{ij} \doteq \begin{cases} 1, & i = j \\ 0, & i \neq j \end{cases} \quad \forall i,j \in [1,2,3]
+$$
+
+将此用矩阵形式表示为
+
+$$
+R_{wc}^\top R_{wc} = R_{wc}R_{wc}^\top = I
+$$
+
+任何满足上述恒等式的矩阵称为**正交矩阵 (orthogonal matrix)** ，根据上面的定义，正交矩阵的逆就是它的转置： $R_{wc}^{-1} = R_{wc}^\top$ 。由于 $\mathbf{r}_1, \mathbf{r}_2, \mathbf{r}_3$ 构成了一个右手坐标系，因而进一步得到了 $R_{wc}$ 的行列式必须为 $+1$ 的条件。因此矩阵 $R_{wc}$ 是**特殊正交阵 (special orthogonal matrix)** ，这里的特殊指示了该矩阵是正定的。所有 $\mathbb{R}^{3 \times 3}$ 的特殊正交阵构成的空间定义如下：
+
+$$
+SO(3) \doteq \{ R \in \mathbb{R}^{3 \times 3} | R^\top R = I, \det(R) = +1 \}
+$$
+
+
+
+#### 旋转的指数坐标
+
+根据上述，我们可知在 $\mathbb{E}^3$ 空间中刚体运动的旋转可以通过一个 $3 \times 3$ 的旋转矩阵 $R \in SO(3)$ 表示。每一个旋转矩阵 $R$ 通过 $3 \times 3 = 9$ 元素定义。然而，这 $9$ 个元素并不是自由参数，因为它们必须满足 $R^\top R= I$ 的约束，这实际上对 $9$ 个元素施加了 $6$ 个独立的约束。因此，由旋转矩阵构成的空间 $SO(3)$ 的维度应该只有 $3$ 维，而 $9$ 参数中有 $6$ 实际上是多余的。
+
+给定一个轨迹 $R(t) : \mathbb{R} \to SO(3)$ 描述一个连续的旋转运动，那么旋转必须满足下式：
+
+$$
+R(t) R^\top(t) = I
+$$
+
+计算上面方程对时间 $t$ 的导数，注意到右边是一个常数矩阵，可以得到
+
+$$
+\dot{R}(t) R^\top(t) + R(t) \dot{R}^\top(t) = 0 \quad \Rightarrow \quad \dot{R}(t) R^\top(t) = - (\dot{R}(t) R^\top(t))^\top
+$$
+
+根据性质，我们可知矩阵 $\dot{R}(t) R^\top(t) \in \mathbb{R}^{3 \times 3}$ 是一个反对称矩阵。 根据[反对称矩阵的性质](#反对称矩阵)，一定存在一个向量，设为 $\omega(t) \in \mathbb{R}^3$ ，使得
+
+$$
+\dot{R}(t) R^\top(t) = \hat{\omega}(t) \quad \Rightarrow \quad \dot{R}(t) = \hat{\omega}(t) R(t)
+$$
+
+根据上式，如果假设 $R(t_0) = I$ 且当 $t = t_0$ 时有 $\dot{R}(t_0) = \hat{\omega}(t_0)$ 。因此，围绕单位矩阵 $I$ ，偏对称矩阵给出了旋转矩阵的一阶近似
+
+$$
+R(t_0 + dt) \approx I + \hat{\omega}(t_0)dt
+$$
+
+综上可得，所有的斜对称矩阵张成的空间如下表示
+
+$$
+so(3) \doteq \{ \hat{\omega} \in \mathbb{R}^{3 \times 3} | \omega \in \mathbb{R}^3 \}
+$$
+
+它亦被称为旋转群 $SO(3)$ 在恒等点处的**切空间 (tangent space)** 。旋转群 $SO(3)$ 被称为**李群 (Lie group)** ，而它的切空间 $so(3)$ 被称为**李代数 (Lie algebra)** 。
+
+
+
+#### 李群和李代数
+
+李群 (或无穷小群) 是一个光滑的流形，也是一个群，因此群运算乘法和逆运算是光滑的映射。
+
+李群与李代数涉及到庞大的知识量，这里对这部分就不进行拓展描述。后续或许会有专门的篇幅来记录这些知识点，再进行添加链接跳转（#TODO）。这部分知识我当时是阅读了[《机器人学中的状态估计》](http://asrl.utias.utoronto.ca/~tdb/) 中相关的篇幅来学习的。当然读者也可以阅读更加数学性的书籍来学习，这里就不在引申。
+
+
+
+!!! tip "Sophus Lie (1841 - 1899)"
+    马里乌斯·索菲斯·李 (Marius Sophus Lie) 是一位出生于挪威的数学家。他创立了连续对称理论，并将其应用于几何和微分方程的研究。他最大的成就之一是发现连续变换群在线性化的版本中更容易理解 (Theorie der transformation sgruppen 1893)。这些无限小的生成器构成了一个今天被称为李代数的结构。群律的线性化版本对应于李代数上的一个操作，称为换向器托架或李托架。
+
+
+
+#### 指数映射
+
+
+
+
 
 
 
