@@ -18,12 +18,12 @@ $$
 
 
 
-换言之，如果 $V​$ 是一个向量空间，那么对于任意的两个向量 $\mathbf{v_1}, \mathbf{v_2} \in V​$ 和两个标量 $\alpha, \beta \in \mathbb{R}​$ ，他们的线性组合 $\alpha \mathbf{v_1} + \beta \mathbf{v_2} \in V​$ 。此外，加法运算($+​$) 满足**交换律**和**结合律**，且存在**幺元 ($0​$)** 以及每个元素存在**逆 ($- \mathbf{v}​$)** 。标量乘法 ($\cdot​$) 在 $\mathbb{R}​$ 域上有：$\alpha (\beta \mathbf{v}) = (\alpha \beta)\mathbf{v}​$，　$1\mathbf{v} = \mathbf{v}​$ 和 $0\mathbf{v} = \mathbf{0}​$ 。加法和标量乘法满足**分配率**：$(\alpha + \beta) \mathbf{v} = \alpha \mathbf{v} + \beta \mathbf{v}​$，　$\alpha(\mathbf{v} + \mathbf{u}) = \alpha \mathbf{v} + \alpha \mathbf{u}​$ 。  
-例如： $\mathbb{R}^n​$ 就是实数域 $\mathbb{R}​$ 上的线性空间。根据上述此时  $V = \mathbb{R}^n​$ ， $\mathbf{v} = [x_1, \dotsc , x_n]^\top​$ 。
+换言之，如果 $V$ 是一个向量空间，那么对于任意的两个向量 $\mathbf{v_1}, \mathbf{v_2} \in V$ 和两个标量 $\alpha, \beta \in \mathbb{R}$ ，他们的线性组合 $\alpha \mathbf{v_1} + \beta \mathbf{v_2} \in V$ 。此外，加法运算($+$) 满足**交换律**和**结合律**，且存在**幺元 ($0$)** 以及每个元素存在**逆 ($- \mathbf{v}$)** 。标量乘法 ($\cdot$) 在 $\mathbb{R}$ 域上有：$\alpha (\beta \mathbf{v}) = (\alpha \beta)\mathbf{v}$，　$1\mathbf{v} = \mathbf{v}$ 和 $0\mathbf{v} = \mathbf{0}$ 。加法和标量乘法满足**分配率**：$(\alpha + \beta) \mathbf{v} = \alpha \mathbf{v} + \beta \mathbf{v}$，　$\alpha(\mathbf{v} + \mathbf{u}) = \alpha \mathbf{v} + \alpha \mathbf{u}$ 。  
+例如： $\mathbb{R}^n$ 就是实数域 $\mathbb{R}$ 上的线性空间。根据上述此时  $V = \mathbb{R}^n$ ， $\mathbf{v} = [x_1, \dotsc , x_n]^\top$ 。
 
 
 
-一个集合 $W \subset V​$ ，$V​$ 是一个向量空间的话，如果 $0 \in W​$ 且集合 $W​$ 对于任意的 $\alpha \in \mathbb{R}​$ 在 $+​$ 和 $\cdot​$ 上是闭合的，那么 $W​$ 称为 $V​$ 的**子空间 (subspace)**。
+一个集合 $W \subset V$ ，$V$ 是一个向量空间的话，如果 $0 \in W$ 且集合 $W$ 对于任意的 $\alpha \in \mathbb{R}$ 在 $+$ 和 $\cdot$ 上是闭合的，那么 $W$ 称为 $V$ 的**子空间 (subspace)**。
 
 
 
@@ -41,7 +41,7 @@ $$
 \sum_{i=1}^k \alpha_i \mathbf{v}_i = \mathbf{0} \Rightarrow \alpha_i =  0   \forall i
 $$
 
-那么集合 $S​$ 就被称为**线性独立 (linearly independent)** 。
+那么集合 $S$ 就被称为**线性独立 (linearly independent)** 。
 
 换句话说，如果集合 $S$ 中的任意一个向量无法用其余向量的线性组合表示的话，那么称为线性独立，反之称为**线性相关 (linearly dependent)** 。
 
@@ -51,9 +51,9 @@ $$
 
 #### 基的性质
 
-如果 $B​$ 与 $B^{\prime}​$ 是线性空间 $V​$ 的两个基，那么：  
+如果 $B$ 与 $B^{\prime}$ 是线性空间 $V$ 的两个基，那么：  
 
-- $B​$ 与 $B^{\prime}​$ 将包含相同数量的线性独立向量，这个数量 $n​$ 被称为向量空间 $V​$ 的**维度  (dimension)** 。
+- $B$ 与 $B^{\prime}$ 将包含相同数量的线性独立向量，这个数量 $n$ 被称为向量空间 $V$ 的**维度  (dimension)** 。
 
 - 让 $B = \{ b_i \}_{i = i}^n$ 和 $B' = \{ b'_i \}_{i = i}^n$ ，那么 $B$ 中的任意一个基向量都能够利用 $B^{\prime}$ 的线性组合形式表示： 
 
@@ -75,7 +75,7 @@ $$
 
     即 $B = B' A$ ，当矩阵 $\mathbf{A}$ 可逆时，有 $B’ = B A^{-1}$ 。
 
-- 任意一个向量 $\mathbf{v} \in V​$ 都能够写成基向量的线性组合：
+- 任意一个向量 $\mathbf{v} \in V$ 都能够写成基向量的线性组合：
 
     $$
     \mathbf{v} = x_1 b_1 + x_2 b_2 + \dotsb + x_n b_n = x'_1 b'_1 + x'_2 b'_2 + \dotsb + x'_n b'_n
@@ -136,9 +136,9 @@ $$
 
 当满足：  
 
-1. $\langle u, \alpha v + \beta w \rangle =  \alpha \langle u, v \rangle + \beta \langle u, w \rangle，　\forall \alpha, \beta \in \mathbb{R}​$ （线性的）
-2. $\langle u, v \rangle ＝ \langle v, u \rangle​$  （对称的/均匀的）
-3. $\langle v, v \rangle \geq 0​$ 且 $\langle v, v \rangle = 0 \Leftrightarrow v = 0​$ 　（正定的）
+1. $\langle u, \alpha v + \beta w \rangle =  \alpha \langle u, v \rangle + \beta \langle u, w \rangle，　\forall \alpha, \beta \in \mathbb{R}$ （线性的）
+2. $\langle u, v \rangle ＝ \langle v, u \rangle$  （对称的/均匀的）
+3. $\langle v, v \rangle \geq 0$ 且 $\langle v, v \rangle = 0 \Leftrightarrow v = 0$ 　（正定的）
 
 那么，可以在向量空间上定义**内积 (inner product) [或点积 (dot product)]** 运算:
 
@@ -176,7 +176,7 @@ $$
 \| \mathbf{x} \|_2 \doteq \sqrt{\mathbf{x}^\top \mathbf{x}} = \sqrt{x_1^2 + x_2^2 + \dotsb + x_n^2}
 $$
 
-在此基础上将利用基底变换矩阵 $\mathbf{A}​$ 将 $B = I_n​$ 转换到一个新的基底 $B​'$ ， 即 $I_n = B' A^{-1}​$ 那么内积形式可以写成：
+在此基础上将利用基底变换矩阵 $\mathbf{A}$ 将 $B = I_n$ 转换到一个新的基底 $B​'$ ， 即 $I_n = B' A^{-1}$ 那么内积形式可以写成：
 
 $$
 \langle \mathbf{x},\mathbf{y} \rangle = \mathbf{x}^\top \mathbf{y} = (A \mathbf{x}')^\top (A \mathbf{y}') = \mathbf{x}'^\top A^\top A \mathbf{y}' \doteq \langle \mathbf{x}',\mathbf{y}' \rangle_{A^\top A}
@@ -192,7 +192,7 @@ $$
 
 #### 矩阵的克罗内克乘积 (Kronecker product) 和 堆形式(stack)
 
-矩阵 $A \in \mathbb{R}^{m \times n}​$ 和 $B \in \mathbb{R}^{k \times l}​$ 的克罗内克乘积定义为 $A \otimes B​$ ，得到一个新的矩阵为：
+矩阵 $A \in \mathbb{R}^{m \times n}$ 和 $B \in \mathbb{R}^{k \times l}$ 的克罗内克乘积定义为 $A \otimes B$ ，得到一个新的矩阵为：
 
 $$
 A \otimes B =
@@ -205,7 +205,7 @@ A \otimes B =
 \in \mathbb{R}^{mk \times nl}
 $$
 
-矩阵 $A \in \mathbb{R}^{m \times n}​$ 的堆形式被定义为 $A^s​$ ，它是通过矩阵 ${A}​$ 的 $n​$ 列向量 $a_1, \dotsc, a_n \in \mathbb{R}^n​$堆积形成的。表示成：
+矩阵 $A \in \mathbb{R}^{m \times n}$ 的堆形式被定义为 $A^s$ ，它是通过矩阵 ${A}$ 的 $n$ 列向量 $a_1, \dotsc, a_n \in \mathbb{R}^n$堆积形成的。表示成：
 
 $$
 A^s \doteq 
@@ -231,10 +231,10 @@ $$
 
 线性代数研究线性空间之间线性变换的性质。 由于这些可以用矩阵表示，所以也可以说线性代数研究的是矩阵的性质。
 
-一个线性变换 $L​$ 将线性（向量）空间 $V​$ 转换到线性空间 $W​$ ，那么 $L​$ 被称为**映射 (map)**：
+一个线性变换 $L$ 将线性（向量）空间 $V$ 转换到线性空间 $W$ ，那么 $L$ 被称为**映射 (map)**：
 
 - $L ( \mathbf{x} +\mathbf{y} ) = L (\mathbf{x} ) + L ( \mathbf{y})	 \qquad \forall \mathbf{x} , \mathbf{y} \in V$
-- $L ( \alpha \mathbf{x} ) = \alpha L (\mathbf{x} ) 	 \qquad \forall \mathbf{x} \in V, \alpha \in \mathbb{R}​$
+- $L ( \alpha \mathbf{x} ) = \alpha L (\mathbf{x} ) 	 \qquad \forall \mathbf{x} \in V, \alpha \in \mathbb{R}$
 
 由于线性关系，$L$ 对空间 $V$ 的映射操作是唯一的，可以通过对 $V$ 中的基向量映射来定义。因而在标准基向量 $\{ e_1, \dotsc , e_n \}$ 下，映射 $L$ 可以被表示成一个矩阵 $A \in \mathbb{R}^{m \times n}$ ，有：
 
@@ -242,13 +242,13 @@ $$
 L ( \mathbf{x} ) = A \mathbf{x} \qquad \forall \mathbf{x} \in V
 $$
 
-这里的矩阵 $A​$ 中的第 $i​$ 列就是标准基向量 $e_i \in \mathbb{R}^n​$ 在 $L​$ 映射下的像：
+这里的矩阵 $A$ 中的第 $i$ 列就是标准基向量 $e_i \in \mathbb{R}^n$ 在 $L$ 映射下的像：
 
 $$
 A = [ L(e_1), \, L(e_2), \, \dotsc \, , L(e_n)] \quad \in \mathbb{R}^{m \times n}
 $$
 
-这里所有的 $m \times n​$ 维的矩阵集表示成 $\mathcal{M} (m, n)​$ 。当 $m = n​$ 的时候，矩阵集 $\mathcal{M} (m, n)  \doteq \mathcal{M} (n)​$ 在 $\mathbb{R}​$ 域中被称为**环 (ring)** ，即，它在矩阵乘法和矩阵加法上是封闭的。
+这里所有的 $m \times n$ 维的矩阵集表示成 $\mathcal{M} (m, n)$ 。当 $m = n$ 的时候，矩阵集 $\mathcal{M} (m, n)  \doteq \mathcal{M} (n)$ 在 $\mathbb{R}$ 域中被称为**环 (ring)** ，即，它在矩阵乘法和矩阵加法上是封闭的。
 
 
 
@@ -259,9 +259,9 @@ $$
 群是带有操作 $\circ : G \times G \to G$ 的集合：
 
 - 封闭性 (closed) ： $g_1 \circ g_2 \in G \quad \forall g_1, g_2 \in G$ ;
-- 结合律 (associative) ： $( g_1 \circ g_2 ) \circ g_3 = g_1 ( g_2 \circ g_3) \quad \forall g_1, g_2, g_3 \in G​$ ;
+- 结合律 (associative) ： $( g_1 \circ g_2 ) \circ g_3 = g_1 ( g_2 \circ g_3) \quad \forall g_1, g_2, g_3 \in G$ ;
 - 幺元 (unit element) ： $\exists e \in G : e \circ g = g \circ e = g \quad \forall g \in G$ ;
-- 逆 (inverse) ： $\exists g^{-1} \in G : g \circ g^{-1} = g^{-1} \circ g = e \quad \forall g \in G​$ 
+- 逆 (inverse) ： $\exists g^{-1} \in G : g \circ g^{-1} = g^{-1} \circ g = e \quad \forall g \in G$ 
 
 
 
@@ -293,7 +293,7 @@ $$
 
 #### 仿射群 A(n)
 
-一个**仿射变换 (Affine transformation)** $L : \mathbb{R}^n \to \mathbb{R}^n​$ 可以被一个矩阵 $A \in G \! L(n)​$ 和向量 $b \in \mathbb{R}^n​$ 定义成：
+一个**仿射变换 (Affine transformation)** $L : \mathbb{R}^n \to \mathbb{R}^n$ 可以被一个矩阵 $A \in G \! L(n)$ 和向量 $b \in \mathbb{R}^n$ 定义成：
 
 $$
 L(\mathbf{x}) = A\mathbf{x} + b
@@ -301,7 +301,7 @@ $$
 
 所有这些仿射变换的集合称为 $n$ 维的仿射群，用 $A(n)$ 表示。
 
-上式中的 $L : \mathbb{R}^n \to \mathbb{R}^n​$ 定义不是线性的，除非 $b = 0​$ 。通过引入**齐次坐标系 (homogeneous coordinates)** 将 
+上式中的 $L : \mathbb{R}^n \to \mathbb{R}^n$ 定义不是线性的，除非 $b = 0$ 。通过引入**齐次坐标系 (homogeneous coordinates)** 将 
 
 $\mathbf{x} \in \mathbb{R}^n$ 升维成 $\binom{\mathbf{x}}{1}  \in \mathbb{R}^{n+1}$ ，那么 $L : \mathbb{R}^n \to \mathbb{R}^n$ 将变为：
 
@@ -313,45 +313,45 @@ L : \mathbb{R}^{n+1} \to \mathbb{R}^{n+1}, \quad
 \begin{bmatrix} \mathbf{x} \\ 1 \end{bmatrix}
 $$
 
-这里的矩阵 $\begin{bmatrix} A & b \\ 0 & 1 \end{bmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)$ 的元素。仿射矩阵构成 $G \! L(n+1)​$ 的一个子群。
+这里的矩阵 $\begin{bmatrix} A & b \\ 0 & 1 \end{bmatrix}  \in \mathbb{R}^{(n+1) \times (n+1)}, \: A \in G \! L(n) \; ， b \in \mathbb{R}^n$ 被称为**仿射矩阵 (Affine matrix)** ，它是 $G \! L(n+1)$ 的元素。仿射矩阵构成 $G \! L(n+1)$ 的一个子群。
 
 
 
 #### 正交群 (Orthogonal Group) O(n)
 
-一个 $n \times n​$ 维矩阵 $A​$ （表示一个从 $\mathbb{R}^n​$ 到自身的线性映射）是正交的，那么它的内积形式有：
+一个 $n \times n$ 维矩阵 $A$ （表示一个从 $\mathbb{R}^n$ 到自身的线性映射）是正交的，那么它的内积形式有：
 
 $$
 \langle A \mathbf{x}, A \mathbf{y} \rangle = \langle \mathbf{x}, \mathbf{y} \rangle, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n.
 $$
 
-所有 $n \times n​$ **正交矩阵 (Orthogonal matrix)**的集合构成维n的正交群，用 $O(n)​$ 表示。显然 $O(n)​$ 是 $G \! L(n)​$ 的子群。如果矩阵 $R​$ 是一个正交矩阵，那么：
+所有 $n \times n$ **正交矩阵 (Orthogonal matrix)**的集合构成维n的正交群，用 $O(n)$ 表示。显然 $O(n)$ 是 $G \! L(n)$ 的子群。如果矩阵 $R$ 是一个正交矩阵，那么：
 
 $$
 \langle R \mathbf{x}, R \mathbf{y} \rangle = \mathbf{x}^{\top} R^\top R \mathbf{y} = \mathbf{x}^\top \mathbf{y}, \quad \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n.
 $$
 
-因此，必需有 $R^\top R = R R^\top = I​$ ，换句话说：
+因此，必需有 $R^\top R = R R^\top = I$ ，换句话说：
 
 $$
 O(n) = \{ R \in G\!L(n) | R^\top R = I \}
 $$
 
-上述恒等式表明，对任意的正交矩阵 $R​$ ，我们有 $det(R^\top R) = (det(R))^2 = det(I) = 1​$ ，也就是说正交矩阵 $R​$ 的**行列式 (determinant)**  $det(R)  \in  \{ \pm1\}​$ 。
+上述恒等式表明，对任意的正交矩阵 $R$ ，我们有 $det(R^\top R) = (det(R))^2 = det(I) = 1$ ，也就是说正交矩阵 $R$ 的**行列式 (determinant)**  $det(R)  \in  \{ \pm1\}$ 。
 
-行列式值为 $+1​$ 的正交群被称为**特殊正交群 (Special orthogonal group)** 被定义为 $SO(n)​$ 。即，可以将 $SO(n)​$ 定义成正交群与特殊线性群的交集：$SO(n) = O(n) \cap S\!L(n)​$ 。当 $n = 3​$ 时， $SO(3)​$ 正好是 $3​$ 维的**旋转矩阵 (rotation matrix)** 。
+行列式值为 $+1$ 的正交群被称为**特殊正交群 (Special orthogonal group)** 被定义为 $SO(n)$ 。即，可以将 $SO(n)$ 定义成正交群与特殊线性群的交集：$SO(n) = O(n) \cap S\!L(n)$ 。当 $n = 3$ 时， $SO(3)$ 正好是 $3$ 维的**旋转矩阵 (rotation matrix)** 。
 
 
 
 #### 欧几里德群 (Euclidean Group) E(n)
 
-正交群的仿射形式给出了欧几里德(变换)群。也就是，一个从 $\mathbb{R}^n​$ 到  $\mathbb{R}^n​$ 的**欧氏变换 (Euclidean transformation)** $L​$ 是由矩阵 $R \in O(n)​$ 和向量 $T \in \mathbb{R}^n​$ 共同定义的：
+正交群的仿射形式给出了欧几里德(变换)群。也就是，一个从 $\mathbb{R}^n$ 到  $\mathbb{R}^n$ 的**欧氏变换 (Euclidean transformation)** $L$ 是由矩阵 $R \in O(n)$ 和向量 $T \in \mathbb{R}^n$ 共同定义的：
 
 $$
 L : \mathbb{R}^n \to \mathbb{R}^n; \quad \mathbf{x} \to R \mathbf{x} + T
 $$
 
-所有这些变换的集合称为 $n​$ 维的欧氏群，用 $E(n)​$ 表示。显然，欧氏群 $E(n)​$ 是仿射群 $A(n)​$ 的子群。因此欧氏群也可以利用齐次坐标升高一维，矩阵形式如下：
+所有这些变换的集合称为 $n$ 维的欧氏群，用 $E(n)$ 表示。显然，欧氏群 $E(n)$ 是仿射群 $A(n)$ 的子群。因此欧氏群也可以利用齐次坐标升高一维，矩阵形式如下：
 
 $$
 E(n) = 
@@ -368,7 +368,6 @@ $$
 !!! note ""
     **由于目前介绍的所有变换群都具有自然矩阵表达式，所以它们都是矩阵群[^李群 (Lie group)]。总结一下他们之间的关系：**
     
-
     $$
     SO(n) \subset O(n) \subset G\!L(n) \quad S\!E(n) \subset E(n) \subset A(n) \subset G\!L(n+1)
     $$
@@ -391,7 +390,7 @@ $$
 
 ### 矩阵的零空间
 
-矩阵 $A \in \mathbb{R}^{m \times n}​$ 的[**零空间 (Null Space)** 或称为**核 (Kernel)**](https://en.wikipedia.org/wiki/Kernel_(linear_algebra)) ，记为 $null(A)​$ 或 $ker(A)​$，被定义为由矩阵 $A​$ 映射 $\mathbb{R}^n​$ 下的向量到 $0​$ 的那部分子向量 $\mathbf{x} \in \mathbb{R}^n​$ ：
+矩阵 $A \in \mathbb{R}^{m \times n}$ 的[**零空间 (Null Space)** 或称为**核 (Kernel)**](https://en.wikipedia.org/wiki/Kernel_(linear_algebra)) ，记为 $null(A)$ 或 $ker(A)$，被定义为由矩阵 $A$ 映射 $\mathbb{R}^n$ 下的向量到 $0$ 的那部分子向量 $\mathbf{x} \in \mathbb{R}^n$ ：
 
 $$
 null(A) \equiv ker(A) = \{ \mathbf{x} \in \mathbb{R}^n \, | \, A \mathbf{x} = 0 \}
@@ -417,7 +416,7 @@ $$
 1. $rank(A) = n - dim( ker(A))$
 2. $0 \leq rank(A) \leq min\{ m, n \}$
 3. $rank(A)$ 等于 $A$ 的线性无关行 (或列) 向量的最大个数
-4. $rank(A)​$ 是 $A​$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
+4. $rank(A)$ 是 $A$ 的非零**余子式 (Minor)**[^余子式 (Minor)] 的最高阶
 5. 西尔维斯特的秩不等式 (Sylvester's inequality) ：让 $B \in \mathbb{R}^{n \times k}$ ，那么 $A B \in \mathbb{R}^{m \times k}$ 且 $rank(A) + rank(B) - n \leq rank(AB) \leq min \{ rank(A), \, rank(B) \}$ 
 6. 对于任何非奇异矩阵 $C \in \mathbb{R}^{m \times m}$ 和 $D \in \mathbb{R}^{n \times n}$ ，有 $rank(A) = rank(C\!A\!D)$ 
 
@@ -425,7 +424,7 @@ $$
 
 ### 特征值与特征向量
 
-让 $A \in \mathbb{C}^{n \times n}$ 是一个 $n \times n$ 的**复矩阵 (complex matrix)** 。一个非零向量 $\mathbf{v} \in \mathbb{C}^n$ 被称为复矩阵 $A​$ 的 **(右) 特征向量 (Eigenvector)** ，如果：
+让 $A \in \mathbb{C}^{n \times n}$ 是一个 $n \times n$ 的**复矩阵 (complex matrix)** 。一个非零向量 $\mathbf{v} \in \mathbb{C}^n$ 被称为复矩阵 $A$ 的 **(右) 特征向量 (Eigenvector)** ，如果：
 
 $$
 A \mathbf{v} = \lambda \mathbf{v}, \quad \lambda \in \mathbb{C}
@@ -441,7 +440,7 @@ $$
 
 设 $A \in \mathbb{R}^{n \times n}$ 是一个方阵，那么有：
 
-1. 如果 $A \mathbf{v} = \lambda \mathbf{v}​$ ，那么对于同样的特征值 $\lambda​
+1. 如果 $A \mathbf{v} = \lambda \mathbf{v}$ ，那么对于同样的特征值 $\lambda​
 
 
 
@@ -457,9 +456,9 @@ $$
 
 让 $S \in \mathbb{R}^{n \times n}$ 是实对称矩阵，那么：
 
-1. 矩阵 $S​$ 的所有特征值是实数，即 $\sigma(S) \subset \mathbb{R}​$ 
+1. 矩阵 $S$ 的所有特征值是实数，即 $\sigma(S) \subset \mathbb{R}$ 
 2. 矩阵 $S$ 对应于不同特征值 $\lambda_i \neq \lambda_j$ 的特征向量 $V_i$ 和 $V_j$ 是正交的
-3. 矩阵 $S​$ 存在 $n​$ 个标准正交特征向量，它们构成了 $\mathbb{R}^n​$ 的一组基。让 $V = (\mathbf{v_1}, \dotsc, \mathbf{v_n}) \in O(n)​$ 是矩阵 $S​$ 特征向量构成的正交矩阵，且 $\Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}​$ 是与之特征向量关联的特征值构成的对角矩阵，那么有 $S = V \Lambda V^\top​$ 
+3. 矩阵 $S$ 存在 $n$ 个标准正交特征向量，它们构成了 $\mathbb{R}^n$ 的一组基。让 $V = (\mathbf{v_1}, \dotsc, \mathbf{v_n}) \in O(n)$ 是矩阵 $S$ 特征向量构成的正交矩阵，且 $\Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}$ 是与之特征向量关联的特征值构成的对角矩阵，那么有 $S = V \Lambda V^\top$ 
 4. 如果所有的特征值是 (非负的) 正数，那么矩阵 $S$ 是 (半)正定的
 5. 如果矩阵 $S \geq 0$ ，让其特征值从大到小排序 $\lambda_1 \geq \lambda_2 \geq \dotsb \geq \lambda_n$ ，那么有 $max_{\|\mathbf{x}\|_2 = 1} \langle \mathbf{x},\, S \mathbf{x} \rangle = \lambda_1$ 和 $min_{\|\mathbf{x}\|_2 = 1} \langle \mathbf{x},\, S \mathbf{x} \rangle = \lambda_n$ 
 
@@ -473,13 +472,13 @@ $$
 \| A \|_2 \doteq \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \| A \mathbf{x} \|_2 = \mathop{\text{max}}\limits_{\| \mathbf{x} \|_2 = 1} \sqrt{\langle \mathbf{x}, A^\top A \mathbf{x} \rangle}
 $$
 
-或者，可以将矩阵 $A​$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
+或者，可以将矩阵 $A$ 的[**弗洛贝尼乌斯范数 (Frobenius norm)**](https://en.wikipedia.org/wiki/Matrix_norm#Frobenius_norm)定义为:
 
 $$
 \| A \|_f = \sqrt{ \sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2} = \sqrt{\text{trace}(A^\top A)} = \sqrt{ \sum_{i=1}^{\text{min}\{m,n\}} \sigma_i^2(A)}
 $$
 
-请注意，这些规范通常并不相同。由于矩阵 $A^\top A​$ 是对称半正定的，我们可以对角化它为：
+请注意，这些规范通常并不相同。由于矩阵 $A^\top A$ 是对称半正定的，我们可以对角化它为：
 
 $$
 A^\top A = V diag\{\sigma_1^2 , \dotsc, \sigma_n^2 \} V^\top , \; \text{其中 } \sigma_1^2 \geq \sigma_i^2 \geq 0
@@ -494,22 +493,22 @@ $$
 
 ### 反对称矩阵
 
-一个矩阵 $A \in \mathbb{R}^{n \times n}​$ ，如果 $A^\top =-A​$ 的话 ，那么矩阵 $A​$ 被称为**反对称矩阵 (skew-symmetric or anti-symmetric)** 。
+一个矩阵 $A \in \mathbb{R}^{n \times n}$ ，如果 $A^\top =-A$ 的话 ，那么矩阵 $A$ 被称为**反对称矩阵 (skew-symmetric or anti-symmetric)** 。
 
 
 
 #### 反对称矩阵的性质
 
-设 $A \in \mathbb{R}^{n \times n}​$ 是反对称矩阵，那么：
+设 $A \in \mathbb{R}^{n \times n}$ 是反对称矩阵，那么：
 
-1. 矩阵 $A​$ 的所有特征值不是 $0​$ 就是纯虚数，也就是所有特征值形如 $i \omega \, ,i^2 = -1 \, ,\omega \in \mathbb{R}​$ 
+1. 矩阵 $A$ 的所有特征值不是 $0$ 就是纯虚数，也就是所有特征值形如 $i \omega \, ,i^2 = -1 \, ,\omega \in \mathbb{R}$ 
 2. 存在这样一个正交矩阵 $V$ 使得 $A = V \Lambda V^\top$ ，这里的 $\Lambda$ 是一个**区块对角化 (block-diagonal)** 矩阵  $\Lambda = diag \{ A_1, \dotsc , A_m, 0, \dotsc , 0 \}$ ，其中 $A_i$ 是实反对角矩阵，形式为：$\begin{bmatrix} 0 & a_i \\ -a_i & 0 \end{bmatrix} \in \mathbb{R}^{2 \times 2} , \; i = 1, \dotsc , m$ 因而，任何反对称矩阵的秩都是偶数。
 
 
 
 #### 反对称矩阵的例子
 
-在计算机视觉中，定义一个向量 $\mathbf{u} \in \mathbb{R}^3​$ 通过 ”帽运算 (hat operator)“ 后得到一个常见的反对称矩阵，形如：
+在计算机视觉中，定义一个向量 $\mathbf{u} \in \mathbb{R}^3$ 通过 ”帽运算 (hat operator)“ 后得到一个常见的反对称矩阵，形如：
 
 $$
 \widehat{\mathbf{u}} = 
@@ -525,7 +524,7 @@ $$
 
 而且，矩阵 $\widehat{\mathbf{u}}$ 满足 $\widehat{\mathbf{u}} \mathbf{v} = \mathbf{u} \times \mathbf{v}$ ，这里的 $\times$ 定义为在向量空间 $\mathbb{R}^3$ 上的标准向量**叉积 (cross product)**。当 $\mathbf{u}  \neq 0$ 时，有  $\text{rank} ( \widehat{\mathbf{u}} )  = 2$ ，且向量 $\mathbf{u} \in \mathbb{R}^3$ 所张成的空间正好是矩阵 $\widehat{\mathbf{u}}$ 的零空间，因为有 $\widehat{\mathbf{u}} \mathbf{u} = \mathbf{u^\top} \widehat{\mathbf{u}}$ 。
 
-如果矩阵 $A \in \mathbb{R}^{3 \times 3}, \; \text{det}(A) = 1​$ ，那么有 $A^\top \widehat{\mathbf{u}} A = \widehat{A^{-1} \mathbf{u}}​$ 。
+如果矩阵 $A \in \mathbb{R}^{3 \times 3}, \; \text{det}(A) = 1$ ，那么有 $A^\top \widehat{\mathbf{u}} A = \widehat{A^{-1} \mathbf{u}}$ 。
 
 
 
@@ -549,8 +548,8 @@ $$
 
 其中：
 
-- $\exists U \in \mathbb{R}^{m \times p}​$ 的列向量是正交的
-- $\exists V \in \mathbb{R}^{n \times p}​$ 的列向量也是正交的
+- $\exists U \in \mathbb{R}^{m \times p}$ 的列向量是正交的
+- $\exists V \in \mathbb{R}^{n \times p}$ 的列向量也是正交的
 - $\exists \Sigma \in \mathbb{R}^{p \times p} , \, \Sigma = diag\{\sigma_1, \sigma_2, \dotsb, \sigma_p \} \text{且} \sigma_1 \geq \sigma_2 \geq \dotsb \geq \sigma_p$ 
 
 以上是一般情况下的奇异值分解。当矩阵 $A$ 是一个 $n \times n$ 的对称方阵时有：
@@ -559,19 +558,19 @@ $$
 A = V \Lambda V^\top, \quad \text{其中}\, V \in O(n), \, \Lambda = diag\{ \lambda_1, \dotsc, \lambda_n \}
 $$
 
-综上，奇异值分解能够将任意秩为 $p​$ (非方阵) 矩阵分解成如上所示的两个列向量正交的矩阵 $U​$ 和  $V​$ 。不过我们也要重视基于对称方阵特征值分解的奇异值分解。
+综上，奇异值分解能够将任意秩为 $p$ (非方阵) 矩阵分解成如上所示的两个列向量正交的矩阵 $U$ 和  $V$ 。不过我们也要重视基于对称方阵特征值分解的奇异值分解。
 
 
 
 ### 奇异值分解推导
 
-设矩阵 $A \in \mathbb{R}^{m \times n}​$ 的秩 $rank(A) = p​$ ，且不失一般性有 $m \geq n​$ ， 那么矩阵 $A^\top A \in \mathbb{R}^{n \times n}​$ 是对称且半正定的。因此可以将它分解得到非负的特征值 $\sigma_1^2 \geq \dotsb \geq\sigma_p^2 \geq \dotsb \geq \sigma_n^2 \geq 0​$ 和关联的特征向量 $\mathbf{v_1}, \dotsc, \mathbf{v_n}​$ 。这里的 $\sigma_i​$ 被称为奇异值。 
+设矩阵 $A \in \mathbb{R}^{m \times n}$ 的秩 $rank(A) = p$ ，且不失一般性有 $m \geq n$ ， 那么矩阵 $A^\top A \in \mathbb{R}^{n \times n}$ 是对称且半正定的。因此可以将它分解得到非负的特征值 $\sigma_1^2 \geq \dotsb \geq\sigma_p^2 \geq \dotsb \geq \sigma_n^2 \geq 0$ 和关联的特征向量 $\mathbf{v_1}, \dotsc, \mathbf{v_n}$ 。这里的 $\sigma_i$ 被称为奇异值。 
 
 由于 $ker(A^\top A) = ker(A), \,range(A^\top A) =  range{A^\top}$ (证明看参考文献2中的 Theorem A.25) ，因此有 $span \{ \mathbf{v_1}, \dotsc, \mathbf{v_p} \} = range(A^\top) , \, span \{ \mathbf{v_{p+1}}, \dotsc, \mathbf{v_n} \} = ker(A)$ 。
 
-让 $\mathbf{u} \doteq \frac{1}{\sigma_i} A \mathbf{v_i} \, \Leftrightarrow A \mathbf{v_i} = \sigma_i \mathbf{u_i}, \, i = 1, \dotsc, p​$ ，那么 $\{ \mathbf{u_i} \}_{i=1}^p​$ 是正交的，因为 $\langle \mathbf{u_i}, \mathbf{u_j} \rangle = \frac{1}{\sigma_i \sigma_j} \langle A \mathbf{v_i}, A \mathbf{v_j} \rangle = \frac{1}{\sigma_i \sigma_j} \langle \mathbf{v_i}, A^\top A \mathbf{v_j} \rangle = \delta_{ij}​$ 
+让 $\mathbf{u} \doteq \frac{1}{\sigma_i} A \mathbf{v_i} \, \Leftrightarrow A \mathbf{v_i} = \sigma_i \mathbf{u_i}, \, i = 1, \dotsc, p$ ，那么 $\{ \mathbf{u_i} \}_{i=1}^p$ 是正交的，因为 $\langle \mathbf{u_i}, \mathbf{u_j} \rangle = \frac{1}{\sigma_i \sigma_j} \langle A \mathbf{v_i}, A \mathbf{v_j} \rangle = \frac{1}{\sigma_i \sigma_j} \langle \mathbf{v_i}, A^\top A \mathbf{v_j} \rangle = \delta_{ij}$ 
 
-拓充 $\{ \mathbf{u_i} \}_{i=1}^p​$ 成 $\mathbb{R^m}​$ 中的基 $\{ \mathbf{u_i} \}_{i=1}^m​$ 。因为有 $A \mathbf{v_i} = \sigma_i \mathbf{u_i}​$ ，可得：
+拓充 $\{ \mathbf{u_i} \}_{i=1}^p$ 成 $\mathbb{R^m}$ 中的基 $\{ \mathbf{u_i} \}_{i=1}^m$ 。因为有 $A \mathbf{v_i} = \sigma_i \mathbf{u_i}$ ，可得：
 
 $$
 A \begin{bmatrix} \mathbf{v_1}, \dotsc, \mathbf{v_n} \end{bmatrix} = \begin{bmatrix} \mathbf{u_1}, \dotsc, \mathbf{u_m} \end{bmatrix} 
@@ -598,15 +597,15 @@ $$
 
 ### 奇异值分解的几何意义
 
-针对于矩阵 $A \in \mathbb{R}^{n \times n}​$ 奇异值分解 $A = U \Sigma V^\top​$ 后得由到 $\mathbb{R}^n​$ 中正交基构成列向量的矩阵 $V = \begin{bmatrix} \mathbf{v_1}, \dotsc, \mathbf{v_n} \end{bmatrix}​$ 和 $U = \begin{bmatrix} \mathbf{u_1}, \dotsc, \mathbf{u_m} \end{bmatrix}​$ 。如果一个点 $\mathbf{x} \in \mathbb{R}^n​$ 通过矩阵 $A​$ 转换称点 $\mathbf{y} \in \mathbb{R}^n​$ ，那么以 $U​$ 为基底的点 $\mathbf{y}​$ 的坐标是通过以 $V​$ 为基底的点 $\mathbf{x}​$ 的坐标乘以对角矩阵 $\Sigma​$ 得到的，即，每个坐标只是由对应的奇异值缩放：
+针对于矩阵 $A \in \mathbb{R}^{n \times n}$ 奇异值分解 $A = U \Sigma V^\top$ 后得由到 $\mathbb{R}^n$ 中正交基构成列向量的矩阵 $V = \begin{bmatrix} \mathbf{v_1}, \dotsc, \mathbf{v_n} \end{bmatrix}$ 和 $U = \begin{bmatrix} \mathbf{u_1}, \dotsc, \mathbf{u_m} \end{bmatrix}$ 。如果一个点 $\mathbf{x} \in \mathbb{R}^n$ 通过矩阵 $A$ 转换称点 $\mathbf{y} \in \mathbb{R}^n$ ，那么以 $U$ 为基底的点 $\mathbf{y}$ 的坐标是通过以 $V$ 为基底的点 $\mathbf{x}$ 的坐标乘以对角矩阵 $\Sigma$ 得到的，即，每个坐标只是由对应的奇异值缩放：
 
 $$
 \mathbf{y} = A \mathbf {x} = U \Sigma V^\top \mathbf{x} \iff U^\top \mathbf{y} = \Sigma V^\top \mathbf{x}
 $$
 
-设矩阵 $A \in \mathbb{R}^{n \times n}= U \Sigma V^\top​$ 是一个方阵。那么矩阵 $A​$ 将*单位球体 (unit sphere)* $\mathbb{S}^{n-1} \doteq \{ {\mathbf{x} \in \mathbb{R}^n :  \| \mathbf{x} \|_2 = 1} \}​$ 映射到具有 $\sigma_i \mathbf{u}_i​$ 为半轴的*椭圆体 (ellipsoid)* ，这里的 $\mathbf{u}_i​$ 是矩阵 $U​$ 的第 $i​$ 列。
+设矩阵 $A \in \mathbb{R}^{n \times n}= U \Sigma V^\top$ 是一个方阵。那么矩阵 $A$ 将*单位球体 (unit sphere)* $\mathbb{S}^{n-1} \doteq \{ {\mathbf{x} \in \mathbb{R}^n :  \| \mathbf{x} \|_2 = 1} \}$ 映射到具有 $\sigma_i \mathbf{u}_i$ 为半轴的*椭圆体 (ellipsoid)* ，这里的 $\mathbf{u}_i$ 是矩阵 $U$ 的第 $i$ 列。
 
-针对这一点证明：让 $A \mathbf{x} = \mathbf{y}​$ ，设集合  $\{ \mathbf{v_i} \}_{i=1}^n​$ 是 $\mathbb{R}^n​$ 中一组正交基，那么关联这个基底的点 $\mathbf{x}​$ 的坐标有：
+针对这一点证明：让 $A \mathbf{x} = \mathbf{y}$ ，设集合  $\{ \mathbf{v_i} \}_{i=1}^n$ 是 $\mathbb{R}^n$ 中一组正交基，那么关联这个基底的点 $\mathbf{x}$ 的坐标有：
 
 $$
 \begin{bmatrix} \alpha_1, \alpha_2 , \dotsc, \alpha_n \end{bmatrix}^\top = 
@@ -626,7 +625,7 @@ $$
 \, \iff \, \mathbf{\beta} = U^\top \mathbf{y}
 $$
 
-因此有 $\mathbf{y} =  \sum_{i=1}^n \beta_i \mathbf{u}_i = A\mathbf{x} = \sum_{i=1}^{n} \sigma_i \mathbf{u}_i \mathbf{v}_i^\top \mathbf{x} = \sum_{i = 1}^n \sigma_i \langle \mathbf{v}_i, \mathbf{x} \rangle \mathbf{u}_i$ ，因此有$\beta_i = \sigma_i \alpha_i$ 。现在有 $\| \mathbf{x} \|_2^2 = \sum_{i=1} \alpha_i^2 = 1 , \, \forall \mathbf{x} \in \mathbb{S}^{n-1}$ ，那么有 $\sum_{i=1}^n  \beta_i^2 / \alpha_i^2 = 1$ 。这意味着点 $\mathbf{x}$ 表示变换后得到的点 $\mathbf{y}$ 位于一个沿以 $U$ 为基底轴方向的椭球面上。如下插图表示当 $n =2$ 时，一个单位圆通过非奇异 $A \in \mathbb{R}^{2 \times 2}​$ 映射到一个椭圆的情况。
+因此有 $\mathbf{y} =  \sum_{i=1}^n \beta_i \mathbf{u}_i = A\mathbf{x} = \sum_{i=1}^{n} \sigma_i \mathbf{u}_i \mathbf{v}_i^\top \mathbf{x} = \sum_{i = 1}^n \sigma_i \langle \mathbf{v}_i, \mathbf{x} \rangle \mathbf{u}_i$ ，因此有$\beta_i = \sigma_i \alpha_i$ 。现在有 $\| \mathbf{x} \|_2^2 = \sum_{i=1} \alpha_i^2 = 1 , \, \forall \mathbf{x} \in \mathbb{S}^{n-1}$ ，那么有 $\sum_{i=1}^n  \beta_i^2 / \alpha_i^2 = 1$ 。这意味着点 $\mathbf{x}$ 表示变换后得到的点 $\mathbf{y}$ 位于一个沿以 $U$ 为基底轴方向的椭球面上。如下插图表示当 $n =2$ 时，一个单位圆通过非奇异 $A \in \mathbb{R}^{2 \times 2}$ 映射到一个椭圆的情况。
 
 ![二维下奇异值分解的几何意义](image/geometric_interpretation2svd.png)
 
