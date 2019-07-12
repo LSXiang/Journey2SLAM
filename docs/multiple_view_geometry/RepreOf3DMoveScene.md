@@ -148,7 +148,7 @@ $$
 
 
 
-#### 旋转的指数坐标
+#### 旋转的指数表示
 
 根据上述，我们可知在 $\mathbb{E}^3$ 空间中刚体运动的旋转可以通过一个 $3 \times 3$ 的旋转矩阵 $R \in SO(3)$ 表示。每一个旋转矩阵 $R$ 通过 $3 \times 3 = 9$ 元素定义。然而，这 $9$ 个元素并不是自由参数，因为它们必须满足 $R^\top R= I$ 的约束，这实际上对 $9$ 个元素施加了 $6$ 个独立的约束。因此，由旋转矩阵构成的空间 $SO(3)$ 的维度应该只有 $3$ 维，而 $9$ 参数中有 $6$ 实际上是多余的。
 
@@ -186,9 +186,9 @@ $$
 
 
 
-#### 李群和李代数
+##### 李群和李代数
 
-李群 (或无穷小群) 是一个光滑的流形，也是一个群，因此群运算乘法和逆运算是光滑的映射。
+李群 (或无穷小群) 是一个光滑的流形，也是一个群，因此群运算乘法和逆运算是光滑的映射。在单位元处与李群相切的空间称为相关的李代数。从李代数到李群的映射称为指数映射，它的逆过程叫做对数映射。
 
 李群与李代数涉及到庞大的知识量，这里对这部分就不进行拓展描述。后续或许会有专门的篇幅来记录这些知识点，再进行添加链接跳转（#TODO）。这部分知识我当时是阅读了[《机器人学中的状态估计》](http://asrl.utias.utoronto.ca/~tdb/) 中相关的篇幅来学习的。当然读者也可以阅读更加数学性的书籍来学习，这里就不在引申。
 
@@ -199,10 +199,162 @@ $$
 
 
 
-#### 指数映射
+##### 指数映射
+
+我们先假设矩阵 $\hat \omega$ 是一个常量，那么
+
+$$
+\dot R(t) = \hat \omega R(t)
+$$
+
+上式中矩阵 $R(t)$ 可以解释为以下**线性常微分方程 (linear ordinary differential equation (ODE))**的**状态转移矩阵 (state transition matrix)** 
+
+$$
+\dot x(t) = \hat \omega x(t) , \quad x(t) \in \mathbb{R}^3
+$$
+
+上式线性常微分方程的解为
+
+$$
+x(t) = e^{\hat \omega t} x(0)
+$$
+
+其中 $e^{\hat \omega t}$ 是矩阵指数
+
+$$
+e^{\hat \omega t} = I + \hat\omega t + \frac{(\hat\omega t)^2}{2!} + \dotsb + \frac{(\hat\omega t)^n}{n!} + \dotsb
+$$
+
+其中，指数 $e^{\hat \omega t}$ 通常记为 $\exp ( \hat \omega t)$ 。由于上式线性常微分方程具有唯一解，那么假设 $R(0) = I$ 为初始条件，那么有：
+
+$$
+R(t) = e^{\hat \omega t}
+$$
+
+为了验证矩阵 $e^{\hat \omega t}$ 确实是一个旋转矩阵，可以直接从矩阵指数的定义中看出
+
+$$
+(e^{\hat \omega t})^{-1} = e^{- \hat \omega t} = e^{\hat \omega^\top t} = (e^{\hat \omega t})^\top
+$$
+
+因此 $(e^{\hat \omega t})^\top e^{\hat \omega t} = I$ 。 $R(t) = e^{\hat \omega t}$ 的物理解释是如果 $\| \omega \| = 1$，那么 $R(t)$ 是一个沿 $\omega$ 为轴，弧度大小为 $t$ 的旋转。通常， $t$ 可以乘到 $\omega$ 中去，因此有 $R = e^{\hat\omega}$ ，其中 $\omega$ 的模为任意有理数。所以，根据上文所述，矩阵指数确实定义了空间 $so(3)$ 到 $SO(3)$ 之间的空间映射，即所谓的**指数映射 (exponential map)** :
+
+$$
+\exp : so(3) \to SO(3); \quad \hat \omega \mapsto e^{\hat \omega}
+$$
+
+以上的所有推导到是在假设矩阵 $\hat \omega$ 是一个常量的前提下，那么对于任意的 $R \in SO(3)$ 是否都可以通过 $R(t) = e^{\hat \omega t}$ 来表示呢。答案是肯定的，接下来会对这个疑问进行阐述。
 
 
 
+##### 对数映射
+
+对于任意的 $R \in SO(3)$ 存在任意的 $\omega \in \mathbb{R}^3$ 使得 $R = \exp( \hat \omega)$ 。我们定义它的逆过程为**对数映射 (exponential map)** ：$\hat \omega = \log (R)$ 。
+
+如果旋转矩阵 $R \neq I$ 且定义为：
+
+$$
+R = \begin{bmatrix} r_{11} & r_{12} & r_{13} \\ r_{21} & r_{22} & r_{23} \\ r_{31} & r_{32} & r_{33} \end{bmatrix}
+$$
+
+那么对应的 $\omega$ 通过下式计算：
+
+$$
+\| \omega \| = \cos^{-1} \left( \frac{trace(R)-1}{2} \right) , \quad \frac{\omega}{\| \omega \|} = \frac{1}{2\sin(\| \omega \|)} \begin{bmatrix} r_{32} - r_{23} \\ r_{13} - r_{31} \\ r_{21} - r_{12} \end{bmatrix}
+$$
+
+如果 $R = I$ ，那么 $\| \omega \| = 0$ ，而 $\frac{\omega}{\| \omega \|}$ 没有定义 (因此可以任意选择) 。
+
+从上面的描述可以得知：任意旋转矩阵可以通过绕以固定旋转轴 $\omega$ 旋转一个特定的角度 $\| \omega \|$ 得到。然而从 $so(3)$ 到 $SO(3)$ 对数映射并不是一一对应的，这是因为任何一个 $2k\pi\omega, k\in Z$ 都可以得到相同的旋转矩阵 $R$ 。
+
+
+
+##### 罗德里格斯旋转
+
+通过对数映射，我们知道了如何通过一个旋转矩阵求解它的指数坐标 $\omega$ 。那么如何通过一个指数坐标 $\omega$ 求解一个旋转矩阵 $R = e^{\hat\omega}$ 呢？当然可以通过它本身的定义：
+
+$$
+e^{\hat \omega} = I + \hat\omega + \frac{(\hat\omega)^2}{2!} + \dotsb + \frac{(\hat\omega)^n}{n!} + \dotsb
+$$
+
+然后一种更加有效的求解方式是通过**罗德里格斯 (Rodrigues)**公式进行求解。令 $\omega = \phi \mathbf{x}$ 其中 $\phi = \| \omega \|$ 为旋转角度，$\mathbf{x} = \omega / \| \omega \|$ 是单位长度旋转轴。根据反对称矩阵的性质有：
+
+$$
+\hat{\mathbf{x}}^2 = \mathbf{x}\mathbf{x}^\top - I, \quad \hat{\mathbf{x}}^3 = -\hat{\mathbf{x}}
+$$
+
+那么
+
+$$
+\begin{align*}
+e^{\hat \omega} &= e^{\phi \hat{\mathbf{x}}} \\
+&= I + \phi \hat{\mathbf{x}} + \frac{(\phi \hat{\mathbf{x}})^2}{2!} + \dotsb + \frac{(\phi \hat{\mathbf{x}})^n}{n!} + \dotsb \\
+&= I + \phi \hat{\mathbf{x}} + \frac{1}{2!}\phi^2 \hat{\mathbf{x}}\hat{\mathbf{x}} + \frac{1}{3!}\phi^3 \underbrace{\hat{\mathbf{x}}\hat{\mathbf{x}}\hat{\mathbf{x}}}_{-\hat{\mathbf{x}}} + \frac{1}{4!}\phi^4 \underbrace{\hat{\mathbf{x}}\hat{\mathbf{x}}\hat{\mathbf{x}}\hat{\mathbf{x}}}_{-\hat{\mathbf{x}}\hat{\mathbf{x}}} - \dotsb \\
+&= I + \underbrace{\left(\phi - \frac{1}{3!}\phi^3 + \frac{1}{5!}\phi^5 - \dotsb \right)}_{\sin \phi} \hat{\mathbf{x}} + \left[1- \underbrace{\left(1 - \frac{1}{2!}\phi^2 + \frac{1}{4!}\phi^4 - \dotsb \right)}_{\cos \phi} \right]\hat{\mathbf{x}}\hat{\mathbf{x}} \\
+&= I + \sin(\|\omega\|)\frac{\hat\omega}{\|\omega\|} + (1-\cos(\|\omega\|))\frac{\hat\omega^2}{\|\omega\|^2} \\
+&= \cos(\|\omega\|)I + (1-\cos(\|\omega\|))\frac{\hat\omega\hat\omega^\top}{\|\omega\|^2} + \sin(\|\omega\|)\frac{\hat\omega}{\|\omega\|}
+\end{align*}
+$$
+
+
+
+根据上面的推导，我们可以得到已知一个旋转向量 $\omega$ 求解出旋转矩阵的方式。下面给出一个更加直观的物理表现。如下图所示，我们知道任意旋转都可以表示成绕一单位旋转轴 $\mathbf{n}$ 旋转 $\theta$ 角，等价与通过一个旋转向量 $\omega = \theta\mathbf{n}$ 。
+
+![Rodrigues Rotation](image/rodrigues.png)
+
+根据上图有 $\mathbf{v}$ 绕单位旋转轴 $\mathbf{n}$ 旋转 $\theta$ 角后得到 $\mathbf{u}$ ，那么这一旋转过程的表示可以通过以下推导所得。
+
+首先，目标向量 $\mathbf{v}$ 平行于 $\mathbf{n}$ 的分量表示为
+
+$$
+\mathbf{v}_{\|} = \mathbf{n}(\mathbf{n} \cdot \mathbf{v}) = (\mathbf{n}\mathbf{n}^\top)\mathbf{v}
+$$
+
+$\mathbf{v}$ 平行于 $\mathbf{n}$ 的分量分量不受旋转影响。接着，计算目标向量 $\mathbf{v}$ 垂直于 $\mathbf{n}$ 的分量
+
+$$
+\mathbf{v}_\bot = \mathbf{v} - \mathbf{v}_{\|} = (I - \mathbf{nn^\top})\mathbf{v}
+$$
+
+可以通过叉乘将这部分垂直分量旋转 $90^\circ$ 
+
+$$
+\mathbf{v}_{\times} = \mathbf{n}\times\mathbf{v} = \hat{\mathbf{n}}\mathbf{v}
+$$
+
+再一次旋转 $90^\circ$ 得
+
+$$
+\mathbf{v}_{\times\times} = \mathbf{n}\times\mathbf{v}_{\times} = \hat{\mathbf{n}}^2 \mathbf{v} = -\mathbf{v}_{\bot}
+$$
+
+因此
+
+$$
+\mathbf{v}_{\|} = \mathbf{v} - \mathbf{v}_{\bot} = \mathbf{v} + \mathbf{v}_{\times\times} = (I + \hat{\mathbf{n}}^2)\mathbf{v}
+$$
+
+进而，我们可以得到旋转后向量 $\mathbf{u}$ 位于以 $\mathbf{n}$ 为法向量的平面分量
+
+$$
+\mathbf{u}_{\bot} = \cos\theta\mathbf{v}_{\bot} + \sin\theta\mathbf{v}_{\times} = (\sin\theta\hat{\mathbf{n}} - \cos\theta\hat{\mathbf{n}}^2)\mathbf{v}
+$$
+
+最后我们得到旋转之后的向量 $\mathbf{u}$ 
+
+$$
+\mathbf{u} = \mathbf{u}_{\bot} + \mathbf{v}_{\|} = (I + \sin\theta\hat{\mathbf{n}} + (1-\cos\theta)\hat{\mathbf{n}}^2) \mathbf{v}
+$$
+
+由此，我们可以将旋转矩阵表示为
+
+$$
+R(\mathbf{n}, \theta) = I + \sin\theta\hat{\mathbf{n}} + (1-\cos\theta)\hat{\mathbf{n}}^2
+$$
+
+
+
+### 刚体运动变换的表达
 
 
 
