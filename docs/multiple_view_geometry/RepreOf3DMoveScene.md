@@ -356,9 +356,27 @@ $$
 
 ### 刚体运动变换的表达
 
+在上文的描述中，我们已经知道了刚体纯旋转运动的表示与对应的旋转矩阵的计算。在接下来的篇幅中，我们将介绍刚体更加一般性的运动变换，包含了旋转与平移。
 
+![Rigid-body Motion](image/Rigid-body_Motion.png)
 
+如上图所示，一个坐标系为 $C$ 的移动刚体上存在一点 $p$ ，点 $p$ 关于参考世界坐标系 $W$ 的表示可以简单的关联称计算向量 $X_w$ 来得到。而 $X_w$ 的计算可以归简为一个世界坐标系 $W$ 下由原点指向刚体坐标系 $C$ 原点的平移向量 $T_{wc} \in \mathbb{R}^3$ 和转换到世界坐标系 $W$ 下的向量 $X_c$ 的向量和
 
+$$
+X_w = R_{wc}X_c + T_{wc}
+$$
+
+因此，刚体运动的空间由一组**特殊的欧几里德变换 (special Euclidean transformations)** 给出
+
+$$
+SE(3) \doteq \{ g=(R,T) | R \in SO(3), T \in \mathbb{R}^3 \}
+$$
+
+上述的刚体运动变换是仿射变换而非线性变换。我们利用**齐次坐标系 (homogeneous coordinates)** ，将它转换称线性变换
+
+$$
+SE(3) \doteq \left\{ g=\begin{bmatrix}R & T \\ 0 & 1 \end{bmatrix} \: \Bigg| \: R \in SO(3), T \in \mathbb{R}^3 \right\} \subset \mathbb{R}^{4\times4}
+$$
 
 
 
