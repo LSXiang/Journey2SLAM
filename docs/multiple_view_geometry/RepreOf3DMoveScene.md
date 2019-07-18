@@ -380,6 +380,194 @@ $$
 
 
 
+#### 刚体运动的正则指数坐标
+
+我们已经了解了旋转矩阵 $R \in SO(3)$ 的指数坐标形式，推广相似的坐标化到应用齐次性表示的刚体运动 $g \in SE(3)$ 。考虑一个连续运动的刚体轨迹为 $SE(3) : g(t) = (R(t), T(t))$ ，用齐次坐标表示为：
+
+$$
+g(t) = \begin{bmatrix} R(t) & T(t) \\ 0 & 1 \end{bmatrix} \in \mathbb{R}^{4\times4}
+$$
+
+按照刚体纯旋转形式类推，首先考虑以下形式矩阵
+
+$$
+\dot g(t) g^{-1}(t) = \begin{bmatrix} \dot R(t)R^\top(t) & \dot T(t) - \dot R(t) R^\top(t)T(t) \\ 0 & 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+$$
+
+已知 $\dot R(t)R^\top(t)$ 是一个反对称矩阵，存在 $\hat\omega(t) \in so(3)$ 使得 $\hat\omega(t) = \dot R(t)R^\top(t)$ ，定义一个向量 $v(t) = \dot T(t) - \dot R(t) R^\top(t)T(t)  \in \mathbb{R}^3$ 。那么上式可以转变成
+
+$$
+\dot g(t) g^{-1}(t) = \begin{bmatrix} \hat\omega(t)  & v(t) \\ 0 & 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+$$
+
+进一步定义矩阵 $\hat \xi \in \mathbb{R}^{4\times4}$ 为
+
+$$
+\hat \xi(t) = \begin{bmatrix} \hat\omega(t)  & v(t) \\ 0 & 0 \end{bmatrix}
+$$
+
+那么有
+
+$$
+\dot g(t) = (\dot g(t) g^{-1}(t)) g(t) = \hat \xi(t)g(t)
+$$
+
+这里的 $\hat \xi$ 可以被认为沿这虚线 $g(t)$ 的 “切向量” ，且可以用于 $g(t)$ 的局部近似：
+
+$$
+g(t+dt) \approx g(t) + \hat\xi(t) g(t)dt = (I + \hat\xi(t)dt)g(t)
+$$
+
+形如 $\hat \xi$ 的 $4\times4$ 的矩阵被称为**扭曲 (twist)** 。所有的扭曲构成一个空间，被定义成
+
+$$
+se(3) \doteq \left\{ \hat\xi = \begin{bmatrix} \hat\omega & v \\ 0 & 0 \end{bmatrix} \; \bigg | \; \hat\omega \in so(3), v \in \mathbb{R}^3 \right\} \subset \mathbb{R}^{4\times4}
+$$
+
+这里的集合 $se(3)$ 被称为矩阵群 $SE(3)$ 的切空间或者李代数。定义两个操作 “$\vee$” 和 “$\wedge$” 关联扭曲 $\hat \xi \in se(3)$ 和它的扭曲坐标 $\xi \in \mathbb{R}^6$ 如下所示：
+
+$$
+\begin{bmatrix} \hat\omega & v \\ 0 & 0 \end{bmatrix}^\vee \doteq \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 , \quad \begin{bmatrix} v \\ \omega \end{bmatrix}^\wedge \doteq \begin{bmatrix} \hat\omega & v \\ 0 & 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+$$
+
+在扭曲坐标 $\xi$ 下，将 $v$ 表示为线速度，$\omega$ 表示为角速度，这表明它们分别与刚体运动的位移和旋转相关。考虑特殊情况下（匀速变换运动）时， $\hat\xi$ 为常数矩阵
+
+$$
+\dot g(t) = \hat \xi g(t)
+$$
+
+我们又得到了一个时不变线性常微分方程，它的解可以通过下式计算给出
+
+$$
+g(t) = e^{\hat\xi t} g(0)
+$$
+
+假设初始条件 $g(0) = I$ ，这上式结果为
+
+$$
+g(t) = e^{\hat\xi t}
+$$
+
+其中扭曲的指数为
+
+$$
+e^{\hat\xi t} = I + \hat\xi t + \frac{(\hat\xi t)^2}{2!} + \cdots + \frac{(\hat\xi t)^n}{n!} + \cdots
+$$
+
+通过前面小节介绍的 Rodrigues 法则和矩阵指数的附加性质，可以建立如下关系
+
+$$
+e^{\hat\xi} = \begin{bmatrix} e^{\hat\omega} & \frac{(I-e^{\hat\omega})\hat\omega v + \omega \hat\omega v}{\|\omega\|} \\ 0 & 1 \end{bmatrix}, \text{if} \quad \omega \neq 0
+$$
+
+如果 $\omega = 0$ ，那么指数化为简单的 $e^{\hat\xi} = \begin{bmatrix} I & v  \\ 0 & 1 \end{bmatrix}$ ，由上式可知， $\xi$ 的指数确实是 $SE(3)$ 中的刚体变换矩阵。因此，指数映射定义了从 $se(3)$ 空间到 $SE(3)$ 空间的变换形式
+
+$$
+\exp: se(3) \to SE(3); \; \hat\xi \mapsto e^{\hat\xi}
+$$
+
+类似于 $\hat\omega \in so(3)$ 与 $SO(3)$ 的关系，我们称 ${\hat\xi} \in se(3)$ 是 $SE(3)$ 的指数坐标。对于任意的 $g \in SE(3)$ 必定存在一个扭曲坐标 $\xi = (v, \omega)$ 使得 $g = \exp(\hat\xi)$ 。我们称这个指数映射的逆过程为对数映射 ${\hat\xi} = \log(g)$ 。
+
+
+
+### 坐标和速度变换
+
+在 SLAM 的研究过程中，经常需要知道一个点的坐标和它的速度如何随着摄像机的移动而变化。这是因为通常选择相机帧作为参考帧，并描述相机运动和与之相关的三维点更为方便。由于相机可能在移动，我们需要知道如何将坐标和速度等量从一个相机帧转换到另一个相机帧。特别是，我们想知道如何正确地表达一个点相对于一个运动的相机的位置和速度。
+
+
+
+#### 坐标变换规则
+
+我们将应用一个刚体变换
+
+$$
+g(t) = \begin{bmatrix} R(t) & T(t) \\ 0 & 1 \end{bmatrix} \in SE(3)
+$$
+
+去表示在 $t$ 时刻刚体相对于一个固定参考系下的运动变换。我们假设一个特殊情况，在 $t = 0$ 的时候，刚体坐标系与固定参考坐标系重合，即 $g(0) = I$ 。固定参考系下的任意点 $\mathbf{X}_0$ ，在 $t$ 时刻它对应到刚体坐标系下的坐标为
+
+$$
+\mathbf{X}(t) = R(t)\mathbf{X}_0 + T(t)
+$$
+
+或者应用齐次坐标表示为
+
+$$
+\mathbf{X}(t) = g(t)\mathbf{X}_0
+$$
+
+![Composition of rigid-body motions](image/rigid-body_motions.png)
+
+如上图所示，给出两个不同的时刻 $t_1$ 和 $t_2$ ，那么 $t_1$ 时刻刚体参考系下的点到 $t_2$ 时刻刚体参考系下的点变换式为
+
+$$
+\mathbf{X}(t_2) = g(t_2, t_1)\mathbf{X}(t_1)
+$$
+
+易得
+
+$$
+\mathbf{X}(t_3) = g(t_3, t_2)\mathbf{X}(t_2) = g(t_3, t_2)g(t_2, t_1)\mathbf{X}(t_1) = g(t_3, t_1)\mathbf{X}(t_1)
+$$
+
+因此有
+
+$$
+g(t_3, t_2)g(t_2, t_1) = g(t_3, t_1)
+$$
+
+通过把 $t_1$ 时刻坐标系的坐标转换到 $t_2$ 时刻坐标系的坐标，然后再转换回来，我们可以看到
+
+$$
+\mathbf{X}(t_1) = g(t_1, t_2)\mathbf{X}(t_2) = g(t_1, t_2)g(t_2, t_1)\mathbf{X}(t_1)
+$$
+
+因此可得
+
+$$
+g(t_1, t_2)g(t_2, t_1) = I \iff g^{-1}(t_1, t_2) = g(t_2, t_1)
+$$
+
+综上所述，我们可以得到刚体运动的坐标变换规则概括为
+
+$$
+\mathbf{X}_i = g_{ij}\mathbf{X}_j \;,\; g_{ik} = g_{ij}g_{jk} \;,\; g^{-1}_{ij} = g_{ji}
+$$
+
+
+
+#### 速度变换规则
+
+根据坐标变换规则，我们知道固定参考系下一点 $p$ 的坐标 $\mathbf{X}_0$ 转换到在 $t$ 时刻刚体坐标系下为 $\mathbf{X}(t) = g_{cw}(t) \mathbf{X}_0$ ，那么在 $t$ 时刻点 $p$ 相对于刚体的瞬时速度为
+
+$$
+\dot{\mathbf{X}}(t) = \dot g_{cw}(t) \mathbf{X}_0 = \dot g_{cw}(t) g^{-1}_{cw}(t)\mathbf{X}(t)
+$$
+
+通过引入扭曲坐标
+
+$$
+\hat V^c_{cw}(t) \doteq g_{cw}(t) g^{-1}_{cw}(t) = \begin{bmatrix} \hat\omega(t) & v(t) \\ 0 & 0 \end{bmatrix} \in se(3)
+$$
+
+由此，可以获得
+
+$$
+\dot{\mathbf{X}}(t) = \hat V^c_{cw}(t)\mathbf{X}(t)
+$$
+
+在 3D 非齐次坐标系下表示为
+
+$$
+\dot{\mathbf{X}}(t) = \hat\omega(t)\mathbf{X}(t) + v(t)
+$$
+
+因此，符号 $\hat V^c_{cw}(t)$ 表示从摄像机帧中看到的世界帧的相对速度。
+
+
+
+
+
 
 
 
