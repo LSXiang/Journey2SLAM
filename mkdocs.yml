@@ -61,8 +61,9 @@ nav:
       - SVO 算法框架: projects/rpg_svo/algorithm_framework.md
       - SVO 代码解析: projects/rpg_svo/code_analysis.md
     - ORB-SLAM:
-      - ORB-SLAM 算法框架: projects/orb_slam/algorithm_framework.md
-      - ORB-SLAM 代码解析: projects/orb_slam/code_analysis.md
+      - 跟踪线程: projects/orb_slam/tracking.md
+      - 局部建图线程: projects/orb_slam/local_mapping.md
+      - 回环检测线程: projects/orb_slam/loop_closing.md
 - 其他:
     - Markdown 写作模版: others/md_template.md
     # - 待归类整合文稿: 
