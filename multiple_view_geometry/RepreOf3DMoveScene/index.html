@@ -704,6 +704,53 @@
     刚体运动变换的表达
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#刚体运动的正则指数坐标" title="刚体运动的正则指数坐标" class="md-nav__link">
+    刚体运动的正则指数坐标
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#坐标和速度变换" title="坐标和速度变换" class="md-nav__link">
+    坐标和速度变换
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#坐标变换规则" title="坐标变换规则" class="md-nav__link">
+    坐标变换规则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#速度变换规则" title="速度变换规则" class="md-nav__link">
+    速度变换规则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#总结" title="总结" class="md-nav__link">
+    总结
+  </a>
+  
 </li>
         
       </ul>
@@ -1055,6 +1102,53 @@
           <li class="md-nav__item">
   <a href="#刚体运动变换的表达" title="刚体运动变换的表达" class="md-nav__link">
     刚体运动变换的表达
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#刚体运动的正则指数坐标" title="刚体运动的正则指数坐标" class="md-nav__link">
+    刚体运动的正则指数坐标
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#坐标和速度变换" title="坐标和速度变换" class="md-nav__link">
+    坐标和速度变换
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#坐标变换规则" title="坐标变换规则" class="md-nav__link">
+    坐标变换规则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#速度变换规则" title="速度变换规则" class="md-nav__link">
+    速度变换规则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#总结" title="总结" class="md-nav__link">
+    总结
   </a>
   
 </li>
@@ -1508,6 +1602,360 @@ R(\mathbf{n}, \theta) = I + \sin\theta\hat{\mathbf{n}} + (1-\cos\theta)\hat{\mat
 </script>
 </div>
 <h3 id="刚体运动变换的表达">刚体运动变换的表达<a class="headerlink" href="#刚体运动变换的表达" title="Permanent link"></a></h3>
+<p>在上文的描述中，我们已经知道了刚体纯旋转运动的表示与对应的旋转矩阵的计算。在接下来的篇幅中，我们将介绍刚体更加一般性的运动变换，包含了旋转与平移。</p>
+<p><img alt="Rigid-body Motion" src="../image/Rigid-body_Motion.png" /></p>
+<p>如上图所示，一个坐标系为 <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span> 的移动刚体上存在一点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> ，点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 关于参考世界坐标系 <span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span> 的表示可以简单的关联称计算向量 <span><span class="MathJax_Preview">X_w</span><script type="math/tex">X_w</script></span> 来得到。而 <span><span class="MathJax_Preview">X_w</span><script type="math/tex">X_w</script></span> 的计算可以归简为一个世界坐标系 <span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span> 下由原点指向刚体坐标系 <span><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span> 原点的平移向量 <span><span class="MathJax_Preview">T_{wc} \in \mathbb{R}^3</span><script type="math/tex">T_{wc} \in \mathbb{R}^3</script></span> 和转换到世界坐标系 <span><span class="MathJax_Preview">W</span><script type="math/tex">W</script></span> 下的向量 <span><span class="MathJax_Preview">X_c</span><script type="math/tex">X_c</script></span> 的向量和</p>
+<div>
+<div class="MathJax_Preview">
+X_w = R_{wc}X_c + T_{wc}
+</div>
+<script type="math/tex; mode=display">
+X_w = R_{wc}X_c + T_{wc}
+</script>
+</div>
+<p>因此，刚体运动的空间由一组<strong>特殊的欧几里德变换 (special Euclidean transformations)</strong> 给出</p>
+<div>
+<div class="MathJax_Preview">
+SE(3) \doteq \{ g=(R,T) | R \in SO(3), T \in \mathbb{R}^3 \}
+</div>
+<script type="math/tex; mode=display">
+SE(3) \doteq \{ g=(R,T) | R \in SO(3), T \in \mathbb{R}^3 \}
+</script>
+</div>
+<p>上述的刚体运动变换是仿射变换而非线性变换。我们利用<strong>齐次坐标系 (homogeneous coordinates)</strong> ，将它转换称线性变换</p>
+<div>
+<div class="MathJax_Preview">
+SE(3) \doteq \left\{ g=\begin{bmatrix}R &amp; T \\ 0 &amp; 1 \end{bmatrix} \: \Bigg| \: R \in SO(3), T \in \mathbb{R}^3 \right\} \subset \mathbb{R}^{4\times4}
+</div>
+<script type="math/tex; mode=display">
+SE(3) \doteq \left\{ g=\begin{bmatrix}R & T \\ 0 & 1 \end{bmatrix} \: \Bigg| \: R \in SO(3), T \in \mathbb{R}^3 \right\} \subset \mathbb{R}^{4\times4}
+</script>
+</div>
+<h4 id="刚体运动的正则指数坐标">刚体运动的正则指数坐标<a class="headerlink" href="#刚体运动的正则指数坐标" title="Permanent link"></a></h4>
+<p>我们已经了解了旋转矩阵 <span><span class="MathJax_Preview">R \in SO(3)</span><script type="math/tex">R \in SO(3)</script></span> 的指数坐标形式，推广相似的坐标化到应用齐次性表示的刚体运动 <span><span class="MathJax_Preview">g \in SE(3)</span><script type="math/tex">g \in SE(3)</script></span> 。考虑一个连续运动的刚体轨迹为 <span><span class="MathJax_Preview">SE(3) : g(t) = (R(t), T(t))</span><script type="math/tex">SE(3) : g(t) = (R(t), T(t))</script></span> ，用齐次坐标表示为：</p>
+<div>
+<div class="MathJax_Preview">
+g(t) = \begin{bmatrix} R(t) &amp; T(t) \\ 0 &amp; 1 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</div>
+<script type="math/tex; mode=display">
+g(t) = \begin{bmatrix} R(t) & T(t) \\ 0 & 1 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</script>
+</div>
+<p>按照刚体纯旋转形式类推，首先考虑以下形式矩阵</p>
+<div>
+<div class="MathJax_Preview">
+\dot g(t) g^{-1}(t) = \begin{bmatrix} \dot R(t)R^\top(t) &amp; \dot T(t) - \dot R(t) R^\top(t)T(t) \\ 0 &amp; 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</div>
+<script type="math/tex; mode=display">
+\dot g(t) g^{-1}(t) = \begin{bmatrix} \dot R(t)R^\top(t) & \dot T(t) - \dot R(t) R^\top(t)T(t) \\ 0 & 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</script>
+</div>
+<p>已知 <span><span class="MathJax_Preview">\dot R(t)R^\top(t)</span><script type="math/tex">\dot R(t)R^\top(t)</script></span> 是一个反对称矩阵，存在 <span><span class="MathJax_Preview">\hat\omega(t) \in so(3)</span><script type="math/tex">\hat\omega(t) \in so(3)</script></span> 使得 <span><span class="MathJax_Preview">\hat\omega(t) = \dot R(t)R^\top(t)</span><script type="math/tex">\hat\omega(t) = \dot R(t)R^\top(t)</script></span> ，定义一个向量 <span><span class="MathJax_Preview">v(t) = \dot T(t) - \dot R(t) R^\top(t)T(t)  \in \mathbb{R}^3</span><script type="math/tex">v(t) = \dot T(t) - \dot R(t) R^\top(t)T(t)  \in \mathbb{R}^3</script></span> 。那么上式可以转变成</p>
+<div>
+<div class="MathJax_Preview">
+\dot g(t) g^{-1}(t) = \begin{bmatrix} \hat\omega(t)  &amp; v(t) \\ 0 &amp; 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</div>
+<script type="math/tex; mode=display">
+\dot g(t) g^{-1}(t) = \begin{bmatrix} \hat\omega(t)  & v(t) \\ 0 & 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</script>
+</div>
+<p>进一步定义矩阵 <span><span class="MathJax_Preview">\hat \xi \in \mathbb{R}^{4\times4}</span><script type="math/tex">\hat \xi \in \mathbb{R}^{4\times4}</script></span> 为</p>
+<div>
+<div class="MathJax_Preview">
+\hat \xi(t) = \begin{bmatrix} \hat\omega(t)  &amp; v(t) \\ 0 &amp; 0 \end{bmatrix}
+</div>
+<script type="math/tex; mode=display">
+\hat \xi(t) = \begin{bmatrix} \hat\omega(t)  & v(t) \\ 0 & 0 \end{bmatrix}
+</script>
+</div>
+<p>那么有</p>
+<div>
+<div class="MathJax_Preview">
+\dot g(t) = (\dot g(t) g^{-1}(t)) g(t) = \hat \xi(t)g(t)
+</div>
+<script type="math/tex; mode=display">
+\dot g(t) = (\dot g(t) g^{-1}(t)) g(t) = \hat \xi(t)g(t)
+</script>
+</div>
+<p>这里的 <span><span class="MathJax_Preview">\hat \xi</span><script type="math/tex">\hat \xi</script></span> 可以被认为沿这虚线 <span><span class="MathJax_Preview">g(t)</span><script type="math/tex">g(t)</script></span> 的 “切向量” ，且可以用于 <span><span class="MathJax_Preview">g(t)</span><script type="math/tex">g(t)</script></span> 的局部近似：</p>
+<div>
+<div class="MathJax_Preview">
+g(t+dt) \approx g(t) + \hat\xi(t) g(t)dt = (I + \hat\xi(t)dt)g(t)
+</div>
+<script type="math/tex; mode=display">
+g(t+dt) \approx g(t) + \hat\xi(t) g(t)dt = (I + \hat\xi(t)dt)g(t)
+</script>
+</div>
+<p>形如 <span><span class="MathJax_Preview">\hat \xi</span><script type="math/tex">\hat \xi</script></span> 的 <span><span class="MathJax_Preview">4\times4</span><script type="math/tex">4\times4</script></span> 的矩阵被称为<strong>扭曲 (twist)</strong> 。所有的扭曲构成一个空间，被定义成</p>
+<div>
+<div class="MathJax_Preview">
+se(3) \doteq \left\{ \hat\xi = \begin{bmatrix} \hat\omega &amp; v \\ 0 &amp; 0 \end{bmatrix} \; \bigg | \; \hat\omega \in so(3), v \in \mathbb{R}^3 \right\} \subset \mathbb{R}^{4\times4}
+</div>
+<script type="math/tex; mode=display">
+se(3) \doteq \left\{ \hat\xi = \begin{bmatrix} \hat\omega & v \\ 0 & 0 \end{bmatrix} \; \bigg | \; \hat\omega \in so(3), v \in \mathbb{R}^3 \right\} \subset \mathbb{R}^{4\times4}
+</script>
+</div>
+<p>这里的集合 <span><span class="MathJax_Preview">se(3)</span><script type="math/tex">se(3)</script></span> 被称为矩阵群 <span><span class="MathJax_Preview">SE(3)</span><script type="math/tex">SE(3)</script></span> 的切空间或者李代数。定义两个操作 “<span><span class="MathJax_Preview">\vee</span><script type="math/tex">\vee</script></span>” 和 “<span><span class="MathJax_Preview">\wedge</span><script type="math/tex">\wedge</script></span>” 关联扭曲 <span><span class="MathJax_Preview">\hat \xi \in se(3)</span><script type="math/tex">\hat \xi \in se(3)</script></span> 和它的扭曲坐标 <span><span class="MathJax_Preview">\xi \in \mathbb{R}^6</span><script type="math/tex">\xi \in \mathbb{R}^6</script></span> 如下所示：</p>
+<div>
+<div class="MathJax_Preview">
+\begin{bmatrix} \hat\omega &amp; v \\ 0 &amp; 0 \end{bmatrix}^\vee \doteq \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 , \quad \begin{bmatrix} v \\ \omega \end{bmatrix}^\wedge \doteq \begin{bmatrix} \hat\omega &amp; v \\ 0 &amp; 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</div>
+<script type="math/tex; mode=display">
+\begin{bmatrix} \hat\omega & v \\ 0 & 0 \end{bmatrix}^\vee \doteq \begin{bmatrix} v \\ \omega \end{bmatrix} \in \mathbb{R}^6 , \quad \begin{bmatrix} v \\ \omega \end{bmatrix}^\wedge \doteq \begin{bmatrix} \hat\omega & v \\ 0 & 0 \end{bmatrix} \in \mathbb{R}^{4\times4}
+</script>
+</div>
+<p>在扭曲坐标 <span><span class="MathJax_Preview">\xi</span><script type="math/tex">\xi</script></span> 下，将 <span><span class="MathJax_Preview">v</span><script type="math/tex">v</script></span> 表示为线速度，<span><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span> 表示为角速度，这表明它们分别与刚体运动的位移和旋转相关。考虑特殊情况下（匀速变换运动）时， <span><span class="MathJax_Preview">\hat\xi</span><script type="math/tex">\hat\xi</script></span> 为常数矩阵</p>
+<div>
+<div class="MathJax_Preview">
+\dot g(t) = \hat \xi g(t)
+</div>
+<script type="math/tex; mode=display">
+\dot g(t) = \hat \xi g(t)
+</script>
+</div>
+<p>我们又得到了一个时不变线性常微分方程，它的解可以通过下式计算给出</p>
+<div>
+<div class="MathJax_Preview">
+g(t) = e^{\hat\xi t} g(0)
+</div>
+<script type="math/tex; mode=display">
+g(t) = e^{\hat\xi t} g(0)
+</script>
+</div>
+<p>假设初始条件 <span><span class="MathJax_Preview">g(0) = I</span><script type="math/tex">g(0) = I</script></span> ，这上式结果为</p>
+<div>
+<div class="MathJax_Preview">
+g(t) = e^{\hat\xi t}
+</div>
+<script type="math/tex; mode=display">
+g(t) = e^{\hat\xi t}
+</script>
+</div>
+<p>其中扭曲的指数为</p>
+<div>
+<div class="MathJax_Preview">
+e^{\hat\xi t} = I + \hat\xi t + \frac{(\hat\xi t)^2}{2!} + \cdots + \frac{(\hat\xi t)^n}{n!} + \cdots
+</div>
+<script type="math/tex; mode=display">
+e^{\hat\xi t} = I + \hat\xi t + \frac{(\hat\xi t)^2}{2!} + \cdots + \frac{(\hat\xi t)^n}{n!} + \cdots
+</script>
+</div>
+<p>通过前面小节介绍的 Rodrigues 法则和矩阵指数的附加性质，可以建立如下关系</p>
+<div>
+<div class="MathJax_Preview">
+e^{\hat\xi} = \begin{bmatrix} e^{\hat\omega} &amp; \frac{(I-e^{\hat\omega})\hat\omega v + \omega \hat\omega v}{\|\omega\|} \\ 0 &amp; 1 \end{bmatrix}, \text{if} \quad \omega \neq 0
+</div>
+<script type="math/tex; mode=display">
+e^{\hat\xi} = \begin{bmatrix} e^{\hat\omega} & \frac{(I-e^{\hat\omega})\hat\omega v + \omega \hat\omega v}{\|\omega\|} \\ 0 & 1 \end{bmatrix}, \text{if} \quad \omega \neq 0
+</script>
+</div>
+<p>如果 <span><span class="MathJax_Preview">\omega = 0</span><script type="math/tex">\omega = 0</script></span> ，那么指数化为简单的 <span><span class="MathJax_Preview">e^{\hat\xi} = \begin{bmatrix} I &amp; v  \\ 0 &amp; 1 \end{bmatrix}</span><script type="math/tex">e^{\hat\xi} = \begin{bmatrix} I & v  \\ 0 & 1 \end{bmatrix}</script></span> ，由上式可知， <span><span class="MathJax_Preview">\xi</span><script type="math/tex">\xi</script></span> 的指数确实是 <span><span class="MathJax_Preview">SE(3)</span><script type="math/tex">SE(3)</script></span> 中的刚体变换矩阵。因此，指数映射定义了从 <span><span class="MathJax_Preview">se(3)</span><script type="math/tex">se(3)</script></span> 空间到 <span><span class="MathJax_Preview">SE(3)</span><script type="math/tex">SE(3)</script></span> 空间的变换形式</p>
+<div>
+<div class="MathJax_Preview">
+\exp: se(3) \to SE(3); \; \hat\xi \mapsto e^{\hat\xi}
+</div>
+<script type="math/tex; mode=display">
+\exp: se(3) \to SE(3); \; \hat\xi \mapsto e^{\hat\xi}
+</script>
+</div>
+<p>类似于 <span><span class="MathJax_Preview">\hat\omega \in so(3)</span><script type="math/tex">\hat\omega \in so(3)</script></span> 与 <span><span class="MathJax_Preview">SO(3)</span><script type="math/tex">SO(3)</script></span> 的关系，我们称 <span><span class="MathJax_Preview">{\hat\xi} \in se(3)</span><script type="math/tex">{\hat\xi} \in se(3)</script></span> 是 <span><span class="MathJax_Preview">SE(3)</span><script type="math/tex">SE(3)</script></span> 的指数坐标。对于任意的 <span><span class="MathJax_Preview">g \in SE(3)</span><script type="math/tex">g \in SE(3)</script></span> 必定存在一个扭曲坐标 <span><span class="MathJax_Preview">\xi = (v, \omega)</span><script type="math/tex">\xi = (v, \omega)</script></span> 使得 <span><span class="MathJax_Preview">g = \exp(\hat\xi)</span><script type="math/tex">g = \exp(\hat\xi)</script></span> 。我们称这个指数映射的逆过程为对数映射 <span><span class="MathJax_Preview">{\hat\xi} = \log(g)</span><script type="math/tex">{\hat\xi} = \log(g)</script></span> 。</p>
+<h3 id="坐标和速度变换">坐标和速度变换<a class="headerlink" href="#坐标和速度变换" title="Permanent link"></a></h3>
+<p>在 SLAM 的研究过程中，经常需要知道一个点的坐标和它的速度如何随着摄像机的移动而变化。这是因为通常选择相机帧作为参考帧，并描述相机运动和与之相关的三维点更为方便。由于相机可能在移动，我们需要知道如何将坐标和速度等量从一个相机帧转换到另一个相机帧。特别是，我们想知道如何正确地表达一个点相对于一个运动的相机的位置和速度。</p>
+<h4 id="坐标变换规则">坐标变换规则<a class="headerlink" href="#坐标变换规则" title="Permanent link"></a></h4>
+<p>我们将应用一个刚体变换</p>
+<div>
+<div class="MathJax_Preview">
+g(t) = \begin{bmatrix} R(t) &amp; T(t) \\ 0 &amp; 1 \end{bmatrix} \in SE(3)
+</div>
+<script type="math/tex; mode=display">
+g(t) = \begin{bmatrix} R(t) & T(t) \\ 0 & 1 \end{bmatrix} \in SE(3)
+</script>
+</div>
+<p>去表示在 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 时刻刚体相对于一个固定参考系下的运动变换。我们假设一个特殊情况，在 <span><span class="MathJax_Preview">t = 0</span><script type="math/tex">t = 0</script></span> 的时候，刚体坐标系与固定参考坐标系重合，即 <span><span class="MathJax_Preview">g(0) = I</span><script type="math/tex">g(0) = I</script></span> 。固定参考系下的任意点 <span><span class="MathJax_Preview">\mathbf{X}_0</span><script type="math/tex">\mathbf{X}_0</script></span> ，在 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 时刻它对应到刚体坐标系下的坐标为</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{X}(t) = R(t)\mathbf{X}_0 + T(t)
+</div>
+<script type="math/tex; mode=display">
+\mathbf{X}(t) = R(t)\mathbf{X}_0 + T(t)
+</script>
+</div>
+<p>或者应用齐次坐标表示为</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{X}(t) = g(t)\mathbf{X}_0
+</div>
+<script type="math/tex; mode=display">
+\mathbf{X}(t) = g(t)\mathbf{X}_0
+</script>
+</div>
+<p><img alt="Composition of rigid-body motions" src="../image/rigid-body_motions.png" /></p>
+<p>如上图所示，给出两个不同的时刻 <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> 和 <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span> ，那么 <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> 时刻刚体参考系下的点到 <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span> 时刻刚体参考系下的点变换式为</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{X}(t_2) = g(t_2, t_1)\mathbf{X}(t_1)
+</div>
+<script type="math/tex; mode=display">
+\mathbf{X}(t_2) = g(t_2, t_1)\mathbf{X}(t_1)
+</script>
+</div>
+<p>易得</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{X}(t_3) = g(t_3, t_2)\mathbf{X}(t_2) = g(t_3, t_2)g(t_2, t_1)\mathbf{X}(t_1) = g(t_3, t_1)\mathbf{X}(t_1)
+</div>
+<script type="math/tex; mode=display">
+\mathbf{X}(t_3) = g(t_3, t_2)\mathbf{X}(t_2) = g(t_3, t_2)g(t_2, t_1)\mathbf{X}(t_1) = g(t_3, t_1)\mathbf{X}(t_1)
+</script>
+</div>
+<p>因此有</p>
+<div>
+<div class="MathJax_Preview">
+g(t_3, t_2)g(t_2, t_1) = g(t_3, t_1)
+</div>
+<script type="math/tex; mode=display">
+g(t_3, t_2)g(t_2, t_1) = g(t_3, t_1)
+</script>
+</div>
+<p>通过把 <span><span class="MathJax_Preview">t_1</span><script type="math/tex">t_1</script></span> 时刻坐标系的坐标转换到 <span><span class="MathJax_Preview">t_2</span><script type="math/tex">t_2</script></span> 时刻坐标系的坐标，然后再转换回来，我们可以看到</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{X}(t_1) = g(t_1, t_2)\mathbf{X}(t_2) = g(t_1, t_2)g(t_2, t_1)\mathbf{X}(t_1)
+</div>
+<script type="math/tex; mode=display">
+\mathbf{X}(t_1) = g(t_1, t_2)\mathbf{X}(t_2) = g(t_1, t_2)g(t_2, t_1)\mathbf{X}(t_1)
+</script>
+</div>
+<p>因此可得</p>
+<div>
+<div class="MathJax_Preview">
+g(t_1, t_2)g(t_2, t_1) = I \iff g^{-1}(t_1, t_2) = g(t_2, t_1)
+</div>
+<script type="math/tex; mode=display">
+g(t_1, t_2)g(t_2, t_1) = I \iff g^{-1}(t_1, t_2) = g(t_2, t_1)
+</script>
+</div>
+<p>综上所述，我们可以得到刚体运动的坐标变换规则概括为</p>
+<div>
+<div class="MathJax_Preview">
+\mathbf{X}_i = g_{ij}\mathbf{X}_j \;,\; g_{ik} = g_{ij}g_{jk} \;,\; g^{-1}_{ij} = g_{ji}
+</div>
+<script type="math/tex; mode=display">
+\mathbf{X}_i = g_{ij}\mathbf{X}_j \;,\; g_{ik} = g_{ij}g_{jk} \;,\; g^{-1}_{ij} = g_{ji}
+</script>
+</div>
+<h4 id="速度变换规则">速度变换规则<a class="headerlink" href="#速度变换规则" title="Permanent link"></a></h4>
+<p>根据坐标变换规则，我们知道固定参考系下一点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 的坐标 <span><span class="MathJax_Preview">\mathbf{X}_0</span><script type="math/tex">\mathbf{X}_0</script></span> 转换到在 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 时刻刚体坐标系下为 <span><span class="MathJax_Preview">\mathbf{X}(t) = g_{cw}(t) \mathbf{X}_0</span><script type="math/tex">\mathbf{X}(t) = g_{cw}(t) \mathbf{X}_0</script></span> ，那么在 <span><span class="MathJax_Preview">t</span><script type="math/tex">t</script></span> 时刻点 <span><span class="MathJax_Preview">p</span><script type="math/tex">p</script></span> 相对于刚体的瞬时速度为</p>
+<div>
+<div class="MathJax_Preview">
+\dot{\mathbf{X}}(t) = \dot g_{cw}(t) \mathbf{X}_0 = \dot g_{cw}(t) g^{-1}_{cw}(t)\mathbf{X}(t)
+</div>
+<script type="math/tex; mode=display">
+\dot{\mathbf{X}}(t) = \dot g_{cw}(t) \mathbf{X}_0 = \dot g_{cw}(t) g^{-1}_{cw}(t)\mathbf{X}(t)
+</script>
+</div>
+<p>通过引入扭曲坐标</p>
+<div>
+<div class="MathJax_Preview">
+\hat V^c_{cw}(t) \doteq g_{cw}(t) g^{-1}_{cw}(t) = \begin{bmatrix} \hat\omega(t) &amp; v(t) \\ 0 &amp; 0 \end{bmatrix} \in se(3)
+</div>
+<script type="math/tex; mode=display">
+\hat V^c_{cw}(t) \doteq g_{cw}(t) g^{-1}_{cw}(t) = \begin{bmatrix} \hat\omega(t) & v(t) \\ 0 & 0 \end{bmatrix} \in se(3)
+</script>
+</div>
+<p>由此，可以获得</p>
+<div>
+<div class="MathJax_Preview">
+\dot{\mathbf{X}}(t) = \hat V^c_{cw}(t)\mathbf{X}(t)
+</div>
+<script type="math/tex; mode=display">
+\dot{\mathbf{X}}(t) = \hat V^c_{cw}(t)\mathbf{X}(t)
+</script>
+</div>
+<p>在 3D 非齐次坐标系下表示为</p>
+<div>
+<div class="MathJax_Preview">
+\dot{\mathbf{X}}(t) = \hat\omega(t)\mathbf{X}(t) + v(t)
+</div>
+<script type="math/tex; mode=display">
+\dot{\mathbf{X}}(t) = \hat\omega(t)\mathbf{X}(t) + v(t)
+</script>
+</div>
+<p>因此，符号 <span><span class="MathJax_Preview">\hat V^c_{cw}(t)</span><script type="math/tex">\hat V^c_{cw}(t)</script></span> 表示从摄像机帧中看到的世界帧的相对速度。假设一个观测者 <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> 从不同帧的坐标系观察当前帧，则该变换为：<span><span class="MathJax_Preview">g_{yx} : \mathbf{Y}(t) = g_{yx} \mathbf{X}(t)</span><script type="math/tex">g_{yx} : \mathbf{Y}(t) = g_{yx} \mathbf{X}(t)</script></span> ，此时，观察者帧坐标系下的速度为</p>
+<div>
+<div class="MathJax_Preview">
+\dot{\mathbf{Y}}(t) = g_{yx} \dot{\mathbf{X}}(t) = g_{yx} \hat{V}(t) \mathbf{X}(t) = g_{yx} \hat{V}(t) g_{yx}^{-1} \mathbf{Y}(t)
+</div>
+<script type="math/tex; mode=display">
+\dot{\mathbf{Y}}(t) = g_{yx} \dot{\mathbf{X}}(t) = g_{yx} \hat{V}(t) \mathbf{X}(t) = g_{yx} \hat{V}(t) g_{yx}^{-1} \mathbf{Y}(t)
+</script>
+</div>
+<p>这表明，从观测者 <span><span class="MathJax_Preview">A</span><script type="math/tex">A</script></span> 帧中观测到的点的相对速度用扭曲表示</p>
+<div>
+<div class="MathJax_Preview">
+\hat V_y = g_{yx} \hat{V} g_{yx}^{-1} \doteq \text{ad}_{g_{xy}}(\hat V)
+</div>
+<script type="math/tex; mode=display">
+\hat V_y = g_{yx} \hat{V} g_{yx}^{-1} \doteq \text{ad}_{g_{xy}}(\hat V)
+</script>
+</div>
+<p>由此，引出了在 <span><span class="MathJax_Preview">se(3)</span><script type="math/tex">se(3)</script></span> 域上的<strong>伴随映射 (adjoint map)</strong>：</p>
+<div>
+<div class="MathJax_Preview">
+\text{ad}_g : se(3) \to se(3); \quad \hat\xi \mapsto g \hat\xi g^{-1}
+</div>
+<script type="math/tex; mode=display">
+\text{ad}_g : se(3) \to se(3); \quad \hat\xi \mapsto g \hat\xi g^{-1}
+</script>
+</div>
+<h3 id="总结">总结<a class="headerlink" href="#总结" title="Permanent link"></a></h3>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">旋转 SO(3)</th>
+<th align="center">刚体运动 SE(3)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><strong>矩阵表示</strong></td>
+<td align="center"><span><span class="MathJax_Preview">R: \begin{cases} R^\top R = I \\ \det(R) = 1 \end{cases}</span><script type="math/tex">R: \begin{cases} R^\top R = I \\ \det(R) = 1 \end{cases}</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">g = \begin{bmatrix} R &amp; T \\ 0 &amp; 1 \end{bmatrix}</span><script type="math/tex">g = \begin{bmatrix} R & T \\ 0 & 1 \end{bmatrix}</script></span></td>
+</tr>
+<tr>
+<td align="center"><strong>坐标变换</strong></td>
+<td align="center"><span><span class="MathJax_Preview">\mathbf{X} = R \mathbf{X}_0</span><script type="math/tex">\mathbf{X} = R \mathbf{X}_0</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">\mathbf{X} = R \mathbf{X}_0 + T</span><script type="math/tex">\mathbf{X} = R \mathbf{X}_0 + T</script></span></td>
+</tr>
+<tr>
+<td align="center"><strong>逆</strong></td>
+<td align="center"><span><span class="MathJax_Preview">R^{-1} = R^\top</span><script type="math/tex">R^{-1} = R^\top</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">g^{-1} = \begin{bmatrix} R^\top &amp; -R^\top T \\ 0 &amp; 1 \end{bmatrix}</span><script type="math/tex">g^{-1} = \begin{bmatrix} R^\top & -R^\top T \\ 0 & 1 \end{bmatrix}</script></span></td>
+</tr>
+<tr>
+<td align="center"><strong>运算规则</strong></td>
+<td align="center"><span><span class="MathJax_Preview">R_{ik} = R_{ij}R_{jk}</span><script type="math/tex">R_{ik} = R_{ij}R_{jk}</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">g_{ik} = g_{ij}g_{jk}</span><script type="math/tex">g_{ik} = g_{ij}g_{jk}</script></span></td>
+</tr>
+<tr>
+<td align="center"><strong>指数映射</strong></td>
+<td align="center"><span><span class="MathJax_Preview">R = \exp(\hat\omega)</span><script type="math/tex">R = \exp(\hat\omega)</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">g = \exp(\hat\xi)</span><script type="math/tex">g = \exp(\hat\xi)</script></span></td>
+</tr>
+<tr>
+<td align="center"><strong>速度</strong></td>
+<td align="center"><span><span class="MathJax_Preview">\dot{\mathbf{X}} = \hat\omega \mathbf{X}</span><script type="math/tex">\dot{\mathbf{X}} = \hat\omega \mathbf{X}</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">\dot{\mathbf{X}} = \hat\omega \mathbf{X} + v</span><script type="math/tex">\dot{\mathbf{X}} = \hat\omega \mathbf{X} + v</script></span></td>
+</tr>
+<tr>
+<td align="center"><strong>伴随映射</strong></td>
+<td align="center"><span><span class="MathJax_Preview">\hat\omega \mapsto R \hat\omega R^\top</span><script type="math/tex">\hat\omega \mapsto R \hat\omega R^\top</script></span></td>
+<td align="center"><span><span class="MathJax_Preview">\hat\xi \mapsto g \hat\xi g^{-1}</span><script type="math/tex">\hat\xi \mapsto g \hat\xi g^{-1}</script></span></td>
+</tr>
+</tbody>
+</table>
+<p>另，刚体的旋转还可以用四元数或者欧拉角来表示，这部分这里不在引申，读者可以阅读相关的文档，如果后续有对这部分内容进行书写，再在这里链接补充（#TODO）</p>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     config: ["MMLorHTML.js"],
