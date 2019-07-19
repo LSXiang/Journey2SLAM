@@ -562,7 +562,39 @@ $$
 \dot{\mathbf{X}}(t) = \hat\omega(t)\mathbf{X}(t) + v(t)
 $$
 
-因此，符号 $\hat V^c_{cw}(t)$ 表示从摄像机帧中看到的世界帧的相对速度。
+因此，符号 $\hat V^c_{cw}(t)$ 表示从摄像机帧中看到的世界帧的相对速度。假设一个观测者 $A$ 从不同帧的坐标系观察当前帧，则该变换为：$g_{yx} : \mathbf{Y}(t) = g_{yx} \mathbf{X}(t)$ ，此时，观察者帧坐标系下的速度为
+
+$$
+\dot{\mathbf{Y}}(t) = g_{yx} \dot{\mathbf{X}}(t) = g_{yx} \hat{V}(t) \mathbf{X}(t) = g_{yx} \hat{V}(t) g_{yx}^{-1} \mathbf{Y}(t)
+$$
+
+这表明，从观测者 $A$ 帧中观测到的点的相对速度用扭曲表示
+
+$$
+\hat V_y = g_{yx} \hat{V} g_{yx}^{-1} \doteq \text{ad}_{g_{xy}}(\hat V)
+$$
+
+由此，引出了在 $se(3)$ 域上的**伴随映射 (adjoint map)**：
+
+$$
+\text{ad}_g : se(3) \to se(3); \quad \hat\xi \mapsto g \hat\xi g^{-1}
+$$
+
+
+
+### 总结
+
+|              |                         旋转 SO(3)                         |                        刚体运动 SE(3)                        |
+| :----------: | :--------------------------------------------------------: | :----------------------------------------------------------: |
+| **矩阵表示** | $R: \begin{cases} R^\top R = I \\ \det(R) = 1 \end{cases}$ |      $g = \begin{bmatrix} R & T \\ 0 & 1 \end{bmatrix}$      |
+| **坐标变换** |               $\mathbf{X} = R \mathbf{X}_0$                |              $\mathbf{X} = R \mathbf{X}_0 + T$               |
+|    **逆**    |                     $R^{-1} = R^\top$                      | $g^{-1} = \begin{bmatrix} R^\top & -R^\top T \\ 0 & 1 \end{bmatrix}$ |
+| **运算规则** |                  $R_{ik} = R_{ij}R_{jk}$                   |                   $g_{ik} = g_{ij}g_{jk}$                    |
+| **指数映射** |                   $R = \exp(\hat\omega)$                   |                     $g = \exp(\hat\xi)$                      |
+|   **速度**   |         $\dot{\mathbf{X}} = \hat\omega \mathbf{X}$         |        $\dot{\mathbf{X}} = \hat\omega \mathbf{X} + v$        |
+| **伴随映射** |          $\hat\omega \mapsto R \hat\omega R^\top$          |              $\hat\xi \mapsto g \hat\xi g^{-1}$              |
+
+另，刚体的旋转还可以用四元数或者欧拉角来表示，这部分这里不在引申，读者可以阅读相关的文档，如果后续有对这部分内容进行书写，再在这里链接补充（#TODO）
 
 
 
