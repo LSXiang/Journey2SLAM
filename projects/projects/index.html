@@ -38,7 +38,7 @@
         <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.1">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.1.2">
     
     
       
@@ -136,6 +136,10 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#前言" tabindex="1" class="md-skip">
+        跳转至
+      </a>
     
     
       <header class="md-header" data-md-component="header">
@@ -648,9 +652,57 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        开源项目概览
+      </label>
+    
     <a href="./" title="开源项目概览" class="md-nav__link md-nav__link--active">
       开源项目概览
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#前言" title="前言" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开源项目列表" title="开源项目列表" class="md-nav__link">
+    开源项目列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目录" title="目录" class="md-nav__link">
+    目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -728,8 +780,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../orb_slam/algorithm_framework/" title="ORB-SLAM 算法框架" class="md-nav__link">
-      ORB-SLAM 算法框架
+    <a href="../orb_slam/tracking/" title="跟踪线程" class="md-nav__link">
+      跟踪线程
     </a>
   </li>
 
@@ -740,8 +792,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../orb_slam/code_analysis/" title="ORB-SLAM 代码解析" class="md-nav__link">
-      ORB-SLAM 代码解析
+    <a href="../orb_slam/local_mapping/" title="局部建图线程" class="md-nav__link">
+      局部建图线程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../orb_slam/loop_closing/" title="回环检测线程" class="md-nav__link">
+      回环检测线程
     </a>
   </li>
 
@@ -799,6 +863,56 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#前言" title="前言" class="md-nav__link">
+    前言
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#开源项目列表" title="开源项目列表" class="md-nav__link">
+    开源项目列表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#目录" title="目录" class="md-nav__link">
+    目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#参考" title="参考" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -809,7 +923,92 @@
                 
                   <h1>开源项目概览</h1>
                 
-                
+                <h3 id="前言">前言<a class="headerlink" href="#前言" title="Permanent link"></a></h3>
+<p>随着 SLAM 技术在市场中的应用越来越广泛，越来越多的学者投身于 SLAM 的研究中。国内外的诸多大学相关实验室发布了许多研究成果，其中不少成果进行开源，并发布了许多相关的数据集用于算法的验证。在此，借用网络上大神 <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> <sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup> <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup> 对各大学实验室的介绍引出研究成果进行归类。后续的篇幅主要是针对目前主要流行的的开源项目进行梳理。个人能力有限，如果哪些讲解和推导有问题劳请大神指出。</p>
+<ul>
+<li><a href="http://uav.ust.hk/" title="http://uav.ust.hk/">香港科技大学的 Aerial Robotics Group</a><ul>
+<li><a href="https://github.com/HKUST-Aerial-Robotics/VINS-Mono">VINS-Mono</a> ：一种鲁棒且通用的实时单目视觉惯性状态估计框架</li>
+<li><a href="https://github.com/HKUST-Aerial-Robotics/VINS-Fusion">VINS-Fusion</a>：一种基于优化的多传感器状态框架，可实现自主应用（无人机，汽车和  AR / VR）的精确自定位。VINS-Fusion 是 VINS-Mono 的扩展，支持多种视觉惯性传感器类型（单声道摄像机 + IMU，立体摄像机 + IMU，甚至仅限立体声摄像机</li>
+</ul>
+</li>
+<li><a href="http://www.zjucvg.net/">浙江大学CAD＆CG国家重点实验室的CVG（Computer Vision Group）</a><ul>
+<li>RKSLAM：用于AR的基于关键帧的鲁棒单目SLAM系统</li>
+<li>LS-ACTS：大型自动相机跟踪系统，可以处理大型视频/序列数据集 <a href="https://github.com/zju3dv/ENFT">https://github.com/zju3dv/ENFT</a> ，<a href="https://github.com/zju3dv/SegmentBA">https://github.com/zju3dv/SegmentBA</a> ， <a href="https://github.com/zju3dv/ENFT-SfM">https://github.com/zju3dv/ENFT-SfM</a></li>
+<li>ACTS：自动相机跟踪系统</li>
+<li>RDSLAM：是一个实时同步定位和建图系统，它允许场景的一部分是动态的或整个场景逐渐变化。与PTAM相比，RDSLAM不仅可以在动态环境中稳健地工作，而且还可以处理更大规模的场景（重建的3D点的数量可以是数万个）</li>
+</ul>
+</li>
+<li><a href="http://media.au.tsinghua.edu.cn/index/index/index">清华大学自动化系宽带网络与数字媒体实验室 BBNC</a></li>
+<li><a href="http://vision.ia.ac.cn/">中科院自动化研究所国家模式识别实验室 Robot Vision Group</a></li>
+<li><a href="http://www.imperial.ac.uk/dyson-robotics-lab">英国伦敦大学帝国理工学院 Dyson 机器人实验室</a><ul>
+<li><a href="https://bitbucket.org/dysonroboticslab/elasticfusionpublic/src/master/">ElasticFusion</a>：一个实时的稠密的视觉 SLAM 系统，可以利用 RGB-D 相机来对房间进行全局一致的三维稠密重建</li>
+<li>CodeSLAM：一种生成室内场景轨迹的大规模照片级真实渲染的系统</li>
+<li><a href="https://bitbucket.org/dysonroboticslab/scenenetrgb-d/src/master/">SceneNet RGB-D</a>：一种生成室内场景轨迹的大规模照片级真实渲染的系统，数据集地址：<a href="https://robotvault.bitbucket.io/scenenet-rgbd.html">https://robotvault.bitbucket.io/scenenet-rgbd.html</a></li>
+<li><a href="https://bitbucket.org/dysonroboticslab/semanticfusion/src/master/">SemanticFusion</a>：一种实时可视 SLAM 系统，能够使用卷积神经网络在语义上注释密集的 3D 场景</li>
+</ul>
+</li>
+<li><a href="http://www.robots.ox.ac.uk/ActiveVision/index.html">英国牛津大学 Active Vision Laboratory</a><ul>
+<li><a href="https://github.com/Oxford-PTAM/PTAM-GPL">PTAM</a>：（并行跟踪和建图）用于增强现实的相机跟踪系统</li>
+</ul>
+</li>
+<li><a href="http://www.robots.ox.ac.uk/~tvg/">英国牛津大学 Torr Vision Group</a><ul>
+<li><a href="https://github.com/torrvision/spaint/tree/collaborative">交互式实时 3D 场景分割的框架</a>：创建了一个只需使用廉价的硬件，就可以在半小时内捕获并重建整个房屋或实验室的建图系统</li>
+</ul>
+</li>
+<li><a href="https://asl.ethz.ch/">苏黎世联邦理工学院 Autonomous System Lab</a><ul>
+<li><a href="https://github.com/ethz-asl/libpointmatcher">libpointmatcher</a>：一个模块化库，它实现了迭代最近点（ICP）算法，用于配准点云</li>
+<li><a href="https://github.com/ethz-asl/libnabo">libnabo</a>：用于低维空间的快速K最近邻库</li>
+<li><a href="https://github.com/ethz-asl/ethzasl_sensor_fusion">ethzasl<em>sensor</em>fusion</a>：基于EKF的时延补偿单传感器和多传感器融合框架</li>
+<li><a href="https://github.com/ethz-asl/ethzasl_ptam">ethzasl_ptam</a>：用于单目SLAM的框架PTAM</li>
+</ul>
+</li>
+<li><a href="http://rpg.ifi.uzh.ch/">苏黎世 Robotics and Perception Group</a><ul>
+<li><a href="https://github.com/uzh-rpg/rpg_trajectory_evaluation">视觉（惯性）里程计轨迹定量评估方法</a>：通过视觉（ 惯性）里程计（VO / VIO）定量评估估计轨迹的质量</li>
+<li><a href="https://github.com/uzh-rpg/dslam_open">基于高效数据的分布式视觉SLAM</a>：该算法可实现使用便宜，轻便和多功能的相机进行分布式通信多机器人建图</li>
+<li><a href="https://github.com/ethz-asl/kalibr">Kalibr</a>：相机惯导标定</li>
+</ul>
+</li>
+<li><a href="https://vision.in.tum.de/research">慕尼黑工业大学 The Computer Vision Group</a><ul>
+<li><a href="https://github.com/tum-vision/dvo_slam">dvo_slam</a>：提供了来自连续图像的RGB-D相机的刚体运动估计的实现方案</li>
+<li><a href="https://github.com/tum-vision/lsd_slam">LSD-SLAM</a>: Large-Scale Direct Monocular SLAM：一种直接单目SLAM建图技术</li>
+<li><a href="https://github.com/JakobEngel/dso">DSO</a>: Direct Sparse Odometry：一种用于视觉里程计的新的直接稀疏建图方法</li>
+<li><a href="https://gitlab.com/VladyslavUsenko/basalt">Basalt</a>: Visual-Inertial Mapping with Non-Linear Factor Recovery：使用非线性因子恢复法从视觉 - 惯性里程计提取信息来进行视觉 - 惯性建图</li>
+</ul>
+</li>
+<li><a href="http://ais.informatik.uni-freiburg.de/index_en.php">德国弗莱堡大学 Autonomous Intelligent Systems</a><ul>
+<li><a href="https://github.com/OpenSLAM-org/openslam_gmapping">GMapping</a> : 基于Bpf粒子滤波算法的滤波SLAM框架</li>
+<li><a href="https://github.com/felixendres/rgbdslam_v2">RGBD SLAM2</a>：是一个非常全面优秀的系统，将SLAM领域的图像特征、优化、闭环检测、点云、octomap等技术融为一体，非常适合RGBD SLAM初学者，也可以在其基础上继续开发</li>
+</ul>
+</li>
+<li><a href="http://robots.unizar.es/slamlab/">西班牙萨拉戈萨大学RoPeRT机器人，感知和实时组SLAM实验室</a></li>
+<li><a href="http://mars.cs.umn.edu/">明尼苏达大学 Multiple Autonomous Robotic Systems Laboratory（MARS）</a></li>
+<li><a href="http://rpl.ri.cmu.edu/">卡内基梅隆大学 Robot Perception Lab</a><ul>
+<li><a href="https://github.com/ori-drs/isam">isam</a>：增量平滑和建图（iSAM），这是一种基于快速增量矩阵分解的同时定位和建图问题方法，通过更新自然稀疏平滑信息矩阵的QR分解来实现</li>
+</ul>
+</li>
+<li><a href="http://driving.stanford.edu/">斯坦福大学人工智能实验室自动驾驶团队</a></li>
+<li><a href="https://marinerobotics.mit.edu/">麻省理工大学计算机科学与人工智能实验室（CSAIL）海洋机器人组</a></li>
+<li><a href="https://www.kumarrobotics.org/">宾夕法尼亚大学机械工程与应用力学系Vijay Kumar实验室</a></li>
+<li><a href="http://rse-lab.cs.washington.edu/">华盛顿大学 UW Robotics and State Estimation Lab</a></li>
+<li><a href="https://introlab.3it.usherbrooke.ca/mediawiki-introlab/index.php/Main_Page">加拿大谢布鲁克大学 IntRoLab</a></li>
+</ul>
+<h3 id="开源项目列表">开源项目列表<a class="headerlink" href="#开源项目列表" title="Permanent link"></a></h3>
+<h3 id="目录">目录<a class="headerlink" href="#目录" title="Permanent link"></a></h3>
+<h3 id="参考">参考<a class="headerlink" href="#参考" title="Permanent link"></a></h3>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://zhuanlan.zhihu.com/p/70066976">https://zhuanlan.zhihu.com/p/70066976</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://blog.csdn.net/mulinb/article/details/53421864">https://blog.csdn.net/mulinb/article/details/53421864</a>&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="http://www.computervisionblog.com/2016/01/why-slam-matters-future-of-real-time.html">http://www.computervisionblog.com/2016/01/why-slam-matters-future-of-real-time.html</a>&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
                 
                   
                 
@@ -890,7 +1089,7 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.dc02f8ce.js"></script>
+      <script src="../../assets/javascripts/application.267712eb.js"></script>
       
         
         
